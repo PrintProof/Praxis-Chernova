@@ -51,13 +51,16 @@
       "title": "Important notes",
       "items": {
         "prescriptions": {
-          "label": "Prescriptions & referrals"
+          "label": "Prescriptions & referrals",
+          "value": "Prescriptions and referrals can be requested via the prescription line or the Arzt-Direkt practice app."
         },
         "pickup": {
-          "label": "Collection / e-prescription"
+          "label": "Collection / e-prescription",
+          "value": "Collection or e-prescription is available from 10:00 on the next working day."
         },
         "appointments": {
-          "label": "Appointments & requests"
+          "label": "Appointments & requests",
+          "value": "Appointments and other requests should be made by phone via the main number only."
         }
       }
     }
@@ -81,8 +84,12 @@
     "organisationTitle": "Important processes",
     "organisationBody": "",
     "prescriptionsTitle": "Prescription line",
+    "prescriptionsLineOne": "Prescriptions and referrals can be requested via the prescription line or the Arzt-Direkt practice app.",
+    "prescriptionsLineTwo": "Collection or e-prescription is available from 10:00 on the next working day.",
     "appointmentsTitle": "Appointments and other requests",
+    "appointmentsLine": "Appointments and other requests should be made by phone via the main number only.",
     "houseCallsTitle": "Home visits",
+    "houseCallsLine": "Home visits are only available within a 2 km radius of the practice.",
     "directionsTitle": "Directions",
     "directionsBody": "",
     "directionsHint": ""

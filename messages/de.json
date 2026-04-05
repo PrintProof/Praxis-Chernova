@@ -51,13 +51,16 @@
       "title": "Wichtige Hinweise",
       "items": {
         "prescriptions": {
-          "label": "Rezepte & Überweisungen"
+          "label": "Rezepte & Überweisungen",
+          "value": "Rezepte und Überweisungen können über das Rezepttelefon oder die Arzt-Direkt Praxis App angefordert werden."
         },
         "pickup": {
-          "label": "Abholung / eRezept"
+          "label": "Abholung / eRezept",
+          "value": "Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr."
         },
         "appointments": {
-          "label": "Termine & Anliegen"
+          "label": "Termine & Anliegen",
+          "value": "Termine und andere Anliegen bitte ausschließlich telefonisch über die Hauptnummer."
         }
       }
     }
@@ -81,8 +84,12 @@
     "organisationTitle": "Wichtige Abläufe",
     "organisationBody": "",
     "prescriptionsTitle": "Rezepttelefon",
+    "prescriptionsLineOne": "Rezepte und Überweisungen können über das Rezepttelefon oder die Arzt-Direkt Praxis App angefordert werden.",
+    "prescriptionsLineTwo": "Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr.",
     "appointmentsTitle": "Termine und andere Anliegen",
+    "appointmentsLine": "Termine und andere Anliegen bitte ausschließlich telefonisch über die Hauptnummer.",
     "houseCallsTitle": "Hausbesuche",
+    "houseCallsLine": "Hausbesuche werden nur in einem Umkreis von 2 km um die Praxis durchgeführt.",
     "directionsTitle": "Anfahrt",
     "directionsBody": "",
     "directionsHint": ""

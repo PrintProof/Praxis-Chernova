@@ -51,13 +51,16 @@
       "title": "Önemli bilgiler",
       "items": {
         "prescriptions": {
-          "label": "Reçeteler ve sevkler"
+          "label": "Reçeteler ve sevkler",
+          "value": "Reçeteler ve sevkler reçete hattı veya Arzt-Direkt muayenehane uygulaması üzerinden talep edilebilir."
         },
         "pickup": {
-          "label": "Teslim alma / e-reçete"
+          "label": "Teslim alma / e-reçete",
+          "value": "Teslim alma veya e-reçete bir sonraki iş gününde saat 10:00'dan itibaren hazırdır."
         },
         "appointments": {
-          "label": "Randevular ve talepler"
+          "label": "Randevular ve talepler",
+          "value": "Randevular ve diğer talepler için lütfen yalnızca ana numarayı telefonla arayın."
         }
       }
     }
@@ -81,8 +84,12 @@
     "organisationTitle": "Önemli süreçler",
     "organisationBody": "",
     "prescriptionsTitle": "Reçete hattı",
+    "prescriptionsLineOne": "Reçeteler ve sevkler reçete hattı veya Arzt-Direkt muayenehane uygulaması üzerinden talep edilebilir.",
+    "prescriptionsLineTwo": "Teslim alma veya e-reçete bir sonraki iş gününde saat 10:00'dan itibaren hazırdır.",
     "appointmentsTitle": "Randevular ve diğer talepler",
+    "appointmentsLine": "Randevular ve diğer talepler için lütfen yalnızca ana numarayı telefonla arayın.",
     "houseCallsTitle": "Ev ziyaretleri",
+    "houseCallsLine": "Ev ziyaretleri yalnızca muayenehanenin 2 km çevresinde yapılmaktadır.",
     "directionsTitle": "Ulaşım",
     "directionsBody": "",
     "directionsHint": ""

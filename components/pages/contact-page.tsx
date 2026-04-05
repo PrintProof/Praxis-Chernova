@@ -55,16 +55,16 @@ export function ContactPage({locale}: {locale: Locale}) {
         <div className="note-stack">
           <article className="note-card">
             <h3>{t('contact.prescriptionsTitle')}</h3>
-            <p>{practice.prescriptionNotes.orderLine}</p>
-            <p>{practice.prescriptionNotes.pickupLine}</p>
+            <p>{t('contact.prescriptionsLineOne')}</p>
+            <p>{t('contact.prescriptionsLineTwo')}</p>
           </article>
           <article className="note-card">
             <h3>{t('contact.appointmentsTitle')}</h3>
-            <p>{practice.prescriptionNotes.appointmentsLine}</p>
+            <p>{t('contact.appointmentsLine')}</p>
           </article>
           <article className="note-card">
             <h3>{t('contact.houseCallsTitle')}</h3>
-            <p>{practice.houseCallsNote}</p>
+            <p>{t('contact.houseCallsLine')}</p>
           </article>
         </div>
       </Section>

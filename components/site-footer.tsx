@@ -17,7 +17,7 @@ export function SiteFooter({locale}: {locale: Locale}) {
             <PracticeLogo className="site-footer__mark" decorative />
             <div>
               <p className="site-footer__eyebrow">{practice.name}</p>
-              <p className="site-footer__specialty">{practice.specialty}</p>
+              <p className="site-footer__specialty">{t('common.specialtyShort')}</p>
             </div>
           </div>
           <p>

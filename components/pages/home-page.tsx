@@ -18,7 +18,7 @@ export function HomePage({locale}: {locale: Locale}) {
           <div className="hero__copy hero__copy--wide">
             <p className="hero__eyebrow">{t('hero.eyebrow')}</p>
             <h1>{practice.name}</h1>
-            <p className="hero__specialty">{practice.specialty}</p>
+            <p className="hero__specialty">{t('common.specialtyShort')}</p>
             <p className="hero__body">{t('hero.body')}</p>
             <div className="hero__actions">
               <a className="button button--primary" href={practice.bookingUrl} target="_blank" rel="noreferrer">
@@ -76,15 +76,15 @@ export function HomePage({locale}: {locale: Locale}) {
           <div className="guide-list">
             <div className="guide-list__row">
               <p className="guide-list__label">{t('home.organisation.items.prescriptions.label')}</p>
-              <p className="guide-list__value">{practice.prescriptionNotes.orderLine}</p>
+              <p className="guide-list__value">{t('home.organisation.items.prescriptions.value')}</p>
             </div>
             <div className="guide-list__row">
               <p className="guide-list__label">{t('home.organisation.items.pickup.label')}</p>
-              <p className="guide-list__value">{practice.prescriptionNotes.pickupLine}</p>
+              <p className="guide-list__value">{t('home.organisation.items.pickup.value')}</p>
             </div>
             <div className="guide-list__row">
               <p className="guide-list__label">{t('home.organisation.items.appointments.label')}</p>
-              <p className="guide-list__value">{practice.prescriptionNotes.appointmentsLine}</p>
+              <p className="guide-list__value">{t('home.organisation.items.appointments.value')}</p>
             </div>
           </div>
         </div>
