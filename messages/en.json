@@ -1,0 +1,167 @@
+{
+  "accessibility": {
+    "skipToContent": "Skip to content"
+  },
+  "header": {
+    "languageLabel": "Sprache / Language"
+  },
+  "nav": {
+    "primary": "Primary navigation",
+    "language": "Change language",
+    "home": "Home",
+    "services": "Services",
+    "contact": "Contact",
+    "legal": "Legal notice",
+    "privacy": "Privacy"
+  },
+  "common": {
+    "specialtyShort": "Specialist in Internal Medicine"
+  },
+  "cta": {
+    "bookAppointment": "Book appointment",
+    "contactDirections": "Contact & directions",
+    "openRoute": "Open route"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday"
+  },
+  "hero": {
+    "eyebrow": "Primary care internal medicine practice in Bielefeld",
+    "lead": "",
+    "body": "Contact details, consultation hours and appointment booking at a glance.",
+    "externalHint": ""
+  },
+  "home": {
+    "summary": {
+      "ariaLabel": "Quick summary",
+      "hoursTitle": "Consultation hours",
+      "hoursValue": "Mon-Fri mornings, Mon and Thu also in the afternoon"
+    },
+    "quick": {
+      "title": "Contact details and opening hours at a glance",
+      "phoneHint": "Please use the main phone number for appointments and other requests.",
+      "prescriptionHint": "For repeat prescriptions and referrals.",
+      "addressHint": "Practice location in Bielefeld-Brackwede."
+    },
+    "organisation": {
+      "title": "Important notes",
+      "items": {
+        "prescriptions": {
+          "label": "Prescriptions & referrals"
+        },
+        "pickup": {
+          "label": "Collection / e-prescription"
+        },
+        "appointments": {
+          "label": "Appointments & requests"
+        }
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "",
+    "title": "Contact & directions",
+    "lead": "",
+    "visitTitle": "Practice visit",
+    "visitDescription": "",
+    "addressTitle": "Address",
+    "mainPhoneTitle": "Phone",
+    "mainPhoneDescription": "For appointments and organisational requests.",
+    "prescriptionPhoneTitle": "Prescription line",
+    "prescriptionPhoneDescription": "For prescriptions and referrals.",
+    "faxLabel": "Fax",
+    "openingHoursTitle": "Opening hours",
+    "openingHoursDescription": "Monday to Friday with additional afternoon hours on selected days.",
+    "openingHoursSectionTitle": "Consultation hours",
+    "openingHoursSectionBody": "",
+    "organisationTitle": "Important processes",
+    "organisationBody": "",
+    "prescriptionsTitle": "Prescription line",
+    "appointmentsTitle": "Appointments and other requests",
+    "houseCallsTitle": "Home visits",
+    "directionsTitle": "Directions",
+    "directionsBody": "",
+    "directionsHint": ""
+  },
+  "services": {
+    "eyebrow": "",
+    "title": "Services",
+    "lead": "",
+    "sections": {
+      "overview": {
+        "title": "Primary care internal medicine",
+        "body": ""
+      }
+    },
+    "cards": {
+      "internalMedicine": {
+        "title": "Internal medicine",
+        "body": "Medical care with a focus on internal medicine."
+      },
+      "primaryCare": {
+        "title": "Primary care support",
+        "body": "First point of contact for acute symptoms, chronic conditions and day-to-day primary care."
+      }
+    },
+    "bookingNotice": "You will be redirected to the external arzt-direkt booking page."
+  },
+  "faqPage": {
+    "eyebrow": "FAQ",
+    "title": "Frequently asked questions",
+    "lead": "Short answers to practical questions patients usually have before a visit.",
+    "sectionTitle": "Easy-to-find answers",
+    "sectionBody": "The FAQ complements the main navigation and helps reduce repeated calls.",
+    "items": {
+      "booking": {
+        "question": "How do I book an appointment?",
+        "answer": "Please use the “Book appointment” button. It takes you directly to the external arzt-direkt booking page."
+      },
+      "prescriptions": {
+        "question": "How do I request prescriptions or referrals?",
+        "answer": "Please use the prescription line. Alternatively, the Arzt-Direkt practice app can be used."
+      },
+      "pickup": {
+        "question": "When will a prescription or e-prescription be ready?",
+        "answer": "According to the practice notice, collection or e-prescription availability starts on the next working day from 10:00."
+      },
+      "houseCalls": {
+        "question": "Does the practice offer home visits?",
+        "answer": "Yes. According to the posted notice, home visits are only carried out within a 2 km radius of the practice."
+      },
+      "languages": {
+        "question": "Which languages are spoken in the practice?",
+        "answer": "The website is available in German, English, Turkish and Russian. Any languages used during treatment should be separately confirmed before publication."
+      }
+    }
+  },
+  "legalPage": {
+    "eyebrow": "Legal notice",
+    "title": "Legal notice",
+    "lead": "The legally required details will be added before launch once the final practice data has been verified.",
+    "sectionTitle": "Temporary placeholder",
+    "sectionBody": "The technical page structure is ready, but the legally relevant details are not yet fully confirmed.",
+    "placeholderOne": "Before publication, the responsible entity, professional information, regulatory details and any further required legal content must be checked and entered in full.",
+    "placeholderTwo": "Until this review is complete, this page only serves as a technical placeholder within the project.",
+    "placeholderThree": "This placeholder version must not remain unchanged for the real public launch."
+  },
+  "privacyPage": {
+    "eyebrow": "Privacy",
+    "title": "Privacy policy",
+    "lead": "The privacy notice must match the final hosting, external links and technical delivery setup.",
+    "sectionTitle": "Temporary placeholder",
+    "sectionBody": "The final privacy policy depends on the actual production infrastructure and third-party services used.",
+    "placeholderOne": "Before launch, hosting, server logs, external map links, the external arzt-direkt booking link and any font or CDN usage should be reviewed.",
+    "placeholderTwo": "This website intentionally avoids a contact form in order to minimise data collection.",
+    "placeholderThree": "The final privacy notice should be legally reviewed and completed before publication."
+  },
+  "footer": {
+    "contactTitle": "Contact",
+    "legalTitle": "Legal",
+    "bookingNotice": "",
+    "legalPlaceholder": ""
+  }
+}

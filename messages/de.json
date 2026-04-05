@@ -1,0 +1,167 @@
+{
+  "accessibility": {
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "header": {
+    "languageLabel": "Sprache / Language"
+  },
+  "nav": {
+    "primary": "Hauptnavigation",
+    "language": "Sprache wechseln",
+    "home": "Start",
+    "services": "Leistungen",
+    "contact": "Kontakt",
+    "legal": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "common": {
+    "specialtyShort": "Ärztin für Innere Medizin"
+  },
+  "cta": {
+    "bookAppointment": "Termin buchen",
+    "contactDirections": "Kontakt & Anfahrt",
+    "openRoute": "Route planen"
+  },
+  "days": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag"
+  },
+  "hero": {
+    "eyebrow": "Hausärztlich-internistische Praxis in Bielefeld",
+    "lead": "",
+    "body": "Kontakt, Sprechzeiten und Terminbuchung auf einen Blick.",
+    "externalHint": ""
+  },
+  "home": {
+    "summary": {
+      "ariaLabel": "Schnellüberblick",
+      "hoursTitle": "Sprechzeiten",
+      "hoursValue": "Mo-Fr vormittags, Mo und Do zusätzlich nachmittags"
+    },
+    "quick": {
+      "title": "Kontakt und Sprechzeiten auf einen Blick",
+      "phoneHint": "Für Termine und andere Anliegen bitte die Hauptnummer nutzen.",
+      "prescriptionHint": "Für Wiederholungsrezepte und Überweisungen.",
+      "addressHint": "Praxisstandort in Bielefeld-Brackwede."
+    },
+    "organisation": {
+      "title": "Wichtige Hinweise",
+      "items": {
+        "prescriptions": {
+          "label": "Rezepte & Überweisungen"
+        },
+        "pickup": {
+          "label": "Abholung / eRezept"
+        },
+        "appointments": {
+          "label": "Termine & Anliegen"
+        }
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "",
+    "title": "Kontakt & Anfahrt",
+    "lead": "",
+    "visitTitle": "Praxisbesuch",
+    "visitDescription": "",
+    "addressTitle": "Adresse",
+    "mainPhoneTitle": "Telefon",
+    "mainPhoneDescription": "Für Termine und organisatorische Anliegen.",
+    "prescriptionPhoneTitle": "Rezepttelefon",
+    "prescriptionPhoneDescription": "Für Rezepte und Überweisungen.",
+    "faxLabel": "Fax",
+    "openingHoursTitle": "Öffnungszeiten",
+    "openingHoursDescription": "Montag bis Freitag mit zusätzlichen Nachmittagssprechzeiten an ausgewählten Tagen.",
+    "openingHoursSectionTitle": "Sprechzeiten",
+    "openingHoursSectionBody": "",
+    "organisationTitle": "Wichtige Abläufe",
+    "organisationBody": "",
+    "prescriptionsTitle": "Rezepttelefon",
+    "appointmentsTitle": "Termine und andere Anliegen",
+    "houseCallsTitle": "Hausbesuche",
+    "directionsTitle": "Anfahrt",
+    "directionsBody": "",
+    "directionsHint": ""
+  },
+  "services": {
+    "eyebrow": "",
+    "title": "Leistungen",
+    "lead": "",
+    "sections": {
+      "overview": {
+        "title": "Hausärztlich-internistische Versorgung",
+        "body": ""
+      }
+    },
+    "cards": {
+      "internalMedicine": {
+        "title": "Innere Medizin",
+        "body": "Medizinische Betreuung mit internistischem Schwerpunkt."
+      },
+      "primaryCare": {
+        "title": "Hausärztliche Begleitung",
+        "body": "Anlaufstelle für akute Beschwerden, chronische Erkrankungen und die hausärztliche Versorgung im Alltag."
+      }
+    },
+    "bookingNotice": "Sie werden direkt auf die externe Buchungsseite von arzt-direkt weitergeleitet."
+  },
+  "faqPage": {
+    "eyebrow": "FAQ",
+    "title": "Häufige Fragen",
+    "lead": "Kurze Antworten auf organisatorische Fragen, die Patientinnen und Patienten typischerweise vor dem Besuch haben.",
+    "sectionTitle": "Gut auffindbare Antworten",
+    "sectionBody": "Die FAQ ergänzt die Hauptnavigation und entlastet wiederkehrende Rückfragen.",
+    "items": {
+      "booking": {
+        "question": "Wie buche ich einen Termin?",
+        "answer": "Bitte nutzen Sie den Button „Termin buchen“. Er führt direkt auf die externe Buchungsseite von arzt-direkt."
+      },
+      "prescriptions": {
+        "question": "Wie fordere ich Rezepte oder Überweisungen an?",
+        "answer": "Dafür steht das Rezepttelefon zur Verfügung. Alternativ kann die Arzt-Direkt Praxis App genutzt werden."
+      },
+      "pickup": {
+        "question": "Ab wann ist ein Rezept oder eRezept verfügbar?",
+        "answer": "Abholung bzw. eRezept ist laut Praxis-Hinweis ab dem nächsten Arbeitstag ab 10:00 Uhr vorgesehen."
+      },
+      "houseCalls": {
+        "question": "Bietet die Praxis Hausbesuche an?",
+        "answer": "Ja, laut Aushang werden Hausbesuche nur in einem Umkreis von 2 km um die Praxis durchgeführt."
+      },
+      "languages": {
+        "question": "Welche Sprachen werden in der Praxis gesprochen?",
+        "answer": "Die Website selbst ist in Deutsch, Englisch, Türkisch und Russisch verfügbar. Welche Sprachen in der Behandlung angeboten werden, sollte vor Veröffentlichung separat bestätigt werden."
+      }
+    }
+  },
+  "legalPage": {
+    "eyebrow": "Impressum",
+    "title": "Impressum",
+    "lead": "Die rechtlichen Pflichtangaben werden vor dem Livegang mit vollständig verifizierten Praxisdaten ergänzt.",
+    "sectionTitle": "Vorläufiger Platzhalter",
+    "sectionBody": "Die technische Website-Struktur ist bereits vorbereitet, die juristisch relevanten Detailangaben jedoch noch nicht final bestätigt.",
+    "placeholderOne": "Vor der Veröffentlichung müssen Name und Anschrift der verantwortlichen Stelle, berufsrechtliche Angaben, ggf. Kammerzugehörigkeit sowie weitere Pflichtangaben rechtlich geprüft und vollständig eingetragen werden.",
+    "placeholderTwo": "Solange diese Prüfung nicht abgeschlossen ist, dient diese Seite nur als technischer Platzhalter innerhalb des Projekts.",
+    "placeholderThree": "Für den echten Go-live darf diese Platzhalterfassung nicht unverändert online bleiben."
+  },
+  "privacyPage": {
+    "eyebrow": "Datenschutz",
+    "title": "Datenschutz",
+    "lead": "Die Datenschutzhinweise müssen auf Hosting, externe Links und die finale technische Auslieferung abgestimmt werden.",
+    "sectionTitle": "Vorläufiger Platzhalter",
+    "sectionBody": "Die spätere Datenschutzerklärung hängt von der finalen Infrastruktur und den tatsächlich eingesetzten Diensten ab.",
+    "placeholderOne": "Vor dem Livegang müssen insbesondere Hosting, Server-Logs, externe Kartendienste, der externe arzt-direkt-Link und mögliche Schrift- oder CDN-Einbindungen bewertet werden.",
+    "placeholderTwo": "Für diese Website ist bewusst kein Kontaktformular vorgesehen, um unnötige Datenerhebung zu vermeiden.",
+    "placeholderThree": "Die endgültige Datenschutzerklärung sollte vor Veröffentlichung rechtlich geprüft und vollständig befüllt werden."
+  },
+  "footer": {
+    "contactTitle": "Kontakt",
+    "legalTitle": "Rechtliches",
+    "bookingNotice": "",
+    "legalPlaceholder": ""
+  }
+}

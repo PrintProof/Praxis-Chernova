@@ -1,0 +1,167 @@
+{
+  "accessibility": {
+    "skipToContent": "İçeriğe geç"
+  },
+  "header": {
+    "languageLabel": "Sprache / Language"
+  },
+  "nav": {
+    "primary": "Ana gezinme",
+    "language": "Dili değiştir",
+    "home": "Ana sayfa",
+    "services": "Hizmetler",
+    "contact": "İletişim",
+    "legal": "Yasal bilgiler",
+    "privacy": "Gizlilik"
+  },
+  "common": {
+    "specialtyShort": "İç hastalıkları uzmanı"
+  },
+  "cta": {
+    "bookAppointment": "Randevu al",
+    "contactDirections": "İletişim ve ulaşım",
+    "openRoute": "Yol tarifi aç"
+  },
+  "days": {
+    "monday": "Pazartesi",
+    "tuesday": "Salı",
+    "wednesday": "Çarşamba",
+    "thursday": "Perşembe",
+    "friday": "Cuma"
+  },
+  "hero": {
+    "eyebrow": "Bielefeld'de aile hekimliği odaklı iç hastalıkları muayenehanesi",
+    "lead": "",
+    "body": "İletişim, muayene saatleri ve randevu bilgileri bir bakışta.",
+    "externalHint": ""
+  },
+  "home": {
+    "summary": {
+      "ariaLabel": "Hızlı özet",
+      "hoursTitle": "Muayene saatleri",
+      "hoursValue": "Pzt-Cum sabahları, Pzt ve Per ayrıca öğleden sonra"
+    },
+    "quick": {
+      "title": "İletişim ve çalışma saatleri bir bakışta",
+      "phoneHint": "Randevular ve diğer talepler için lütfen ana numarayı kullanın.",
+      "prescriptionHint": "Tekrarlayan reçeteler ve sevkler için.",
+      "addressHint": "Muayenehane Bielefeld-Brackwede'dedir."
+    },
+    "organisation": {
+      "title": "Önemli bilgiler",
+      "items": {
+        "prescriptions": {
+          "label": "Reçeteler ve sevkler"
+        },
+        "pickup": {
+          "label": "Teslim alma / e-reçete"
+        },
+        "appointments": {
+          "label": "Randevular ve talepler"
+        }
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "",
+    "title": "İletişim ve ulaşım",
+    "lead": "",
+    "visitTitle": "Muayenehane ziyareti",
+    "visitDescription": "",
+    "addressTitle": "Adres",
+    "mainPhoneTitle": "Telefon",
+    "mainPhoneDescription": "Randevular ve organizasyonel konular için.",
+    "prescriptionPhoneTitle": "Reçete hattı",
+    "prescriptionPhoneDescription": "Reçeteler ve sevkler için.",
+    "faxLabel": "Faks",
+    "openingHoursTitle": "Çalışma saatleri",
+    "openingHoursDescription": "Pazartesiden cumaya, bazı günlerde ek öğleden sonra saatleriyle.",
+    "openingHoursSectionTitle": "Muayene saatleri",
+    "openingHoursSectionBody": "",
+    "organisationTitle": "Önemli süreçler",
+    "organisationBody": "",
+    "prescriptionsTitle": "Reçete hattı",
+    "appointmentsTitle": "Randevular ve diğer talepler",
+    "houseCallsTitle": "Ev ziyaretleri",
+    "directionsTitle": "Ulaşım",
+    "directionsBody": "",
+    "directionsHint": ""
+  },
+  "services": {
+    "eyebrow": "",
+    "title": "Hizmetler",
+    "lead": "",
+    "sections": {
+      "overview": {
+        "title": "Aile hekimliği odaklı iç hastalıkları",
+        "body": ""
+      }
+    },
+    "cards": {
+      "internalMedicine": {
+        "title": "İç hastalıkları",
+        "body": "İç hastalıkları odaklı tıbbi takip."
+      },
+      "primaryCare": {
+        "title": "Aile hekimliği desteği",
+        "body": "Akut şikayetler, kronik hastalıklar ve günlük aile hekimliği hizmeti için ilk başvuru noktası."
+      }
+    },
+    "bookingNotice": "Harici arzt-direkt randevu sayfasına yönlendirileceksiniz."
+  },
+  "faqPage": {
+    "eyebrow": "SSS",
+    "title": "Sık sorulan sorular",
+    "lead": "Hastaların ziyaret öncesinde genellikle sorduğu organizasyon sorularına kısa cevaplar.",
+    "sectionTitle": "Kolay bulunan cevaplar",
+    "sectionBody": "SSS bölümü ana navigasyonu tamamlar ve tekrar eden telefonları azaltmaya yardımcı olur.",
+    "items": {
+      "booking": {
+        "question": "Nasıl randevu alabilirim?",
+        "answer": "Lütfen “Randevu al” düğmesini kullanın. Bu düğme sizi doğrudan arzt-direkt'in harici randevu sayfasına götürür."
+      },
+      "prescriptions": {
+        "question": "Reçete veya sevk nasıl talep edilir?",
+        "answer": "Bunun için reçete hattı kullanılmalıdır. Alternatif olarak Arzt-Direkt uygulaması da kullanılabilir."
+      },
+      "pickup": {
+        "question": "Reçete veya e-reçete ne zaman hazır olur?",
+        "answer": "Muayenehane notuna göre teslim alma veya e-reçete bir sonraki iş gününde saat 10:00'dan itibaren mümkündür."
+      },
+      "houseCalls": {
+        "question": "Ev ziyareti yapılıyor mu?",
+        "answer": "Evet. İlanda belirtildiğine göre ev ziyaretleri yalnızca muayenehanenin 2 km çevresinde yapılmaktadır."
+      },
+      "languages": {
+        "question": "Muayenehanede hangi diller konuşuluyor?",
+        "answer": "Web sitesi Almanca, İngilizce, Türkçe ve Rusça olarak sunulmaktadır. Tedavi sırasında hangi dillerin konuşulduğu yayın öncesinde ayrıca doğrulanmalıdır."
+      }
+    }
+  },
+  "legalPage": {
+    "eyebrow": "Yasal bilgiler",
+    "title": "Yasal bilgiler",
+    "lead": "Yasal olarak gerekli bilgiler, nihai muayenehane verileri doğrulandıktan sonra yayına girmeden önce eklenecektir.",
+    "sectionTitle": "Geçici yer tutucu",
+    "sectionBody": "Teknik sayfa yapısı hazırdır, ancak hukuken gerekli ayrıntılar henüz tamamen doğrulanmamıştır.",
+    "placeholderOne": "Yayın öncesinde sorumlu kişi/kurum, mesleki bilgiler ve gerekli diğer yasal içerikler tam olarak kontrol edilip girilmelidir.",
+    "placeholderTwo": "Bu inceleme tamamlanana kadar bu sayfa yalnızca proje içinde teknik bir yer tutucu olarak işlev görür.",
+    "placeholderThree": "Gerçek yayında bu geçici sürüm değişmeden çevrimiçi kalmamalıdır."
+  },
+  "privacyPage": {
+    "eyebrow": "Gizlilik",
+    "title": "Gizlilik politikası",
+    "lead": "Gizlilik metni, nihai barındırma, harici bağlantılar ve teknik dağıtım yapısıyla uyumlu olmalıdır.",
+    "sectionTitle": "Geçici yer tutucu",
+    "sectionBody": "Nihai gizlilik politikası üretim altyapısına ve kullanılan üçüncü taraf hizmetlere bağlıdır.",
+    "placeholderOne": "Yayın öncesinde özellikle barındırma, sunucu günlükleri, harici harita bağlantıları, arzt-direkt randevu bağlantısı ve varsa yazı tipi/CDN kullanımı değerlendirilmelidir.",
+    "placeholderTwo": "Bu web sitesi veri toplamayı azaltmak için bilinçli olarak iletişim formu kullanmaz.",
+    "placeholderThree": "Nihai gizlilik politikası yayın öncesinde hukuki açıdan kontrol edilmeli ve tamamlanmalıdır."
+  },
+  "footer": {
+    "contactTitle": "İletişim",
+    "legalTitle": "Yasal",
+    "bookingNotice": "",
+    "legalPlaceholder": ""
+  }
+}
