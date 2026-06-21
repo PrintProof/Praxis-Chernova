@@ -1,3 +1,17 @@
 {
-  "periods": []
+  "periods": [
+    {
+      "start": "2026-06-21",
+      "end": "2026-06-30",
+      "note": "Wir sind wegen Betriebsurlaub nicht erreichbar",
+      "substitute": {
+        "name": "Praxis Achtziger",
+        "street": "Alsterterrasse 1",
+        "postalCode": "22081",
+        "city": "Hamburg",
+        "phone": "0152402491480",
+        "note": "Nur Telefonisch erreichbar"
+      }
+    }
+  ]
 }
