@@ -1,4 +1,5 @@
-import vacationData from '@/content/vacation.json';
+import {readFileSync} from 'node:fs';
+import {join} from 'node:path';
 
 export type PracticeFact = {
   label: string;
@@ -38,7 +39,25 @@ export type VacationPeriod = {
  * Abgelaufene Einträge werden automatisch ausgeblendet (siehe `lib/vacations.ts`).
  * Solange die Liste leer ist, wird KEIN Hinweis angezeigt.
  */
-export const vacationPeriods: VacationPeriod[] = vacationData.periods as VacationPeriod[];
+function loadVacationPeriods(): VacationPeriod[] {
+  try {
+    const raw = readFileSync(join(process.cwd(), 'content/vacation.json'), 'utf8').trim();
+    if (!raw) {
+      return [];
+    }
+
+    const data: unknown = JSON.parse(raw);
+    const periods = Array.isArray(data) ? data : (data as {periods?: unknown} | null)?.periods;
+
+    return Array.isArray(periods) ? (periods as VacationPeriod[]) : [];
+  } catch {
+    // Pages CMS schreibt beim Löschen des letzten Eintrags eine leere Datei.
+    // Leere/ungültige Inhalte ergeben eine leere Liste, damit der Build nie bricht.
+    return [];
+  }
+}
+
+export const vacationPeriods: VacationPeriod[] = loadVacationPeriods();
 
 export const bookingUrl = 'https://app.arzt-direkt.de/praxis-chernova/booking';
 
