@@ -1,22 +1,19 @@
 import {PageShell} from '@/components/page-shell';
 import {Section} from '@/components/section';
-import type {Locale} from '@/lib/i18n';
 import {getTranslator} from '@/lib/i18n';
 import type {RouteKey} from '@/lib/routing';
 
 export function LegalPage({
-  locale,
   routeKey,
   translationPrefix
 }: {
-  locale: Locale;
   routeKey: Extract<RouteKey, 'legal' | 'privacy'>;
   translationPrefix: 'legalPage' | 'privacyPage';
 }) {
-  const t = getTranslator(locale);
+  const t = getTranslator();
 
   return (
-    <PageShell locale={locale} routeKey={routeKey}>
+    <PageShell routeKey={routeKey}>
       <section className="page-hero">
         <div className="container">
           <p className="page-hero__eyebrow">{t(`${translationPrefix}.eyebrow`)}</p>

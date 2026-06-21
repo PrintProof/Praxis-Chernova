@@ -2,17 +2,19 @@ import Link from 'next/link';
 
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
+import {PracticeNotice} from '@/components/practice-notice';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
-import type {Locale} from '@/lib/i18n';
 import {getTranslator} from '@/lib/i18n';
-import {getLocalizedPath} from '@/lib/routing';
+import {getPath} from '@/lib/routing';
 
-export function HomePage({locale}: {locale: Locale}) {
-  const t = getTranslator(locale);
+export function HomePage() {
+  const t = getTranslator();
 
   return (
-    <PageShell locale={locale} routeKey="home">
+    <PageShell routeKey="home">
+      <PracticeNotice withContainer />
+
       <section className="hero">
         <div className="container hero__grid">
           <div className="hero__copy hero__copy--wide">
@@ -24,7 +26,7 @@ export function HomePage({locale}: {locale: Locale}) {
               <a className="button button--primary" href={practice.bookingUrl} target="_blank" rel="noreferrer">
                 {t('cta.bookAppointment')}
               </a>
-              <Link className="button button--secondary" href={getLocalizedPath(locale, 'contact')}>
+              <Link className="button button--secondary" href={getPath('contact')}>
                 {t('cta.contactDirections')}
               </Link>
             </div>
@@ -38,7 +40,7 @@ export function HomePage({locale}: {locale: Locale}) {
       >
         <div className="overview-panel">
           <div className="overview-panel__primary">
-            <OpeningHours locale={locale} />
+            <OpeningHours />
           </div>
           <div className="overview-panel__secondary">
             <article className="info-card info-card--stack">

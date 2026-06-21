@@ -1,21 +1,23 @@
 import {PageShell} from '@/components/page-shell';
 import {Section} from '@/components/section';
-import type {Locale} from '@/lib/i18n';
 import {getTranslator} from '@/lib/i18n';
 
-export function ServicesPage({locale}: {locale: Locale}) {
-  const t = getTranslator(locale);
+export function ServicesPage() {
+  const t = getTranslator();
   const serviceCards = ['internalMedicine', 'primaryCare'] as const;
 
   return (
-    <PageShell locale={locale} routeKey="services">
+    <PageShell routeKey="services">
       <section className="page-hero">
         <div className="container">
           <h1>{t('services.title')}</h1>
         </div>
       </section>
 
-      <Section title={t('services.sections.overview.title')}>
+      <Section
+        title={t('services.sections.overview.title')}
+        description={t('services.sections.overview.body')}
+      >
         <div className="service-list">
           {serviceCards.map((card) => (
             <article key={card} className="service-list__item">

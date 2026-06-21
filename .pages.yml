@@ -1,0 +1,63 @@
+content:
+  - name: vacation
+    label: "Urlaub / Schliesszeiten"
+    type: file
+    path: content/vacation.json
+    format: json
+    fields:
+      - name: periods
+        label: "Schliesszeiten"
+        description: "Hier alle Zeitraeume eintragen, in denen die Praxis geschlossen ist. Mit dem Plus-Symbol einen neuen Zeitraum hinzufuegen. Abgelaufene Eintraege werden auf der Website automatisch ausgeblendet und koennen geloescht werden."
+        type: object
+        list: true
+        fields:
+          - name: start
+            label: "Von (erster Schliesstag)"
+            description: "Erster Tag, an dem die Praxis geschlossen ist."
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+
+          - name: end
+            label: "Bis (letzter Schliesstag)"
+            description: "Letzter Tag der Schliessung. Bei nur einem Tag bitte denselben Tag wie oben eintragen."
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+
+          - name: note
+            label: "Hinweis (optional)"
+            description: "Optionaler Text, z. B. 'Betriebsurlaub' oder 'In dringenden Faellen wenden Sie sich bitte an die Vertretungspraxis.'. Kann leer bleiben."
+            type: text
+
+          - name: substitute
+            label: "Vertretung (optional)"
+            description: "Falls eine Vertretungspraxis angegeben werden soll, hier die Daten eintragen. Andernfalls leer lassen."
+            type: object
+            fields:
+              - name: name
+                label: "Name der Praxis / des Arztes"
+                description: "Name der vertretenden Praxis, z. B. 'Hausarztpraxis Dr. Mustermann'."
+                type: string
+              - name: street
+                label: "Strasse und Hausnummer"
+                description: "Anschrift der Vertretungspraxis. Kann leer bleiben."
+                type: string
+              - name: postalCode
+                label: "Postleitzahl"
+                description: "z. B. 33647. Kann leer bleiben."
+                type: string
+              - name: city
+                label: "Ort"
+                description: "z. B. Bielefeld. Kann leer bleiben."
+                type: string
+              - name: phone
+                label: "Telefon"
+                description: "Telefonnummer der Vertretung als Klartext, z. B. 0521 123456."
+                type: string
+              - name: note
+                label: "Zusatzhinweis zur Vertretung (optional)"
+                description: "Optionaler Text, z. B. 'Sprechzeiten: Mo-Fr 08:00-12:00 Uhr'. Kann leer bleiben."
+                type: text

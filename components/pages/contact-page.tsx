@@ -1,20 +1,28 @@
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
+import {PracticeNotice} from '@/components/practice-notice';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
-import type {Locale} from '@/lib/i18n';
 import {getTranslator} from '@/lib/i18n';
+import {getActiveVacationPeriods} from '@/lib/vacations';
 
-export function ContactPage({locale}: {locale: Locale}) {
-  const t = getTranslator(locale);
+export function ContactPage() {
+  const t = getTranslator();
+  const hasVacationNotice = getActiveVacationPeriods(new Date()).length > 0;
 
   return (
-    <PageShell locale={locale} routeKey="contact">
+    <PageShell routeKey="contact">
       <section className="page-hero">
         <div className="container">
           <h1>{t('contact.title')}</h1>
         </div>
       </section>
+
+      {hasVacationNotice ? (
+        <Section title={t('notice.title')}>
+          <PracticeNotice showTitle={false} />
+        </Section>
+      ) : null}
 
       <Section title={t('contact.visitTitle')}>
         <div className="info-grid">
@@ -48,7 +56,7 @@ export function ContactPage({locale}: {locale: Locale}) {
       </Section>
 
       <Section title={t('contact.openingHoursSectionTitle')}>
-        <OpeningHours locale={locale} />
+        <OpeningHours />
       </Section>
 
       <Section title={t('contact.organisationTitle')}>

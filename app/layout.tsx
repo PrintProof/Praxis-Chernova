@@ -1,20 +1,10 @@
 import type {ReactNode} from 'react';
 
 import '@/app/globals.css';
-import {defaultLocale, isLocale} from '@/lib/i18n';
 
-export default async function RootLayout({
-  children,
-  params
-}: {
-  children: ReactNode;
-  params: Promise<{locale?: string}>;
-}) {
-  const {locale} = await params;
-  const resolvedLocale = locale && isLocale(locale) ? locale : defaultLocale;
-
+export default function RootLayout({children}: {children: ReactNode}) {
   return (
-    <html lang={resolvedLocale}>
+    <html lang="de">
       <body>{children}</body>
     </html>
   );

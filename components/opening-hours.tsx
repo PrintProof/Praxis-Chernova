@@ -1,9 +1,8 @@
 import {practice} from '@/content/practice';
-import type {Locale} from '@/lib/i18n';
 import {getTranslator} from '@/lib/i18n';
 
-export function OpeningHours({locale}: {locale: Locale}) {
-  const t = getTranslator(locale);
+export function OpeningHours() {
+  const t = getTranslator();
 
   return (
     <div className="hours-card">

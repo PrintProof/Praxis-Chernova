@@ -2,12 +2,11 @@ import Link from 'next/link';
 
 import {PracticeLogo} from '@/components/practice-logo';
 import {practice} from '@/content/practice';
-import type {Locale} from '@/lib/i18n';
 import {getTranslator} from '@/lib/i18n';
-import {getLocalizedPath} from '@/lib/routing';
+import {getPath} from '@/lib/routing';
 
-export function SiteFooter({locale}: {locale: Locale}) {
-  const t = getTranslator(locale);
+export function SiteFooter() {
+  const t = getTranslator();
 
   return (
     <footer className="site-footer">
@@ -50,8 +49,8 @@ export function SiteFooter({locale}: {locale: Locale}) {
         <div className="site-footer__block">
           <h2>{t('footer.legalTitle')}</h2>
           <p className="site-footer__legal-links">
-            <Link href={getLocalizedPath(locale, 'legal')}>{t('nav.legal')}</Link>
-            <Link href={getLocalizedPath(locale, 'privacy')}>{t('nav.privacy')}</Link>
+            <Link href={getPath('legal')}>{t('nav.legal')}</Link>
+            <Link href={getPath('privacy')}>{t('nav.privacy')}</Link>
           </p>
         </div>
       </div>

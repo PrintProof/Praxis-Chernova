@@ -1,8 +1,7 @@
 import {practice} from '@/content/practice';
-import type {Locale} from '@/lib/i18n';
 import {getSiteUrl} from '@/lib/seo';
 
-export function StructuredData({locale, pathname}: {locale: Locale; pathname: string}) {
+export function StructuredData({pathname}: {pathname: string}) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'MedicalClinic',
@@ -10,7 +9,7 @@ export function StructuredData({locale, pathname}: {locale: Locale; pathname: st
     url: getSiteUrl(pathname),
     telephone: practice.phone,
     faxNumber: practice.fax,
-    medicalSpecialty: 'InternalMedicine',
+    medicalSpecialty: ['InternalMedicine', 'PrimaryCare'],
     address: {
       '@type': 'PostalAddress',
       streetAddress: practice.address.street,
@@ -19,13 +18,18 @@ export function StructuredData({locale, pathname}: {locale: Locale; pathname: st
       addressCountry: 'DE'
     },
     areaServed: practice.address.city,
-    availableLanguage: locale,
-    openingHoursSpecification: practice.openingHours.map((entry) => ({
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: `https://schema.org/${capitalize(entry.dayKey)}`,
-      opens: entry.value.split(', ')[0]?.split('-')[0] ?? '08:00',
-      closes: entry.value.split(', ')[0]?.split('-')[1] ?? '13:00'
-    }))
+    availableLanguage: 'de',
+    openingHoursSpecification: practice.openingHours.flatMap((entry) =>
+      entry.value.split(', ').map((block) => {
+        const [opens, closes] = block.split('-');
+        return {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: `https://schema.org/${capitalize(entry.dayKey)}`,
+          opens: opens ?? '08:00',
+          closes: closes ?? '13:00'
+        };
+      })
+    )
   };
 
   return (

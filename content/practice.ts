@@ -1,3 +1,5 @@
+import vacationData from '@/content/vacation.json';
+
 export type PracticeFact = {
   label: string;
   value: string;
@@ -8,12 +10,42 @@ export type OpeningHoursEntry = {
   value: string;
 };
 
+export type SubstitutePractice = {
+  name: string;
+  street?: string;
+  postalCode?: string;
+  city?: string;
+  phone?: string;
+  note?: string;
+};
+
+export type VacationPeriod = {
+  /** Erster Tag der Schließung im Format YYYY-MM-DD (inklusive). */
+  start: string;
+  /** Letzter Tag der Schließung im Format YYYY-MM-DD (inklusive). */
+  end: string;
+  /** Optionale Vertretungspraxis für diesen Zeitraum. */
+  substitute?: SubstitutePractice;
+  /** Optionaler Zusatzhinweis (z.B. Notdienst, Erreichbarkeit). */
+  note?: string;
+};
+
+/**
+ * Urlaubs- und Schließungszeiten der Praxis.
+ *
+ * Die Daten werden vom Praxisteam über Pages CMS in `content/vacation.json`
+ * gepflegt (das Bearbeitungsformular ist in `.pages.yml` definiert).
+ * Abgelaufene Einträge werden automatisch ausgeblendet (siehe `lib/vacations.ts`).
+ * Solange die Liste leer ist, wird KEIN Hinweis angezeigt.
+ */
+export const vacationPeriods: VacationPeriod[] = vacationData.periods as VacationPeriod[];
+
 export const bookingUrl = 'https://app.arzt-direkt.de/praxis-chernova/booking';
 
 export const practice = {
   name: 'Praxis Veronika Chernova',
   physicianName: 'Veronika Chernova',
-  specialty: 'Ärztin für Innere Medizin',
+  specialty: 'Fachärztin für Innere Medizin und Allgemeinmedizin',
   focus: 'Hausärztlich-internistische Versorgung',
   address: {
     street: 'Treppenstraße 15',

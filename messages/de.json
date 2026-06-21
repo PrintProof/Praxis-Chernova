@@ -2,12 +2,8 @@
   "accessibility": {
     "skipToContent": "Zum Inhalt springen"
   },
-  "header": {
-    "languageLabel": "Sprache / Language"
-  },
   "nav": {
     "primary": "Hauptnavigation",
-    "language": "Sprache wechseln",
     "home": "Start",
     "services": "Leistungen",
     "contact": "Kontakt",
@@ -15,7 +11,7 @@
     "privacy": "Datenschutz"
   },
   "common": {
-    "specialtyShort": "Ärztin für Innere Medizin"
+    "specialtyShort": "Fachärztin für Innere Medizin und Allgemeinmedizin"
   },
   "cta": {
     "bookAppointment": "Termin buchen",
@@ -65,6 +61,11 @@
       }
     }
   },
+  "notice": {
+    "title": "Urlaub & Vertretung",
+    "closedLabel": "Unsere Praxis bleibt in folgendem Zeitraum geschlossen:",
+    "substituteLabel": "Vertretungspraxis"
+  },
   "contact": {
     "eyebrow": "",
     "title": "Kontakt & Anfahrt",
@@ -101,7 +102,7 @@
     "sections": {
       "overview": {
         "title": "Hausärztlich-internistische Versorgung",
-        "body": ""
+        "body": "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an."
       }
     },
     "cards": {
@@ -115,35 +116,6 @@
       }
     },
     "bookingNotice": "Sie werden direkt auf die externe Buchungsseite von arzt-direkt weitergeleitet."
-  },
-  "faqPage": {
-    "eyebrow": "FAQ",
-    "title": "Häufige Fragen",
-    "lead": "Kurze Antworten auf organisatorische Fragen, die Patientinnen und Patienten typischerweise vor dem Besuch haben.",
-    "sectionTitle": "Gut auffindbare Antworten",
-    "sectionBody": "Die FAQ ergänzt die Hauptnavigation und entlastet wiederkehrende Rückfragen.",
-    "items": {
-      "booking": {
-        "question": "Wie buche ich einen Termin?",
-        "answer": "Bitte nutzen Sie den Button „Termin buchen“. Er führt direkt auf die externe Buchungsseite von arzt-direkt."
-      },
-      "prescriptions": {
-        "question": "Wie fordere ich Rezepte oder Überweisungen an?",
-        "answer": "Dafür steht das Rezepttelefon zur Verfügung. Alternativ kann die Arzt-Direkt Praxis App genutzt werden."
-      },
-      "pickup": {
-        "question": "Ab wann ist ein Rezept oder eRezept verfügbar?",
-        "answer": "Abholung bzw. eRezept ist laut Praxis-Hinweis ab dem nächsten Arbeitstag ab 10:00 Uhr vorgesehen."
-      },
-      "houseCalls": {
-        "question": "Bietet die Praxis Hausbesuche an?",
-        "answer": "Ja, laut Aushang werden Hausbesuche nur in einem Umkreis von 2 km um die Praxis durchgeführt."
-      },
-      "languages": {
-        "question": "Welche Sprachen werden in der Praxis gesprochen?",
-        "answer": "Die Website selbst ist in Deutsch, Englisch, Türkisch und Russisch verfügbar. Welche Sprachen in der Behandlung angeboten werden, sollte vor Veröffentlichung separat bestätigt werden."
-      }
-    }
   },
   "legalPage": {
     "eyebrow": "Impressum",
