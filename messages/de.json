@@ -14,9 +14,10 @@
     "specialtyShort": "Fachärztin für Innere Medizin und Allgemeinmedizin"
   },
   "cta": {
-    "bookAppointment": "Termin buchen",
+    "bookAppointment": "Online-Termin (nur Bestandspatienten)",
     "contactDirections": "Kontakt & Anfahrt",
-    "openRoute": "Route planen"
+    "openRoute": "Route planen",
+    "newPatientsHint": "Neue Patientinnen und Patienten melden sich bitte telefonisch."
   },
   "days": {
     "monday": "Montag",

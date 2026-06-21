@@ -30,6 +30,7 @@ export function HomePage() {
                 {t('cta.contactDirections')}
               </Link>
             </div>
+            <p className="booking-hint">{t('cta.newPatientsHint')}</p>
           </div>
         </div>
       </section>

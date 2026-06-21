@@ -87,6 +87,7 @@ export function ContactPage() {
               {t('cta.openRoute')}
             </a>
           </div>
+          <p className="booking-hint">{t('cta.newPatientsHint')}</p>
         </div>
       </Section>
     </PageShell>

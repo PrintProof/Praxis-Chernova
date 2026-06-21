@@ -327,6 +327,13 @@ h3 {
   justify-content: center;
 }
 
+.booking-hint {
+  margin: 0.75rem auto 0;
+  max-width: 42ch;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .hero__caption {
   margin-top: 1rem;
   color: var(--muted);

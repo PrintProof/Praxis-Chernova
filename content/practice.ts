@@ -87,7 +87,7 @@ export const practice = {
     },
     {
       dayKey: 'tuesday',
-      value: '08:00-13:00'
+      value: '08:00-14:00'
     },
     {
       dayKey: 'wednesday',
