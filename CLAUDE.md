@@ -41,7 +41,14 @@ A single route exists in several places that must stay in sync:
 
 ## Vacation / substitute notices (CMS-managed)
 
-Holiday/closure periods and any substitute-practice details live in **`content/vacation.json`** (shape: `{ "periods": [ … ] }`). The non-technical practice team edits this file through **Pages CMS**; the editing form is defined by **`.pages.yml`** in the repo root (German labels + help texts). `content/practice.ts` reads the JSON **tolerantly at build time** (via `node:fs`) and exposes it as `vacationPeriods` — an empty, missing, or invalid file resolves to an empty list, so a CMS deletion can never break the build (Pages CMS writes an empty file when the last entry is removed). `lib/vacations.ts` filters out expired entries automatically (`getActiveVacationPeriods`), formats the date range (`formatVacationRange`), and builds the substitute `tel:` link from the plain-text phone number (`telHref`). When `periods` is empty, no notice renders (`components/practice-notice.tsx`). Editors enter the phone number as plain text only — there is no `phoneHref` field.
+Holiday/closure periods and any substitute-practice details live in **`content/vacation.json`** (shape: `{ "periods": [ … ] }`). The non-technical practice team edits this file through **Pages CMS**; the editing form is defined by **`.pages.yml`** in the repo root (German labels + help texts). `content/practice.ts` reads the JSON **tolerantly at build time** (via `node:fs`) and exposes it as `vacationPeriods` — an empty, missing, or invalid file resolves to an empty list, so a CMS deletion can never break the build (Pages CMS writes an empty file when the last entry is removed).
+
+The display has **two parts**, both rendered top-of-page by `components/practice-notice.tsx`:
+
+1. **Compact overview** — a single line `Urlaub <year>: DD.MM.-DD.MM., …` listing **all** not-yet-finished vacations (`end >= today`, sorted by start). Always shown when at least one upcoming vacation exists.
+2. **Detail box** — the full `.practice-notice` card (range, note, and one or more substitute practices — the `substitutes` array — each with a `tel:` link), shown **only** for the *imminent* vacation per the **two-week rule** (`start <= today + 14 days` and `end >= today`, both inclusive; covers a currently-running vacation). Exactly one is shown; it disappears automatically once it ends.
+
+All pure, isolated, node-testable logic lives in **`lib/vacation-logic.ts`** (`parseIsoDate`, `getUpcomingVacations`, `getImminentVacation`, `formatCompactRange`, `formatVacationRange`, `telHref`, `vacationListYear` — type-only import of `VacationPeriod`, no real data). `lib/vacations.ts` binds the real `vacationPeriods` and exposes thin wrappers (`getUpcomingVacationsNow`, `getImminentVacationNow`) plus re-exports of the formatters. `today` = local midnight of build time. When there are no upcoming vacations, nothing renders. Editors enter the phone number as plain text only — there is no `phoneHref` field.
 
 ## SEO & metadata
 

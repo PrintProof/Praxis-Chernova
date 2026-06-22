@@ -25,8 +25,8 @@ export type VacationPeriod = {
   start: string;
   /** Letzter Tag der Schließung im Format YYYY-MM-DD (inklusive). */
   end: string;
-  /** Optionale Vertretungspraxis für diesen Zeitraum. */
-  substitute?: SubstitutePractice;
+  /** Optionale Vertretungspraxen für diesen Zeitraum (eine oder mehrere). */
+  substitutes?: SubstitutePractice[];
   /** Optionaler Zusatzhinweis (z.B. Notdienst, Erreichbarkeit). */
   note?: string;
 };
@@ -39,6 +39,13 @@ export type VacationPeriod = {
  * Abgelaufene Einträge werden automatisch ausgeblendet (siehe `lib/vacations.ts`).
  * Solange die Liste leer ist, wird KEIN Hinweis angezeigt.
  */
+function normalizePeriod(period: VacationPeriod): VacationPeriod {
+  // Abwärtskompatibel: ein altes einzelnes `substitute` wird zu `substitutes: [...]`.
+  const legacy = (period as {substitute?: SubstitutePractice}).substitute;
+  const substitutes = period.substitutes ?? (legacy ? [legacy] : undefined);
+  return {...period, substitutes};
+}
+
 function loadVacationPeriods(): VacationPeriod[] {
   try {
     const raw = readFileSync(join(process.cwd(), 'content/vacation.json'), 'utf8').trim();
@@ -49,7 +56,7 @@ function loadVacationPeriods(): VacationPeriod[] {
     const data: unknown = JSON.parse(raw);
     const periods = Array.isArray(data) ? data : (data as {periods?: unknown} | null)?.periods;
 
-    return Array.isArray(periods) ? (periods as VacationPeriod[]) : [];
+    return Array.isArray(periods) ? (periods as VacationPeriod[]).map(normalizePeriod) : [];
   } catch {
     // Pages CMS schreibt beim Löschen des letzten Eintrags eine leere Datei.
     // Leere/ungültige Inhalte ergeben eine leere Liste, damit der Build nie bricht.

@@ -32,10 +32,11 @@ content:
             description: "Optionaler Text, z. B. 'Betriebsurlaub' oder 'In dringenden Faellen wenden Sie sich bitte an die Vertretungspraxis.'. Kann leer bleiben."
             type: text
 
-          - name: substitute
-            label: "Vertretung (optional)"
-            description: "Falls eine Vertretungspraxis angegeben werden soll, hier die Daten eintragen. Andernfalls leer lassen."
+          - name: substitutes
+            label: "Vertretungen (optional)"
+            description: "Eine oder mehrere Vertretungspraxen für diesen Zeitraum. Mit dem Plus-Symbol weitere hinzufügen, sonst leer lassen."
             type: object
+            list: true
             fields:
               - name: name
                 label: "Name der Praxis / des Arztes"

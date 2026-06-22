@@ -486,6 +486,23 @@ h3 {
   margin-top: 2.4rem;
 }
 
+.vacation-info {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.vacation-overview {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.vacation-overview__label {
+  font-weight: 700;
+  color: var(--brand-strong);
+}
+
 .practice-notice {
   display: grid;
   gap: 1rem;
@@ -540,6 +557,10 @@ h3 {
 .practice-notice__note {
   margin: 0;
   color: var(--muted);
+}
+
+.practice-notice__substitutes {
+  margin-top: 0.6rem;
 }
 
 .practice-notice__substitute {

@@ -1,62 +1,82 @@
 import {getTranslator} from '@/lib/i18n';
-import {formatVacationRange, getActiveVacationPeriods, telHref} from '@/lib/vacations';
+import {
+  formatCompactRange,
+  formatVacationRange,
+  getImminentVacationNow,
+  getUpcomingVacationsNow,
+  telHref,
+  vacationListYear
+} from '@/lib/vacations';
 
 type PracticeNoticeProps = {
-  /** Umschließt den Hinweis mit einem zentrierten Container (z.B. für die Startseite). */
+  /** Umschließt die Anzeige mit einem zentrierten Container (z.B. für die Startseite). */
   withContainer?: boolean;
-  /**
-   * Eigene Überschrift anzeigen. Auf false setzen, wenn der Hinweis bereits in
-   * einer Section mit Titel steckt (z.B. Kontaktseite), um eine doppelte Überschrift zu vermeiden.
-   */
-  showTitle?: boolean;
 };
 
-export function PracticeNotice({withContainer = false, showTitle = true}: PracticeNoticeProps = {}) {
+export function PracticeNotice({withContainer = false}: PracticeNoticeProps = {}) {
   const t = getTranslator();
-  const periods = getActiveVacationPeriods(new Date());
+  const now = new Date();
+  const upcoming = getUpcomingVacationsNow(now);
 
-  if (periods.length === 0) {
+  if (upcoming.length === 0) {
     return null;
   }
 
-  const notice = (
-    <aside className="practice-notice" role="status" aria-label={t('notice.title')}>
-      {showTitle ? <p className="practice-notice__title">{t('notice.title')}</p> : null}
-      <p className="practice-notice__lead">{t('notice.closedLabel')}</p>
-      <ul className="practice-notice__list">
-        {periods.map((period, index) => (
-          <li className="practice-notice__item" key={`${period.start}-${period.end}-${index}`}>
-            <p className="practice-notice__range">{formatVacationRange(period)}</p>
-            {period.note ? <p className="practice-notice__note">{period.note}</p> : null}
-            {period.substitute ? (
-              <div className="practice-notice__substitute">
-                <p className="practice-notice__substitute-label">{t('notice.substituteLabel')}</p>
-                <p className="practice-notice__substitute-name">{period.substitute.name}</p>
-                {period.substitute.street ? <p>{period.substitute.street}</p> : null}
-                {period.substitute.postalCode || period.substitute.city ? (
-                  <p>
-                    {[period.substitute.postalCode, period.substitute.city].filter(Boolean).join(' ')}
+  const year = vacationListYear(upcoming, now);
+  const imminent = getImminentVacationNow(now);
+
+  const content = (
+    <div className="vacation-info">
+      <p className="vacation-overview">
+        <span className="vacation-overview__label">
+          {t('notice.overviewLabel')} {year}:
+        </span>{' '}
+        {upcoming.map((period) => formatCompactRange(period)).join(', ')}
+      </p>
+
+      {imminent ? (
+        <aside className="practice-notice" role="status" aria-label={t('notice.title')}>
+          <p className="practice-notice__lead">{t('notice.closedLabel')}</p>
+          <ul className="practice-notice__list">
+            <li className="practice-notice__item">
+              <p className="practice-notice__range">{formatVacationRange(imminent)}</p>
+              {imminent.note ? <p className="practice-notice__note">{imminent.note}</p> : null}
+              {imminent.substitutes && imminent.substitutes.length > 0 ? (
+                <div className="practice-notice__substitutes">
+                  <p className="practice-notice__substitute-label">
+                    {imminent.substitutes.length > 1
+                      ? t('notice.substitutesLabel')
+                      : t('notice.substituteLabel')}
                   </p>
-                ) : null}
-                {period.substitute.phone ? (
-                  <p>
-                    <a href={telHref(period.substitute.phone)}>{period.substitute.phone}</a>
-                  </p>
-                ) : null}
-                {period.substitute.note ? (
-                  <p className="practice-notice__substitute-note">{period.substitute.note}</p>
-                ) : null}
-              </div>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-    </aside>
+                  {imminent.substitutes.map((sub, index) => (
+                    <div className="practice-notice__substitute" key={index}>
+                      <p className="practice-notice__substitute-name">{sub.name}</p>
+                      {sub.street ? <p>{sub.street}</p> : null}
+                      {sub.postalCode || sub.city ? (
+                        <p>{[sub.postalCode, sub.city].filter(Boolean).join(' ')}</p>
+                      ) : null}
+                      {sub.phone ? (
+                        <p>
+                          <a href={telHref(sub.phone)}>{sub.phone}</a>
+                        </p>
+                      ) : null}
+                      {sub.note ? (
+                        <p className="practice-notice__substitute-note">{sub.note}</p>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </li>
+          </ul>
+        </aside>
+      ) : null}
+    </div>
   );
 
   if (withContainer) {
-    return <div className="container practice-notice__container">{notice}</div>;
+    return <div className="container practice-notice__container">{content}</div>;
   }
 
-  return notice;
+  return content;
 }

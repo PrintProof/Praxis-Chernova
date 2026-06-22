@@ -4,14 +4,16 @@
       "start": "2026-07-20",
       "end": "2026-08-07",
       "note": "Wir sind wegen Betriebsurlaub nicht erreichbar",
-      "substitute": {
-        "name": "Dres. med Lankes",
-        "street": "Hauptstr. 93",
-        "postalCode": "33647",
-        "city": "Bielefeld",
-        "phone": "0521 55 77 133 ",
-        "note": "Nur Telefonisch erreichbar"
-      }
+      "substitutes": [
+        {
+          "name": "Dres. med Lankes",
+          "street": "Hauptstr. 93",
+          "postalCode": "33647",
+          "city": "Bielefeld",
+          "phone": "0521 55 77 133 ",
+          "note": "Nur Telefonisch erreichbar"
+        }
+      ]
     }
   ]
 }

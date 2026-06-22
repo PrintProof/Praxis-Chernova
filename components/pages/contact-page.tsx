@@ -4,25 +4,19 @@ import {PracticeNotice} from '@/components/practice-notice';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
-import {getActiveVacationPeriods} from '@/lib/vacations';
 
 export function ContactPage() {
   const t = getTranslator();
-  const hasVacationNotice = getActiveVacationPeriods(new Date()).length > 0;
 
   return (
     <PageShell routeKey="contact">
+      <PracticeNotice withContainer />
+
       <section className="page-hero">
         <div className="container">
           <h1>{t('contact.title')}</h1>
         </div>
       </section>
-
-      {hasVacationNotice ? (
-        <Section title={t('notice.title')}>
-          <PracticeNotice showTitle={false} />
-        </Section>
-      ) : null}
 
       <Section title={t('contact.visitTitle')}>
         <div className="info-grid">

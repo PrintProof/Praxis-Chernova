@@ -64,8 +64,10 @@
   },
   "notice": {
     "title": "Urlaub & Vertretung",
+    "overviewLabel": "Urlaub",
     "closedLabel": "Unsere Praxis bleibt in folgendem Zeitraum geschlossen:",
-    "substituteLabel": "Vertretungspraxis"
+    "substituteLabel": "Vertretungspraxis",
+    "substitutesLabel": "Vertretungspraxen"
   },
   "contact": {
     "eyebrow": "",
