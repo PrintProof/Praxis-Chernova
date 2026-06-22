@@ -106,16 +106,6 @@
         "body": "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an."
       }
     },
-    "cards": {
-      "internalMedicine": {
-        "title": "Innere Medizin",
-        "body": "Medizinische Betreuung mit internistischem Schwerpunkt."
-      },
-      "primaryCare": {
-        "title": "Hausärztliche Begleitung",
-        "body": "Anlaufstelle für akute Beschwerden, chronische Erkrankungen und die hausärztliche Versorgung im Alltag."
-      }
-    },
     "bookingNotice": "Sie werden direkt auf die externe Buchungsseite von arzt-direkt weitergeleitet."
   },
   "legalPage": {
