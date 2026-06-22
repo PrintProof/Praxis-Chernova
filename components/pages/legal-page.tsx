@@ -1,5 +1,6 @@
 import {PageShell} from '@/components/page-shell';
 import {Section} from '@/components/section';
+import {datenschutz, impressum, type LegalSection} from '@/content/legal';
 import {getTranslator} from '@/lib/i18n';
 import type {RouteKey} from '@/lib/routing';
 
@@ -11,6 +12,7 @@ export function LegalPage({
   translationPrefix: 'legalPage' | 'privacyPage';
 }) {
   const t = getTranslator();
+  const sections: LegalSection[] = routeKey === 'legal' ? impressum : datenschutz;
 
   return (
     <PageShell routeKey={routeKey}>
@@ -18,17 +20,18 @@ export function LegalPage({
         <div className="container">
           <p className="page-hero__eyebrow">{t(`${translationPrefix}.eyebrow`)}</p>
           <h1>{t(`${translationPrefix}.title`)}</h1>
-          <p>{t(`${translationPrefix}.lead`)}</p>
         </div>
       </section>
 
-      <Section title={t(`${translationPrefix}.sectionTitle`)} description={t(`${translationPrefix}.sectionBody`)}>
-        <div className="legal-placeholder">
-          <p>{t(`${translationPrefix}.placeholderOne`)}</p>
-          <p>{t(`${translationPrefix}.placeholderTwo`)}</p>
-          <p>{t(`${translationPrefix}.placeholderThree`)}</p>
-        </div>
-      </Section>
+      {sections.map((section) => (
+        <Section key={section.heading} title={section.heading}>
+          <div className="legal-content">
+            {section.body.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+        </Section>
+      ))}
     </PageShell>
   );
 }

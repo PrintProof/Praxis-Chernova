@@ -109,24 +109,12 @@
     "bookingNotice": "Sie werden direkt auf die externe Buchungsseite von arzt-direkt weitergeleitet."
   },
   "legalPage": {
-    "eyebrow": "Impressum",
-    "title": "Impressum",
-    "lead": "Die rechtlichen Pflichtangaben werden vor dem Livegang mit vollständig verifizierten Praxisdaten ergänzt.",
-    "sectionTitle": "Vorläufiger Platzhalter",
-    "sectionBody": "Die technische Website-Struktur ist bereits vorbereitet, die juristisch relevanten Detailangaben jedoch noch nicht final bestätigt.",
-    "placeholderOne": "Vor der Veröffentlichung müssen Name und Anschrift der verantwortlichen Stelle, berufsrechtliche Angaben, ggf. Kammerzugehörigkeit sowie weitere Pflichtangaben rechtlich geprüft und vollständig eingetragen werden.",
-    "placeholderTwo": "Solange diese Prüfung nicht abgeschlossen ist, dient diese Seite nur als technischer Platzhalter innerhalb des Projekts.",
-    "placeholderThree": "Für den echten Go-live darf diese Platzhalterfassung nicht unverändert online bleiben."
+    "eyebrow": "Rechtliche Pflichtangaben",
+    "title": "Impressum"
   },
   "privacyPage": {
     "eyebrow": "Datenschutz",
-    "title": "Datenschutz",
-    "lead": "Die Datenschutzhinweise müssen auf Hosting, externe Links und die finale technische Auslieferung abgestimmt werden.",
-    "sectionTitle": "Vorläufiger Platzhalter",
-    "sectionBody": "Die spätere Datenschutzerklärung hängt von der finalen Infrastruktur und den tatsächlich eingesetzten Diensten ab.",
-    "placeholderOne": "Vor dem Livegang müssen insbesondere Hosting, Server-Logs, externe Kartendienste, der externe arzt-direkt-Link und mögliche Schrift- oder CDN-Einbindungen bewertet werden.",
-    "placeholderTwo": "Für diese Website ist bewusst kein Kontaktformular vorgesehen, um unnötige Datenerhebung zu vermeiden.",
-    "placeholderThree": "Die endgültige Datenschutzerklärung sollte vor Veröffentlichung rechtlich geprüft und vollständig befüllt werden."
+    "title": "Datenschutzerklärung"
   },
   "footer": {
     "contactTitle": "Kontakt",

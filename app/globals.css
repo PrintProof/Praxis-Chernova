@@ -345,6 +345,19 @@ h3 {
   padding: 1rem 0 1.9rem;
 }
 
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 60rem;
+}
+
+.legal-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .section-header {
   margin-bottom: 1.3rem;
   max-width: 60rem;

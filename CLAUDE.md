@@ -37,6 +37,7 @@ A single route exists in several places that must stay in sync:
 
 - **`content/practice.ts`** — factual practice data (address, phone numbers, fax, opening hours, booking URL, map URL). These are real verified contact details; treat changes here as sensitive — don't invent or alter phone numbers/addresses.
 - **`messages/de.json`** — all UI/prose strings, keyed by dotted namespaces (`nav.*`, `hero.*`, `home.*`, …). Access via `t('namespace.key')` from `getTranslator()`.
+- **`content/legal.ts`** — the full Impressum and Datenschutzerklärung text, structured as `LegalSection[]` (`{heading, body: string[]}`) in two exports (`impressum`, `datenschutz`). `components/pages/legal-page.tsx` selects the array by `routeKey` (`legal` → Impressum, `privacy` → Datenschutz) and renders one `<Section title={heading}>` per entry with a `<p>` per body line; `messages/de.json` only holds the hero `eyebrow`/`title` for these pages. The text contains intentional `[BITTE ERGÄNZEN: …]` / `[BITTE PRÜFEN: …]` placeholders for legally open points — do not remove or invent values for them.
 
 ## Vacation / substitute notices (CMS-managed)
 

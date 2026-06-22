@@ -6,7 +6,7 @@ import {buildMetadata} from '@/lib/seo';
 export const metadata: Metadata = buildMetadata({
   routeKey: 'privacy',
   title: 'Praxis Veronika Chernova | Datenschutz',
-  description: 'Datenschutzhinweise der Praxis Veronika Chernova.'
+  description: 'Datenschutzerklärung der Praxis Veronika Chernova.'
 });
 
 export default function Page() {
