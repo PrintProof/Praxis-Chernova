@@ -24,6 +24,18 @@
         "phone": "0521 44 97 44",
         "note": "Nur Telefonisch erreichbar"
       }
+    },
+    {
+      "start": "2026-07-20",
+      "end": "2026-08-07",
+      "substitute": {
+        "name": "Oxana Berlin",
+        "street": "Lippstädter Str. 63",
+        "postalCode": "33659",
+        "city": "Bielefeld",
+        "phone": "05209 40 77",
+        "note": "Nur Telefonisch erreichbar"
+      }
     }
   ]
 }
