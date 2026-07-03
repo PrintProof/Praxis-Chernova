@@ -12,6 +12,18 @@
         "phone": "0521 55 77 133 ",
         "note": "Nur Telefonisch erreichbar"
       }
+    },
+    {
+      "start": "2026-07-20",
+      "end": "2026-08-07",
+      "substitute": {
+        "name": "Hausarztpraxis am Frölenberg",
+        "street": "Hauptstr. 90",
+        "postalCode": "33647",
+        "city": "Bielefeld",
+        "phone": "0521 44 97 44",
+        "note": "Nur Telefonisch erreichbar"
+      }
     }
   ]
 }
