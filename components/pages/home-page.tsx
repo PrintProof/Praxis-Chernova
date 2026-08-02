@@ -1,9 +1,18 @@
 import Link from 'next/link';
 
-import {AlertCircle, Calendar, Mask, Phone, PracticeIllustration, Video} from '@/components/illustrations';
+import {
+  AlertCircle,
+  Calendar,
+  Mask,
+  Phone,
+  PracticeIllustration,
+  Prescription,
+  Video
+} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
+import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
@@ -93,10 +102,18 @@ export function HomePage() {
                   <span className="visually-hidden"> ({t('accessibility.newTabHint')})</span>
                 </a>
               </div>
-              {/* Die Einschraenkung selbst steht jetzt IM Button. Hier bleibt
-                  nur, was der Button nicht sagen kann: was neue Patientinnen
-                  und Patienten stattdessen tun. */}
-              <p className="hint home-hero__hint">{t('cta.newPatientsHint')}</p>
+              {/* Die Einschraenkung selbst steht IM Button. Hier bleibt nur,
+                  was der Button nicht sagen kann: wer stattdessen anruft.
+                  Massgeblich ist die APP-NUTZUNG, nicht "neu in der Praxis" —
+                  so von der Praxis ausdruecklich korrigiert.
+                  Ohne das Zeitfenster: das steht im Abschnitt "Termin
+                  vereinbaren" direkt darunter in der Telefon-Karte. */}
+              <PhoneSentence
+                className="hint home-hero__hint"
+                text={practice.appointments.appOptOut}
+                href={practice.phoneHref}
+                display={practice.phone}
+              />
             </div>
           </div>
 
@@ -185,6 +202,53 @@ export function HomePage() {
           </p>
           <p className="note__body">{practice.maskNote}</p>
           <p className="note__thanks">{t('home.appointment.thanks')}</p>
+        </div>
+      </Section>
+
+      {/* Rezepttelefon — auf ausdruecklichen Wunsch der Aerztin prominent.
+          Der Kern ist die RUND-UM-DIE-UHR-Erreichbarkeit: sie entlastet die
+          Hauptnummer, die morgens zwischen 7:30 und 8:30 fuer Termine gebraucht
+          wird. Bisher stand der Satz nur auf /kontakt, tief unten in
+          "Organisatorisches" — dort findet ihn nur, wer ohnehin sucht.
+
+          Der Satz der Praxis wird WOERTLICH uebernommen und allein durch seine
+          Groesse hervorgehoben (--step-2), statt ihn fuer die Startseite neu zu
+          texten. So gibt es die Aussage nur in einer Formulierung, hier wie auf
+          /kontakt, aus derselben Quelle in content/practice.ts.
+          Der vollstaendige Ablauf (App, 10:00 Uhr, Gesundheitskarte) bleibt auf
+          /kontakt; hierher fuehrt nur der Link am Ende. */}
+      <Section
+        id="rezept"
+        className="home-prescription"
+        eyebrow={t('home.prescription.eyebrow')}
+        title={t('home.prescription.title')}
+      >
+        <div className="prescription-panel">
+          <div className="prescription-panel__phone">
+            <p className="prescription-panel__label">
+              <Prescription className="icon prescription-panel__icon" />
+              <span>{t('home.prescription.phoneLabel')}</span>
+            </p>
+            <p className="prescription-panel__number">
+              <a href={practice.prescriptionPhoneHref}>
+                {practice.prescriptionPhoneDisplay}
+              </a>
+            </p>
+          </div>
+
+          <div className="prescription-panel__body">
+            <p className="prescription-panel__lead">
+              {practice.prescriptionNotes.phoneAvailability}
+            </p>
+            <p className="prescription-panel__processing">
+              {practice.prescriptionNotes.processingLine}
+            </p>
+            <p>
+              <Link className="link--arrow" href={`${getPath('contact')}#rezepte`}>
+                {t('home.prescription.link')}
+              </Link>
+            </p>
+          </div>
         </div>
       </Section>
 

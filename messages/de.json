@@ -28,9 +28,7 @@
     "toNews": "Aktuelles ansehen",
     "bookOnlineShort": "Online-Termin",
     "bookOnlineAudience": "nur für Bestandspatienten",
-    "bookOnlineNote": "Online-Termine sind für Bestandspatientinnen und Bestandspatienten. Sind Sie neu in der Praxis, rufen Sie uns bitte an.",
     "bookOnlineHint": "Die Buchung öffnet sich bei arzt-direkt in einem neuen Tab.",
-    "newPatientsHint": "Neue Patientinnen und Patienten melden sich bitte telefonisch.",
     "openRoute": "Route planen",
     "openRouteHint": "Der Link öffnet die Adresse in Google Maps in einem neuen Tab."
   },
@@ -71,6 +69,12 @@
       "ruleTitle": "Bitte nur mit vereinbartem Termin",
       "maskTitle": "Bei Erkältungssymptomen",
       "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
+    },
+    "prescription": {
+      "eyebrow": "Ohne in die Praxis zu kommen",
+      "title": "Rezepte und Überweisungen",
+      "phoneLabel": "Rezepttelefon",
+      "link": "Rezepte und Überweisungen im Detail"
     }
   },
   "services": {

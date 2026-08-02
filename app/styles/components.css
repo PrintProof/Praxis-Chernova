@@ -187,22 +187,34 @@
 
 /* Weiterfuehrender Link mit Chevron. Der Chevron ist reines CSS
    (kein Glyph, keine Grafik) und damit fuer Screenreader unsichtbar. */
+/* Bewusst `inline` statt `inline-flex`: als Flex-Container wurde der Linktext
+   zu EINEM Item, das die volle Breite umbrach — der Pfeil sass danach am
+   rechten Zeilenende und wirkte abgerissen (auf schmalen Bildschirmen deutlich
+   sichtbar). Inline laeuft er im Textfluss mit und bleibt am letzten Wort.
+   Die Trefferflaeche kommt jetzt ueber `padding-block`; bei Inline-Elementen
+   vergroessert das den anklickbaren Bereich, ohne den Zeilenfluss zu stoeren. */
 .link--arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: var(--tap-min);
+  display: inline;
+  /* Gemessen: ergibt 48px Trefferflaeche bei der Standard-Zeilenhoehe.
+     Mit 0.6em waren es 41px und damit unter den 44px, die die Seite sonst
+     ueberall einhaelt. */
+  padding-block: 0.72em;
   font-family: var(--font-ui);
   font-weight: var(--weight-semibold);
   text-decoration-line: underline;
   text-underline-offset: 0.22em;
 }
 
+/* Kein Leerzeichen zwischen Text und Pfeil: dadurch gibt es keine
+   Umbruchgelegenheit und der Pfeil kann nie allein auf einer Zeile landen.
+   Der Abstand kommt ueber margin-inline-start. */
 .link--arrow::after {
   content: "";
-  flex: none;
+  display: inline-block;
   width: 0.42em;
   height: 0.42em;
+  margin-inline-start: var(--space-2);
+  vertical-align: 0.06em;
   border-top: 2px solid currentColor;
   border-right: 2px solid currentColor;
   transform: rotate(45deg);

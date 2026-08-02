@@ -220,6 +220,19 @@ export const practice = {
      */
     videoLine:
       'Für geeignete Anliegen bieten wir Ihnen auch eine Videosprechstunde an. Sie ermöglicht Ihnen eine ärztliche Beratung bequem von zu Hause oder unterwegs und kann Ihnen in vielen Fällen den Weg in die Praxis ersparen. Ob eine Videosprechstunde für Ihr Anliegen geeignet ist, entscheiden wir gemeinsam mit Ihnen.',
+    /**
+     * Wer die Praxis-App nicht nutzt, ruft an. Das Kriterium ist ausdruecklich
+     * die APP-NUTZUNG, nicht "neu in der Praxis" — die frühere Formulierung
+     * "Neue Patientinnen und Patienten melden sich bitte telefonisch" hat die
+     * Praxis genau deshalb korrigieren lassen: auch langjaehrige Patientinnen
+     * und Patienten ohne App gehoeren telefonisch angemeldet.
+     * `{phone}` wird beim Rendern durch die Hauptnummer ersetzt (PhoneSentence).
+     */
+    appOptOut:
+      'Patientinnen und Patienten, die unsere Praxis-App noch nicht nutzen, melden sich bitte telefonisch unter {phone} bei uns.',
+    /** Ergaenzt appOptOut dort, wo das Zeitfenster nicht ohnehin sichtbar ist. */
+    phoneWindowLine:
+      'Die telefonische Terminvereinbarung ist täglich von 7:30 Uhr bis 8:30 Uhr möglich.',
     /** Die verbindliche Regel: keine Behandlung ohne Termin. */
     byAppointmentOnly:
       'Um Wartezeiten zu vermeiden und einen reibungslosen Praxisablauf zu gewährleisten, erfolgt die Behandlung ausschließlich nach vorheriger Terminvereinbarung. Bitte kommen Sie daher nur mit einem vereinbarten Termin in unsere Praxis.'

@@ -358,3 +358,76 @@
   margin-top: var(--space-2);
   max-width: var(--measure);
 }
+
+/* ---------------------------------------------------------------------------
+   Rezepttelefon — auf ausdruecklichen Wunsch der Aerztin prominent.
+   Ein breites Panel statt zweier Karten: es gibt hier nur EINE Aussage, und
+   die soll man nicht suchen muessen. Links die Rufnummer als Ankerpunkt fuers
+   Auge, rechts der Satz in Lead-Groesse. Getoente Flaeche wie beim
+   Videosprechstunden-Angebot — beide sagen "das erspart Ihnen den Weg".
+   --------------------------------------------------------------------------- */
+
+.prescription-panel {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--card-padding);
+  background-color: var(--brand-soft);
+  border: 1px solid var(--border-brand);
+  border-radius: var(--radius-card);
+}
+
+/* Ab 48em zweispaltig: die Nummer bekommt eine feste Spalte, damit der Satz
+   daneben nicht auf Schlauchbreite schrumpft. */
+@media (min-width: 48em) {
+  .prescription-panel {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+.prescription-panel__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+}
+
+.prescription-panel__icon {
+  color: var(--brand);
+}
+
+.prescription-panel__number {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.prescription-panel__number a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Der Satz der Praxis, woertlich — und gross genug, dass man ihn nicht
+   ueberliest. Das ist der ganze Zweck dieses Abschnitts. */
+.prescription-panel__lead {
+  margin: 0;
+  font-size: var(--step-2);
+  line-height: var(--leading-snug);
+  color: var(--text);
+  max-width: 34ch;
+}
+
+.prescription-panel__processing {
+  margin: var(--space-4) 0 var(--space-4);
+  color: var(--text-muted);
+  max-width: var(--measure);
+}

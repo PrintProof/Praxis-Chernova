@@ -3,7 +3,9 @@ import Link from 'next/link';
 import {CareIllustration} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
+import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
+import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
 import {getPath} from '@/lib/routing';
 
@@ -54,7 +56,15 @@ export function ServicesPage() {
                 leuchtet auf dem Telefon ein gruener "Online-Termin"-Button
                 ohne jeden Zusatz. Gleicher Schluessel wie im Hero der
                 Startseite. */}
-            <p className="hint services-appointment__note">{t('cta.bookOnlineNote')}</p>
+            <PhoneSentence
+              className="hint services-appointment__note"
+              text={practice.appointments.appOptOut}
+              href={practice.phoneHref}
+              display={practice.phone}
+            />
+            <p className="hint services-appointment__note">
+              {practice.appointments.phoneWindowLine}
+            </p>
           </div>
           {/* Rein dekorativ (aria-hidden im SVG selbst): zwei Stuehle, Tisch, Lampe. */}
           <div className="services-care__figure">

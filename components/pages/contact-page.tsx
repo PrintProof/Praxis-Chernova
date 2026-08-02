@@ -5,6 +5,7 @@ import {Calendar, Clock, Info} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
+import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
@@ -42,11 +43,6 @@ import {getPath} from '@/lib/routing';
  */
 export function ContactPage() {
   const t = getTranslator();
-
-  // Der Satz zum Anfordern von Rezepten traegt den Platzhalter {phone}.
-  // Vor/hinter ihm steht Fliesstext, an seiner Stelle der tel:-Link.
-  const [orderBefore, orderAfter = ''] =
-    practice.prescriptionNotes.orderLine.split('{phone}');
 
   return (
     <PageShell routeKey="contact" notice={<NextVacationBanner />}>
@@ -176,30 +172,37 @@ export function ContactPage() {
                   <span className="visually-hidden"> ({t('accessibility.newTabHint')})</span>
                 </a>
               </div>
+              {/* Hier BEIDE Saetze: das Zeitfenster steht auf dieser Seite
+                  sonst nirgends (es lebt im Abschnitt "Termin vereinbaren"
+                  auf der Startseite). */}
               <div className="contact-processes__hints">
                 <p className="hint">{t('cta.bookOnlineHint')}</p>
-                <p className="hint">{t('cta.newPatientsHint')}</p>
+                <PhoneSentence
+                  className="hint"
+                  text={practice.appointments.appOptOut}
+                  href={practice.phoneHref}
+                  display={practice.phone}
+                />
+                <p className="hint">{practice.appointments.phoneWindowLine}</p>
               </div>
             </div>
           </li>
 
-          <li className="rule-list__item">
+          {/* Sprungziel des Rezept-Blocks auf der Startseite. */}
+          <li className="rule-list__item" id="rezepte">
             <h3 className="rule-list__title">{t('contact.processes.prescriptions.title')}</h3>
             <div className="contact-processes__body">
               {/* Die Rufnummer steht als tel:-Link MITTEN im Satz, dort wo das
                   Merkblatt sie nennt. Der Text traegt dafuer den Platzhalter
                   {phone}; die Nummer selbst kommt aus practice.ts und existiert
                   im Repository weiterhin nur ein einziges Mal. */}
-              <p className="rule-list__body">
-                {orderBefore}
-                <a
-                  className="contact-processes__phone"
-                  href={practice.prescriptionPhoneHref}
-                >
-                  {practice.prescriptionPhoneDisplay}
-                </a>
-                {orderAfter}
-              </p>
+              <PhoneSentence
+                className="rule-list__body"
+                linkClassName="contact-processes__phone"
+                text={practice.prescriptionNotes.orderLine}
+                href={practice.prescriptionPhoneHref}
+                display={practice.prescriptionPhoneDisplay}
+              />
               {/* Rund-um-die-Uhr-Erreichbarkeit: der eine erfreuliche Punkt in
                   einem Abschnitt voller Fristen und Bedingungen — und der
                   Gegenpol zum engen Terminfenster 7:30-8:30. Deshalb mit Uhr
