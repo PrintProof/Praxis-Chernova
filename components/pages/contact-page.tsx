@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import {EmergencyService} from '@/components/emergency-service';
-import {Calendar} from '@/components/illustrations';
+import {Calendar, Info} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
@@ -42,6 +42,11 @@ import {getPath} from '@/lib/routing';
  */
 export function ContactPage() {
   const t = getTranslator();
+
+  // Der Satz zum Anfordern von Rezepten traegt den Platzhalter {phone}.
+  // Vor/hinter ihm steht Fliesstext, an seiner Stelle der tel:-Link.
+  const [orderBefore, orderAfter = ''] =
+    practice.prescriptionNotes.orderLine.split('{phone}');
 
   return (
     <PageShell routeKey="contact" notice={<NextVacationBanner />}>
@@ -181,19 +186,37 @@ export function ContactPage() {
           <li className="rule-list__item">
             <h3 className="rule-list__title">{t('contact.processes.prescriptions.title')}</h3>
             <div className="contact-processes__body">
-              <p className="rule-list__body">{practice.prescriptionNotes.orderLine}</p>
-              <p className="rule-list__body">{practice.prescriptionNotes.pickupLine}</p>
-              <div className="button-row">
+              {/* Die Rufnummer steht als tel:-Link MITTEN im Satz, dort wo das
+                  Merkblatt sie nennt. Der Text traegt dafuer den Platzhalter
+                  {phone}; die Nummer selbst kommt aus practice.ts und existiert
+                  im Repository weiterhin nur ein einziges Mal. */}
+              <p className="rule-list__body">
+                {orderBefore}
                 <a
-                  className="button button--secondary"
+                  className="contact-processes__phone"
                   href={practice.prescriptionPhoneHref}
-                  aria-label={t('cta.callPrescriptionAria', {
-                    phone: practice.prescriptionPhoneDisplay
-                  })}
                 >
-                  {t('cta.callPrescription')}
+                  {practice.prescriptionPhoneDisplay}
                 </a>
+                {orderAfter}
+              </p>
+              <p className="rule-list__body">{practice.prescriptionNotes.processingLine}</p>
+              <p className="rule-list__body">{practice.prescriptionNotes.pickupLine}</p>
+
+              {/* Die Voraussetzung fuers eRezept steht VOR dem Anruf-Button:
+                  wer sie erst danach liest, hat schon angefordert. Bewusst die
+                  ruhige .note statt der Sandflaeche — Sand traegt 116 117, die
+                  Schliesszeiten und die Terminpflicht, also Regeln, die den
+                  Zugang zur Praxis selbst betreffen. Hier geht es um die
+                  Bedingung fuer EINE Leistung. */}
+              <div className="note contact-processes__note">
+                <p className="note__title">
+                  <Info className="icon note__icon" />
+                  <span>{t('common.pleaseNote')}</span>
+                </p>
+                <p className="note__body">{practice.prescriptionNotes.cardRequirement}</p>
               </div>
+
             </div>
           </li>
 

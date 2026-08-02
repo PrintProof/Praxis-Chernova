@@ -159,9 +159,29 @@ export const practice = {
     'DMP Diabetes mellitus Typ 2',
     'DMP KHK'
   ],
+  /**
+   * Rezepte und Überweisungen — wortgetreu aus dem Merkblatt der Praxis
+   * (Fassung vom 02.08.2026).
+   *
+   * Zwei Anforderungswege (App und Rezepttelefon), ein Zeitpunkt der
+   * Verfügbarkeit und EINE Voraussetzung, die man kennen muss, bevor man ein
+   * eRezept anfordert — sonst kann es nicht ausgestellt werden.
+   */
   prescriptionNotes: {
-    orderLine: 'Rezepte und Überweisungen können über das Rezepttelefon oder die Arzt-Direkt Praxis App angefordert werden.',
-    pickupLine: 'Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr.'
+    /**
+     * `{phone}` ist der Platzhalter für die Rezepttelefonnummer. Sie steht
+     * NICHT im Text, sondern wird beim Rendern aus `prescriptionPhoneDisplay`
+     * eingesetzt und als `tel:`-Link ausgegeben — so gibt es die Nummer im
+     * Repository weiterhin genau einmal.
+     */
+    orderLine:
+      'Rezepte und Überweisungen können bequem über die Arzt-Direkt Praxis-App (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',
+    processingLine: 'Die Bearbeitung erfolgt am nächsten Arbeitstag.',
+    pickupLine:
+      'eRezepte sowie angeforderte Überweisungen stehen ab 10:00 Uhr zur Verfügung bzw. können ab diesem Zeitpunkt in der Praxis abgeholt werden.',
+    /** Voraussetzung fürs eRezept. Ohne sie läuft die Anforderung ins Leere. */
+    cardRequirement:
+      'Voraussetzung für die Ausstellung eines eRezepts ist, dass Ihre elektronische Gesundheitskarte im laufenden Quartal bereits in unserer Praxis eingelesen wurde.'
   },
 
   /**

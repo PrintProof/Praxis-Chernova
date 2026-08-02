@@ -18,13 +18,12 @@
   },
   "common": {
     "specialtyShort": "Fachärztin für Innere Medizin und Allgemeinmedizin",
-    "homeAria": "Zur Startseite"
+    "homeAria": "Zur Startseite",
+    "pleaseNote": "Bitte beachten Sie"
   },
   "cta": {
     "call": "Anrufen",
     "callAria": "Praxis anrufen: {phone}",
-    "callPrescription": "Rezepttelefon anrufen",
-    "callPrescriptionAria": "Rezepttelefon anrufen: {phone}",
     "contactAndHours": "Sprechzeiten & Kontakt",
     "toNews": "Aktuelles ansehen",
     "bookOnlineShort": "Online-Termin",

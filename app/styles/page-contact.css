@@ -208,3 +208,27 @@
     row-gap: var(--space-4);
   }
 }
+
+/* Hinweiskasten innerhalb einer Zeile der Ablaufliste (Voraussetzung fuers
+   eRezept). Er sitzt zwischen Fliesstext und Aktionsbutton und braucht deshalb
+   nach oben etwas mehr Luft als nach unten — sonst klebt er am Button, der zu
+   ihm gehoert. Etwas kleinere Ueberschrift als der freistehende Kasten auf der
+   Startseite: hier steht er eine Ebene tiefer, unter einer h3. */
+.contact-processes__note {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-4);
+}
+
+.contact-processes__note .note__title {
+  font-size: var(--step-0);
+}
+
+/* Rezepttelefon im Fliesstext: die Nummer soll als Nummer lesbar sein, nicht
+   nur als Link. Tabellarische Ziffern und etwas mehr Gewicht heben sie aus dem
+   Satz heraus, ohne dass sie wie ein Button aussieht. */
+.contact-processes__phone {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
