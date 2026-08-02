@@ -7,6 +7,8 @@ import '@/app/styles/base.css';
 import '@/app/styles/layout.css';
 import '@/app/styles/components.css';
 import '@/app/styles/page-home.css';
+import '@/app/styles/page-appointments.css';
+import '@/app/styles/page-prescriptions.css';
 import '@/app/styles/page-services.css';
 import '@/app/styles/page-news.css';
 import '@/app/styles/page-contact.css';

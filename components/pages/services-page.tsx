@@ -3,7 +3,6 @@ import Link from 'next/link';
 import {CareIllustration} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
-import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
@@ -40,30 +39,18 @@ export function ServicesPage() {
 
       {/* Kein Abschnittskopf: die Aussage steht bereits im Hero. Hier traegt
           allein die Zeichnung, damit die Seite nicht als nackter Textblock
-          endet — sie fuegt keine inhaltliche Aussage hinzu. */}
+          endet — sie fuegt keine inhaltliche Aussage hinzu.
+          Der frueher hier stehende Block "Termin vereinbaren" ist auf die
+          eigene Seite /termine gewandert; hierher bleibt nur der Verweis. */}
       <Section spacing="sm" ariaLabel={t('services.appointment.title')}>
         <div className="grid grid--split-center services-care">
           <div className="services-appointment">
             <h2 className="services-appointment__title">{t('services.appointment.title')}</h2>
             <p className="services-appointment__body">{t('services.appointment.body')}</p>
-            <div className="button-row">
-              <Link className="button button--secondary" href={getPath('contact')}>
-                {t('cta.contactAndHours')}
+            <p>
+              <Link className="link--arrow" href={getPath('appointments')}>
+                {t('services.appointment.link')}
               </Link>
-            </div>
-            {/* Die Einschraenkung der Online-Buchung, sichtbar auf jeder Breite.
-                In der Kopfzeile steht sie erst ab 40em; ueber dieser Seite
-                leuchtet auf dem Telefon ein gruener "Online-Termin"-Button
-                ohne jeden Zusatz. Gleicher Schluessel wie im Hero der
-                Startseite. */}
-            <PhoneSentence
-              className="hint services-appointment__note"
-              text={practice.appointments.appOptOut}
-              href={practice.phoneHref}
-              display={practice.phone}
-            />
-            <p className="hint services-appointment__note">
-              {practice.appointments.phoneWindowLine}
             </p>
           </div>
           {/* Rein dekorativ (aria-hidden im SVG selbst): zwei Stuehle, Tisch, Lampe. */}
@@ -72,6 +59,7 @@ export function ServicesPage() {
           </div>
         </div>
       </Section>
+
     </PageShell>
   );
 }

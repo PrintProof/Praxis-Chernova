@@ -1,11 +1,8 @@
 import Link from 'next/link';
 
 import {EmergencyService} from '@/components/emergency-service';
-import {Calendar, Clock, Info} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
-import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
-import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
@@ -63,6 +60,11 @@ export function ContactPage() {
               {practice.phone}
             </a>
             <p className="phone-line__description">{t('contact.channels.phone.description')}</p>
+            <p>
+              <Link className="link--arrow" href={getPath('appointments')}>
+                {t('contact.channels.phone.link')}
+              </Link>
+            </p>
           </li>
 
           <li className="contact-channels__item contact-channels__item--minor phone-line">
@@ -75,6 +77,11 @@ export function ContactPage() {
             <p className="phone-line__description">
               {t('contact.channels.prescriptionPhone.description')}
             </p>
+            <p>
+              <Link className="link--arrow" href={getPath('prescriptions')}>
+                {t('contact.channels.prescriptionPhone.link')}
+              </Link>
+            </p>
           </li>
 
           {/* Fax bewusst ohne tel:-Link und ohne Erklaersatz: es gibt keine
@@ -84,23 +91,6 @@ export function ContactPage() {
             <p className="phone-line__number phone-line__number--static">{practice.fax}</p>
           </li>
         </ul>
-      </Section>
-
-      {/* --- Sprechzeiten -------------------------------------------------- */}
-      <Section
-        className="contact-hours"
-        title={t('contact.hours.title')}
-        tone="surface"
-        headerExtra={
-          <>
-            <p className="section__description">{t('contact.hours.description')}</p>
-            <Link className="link link--arrow" href={getPath('news')}>
-              {t('cta.toNews')}
-            </Link>
-          </>
-        }
-      >
-        <OpeningHours />
       </Section>
 
       {/* --- Adresse & Anfahrt --------------------------------------------- */}
@@ -140,113 +130,6 @@ export function ContactPage() {
       {/* Papierband statt Roséband: der anschliessende Notdienst-Block
           (gemeinsame Komponente) ist selbst `muted`. Zwei Rosébaender
           direkt hintereinander wuerden zu einem einzigen verschmelzen. */}
-      <Section className="contact-processes" title={t('contact.processes.title')} tone="surface">
-        <ul className="rule-list rule-list--split" role="list">
-          <li className="rule-list__item">
-            <h3 className="rule-list__title">{t('contact.processes.appointments.title')}</h3>
-            <div className="contact-processes__body">
-              {/* Die verbindliche Regel steht auch hier — wer auf /kontakt
-                  landet, darf nicht erst zur Startseite muessen, um zu
-                  erfahren, dass es ohne Termin nicht geht. Ein Satz, EINE
-                  Quelle (content/practice.ts), kann nicht auseinanderlaufen.
-                  Die beiden Wege mit ihren Zeitfenstern werden NICHT
-                  wiederholt; dorthin fuehrt der Link darunter. */}
-              <p className="rule-list__body">{practice.appointments.byAppointmentOnly}</p>
-              <p className="rule-list__body">
-                <Link className="link--arrow" href={`${getPath('home')}#termin`}>
-                  {t('contact.processes.appointments.link')}
-                </Link>
-              </p>
-              <div className="button-row">
-                <a
-                  className="button button--secondary button--booking"
-                  href={practice.bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Calendar className="button__icon" />
-                  <span className="button__text">
-                    <span className="button__label">{t('cta.bookOnlineShort')}</span>
-                    <span className="button__note">{t('cta.bookOnlineAudience')}</span>
-                  </span>
-                  <span className="visually-hidden"> ({t('accessibility.newTabHint')})</span>
-                </a>
-              </div>
-              {/* Hier BEIDE Saetze: das Zeitfenster steht auf dieser Seite
-                  sonst nirgends (es lebt im Abschnitt "Termin vereinbaren"
-                  auf der Startseite). */}
-              <div className="contact-processes__hints">
-                <p className="hint">{t('cta.bookOnlineHint')}</p>
-                <PhoneSentence
-                  className="hint"
-                  text={practice.appointments.appOptOut}
-                  href={practice.phoneHref}
-                  display={practice.phone}
-                />
-                <p className="hint">{practice.appointments.phoneWindowLine}</p>
-              </div>
-            </div>
-          </li>
-
-          {/* Sprungziel des Rezept-Blocks auf der Startseite. */}
-          <li className="rule-list__item" id="rezepte">
-            <h3 className="rule-list__title">{t('contact.processes.prescriptions.title')}</h3>
-            <div className="contact-processes__body">
-              {/* Die Rufnummer steht als tel:-Link MITTEN im Satz, dort wo das
-                  Merkblatt sie nennt. Der Text traegt dafuer den Platzhalter
-                  {phone}; die Nummer selbst kommt aus practice.ts und existiert
-                  im Repository weiterhin nur ein einziges Mal. */}
-              <PhoneSentence
-                className="rule-list__body"
-                linkClassName="contact-processes__phone"
-                text={practice.prescriptionNotes.orderLine}
-                href={practice.prescriptionPhoneHref}
-                display={practice.prescriptionPhoneDisplay}
-              />
-              {/* Rund-um-die-Uhr-Erreichbarkeit: der eine erfreuliche Punkt in
-                  einem Abschnitt voller Fristen und Bedingungen — und der
-                  Gegenpol zum engen Terminfenster 7:30-8:30. Deshalb mit Uhr
-                  ausgezeichnet statt als vierter gleicher Absatz unterzugehen. */}
-              <p className="contact-processes__available">
-                <Clock className="icon contact-processes__available-icon" />
-                <span>{practice.prescriptionNotes.phoneAvailability}</span>
-              </p>
-
-              <p className="rule-list__body">{practice.prescriptionNotes.processingLine}</p>
-              <p className="rule-list__body">{practice.prescriptionNotes.pickupLine}</p>
-
-              {/* Die Voraussetzung fuers eRezept steht VOR dem Anruf-Button:
-                  wer sie erst danach liest, hat schon angefordert. Bewusst die
-                  ruhige .note statt der Sandflaeche — Sand traegt 116 117, die
-                  Schliesszeiten und die Terminpflicht, also Regeln, die den
-                  Zugang zur Praxis selbst betreffen. Hier geht es um die
-                  Bedingung fuer EINE Leistung. */}
-              <div className="note contact-processes__note">
-                <p className="note__title">
-                  <Info className="icon note__icon" />
-                  <span>{t('common.pleaseNote')}</span>
-                </p>
-                <p className="note__body">{practice.prescriptionNotes.cardRequirement}</p>
-              </div>
-
-            </div>
-          </li>
-
-          <li className="rule-list__item">
-            <h3 className="rule-list__title">{t('contact.processes.houseCalls.title')}</h3>
-            <div className="contact-processes__body">
-              <p className="rule-list__body">{practice.houseCallsNote}</p>
-            </div>
-          </li>
-        </ul>
-      </Section>
-
-      {/* Steht bewusst am Seitenende: genau dort merkt jemand, dass die Praxis
-          gerade nicht erreichbar ist. Gleiche Komponente wie auf /aktuelles,
-          hier aber als Kurzfassung — beide Nummern als Anrufziele in einer
-          Zeile. Vorher endeten /kontakt und /aktuelles zeichengleich mit
-          denselben zwei Sandkaesten; die Vollansicht mit Erklaerung gehoert
-          auf /aktuelles, wo die Praxis geschlossen ist. */}
       <EmergencyService variant="compact" />
     </PageShell>
   );

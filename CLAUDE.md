@@ -52,12 +52,17 @@ The practice's core complaint about the previous version was duplicated informat
 
 | Information | Canonical home |
 |---|---|
-| Phone, prescription phone, fax, address block, directions | `/kontakt` (main number also in header/footer, address also in footer) |
-| Opening-hours table | `/kontakt` (also on `/` as the single shared `OpeningHours` component — one source, no duplicated prose) |
-| **How to get an appointment** (both routes + time windows), the "only with an appointment" rule and the mask notice | `/` section `#termin` — see below |
-| Prescriptions, house-call rules | `/kontakt` |
-| All vacation periods + substitutes, 116 117 / 112 | `/aktuelles` (`/` and `/kontakt` show only the compact `NextVacationBanner`) |
+| How to get an appointment (both routes + time windows), video consultation, "only with an appointment" rule, mask notice, **house calls** | `/termine` |
+| Prescriptions and referrals: app/Rezepttelefon, 24/7 availability, processing times, eGK precondition | `/rezepte` |
+| Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
+| Opening hours | `/` — the `Sprechzeiten` section. Removed from `/kontakt` entirely. |
+| All vacation periods + substitutes, 116 117 / 112 | `/aktuelles` (other pages show only the compact `NextVacationBanner`; `/kontakt` also carries the compact 116 117 block) |
+| What the practice is | `/` — the `Die Praxis` section |
 | Services | `/leistungen` — see the caveat below |
+
+**The home page is deliberately thin.** The practice asked for it: hero (name, the two buttons, the illustration — no eyebrow, no specialty line, no lead), then `Die Praxis`, then `Sprechzeiten`. Nothing else. Everything operational moved to `/termine` and `/rezepte`. Don't grow it back.
+
+**`/leistungen` is not in the primary navigation.** Measured: six nav items don't fit the single-row header — brand 300 + nav 462 + phone 44 + button 218 + gaps = 1072px against a 1008px content box, and `--container` caps at 1088px so a wider viewport never helps. The page carries one sentence and stays reachable from the footer and from the `Sprechzeiten` section on `/`.
 
 Before adding a block of prose or contact detail to a page, check whether it already lives somewhere else. If it does, link instead.
 

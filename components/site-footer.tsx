@@ -5,7 +5,14 @@ import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
 import {getPath, type RouteKey} from '@/lib/routing';
 
-const primaryRoutes = ['home', 'services', 'news', 'contact'] as const;
+const primaryRoutes = [
+  'home',
+  'appointments',
+  'prescriptions',
+  'services',
+  'news',
+  'contact'
+] as const;
 const legalRoutes = ['legal', 'privacy'] as const satisfies readonly RouteKey[];
 
 /**

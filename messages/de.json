@@ -14,10 +14,11 @@
     "news": "Aktuelles",
     "contact": "Kontakt",
     "legal": "Impressum",
-    "privacy": "Datenschutz"
+    "privacy": "Datenschutz",
+    "appointments": "Termine",
+    "prescriptions": "Rezepte"
   },
   "common": {
-    "specialtyShort": "Fachärztin für Innere Medizin und Allgemeinmedizin",
     "homeAria": "Zur Startseite",
     "pleaseNote": "Bitte beachten Sie"
   },
@@ -25,10 +26,8 @@
     "call": "Anrufen",
     "callAria": "Praxis anrufen: {phone}",
     "contactAndHours": "Sprechzeiten & Kontakt",
-    "toNews": "Aktuelles ansehen",
     "bookOnlineShort": "Online-Termin",
     "bookOnlineAudience": "nur für Bestandspatienten",
-    "bookOnlineHint": "Die Buchung öffnet sich bei arzt-direkt in einem neuen Tab.",
     "openRoute": "Route planen",
     "openRouteHint": "Der Link öffnet die Adresse in Google Maps in einem neuen Tab."
   },
@@ -40,10 +39,6 @@
     "friday": "Freitag"
   },
   "home": {
-    "hero": {
-      "eyebrow": "Hausärztlich-internistische Praxis in Bielefeld-Brackwede",
-      "lead": "Termine für den aktuellen Tag vereinbaren Sie online oder telefonisch."
-    },
     "about": {
       "title": "Die Praxis",
       "body": "Veronika Chernova ist Fachärztin für Innere Medizin und Allgemeinmedizin. In unserer Praxis in Bielefeld-Brackwede bieten wir eine persönliche, vertrauensvolle und moderne hausärztliche Versorgung. Unser Ziel ist es, Sie kompetent und individuell in allen Gesundheitsfragen zu begleiten."
@@ -51,30 +46,11 @@
     "hours": {
       "title": "Sprechzeiten",
       "note": "Während der Schließzeiten der Praxis gelten abweichende Zeiten.",
-      "link": "Schließzeiten und Vertretung ansehen"
+      "link": "Schließzeiten und Vertretung ansehen",
+      "ariaLabel": "Sprechzeiten der Praxis"
     },
     "guide": {
-      "body": "Alle Kontaktwege, die Anfahrt und die Abläufe für Termine, Rezepte und Hausbesuche stehen unter <contact>Kontakt & Anfahrt</contact>. Das medizinische Angebot der Praxis finden Sie unter <services>Leistungen</services>."
-    },
-    "appointment": {
-      "eyebrow": "So kommen Sie zu uns",
-      "title": "Termin vereinbaren",
-      "description": "Termine gelten jeweils für den aktuellen Tag. Für die Vereinbarung gibt es zwei Wege.",
-      "onlineTitle": "Online buchen",
-      "onlineWhen": "ab 00:00 Uhr",
-      "phoneTitle": "Telefonisch",
-      "phoneWhen": "7:30 – 8:30 Uhr",
-      "forToday": "für den aktuellen Tag",
-      "videoTitle": "Videosprechstunde",
-      "ruleTitle": "Bitte nur mit vereinbartem Termin",
-      "maskTitle": "Bei Erkältungssymptomen",
-      "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
-    },
-    "prescription": {
-      "eyebrow": "Ohne in die Praxis zu kommen",
-      "title": "Rezepte und Überweisungen",
-      "phoneLabel": "Rezepttelefon",
-      "link": "Rezepte und Überweisungen im Detail"
+      "body": "Termine, Rezepte und Hausbesuche sind unter <appointments>Termine</appointments> und <prescriptions>Rezepte</prescriptions> erklärt. Alle Kontaktwege und die Anfahrt stehen unter <contact>Kontakt & Anfahrt</contact>, das medizinische Angebot unter <services>Leistungen</services>."
     }
   },
   "services": {
@@ -83,7 +59,8 @@
     "lead": "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an.",
     "appointment": {
       "title": "Termin vereinbaren",
-      "body": "Termine vereinbaren Sie telefonisch. Alle Nummern und die Sprechzeiten stehen auf der Kontaktseite."
+      "body": "Termine gelten jeweils für den aktuellen Tag und werden online oder telefonisch vereinbart.",
+      "link": "Alles zur Terminvereinbarung"
     }
   },
   "news": {
@@ -110,44 +87,28 @@
   "contact": {
     "eyebrow": "So erreichen Sie uns",
     "title": "Kontakt & Anfahrt",
-    "lead": "Termine, Rezepte und organisatorische Fragen klären Sie telefonisch. Auf dieser Seite finden Sie alle Nummern, die Sprechzeiten, die Anfahrt und die wichtigsten Abläufe.",
+    "lead": "Hier finden Sie alle Rufnummern und die Anfahrt zur Praxis.",
     "channels": {
       "title": "Telefon und Fax",
       "ariaLabel": "Telefonnummern der Praxis",
       "phone": {
         "title": "Telefon",
-        "description": "Für Termine und alle organisatorischen Anliegen."
+        "description": "Für Termine und alle organisatorischen Anliegen.",
+        "link": "Termine vereinbaren"
       },
       "prescriptionPhone": {
         "title": "Rezepttelefon",
-        "description": "Für Wiederholungsrezepte und Überweisungen."
+        "description": "Für Wiederholungsrezepte und Überweisungen.",
+        "link": "Rezepte und Überweisungen"
       },
       "fax": {
         "title": "Fax"
       }
     },
-    "hours": {
-      "title": "Sprechzeiten",
-      "description": "Abweichende Zeiten während des Praxisurlaubs stehen unter Aktuelles.",
-      "ariaLabel": "Sprechzeiten der Praxis"
-    },
     "directions": {
       "title": "Adresse & Anfahrt",
       "addressLabel": "Adresse",
       "ariaLabel": "Adresse und Anfahrt"
-    },
-    "processes": {
-      "title": "Organisatorisches",
-      "appointments": {
-        "title": "Termine",
-        "link": "So vereinbaren Sie einen Termin"
-      },
-      "prescriptions": {
-        "title": "Rezepte und Überweisungen"
-      },
-      "houseCalls": {
-        "title": "Hausbesuche"
-      }
     }
   },
   "vacation": {
@@ -210,5 +171,29 @@
     "navTitle": "Seiten",
     "legalTitle": "Rechtliches",
     "addressLabel": "Anschrift"
+  },
+  "appointments": {
+    "eyebrow": "So kommen Sie zu uns",
+    "title": "Termine",
+    "lead": "Termine gelten jeweils für den aktuellen Tag. Für die Vereinbarung gibt es zwei Wege.",
+    "waysTitle": "Termin vereinbaren",
+    "onlineTitle": "Online buchen",
+    "onlineWhen": "ab 00:00 Uhr",
+    "phoneTitle": "Telefonisch",
+    "phoneWhen": "7:30 – 8:30 Uhr",
+    "forToday": "für den aktuellen Tag",
+    "videoTitle": "Videosprechstunde",
+    "ruleTitle": "Bitte nur mit vereinbartem Termin",
+    "maskTitle": "Bei Erkältungssymptomen",
+    "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme.",
+    "houseCallsTitle": "Hausbesuche"
+  },
+  "prescriptions": {
+    "eyebrow": "Ohne in die Praxis zu kommen",
+    "title": "Rezepte und Überweisungen",
+    "lead": "Rezepte und Überweisungen fordern Sie an, ohne dafür in die Praxis zu kommen.",
+    "phoneLabel": "Rezepttelefon",
+    "howTitle": "So fordern Sie an",
+    "timingTitle": "Wann alles bereitliegt"
   }
 }

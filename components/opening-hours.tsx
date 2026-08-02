@@ -33,7 +33,7 @@ export function OpeningHours() {
   const t = getTranslator();
 
   return (
-    <dl className="hours-list" aria-label={t('contact.hours.ariaLabel')}>
+    <dl className="hours-list" aria-label={t('home.hours.ariaLabel')}>
       {practice.openingHours.map((entry) => (
         <div key={entry.dayKey} className="hours-list__row">
           <dt className="hours-list__day">{t(`days.${entry.dayKey}`)}</dt>

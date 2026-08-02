@@ -6,7 +6,14 @@ import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
 import {getPath, type RouteKey} from '@/lib/routing';
 
-const navItems = ['home', 'services', 'news', 'contact'] as const;
+/**
+ * Hauptnavigation. Leistungen steht bewusst NICHT hier: die Seite traegt eine
+ * einzige Aussage, und gemessen passen sechs Punkte nicht in die einreihige
+ * Kopfzeile — Marke 300 + Navigation 462 + Rufnummer 44 + Button 218 + Abstaende
+ * ergeben 1072px, der Container fasst 1008px. Erreichbar bleibt sie ueber die
+ * Fusszeile und den Verweis im Abschnitt "Sprechzeiten" der Startseite.
+ */
+const navItems = ['home', 'appointments', 'prescriptions', 'news', 'contact'] as const;
 
 /**
  * Kopfzeile: Marke links, Navigation, rechts die Aktionen.

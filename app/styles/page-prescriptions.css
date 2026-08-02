@@ -1,0 +1,119 @@
+/* =============================================================================
+   page-prescriptions.css — die Ausnahmen der Seite /rezepte
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+
+   Das Panel stand frueher in page-home.css; der Rezept-Block ist auf eine
+   eigene Seite gewandert und die Regeln sind mitgezogen.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   Rezepttelefon — auf ausdruecklichen Wunsch der Aerztin prominent.
+   Ein breites Panel statt zweier Karten: es gibt hier nur EINE Aussage, und
+   die soll man nicht suchen muessen. Links die Rufnummer als Ankerpunkt fuers
+   Auge, rechts der Satz in Lead-Groesse. Getoente Flaeche wie beim
+   Videosprechstunden-Angebot — beide sagen "das erspart Ihnen den Weg".
+   --------------------------------------------------------------------------- */
+
+.prescription-panel {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--card-padding);
+  background-color: var(--brand-soft);
+  border: 1px solid var(--border-brand);
+  border-radius: var(--radius-card);
+}
+
+/* Ab 48em zweispaltig: die Nummer bekommt eine feste Spalte, damit der Satz
+   daneben nicht auf Schlauchbreite schrumpft. */
+@media (min-width: 48em) {
+  .prescription-panel {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+.prescription-panel__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+}
+
+.prescription-panel__icon {
+  color: var(--brand);
+}
+
+.prescription-panel__number {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.prescription-panel__number a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Der Satz der Praxis, woertlich — und gross genug, dass man ihn nicht
+   ueberliest. Das ist der ganze Zweck dieses Abschnitts. */
+.prescription-panel__lead {
+  margin: 0;
+  font-size: var(--step-2);
+  line-height: var(--leading-snug);
+  color: var(--text);
+  max-width: 34ch;
+}
+
+
+/* Anfordern: der Satz mit der Rufnummer, darunter die Voraussetzung. */
+.prescription-how__body {
+  max-width: var(--measure);
+}
+
+.prescription-how__phone {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.prescription-how__note {
+  margin-top: var(--block-gap);
+  max-width: 46rem;
+}
+
+/* Zeitpunkt: die Uhr markiert die Bearbeitungszeile, der Rest steht ruhig
+   darunter. Icon oben ausgerichtet, damit es bei Umbruch an der ERSTEN
+   Zeile steht. */
+.prescription-timing__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: 0;
+  max-width: var(--measure);
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  color: var(--text);
+}
+
+.prescription-timing__icon {
+  flex: none;
+  margin-top: 0.2em;
+  color: var(--brand);
+}
+
+.prescription-timing__body {
+  margin-top: var(--space-4);
+  max-width: var(--measure);
+  color: var(--text-muted);
+}
