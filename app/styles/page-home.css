@@ -253,3 +253,15 @@
   margin-top: var(--space-3);
   color: var(--text);
 }
+
+/* ---------------------------------------------------------------------------
+   Regeln zum Praxisbesuch — Terminpflicht und Hygienehinweis.
+   Standen bis August 2026 auf /termine; die Praxis wollte beide auf der
+   Startseite haben. Sand traegt die verbindliche Regel, der ruhigere
+   .note-Kasten den Hygienehinweis: zwei gleich laute Kaesten uebereinander
+   heben sich gegenseitig auf.
+   --------------------------------------------------------------------------- */
+
+.home-rules__mask {
+  margin-top: var(--space-5);
+}

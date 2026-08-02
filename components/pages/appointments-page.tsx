@@ -1,4 +1,4 @@
-import {AlertCircle, Calendar, Mask, Phone, Video} from '@/components/illustrations';
+import {Calendar, Phone, Video} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
 import {PhoneSentence} from '@/components/phone-sentence';
@@ -17,9 +17,8 @@ import {getTranslator} from '@/lib/i18n';
  * Reihenfolge folgt dem Ablauf einer Patientin:
  *   1. Wie bekomme ich einen Termin?   (zwei Wege mit Uhrzeit)
  *   2. Geht es auch ohne herzukommen?  (Videosprechstunde)
- *   3. Was gilt beim Besuch?           (Terminpflicht, Maske)
- * Hausbesuche haben eine eigene Seite (/hausbesuche) — so von der Praxis
- * gewuenscht.
+ * Terminpflicht und Hygienehinweis stehen auf der STARTSEITE, Hausbesuche auf
+ * /hausbesuche — beides so von der Praxis gewuenscht.
  */
 export function AppointmentsPage() {
   const t = getTranslator();
@@ -89,29 +88,6 @@ export function AppointmentsPage() {
         <div className="way way--offer appointment-video__panel">
           <Video className="icon appointment-video__icon" />
           <p className="way__body">{practice.appointments.videoLine}</p>
-        </div>
-      </Section>
-
-      {/* 3. Was beim Besuch gilt. Die Terminpflicht auf der reservierten
-             Sandflaeche — sie ist der Hinweis, wegen dem sonst jemand
-             vergeblich vor der Tuer steht. Der Hygienehinweis daneben
-             bewusst ruhiger: zwei gleich laute Kaesten heben sich auf. */}
-      <Section className="appointment-rules" titleHidden title={t('appointments.ruleTitle')}>
-        <div className="callout appointment-rules__rule">
-          <p className="callout__title">
-            <AlertCircle className="icon icon--sm callout__icon" />
-            <span>{t('appointments.ruleTitle')}</span>
-          </p>
-          <p className="callout__body">{practice.appointments.byAppointmentOnly}</p>
-        </div>
-
-        <div className="note appointment-rules__mask">
-          <p className="note__title">
-            <Mask className="icon note__icon" />
-            <span>{t('appointments.maskTitle')}</span>
-          </p>
-          <p className="note__body">{practice.maskNote}</p>
-          <p className="note__thanks">{t('appointments.thanks')}</p>
         </div>
       </Section>
 

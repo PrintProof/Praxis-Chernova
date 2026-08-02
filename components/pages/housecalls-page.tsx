@@ -33,13 +33,13 @@ export function HouseCallsPage() {
         </p>
       </Section>
 
-      {/* Ein Hausbesuch wird vereinbart wie jeder Termin: telefonisch. Deshalb
-          hier derselbe Satz und dieselbe Rufnummer wie auf /termine, aus
-          derselben Quelle — nicht neu formuliert. */}
+      {/* Hausbesuche gehen NUR telefonisch — nicht ueber die App, nicht
+          online. Deshalb hier ein eigener Satz und nicht der allgemeine
+          App-Hinweis von /termine, der genau das Gegenteil nahelegen wuerde. */}
       <Section className="housecalls-arrange" title={t('housecalls.arrangeTitle')} tone="surface">
         <PhoneSentence
           className="housecalls-arrange__line"
-          text={practice.appointments.appOptOut}
+          text={practice.houseCallsArrangement}
           href={practice.phoneHref}
           display={practice.phone}
         />

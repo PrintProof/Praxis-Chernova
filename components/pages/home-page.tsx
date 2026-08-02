@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import {Calendar, Phone, PracticeIllustration} from '@/components/illustrations';
+import {AlertCircle, Mask, Phone, PracticeIllustration} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
@@ -76,19 +76,6 @@ export function HomePage() {
                     <span className="button__value">{practice.phone}</span>
                   </span>
                 </a>
-                <a
-                  className="button button--secondary button--booking"
-                  href={practice.bookingUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Calendar className="button__icon" />
-                  <span className="button__text">
-                    <span className="button__label">{t('cta.bookOnlineShort')}</span>
-                    <span className="button__note">{t('cta.bookOnlineAudience')}</span>
-                  </span>
-                  <span className="visually-hidden"> ({t('accessibility.newTabHint')})</span>
-                </a>
               </div>
             </div>
           </div>
@@ -133,13 +120,37 @@ export function HomePage() {
                 prescriptions: (chunks) => (
                   <Link href={getPath('prescriptions')}>{chunks}</Link>
                 ),
-                services: (chunks) => <Link href={getPath('services')}>{chunks}</Link>,
+                housecalls: (chunks) => <Link href={getPath('housecalls')}>{chunks}</Link>,
                 contact: (chunks) => <Link href={getPath('contact')}>{chunks}</Link>
               })}
             </p>
           </div>
         </div>
       </Section>
+
+      {/* Terminpflicht und Hygienehinweis standen bis August 2026 auf /termine.
+          Die Praxis wollte beide auf der Startseite haben — es sind die zwei
+          Regeln, an denen sonst jemand vergeblich vor der Tuer steht bzw. ohne
+          Maske hereinkommt. Auf /termine stehen sie deshalb NICHT mehr. */}
+      <Section titleHidden title={t('home.rules.title')}>
+        <div className="callout home-rules__rule">
+          <p className="callout__title">
+            <AlertCircle className="icon icon--sm callout__icon" />
+            <span>{t('home.rules.appointmentOnly')}</span>
+          </p>
+          <p className="callout__body">{practice.appointments.byAppointmentOnly}</p>
+        </div>
+
+        <div className="note home-rules__mask">
+          <p className="note__title">
+            <Mask className="icon note__icon" />
+            <span>{t('home.rules.mask')}</span>
+          </p>
+          <p className="note__body">{practice.maskNote}</p>
+          <p className="note__thanks">{t('home.rules.thanks')}</p>
+        </div>
+      </Section>
+
     </PageShell>
   );
 }

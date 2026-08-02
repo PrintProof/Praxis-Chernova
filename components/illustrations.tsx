@@ -539,18 +539,3 @@ const CARE_MAIN = [
   'M144 188 A16 4.5 0 0 1 176 188 A16 4.5 0 0 1 144 188 Z',
   'M136 84 C136 68 146 56 160 56 C174 56 184 68 184 84 Z',
 ] as const;
-
-/**
- * Leitmotiv der Leistungen-Seite: zwei einander zugewandte Stuehle, ein kleiner
- * Tisch, eine Haengeleuchte — Zeit fuer ein Gespraech.
- */
-export function CareIllustration(props: IllustrationProps) {
-  return (
-    <Illustration {...props}>
-      <Blob d={CARE_BLOB} />
-      <Paper paths={CARE_PAPER} />
-      <Detail paths={CARE_DETAIL} />
-      <Main paths={CARE_MAIN} />
-    </Illustration>
-  );
-}

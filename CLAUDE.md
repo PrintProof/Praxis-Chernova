@@ -52,26 +52,26 @@ The practice's core complaint about the previous version was duplicated informat
 
 | Information | Canonical home |
 |---|---|
-| How to get an appointment (both routes + time windows), video consultation, "only with an appointment" rule, mask notice | `/termine` |
-| Prescriptions and referrals: app/Rezepttelefon, 24/7 availability, processing times, eGK precondition | `/rezepte` |
-| House calls | `/hausbesuche` |
-| Services | `/leistungen` — see the caveat below |
+| How to get an appointment (both routes + time windows), video consultation | `/termine` |
+| Prescriptions and referrals: app first, then Rezepttelefon, 24/7 availability, processing times, eGK precondition | `/rezepte` |
+| House calls — **arranged by phone only** | `/hausbesuche` |
 | Vacation periods + substitutes, 116 117 / 112 | `/schliesszeiten` (other pages show only the compact `NextVacationBanner`; `/kontakt` also carries the compact 116 117 block) |
 | Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
-| Opening hours | `/` — the `Sprechzeiten` section. Not on `/kontakt`. |
-| What the practice is | `/` — the `Die Praxis` section |
+| What the practice is, opening hours, **"only with an appointment" rule, mask notice** | `/` |
 
-**The home page is deliberately thin.** The practice asked for it: hero (name, the two buttons, the illustration — no eyebrow, no specialty line, no lead), then `Die Praxis`, then `Sprechzeiten`. Nothing else. Don't grow it back.
+**The home page is deliberately thin, in this order:** hero (practice name + the *Anrufen* button + illustration — no eyebrow, no specialty line, no lead, **no booking button**), `Die Praxis`, `Sprechzeiten`, then the two visit rules. Nothing else. Don't grow it back.
 
-**`/leistungen` carries one sentence and nothing else** — a deliberate, repeated decision by the practice (commit 9d7bed2, reaffirmed twice since). `practice.services` stays in `content/practice.ts` as data but is **not rendered**. Don't break it out into a list, don't explain the DMP programmes, and keep the page's meta description free of claims the page doesn't make.
+**The Online-Termin button lives in the header only.** The practice removed it from the hero but explicitly kept it top right. Online booking itself stays fully intact (`/termine` still explains it).
+
+**There is no `/leistungen` page.** The practice had it removed in August 2026 after it had carried a single sentence for months. `practice.services` remains in `content/practice.ts` as data but nothing renders it, and `CareIllustration` was deleted with the page. Don't recreate it without asking.
 
 ### The header has two rows above 62em — don't "fix" it
 
-Seven nav items are an explicit wish of the practice: everything visible, nothing hidden in a menu. They do not fit one row. Measured against the container's 1008px content box: brand 300 + nav 622 + phone 152 + button 218 + gaps ≈ 1340px, and `--container` caps at 1088px so a wider viewport never helps.
+Six nav items are an explicit wish of the practice: everything visible, nothing hidden in a menu. They do not fit one row. Measured against the container's 1008px content box: brand + nav + phone + button + gaps exceed it by a wide margin, and `--container` caps at 1088px so a wider viewport never helps.
 
-So above 62em the header is `"brand cta" / "nav nav"` — brand and actions on top, navigation full-width below with a hairline divider. Header height ≈ 122px (one row would have been ≈ 81px). That is the price of the practice's requirement. Below 62em nothing changed: the CSS-only `<details>` menu still holds the navigation.
+So above 62em the header is `"brand cta" / "nav nav"` — brand and actions on top, navigation full-width below with a hairline divider. Header height ≈ 122px. Below 62em nothing changed: the CSS-only `<details>` menu holds the navigation.
 
-If you add an eighth item, re-measure before assuming it fits.
+If you add a seventh item, re-measure before assuming it fits.
 
 ### Adding or changing a page/route
 

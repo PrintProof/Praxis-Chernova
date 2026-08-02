@@ -21,7 +21,6 @@ const navItems = [
   'appointments',
   'prescriptions',
   'housecalls',
-  'services',
   'closures',
   'contact'
 ] as const;

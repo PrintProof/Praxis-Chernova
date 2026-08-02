@@ -31,9 +31,31 @@ export function PrescriptionsPage() {
         </div>
       </section>
 
-      {/* Rufnummer und Erreichbarkeit zuerst — das ist die Information, wegen
-          der die meisten hier landen. */}
-      <Section className="prescription-intro" titleHidden title={t('prescriptions.phoneLabel')}>
+      <Section className="prescription-how" title={t('prescriptions.howTitle')}>
+        <PhoneSentence
+          className="prescription-how__body"
+          linkClassName="prescription-how__phone"
+          text={practice.prescriptionNotes.orderLine}
+          href={practice.prescriptionPhoneHref}
+          display={practice.prescriptionPhoneDisplay}
+        />
+
+        {/* Voraussetzung fuers eRezept. Steht bewusst hier, direkt beim
+            Anfordern — wer sie erst weiter unten liest, hat schon angefordert. */}
+        <div className="note prescription-how__note">
+          <p className="note__title">
+            <Info className="icon note__icon" />
+            <span>{t('common.pleaseNote')}</span>
+          </p>
+          <p className="note__body">{practice.prescriptionNotes.cardRequirement}</p>
+        </div>
+      </Section>
+
+      {/* Danach die Rufnummer mit der Rund-um-die-Uhr-Erreichbarkeit. Sie
+          steht bewusst NICHT mehr ganz oben: die Praxis wollte, dass zuerst
+          die App kommt. Prominent bleibt sie trotzdem — zweiter Abschnitt,
+          eigenes Panel, Satz in Lead-Groesse. */}
+      <Section className="prescription-intro" titleHidden title={t('prescriptions.phoneLabel')} tone="surface">
         <div className="prescription-panel">
           <div className="prescription-panel__phone">
             <p className="prescription-panel__label">
@@ -52,26 +74,6 @@ export function PrescriptionsPage() {
               {practice.prescriptionNotes.phoneAvailability}
             </p>
           </div>
-        </div>
-      </Section>
-
-      <Section className="prescription-how" title={t('prescriptions.howTitle')} tone="surface">
-        <PhoneSentence
-          className="prescription-how__body"
-          linkClassName="prescription-how__phone"
-          text={practice.prescriptionNotes.orderLine}
-          href={practice.prescriptionPhoneHref}
-          display={practice.prescriptionPhoneDisplay}
-        />
-
-        {/* Voraussetzung fuers eRezept. Steht bewusst hier, direkt beim
-            Anfordern — wer sie erst weiter unten liest, hat schon angefordert. */}
-        <div className="note prescription-how__note">
-          <p className="note__title">
-            <Info className="icon note__icon" />
-            <span>{t('common.pleaseNote')}</span>
-          </p>
-          <p className="note__body">{practice.prescriptionNotes.cardRequirement}</p>
         </div>
       </Section>
 

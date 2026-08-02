@@ -219,7 +219,7 @@ export const practice = {
      * steht sie in der Anzeige unter den beiden Karten und nicht daneben.
      */
     videoLine:
-      'Für geeignete Anliegen bieten wir Ihnen auch eine Videosprechstunde an. Sie ermöglicht Ihnen eine ärztliche Beratung bequem von zu Hause oder unterwegs und kann Ihnen in vielen Fällen den Weg in die Praxis ersparen. Ob eine Videosprechstunde für Ihr Anliegen geeignet ist, entscheiden wir gemeinsam mit Ihnen.',
+      'Für geeignete Anliegen bieten wir Ihnen auch eine Videosprechstunde an. Sie ermöglicht Ihnen eine ärztliche Beratung bequem von zu Hause oder unterwegs und kann Ihnen in vielen Fällen den Weg in die Praxis ersparen.',
     /**
      * Wer die Praxis-App nicht nutzt, ruft an. Das Kriterium ist ausdruecklich
      * die APP-NUTZUNG, nicht "neu in der Praxis" — die frühere Formulierung
@@ -237,6 +237,15 @@ export const practice = {
     byAppointmentOnly:
       'Um Wartezeiten zu vermeiden und einen reibungslosen Praxisablauf zu gewährleisten, erfolgt die Behandlung ausschließlich nach vorheriger Terminvereinbarung. Bitte kommen Sie daher nur mit einem vereinbarten Termin in unsere Praxis.'
   },
+
+  /**
+   * Hausbesuche werden AUSSCHLIESSLICH telefonisch vereinbart — nicht ueber
+   * die App und nicht online. Deshalb steht hier ein eigener Satz statt des
+   * allgemeinen `appointments.appOptOut`, der auf die App-Nutzung abstellt.
+   * `{phone}` wird beim Rendern durch die Hauptnummer ersetzt (PhoneSentence).
+   */
+  houseCallsArrangement:
+    'Hausbesuche werden ausschließlich telefonisch vereinbart. Bitte rufen Sie uns dafür unter {phone} an.',
 
   /** Hygienehinweis aus demselben Merkblatt. */
   maskNote:

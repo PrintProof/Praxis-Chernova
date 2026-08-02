@@ -10,7 +10,6 @@
     "menu": "Menü",
     "menuAria": "Hauptmenü ein- und ausblenden",
     "home": "Start",
-    "services": "Leistungen",
     "contact": "Kontakt",
     "legal": "Impressum",
     "privacy": "Datenschutz",
@@ -51,17 +50,13 @@
       "ariaLabel": "Sprechzeiten der Praxis"
     },
     "guide": {
-      "body": "Termine, Rezepte und Hausbesuche sind unter <appointments>Termine</appointments> und <prescriptions>Rezepte</prescriptions> erklärt. Alle Kontaktwege und die Anfahrt stehen unter <contact>Kontakt & Anfahrt</contact>, das medizinische Angebot unter <services>Leistungen</services>."
-    }
-  },
-  "services": {
-    "eyebrow": "Medizinisches Angebot",
-    "title": "Leistungen",
-    "lead": "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an.",
-    "appointment": {
-      "title": "Termin vereinbaren",
-      "body": "Termine gelten jeweils für den aktuellen Tag und werden online oder telefonisch vereinbart.",
-      "link": "Alles zur Terminvereinbarung"
+      "body": "Termine, Rezepte und Hausbesuche sind unter <appointments>Termine</appointments>, <prescriptions>Rezepte</prescriptions> und <housecalls>Hausbesuche</housecalls> erklärt. Alle Kontaktwege und die Anfahrt stehen unter <contact>Kontakt & Anfahrt</contact>."
+    },
+    "rules": {
+      "title": "Beim Besuch der Praxis",
+      "appointmentOnly": "Bitte nur mit vereinbartem Termin",
+      "mask": "Bei Erkältungssymptomen",
+      "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
     }
   },
   "contact": {
@@ -162,10 +157,7 @@
     "phoneTitle": "Telefonisch",
     "phoneWhen": "7:30 – 8:30 Uhr",
     "forToday": "für den aktuellen Tag",
-    "videoTitle": "Videosprechstunde",
-    "ruleTitle": "Bitte nur mit vereinbartem Termin",
-    "maskTitle": "Bei Erkältungssymptomen",
-    "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
+    "videoTitle": "Videosprechstunde"
   },
   "prescriptions": {
     "eyebrow": "Ohne in die Praxis zu kommen",
