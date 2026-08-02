@@ -241,7 +241,7 @@
   margin: 0;
 }
 
-/* Aufzaehlung mit Salbei-Punkt. Markup braucht role="list". */
+/* Aufzaehlung mit Bordeaux-Punkt. Markup braucht role="list". */
 .bullet-list {
   list-style: none;
   margin: 0;
@@ -292,7 +292,7 @@
   background-color: transparent;
 }
 
-/* Salbei-Karte, z.B. innerhalb eines Creme-Abschnitts. */
+/* Rosé-Karte, z.B. innerhalb eines Creme-Abschnitts. */
 .card--muted {
   background-color: var(--surface-muted);
   border-color: var(--border-subtle);
@@ -854,7 +854,7 @@
   border-color: var(--sand-border-strong);
 }
 
-/* Geplant — ruhiger Salbeiton. */
+/* Geplant — ruhiger Roséton. */
 .tag--upcoming {
   background-color: var(--brand-soft);
   color: var(--brand-hover);

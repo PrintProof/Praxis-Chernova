@@ -136,8 +136,8 @@ export function ContactPage() {
       </Section>
 
       {/* --- Organisatorisches --------------------------------------------- */}
-      {/* Papierband statt Salbeiband: der anschliessende Notdienst-Block
-          (gemeinsame Komponente) ist selbst `muted`. Zwei Salbeibaender
+      {/* Papierband statt Roséband: der anschliessende Notdienst-Block
+          (gemeinsame Komponente) ist selbst `muted`. Zwei Rosébaender
           direkt hintereinander wuerden zu einem einzigen verschmelzen. */}
       <Section className="contact-processes" title={t('contact.processes.title')} tone="surface">
         <ul className="rule-list rule-list--split" role="list">

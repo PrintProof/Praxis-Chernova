@@ -6,13 +6,14 @@
    Reihenfolge der Layer: tokens -> base -> layout -> components -> pages.
 
    Zwei Ebenen:
-   1. PRIMITIVE  (--green-*, --warm-*, --ochre-*)  = die reine Farbrampe.
+   1. PRIMITIVE  (--wine-*, --warm-*, --ochre-*)  = die reine Farbrampe.
       Niemals direkt in Komponenten verwenden.
    2. SEMANTIK   (--bg, --text, --brand, --sand ...) = die einzige Ebene,
       die Komponenten-CSS benutzen darf.
 
    Alle Textfarb-Paare sind gegen WCAG 2.2 nachgerechnet (Werte in Kommentaren).
    Kein Dark Mode: die Seite ist bewusst nur hell (color-scheme: light).
+   Leitfarbe ist Bordeaux — derselbe Ton wie das Herz im Praxislogo.
    Keine Webfonts, keine externen Ressourcen (DSGVO).
    ============================================================================= */
 
@@ -26,32 +27,36 @@
      1. PRIMITIVE — Farbrampen
      ========================================================================= */
 
-  /* Salbeigruen: warm, leicht gelbstichig, bewusst nicht blaustichig.
-     400 = Kundenvorgabe Akzent, 700 = Kundenvorgabe Primaerfarbe. */
-  --green-50: #f0f4ee;
-  --green-100: #e2ebe1;
-  --green-200: #c9dcc9;
-  --green-300: #a6c6ae;
-  --green-400: #7fa98b;
-  --green-500: #5c8a6d;
-  --green-600: #427054;
-  --green-700: #2f5d45;
-  --green-800: #244838;
-  --green-900: #1a3529;
-  --green-950: #12241b;
+  /* Bordeaux: die Farbe des Herzens im Praxislogo (500 = #a74d5f, exakt der
+     Logo-Ton). Farbton rund 348 Grad, warm und gedeckt — kein Signalrot.
+     500 ist der Ankerpunkt; nach oben wird aufgehellt, nach unten vertieft.
+     Als TEXTfarbe ist 500 zu hell (4.85:1 auf --bg), deshalb traegt --brand
+     die 700er Stufe. */
+  --wine-50: #fbf4f6;
+  --wine-100: #f6e8ec;
+  --wine-200: #ecd1d8;
+  --wine-300: #dcaeba;
+  --wine-400: #c78b9a;
+  --wine-500: #a74d5f;
+  --wine-600: #8b3e4f;
+  --wine-700: #6e2f3d;
+  --wine-800: #57252f;
+  --wine-900: #3f1a22;
+  --wine-950: #2a1017;
 
   /* Warme Neutralstufen: Creme, Papier, Linien, Sekundaertext.
-     Nach unten hin leicht ins Salbei kippend, damit Grau nie kalt wirkt. */
-  --warm-50: #fdfcf8;
-  --warm-100: #f7f4ec;
-  --warm-200: #f1eee3;
-  --warm-300: #e8e4d6;
-  --warm-400: #d5d0be;
-  --warm-500: #adab99;
-  --warm-600: #7c8172;
-  --warm-700: #576055;
-  --warm-800: #3b423a;
-  --warm-900: #262c26;
+     Nach unten hin minimal ins Rosé kippend statt ins Rosé — neben Bordeaux
+     wirkt ein gruenstichiges Grau sofort olivfarben und schmutzig. */
+  --warm-50: #fdfbf9;
+  --warm-100: #f8f4f1;
+  --warm-200: #f2ece9;
+  --warm-300: #e7dfdb;
+  --warm-400: #d6cbc6;
+  --warm-500: #aea19d;
+  --warm-600: #7d7370;
+  --warm-700: #5a5254;
+  --warm-800: #3d3739;
+  --warm-900: #282325;
 
   /* Ocker/Sand: ausschliesslich fuer Hinweisflaechen (116 117, Urlaub). */
   --ochre-100: #faf3e2;
@@ -65,9 +70,6 @@
 
   --white: #ffffff;
 
-  /* Altrosa: reserviert fuer das Herz im Praxislogo (components/practice-logo.tsx
-     referenziert --logo-heart direkt). Markenzeichen, nicht umfaerben. */
-  --rose-500: #a74d5f;
 
   /* ===========================================================================
      2. SEMANTIK — Flaechen
@@ -82,12 +84,15 @@
   /* Hoechste Stufe: reines Weiss. Nur fuer Sticky-Header und genau EIN
      hervorgehobenes Panel pro Seite. Nie direkt neben --surface stellen. */
   --surface-raised: var(--white);
-  /* Salbei-getoentes Band: trennt einen Abschnitt vom Fluss, OHNE Karte.
-     Bewusst waermer (gelblicher) als --green-50: ueber grosse Flaechen kippt
-     ein reiner Salbeiton sonst ins Kuehl-Minzige. Abstand zum Creme: dE 4.1. */
-  --surface-muted: #ecefe2;
+  /* Rosé-getoentes Band: trennt einen Abschnitt vom Fluss, OHNE Karte.
+     Bewusst deutlich blasser als --wine-100 — ueber grosse Flaechen wirkt ein
+     saettigeres Rosa schnell suesslich statt ruhig. Gemessen: dE 3.66 zum
+     Creme — dieselbe Groessenordnung wie das fruehere Salbeiband (4.1) —, aber
+     ein Drittel weniger Buntheit, damit grosse Flaechen nicht pastellrosa
+     wirken. */
+  --surface-muted: #f2ecee;
   /* Dunkles Band: Footer, ggf. ein bewusster Kontrastblock. */
-  --surface-dark: var(--green-800);
+  --surface-dark: var(--wine-800);
 
   /* ===========================================================================
      3. SEMANTIK — Linien
@@ -101,8 +106,8 @@
   /* Rahmen interaktiver Elemente (Sekundaer-Button, Formularfeld). Gruen statt
      Oliv-Grau: haelt die Kontur in der Marke und erfuellt 3:1 auf allen
      hellen Flaechen (min. 4.73:1 auf --sand). */
-  --border-interactive: var(--green-600);
-  --border-brand: var(--green-200);
+  --border-interactive: var(--wine-600);
+  --border-brand: var(--wine-200);
   --border-on-dark: rgba(255, 255, 255, 0.18);
 
   --rule: 1px solid var(--border);
@@ -112,32 +117,32 @@
   /* ===========================================================================
      4. SEMANTIK — Text
      ========================================================================= */
-  --text: #1c2b23; /* 13.46:1 auf --bg */
-  --text-muted: var(--warm-700); /* 5.95:1 auf --bg, 5.42:1 auf --sand */
-  --text-on-dark: #edf1ea; /* 8.92:1 auf --surface-dark */
-  --text-on-dark-muted: #c0cdc1; /* 6.19:1 auf --surface-dark */
+  --text: #241d1f; /* 15.11:1 auf --bg */
+  --text-muted: var(--warm-700); /* 6.93:1 auf --bg, 6.28:1 auf --sand */
+  --text-on-dark: #f6eef0; /* 10.76:1 auf --surface-dark */
+  --text-on-dark-muted: #d8c4c9; /* 7.40:1 auf --surface-dark */
 
   /* ===========================================================================
      5. SEMANTIK — Marke, Links, Akzent
      ========================================================================= */
-  --brand: var(--green-700); /* 6.89:1 auf --bg — als Textfarbe zulaessig */
-  --brand-hover: var(--green-800);
-  --brand-active: var(--green-900);
-  --brand-muted: #3d6b51; /* 5.59:1 auf --bg — Eyebrows, kleine Labels */
-  --brand-soft: var(--green-100); /* zarte Flaeche, z.B. aktiver Nav-Zustand */
-  --brand-wash: var(--green-50);
-  --on-brand: var(--warm-50); /* 7.38:1 auf --brand */
+  --brand: var(--wine-700); /* 8.99:1 auf --bg — als Textfarbe zulaessig */
+  --brand-hover: var(--wine-800);
+  --brand-active: var(--wine-900);
+  --brand-muted: var(--wine-800); /* 11.22:1 auf --bg — Eyebrows, kleine Labels */
+  --brand-soft: var(--wine-50); /* zarte Flaeche: aktiver Nav-Zustand, Illustrationsgrund */
+  --brand-wash: var(--wine-50);
+  --on-brand: var(--warm-50); /* 9.52:1 auf --brand */
 
   /* --accent ist DEKORATIV (2.40:1 auf --bg): Trennlinien, Flaechen,
      Fuellungen in Illustrationen. NIEMALS fuer Text oder fuer eine Linie,
      die allein eine Information traegt. */
-  --accent: var(--green-400);
+  --accent: var(--wine-400);
   /* --accent-strong erfuellt 3:1 auf allen hellen Flaechen: Icon- und
      Illustrationskonturen, grosse Schrift ab 24px. */
-  --accent-strong: var(--green-500);
+  --accent-strong: var(--wine-500);
 
   --link: var(--brand);
-  --link-hover: var(--green-900);
+  --link-hover: var(--wine-900);
 
   /* ===========================================================================
      6. SEMANTIK — Hinweisflaeche (Sand)
@@ -159,8 +164,8 @@
      Immer mit outline-offset arbeiten, damit der Ring auf der Flaeche
      DAHINTER liegt und nie im Element verschwindet.
      ========================================================================= */
-  --focus: var(--green-900); /* 12.05:1 auf --bg */
-  --focus-inverse: var(--warm-50); /* 9.93:1 auf --surface-dark */
+  --focus: var(--wine-900); /* 13.89:1 auf --bg */
+  --focus-inverse: var(--warm-50); /* 11.6:1 auf --surface-dark */
   --focus-width: 3px;
   --focus-offset: 3px;
   --focus-ring: var(--focus-width) solid var(--focus);
@@ -174,7 +179,7 @@
      Beide Werte muessen mit den festen Farben in app/icon.svg uebereinstimmen.
      --------------------------------------------------------------------------- */
   --logo-ink: #183753; /* Stethoskop; 11.6:1 auf --bg */
-  --logo-heart: var(--rose-500); /* #a74d5f */
+  --logo-heart: var(--wine-500); /* #a74d5f — identisch mit app/icon.svg */
 
   /* Auf dunklem Grund (Fusszeile) traegt das Logo eine helle Plakette, damit
      die Originalfarben erhalten bleiben, statt das Logo zu invertieren. */
@@ -369,7 +374,7 @@
     --border-subtle: var(--warm-400);
     --border-strong: var(--warm-800);
     --sand-border: var(--ochre-400);
-    --brand-muted: var(--green-800);
+    --brand-muted: var(--wine-900);
     --accent: var(--accent-strong);
     --shadow-xs: none;
     --shadow-sm: none;

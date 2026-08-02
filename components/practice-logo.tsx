@@ -15,7 +15,7 @@ type PracticeLogoProps = {
  *
  * Farben:
  * - Stethoskop: `currentColor`, gesetzt ueber `--logo-ink` (Dunkelblau #183753).
- *   Bewusst NICHT `--brand`: die Marke ist unabhaengig von der Salbeigruen-
+ *   Bewusst NICHT `--brand`: die Marke ist unabhaengig von der Bordeaux-
  *   Palette der Website und darf nicht mitwandern, wenn die Palette sich aendert.
  * - Herz: `--logo-heart` (Altrosa #a74d5f).
  *

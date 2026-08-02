@@ -39,7 +39,7 @@ import {getPath} from '@/lib/routing';
  * selbst nur, wenn wirklich ein Urlaub ansteht.
  *
  * Drei Abschnitte, drei verschiedene Strukturmuster (zweispaltiger Hero mit
- * Illustration, ruhiges Salbeiband, Datenliste mit Randspalte) — statt
+ * Illustration, ruhiges Roséband, Datenliste mit Randspalte) — statt
  * dreimal derselben Kachelreihe.
  */
 export function HomePage() {
@@ -174,7 +174,7 @@ export function HomePage() {
         </div>
       </Section>
 
-      {/* "Die Praxis" — ein ruhiger Block im Salbeiband, EINE Spalte.
+      {/* "Die Praxis" — ein ruhiger Block im Roséband, EINE Spalte.
           Bewusst ohne schmalen mittigen Container: der begann rund 200px
           weiter rechts als Hero, Kopfzeile und Fusszeile und erzeugte beim
           Scrollen einen sichtbaren Versatz. Die Zeilenlaenge begrenzt jetzt

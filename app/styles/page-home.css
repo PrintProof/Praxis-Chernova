@@ -10,7 +10,7 @@
    Aufbau der Seite und ihr Flaechenrhythmus:
      Hinweisband (Sand, nur bei Urlaub)
        -> Hero            (Creme, Typografie + Illustration nebeneinander)
-       -> "Die Praxis"    (Salbeiband, eine Spalte)
+       -> "Die Praxis"    (Roséband, eine Spalte)
        -> "Sprechzeiten"  (Papier, Datenliste + schmale Randspalte)
        -> Fusszeile       (dunkel)
    Drei Abschnitte, drei verschiedene Strukturmuster — kein dreifach
@@ -151,7 +151,7 @@
 }
 
 /* ---------------------------------------------------------------------------
-   2. "Die Praxis" — Salbeiband, EINE Spalte an der Seitenkante.
+   2. "Die Praxis" — Roséband, EINE Spalte an der Seitenkante.
 
    Vorher stand die Ueberschrift in einer eigenen 15rem-Spalte links. Weil
    dort nur zwei Woerter stehen, blieb auf dem Desktop eine grosse leere

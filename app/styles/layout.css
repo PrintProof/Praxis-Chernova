@@ -65,7 +65,7 @@
   background-color: transparent;
 }
 
-/* Salbei-getoentes Band. Das Arbeitspferd fuer "dieser Abschnitt ist anders". */
+/* Rosé-getoentes Band. Das Arbeitspferd fuer "dieser Abschnitt ist anders". */
 .section--muted {
   background-color: var(--surface-muted);
 }
@@ -180,7 +180,7 @@
   padding-block: clamp(2.25rem, 6vw, 4rem) var(--section-y);
 }
 
-/* Auf Unterseiten hebt das Salbei-Band den Kopf vom Inhalt ab. */
+/* Auf Unterseiten hebt das Rosé-Band den Kopf vom Inhalt ab. */
 .page-hero--muted {
   background-color: var(--surface-muted);
   border-bottom: 1px solid var(--border-subtle);
