@@ -242,5 +242,11 @@ export const practice = {
   maskNote:
     'Zum Schutz unserer Patientinnen und Patienten sowie unseres Praxisteams bitten wir Sie, unsere Praxis bei Erkältungssymptomen (z. B. Husten, Schnupfen oder Halsschmerzen) nur mit einer medizinischen Mund-Nasen-Maske zu betreten.',
 
-  houseCallsNote: 'Hausbesuche werden nur in einem Umkreis von 2 km um die Praxis durchgeführt.'
+  /**
+   * Hausbesuche — wortgetreu aus dem Merkblatt der Praxis.
+   * Nennt jetzt auch die Voraussetzung (starke Mobilitaetseinschraenkung), die
+   * in der frueheren Fassung fehlte: dort stand nur die 2-km-Grenze.
+   */
+  houseCallsNote:
+    'Bei stark mobilitätseingeschränkten Patientinnen und Patienten führen wir Hausbesuche in einem Umkreis von 2 km rund um unsere Praxis durch.'
 } as const;
