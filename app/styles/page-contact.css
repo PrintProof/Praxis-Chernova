@@ -232,3 +232,23 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+/* Rund-um-die-Uhr-Erreichbarkeit des Rezepttelefons.
+   Kein Kasten: der Abschnitt hat mit dem eRezept-Hinweis bereits einen, und
+   zwei Kaesten uebereinander heben sich gegenseitig auf. Die Uhr am Zeilenanfang
+   genuegt, um die Zeile aus dem Fliesstext zu heben. Icon oben ausgerichtet,
+   damit es bei mehrzeiligem Umbruch an der ERSTEN Zeile steht. */
+.contact-processes__available {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  max-width: var(--measure);
+  color: var(--text);
+}
+
+.contact-processes__available-icon {
+  flex: none;
+  margin-top: 0.15em;
+  color: var(--brand);
+}

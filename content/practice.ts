@@ -176,7 +176,13 @@ export const practice = {
      */
     orderLine:
       'Rezepte und Überweisungen können bequem über die Arzt-Direkt Praxis-App (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',
-    processingLine: 'Die Bearbeitung erfolgt am nächsten Arbeitstag.',
+    /**
+     * Der Gegenpol zum engen Terminfenster (7:30-8:30): das Rezepttelefon
+     * nimmt jederzeit entgegen. Deshalb in der Anzeige eigens hervorgehoben.
+     */
+    phoneAvailability:
+      'Unser Rezepttelefon steht Ihnen rund um die Uhr – auch nachts sowie an Wochenenden und Feiertagen – zur Verfügung.',
+    processingLine: 'Ihre Anfrage wird am nächsten Arbeitstag bearbeitet.',
     pickupLine:
       'eRezepte sowie angeforderte Überweisungen stehen ab 10:00 Uhr zur Verfügung bzw. können ab diesem Zeitpunkt in der Praxis abgeholt werden.',
     /** Voraussetzung fürs eRezept. Ohne sie läuft die Anforderung ins Leere. */

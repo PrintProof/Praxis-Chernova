@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import {EmergencyService} from '@/components/emergency-service';
-import {Calendar, Info} from '@/components/illustrations';
+import {Calendar, Clock, Info} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
@@ -200,6 +200,15 @@ export function ContactPage() {
                 </a>
                 {orderAfter}
               </p>
+              {/* Rund-um-die-Uhr-Erreichbarkeit: der eine erfreuliche Punkt in
+                  einem Abschnitt voller Fristen und Bedingungen — und der
+                  Gegenpol zum engen Terminfenster 7:30-8:30. Deshalb mit Uhr
+                  ausgezeichnet statt als vierter gleicher Absatz unterzugehen. */}
+              <p className="contact-processes__available">
+                <Clock className="icon contact-processes__available-icon" />
+                <span>{practice.prescriptionNotes.phoneAvailability}</span>
+              </p>
+
               <p className="rule-list__body">{practice.prescriptionNotes.processingLine}</p>
               <p className="rule-list__body">{practice.prescriptionNotes.pickupLine}</p>
 
