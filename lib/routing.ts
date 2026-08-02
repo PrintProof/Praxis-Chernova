@@ -1,6 +1,7 @@
 export type RouteKey =
   | 'home'
   | 'services'
+  | 'news'
   | 'contact'
   | 'legal'
   | 'privacy';
@@ -8,6 +9,7 @@ export type RouteKey =
 export const routeByKey: Record<RouteKey, string> = {
   home: '/',
   services: '/leistungen',
+  news: '/aktuelles',
   contact: '/kontakt',
   legal: '/impressum',
   privacy: '/datenschutz'

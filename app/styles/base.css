@@ -1,0 +1,436 @@
+/* =============================================================================
+   base.css — Reset, Elementdefaults, Typografie, Fokus, Hilfsklassen
+   -----------------------------------------------------------------------------
+   Layer 2 von 5: tokens -> BASE -> layout -> components -> pages.
+   Hier stehen ausschliesslich Elementselektoren und ganz wenige, klar
+   benannte Hilfsklassen. Keine Komponenten.
+   Es werden ausschliesslich Tokens der SEMANTIK-Ebene benutzt.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Reset
+   --------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Sprungziele sollen nicht unter dem Sticky-Header verschwinden. */
+  scroll-padding-top: calc(var(--header-h) + var(--space-4));
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-normal);
+  /* Sicherheitsnetz gegen horizontales Scrollen ab 320px.
+     `clip` statt `hidden`, damit position: sticky im Header funktioniert. */
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+/* Sticky Footer: der Inhalt schiebt die Fusszeile nach unten. */
+body > main {
+  flex: 1 0 auto;
+}
+
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   2. Ueberschriften
+   Serife fuer h1/h2 (Praxis, erwachsen), Sans ab h3 — ein bewusster Bruch,
+   der Hierarchie ohne zusaetzliche Groesse sichtbar macht.
+   Serifen nie in 500/600: System-Serifen kennen den Schnitt nicht und der
+   Browser faelscht ihn (schmierige Fettung).
+   --------------------------------------------------------------------------- */
+
+h1,
+h2 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  color: var(--text);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  max-width: 20ch;
+}
+
+h2 {
+  font-size: var(--step-3);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  max-width: 26ch;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  letter-spacing: var(--tracking-normal);
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: var(--step-2);
+  line-height: var(--leading-title);
+  max-width: 32ch;
+}
+
+h4 {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+}
+
+h5,
+h6 {
+  font-size: var(--step-0);
+  line-height: var(--leading-snug);
+}
+
+/* ---------------------------------------------------------------------------
+   3. Text
+   Kein Fliesstextabsatz ohne Zeilenlaengenbegrenzung. Ausnahme:
+   `.measure-none`.
+   --------------------------------------------------------------------------- */
+
+/* Silbentrennung ist bei deutschen Komposita keine Kosmetik, sondern noetig:
+   ohne sie schiebt ein Wort wie "Behandlungsprogrammen" eine ganze Zeile in
+   die naechste, und der Flattersatz reisst mitten im Absatz ein Loch (auf
+   390px gemessen: eine Zeile bei 46% Fuelle neben einer bei 96%).
+   `text-wrap: pretty` verteilt die Zeilen, kann aber nicht trennen — beides
+   zusammen ergibt einen gleichmaessigen rechten Rand.
+   <html lang="de"> steht in app/layout.tsx, damit greifen die deutschen
+   Trennmuster. */
+p {
+  max-width: var(--measure);
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+}
+
+small {
+  font-size: var(--step--1);
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+
+address {
+  font-style: normal;
+  line-height: var(--leading-ui);
+}
+
+blockquote {
+  max-width: var(--measure);
+}
+
+hr {
+  border: 0;
+  border-top: var(--rule);
+  margin-block: var(--block-gap);
+}
+
+/* Listen behalten ihre Marker. Nur Komponenten mit eigener Klasse
+   (.card-grid, .rule-list, .link-list, .plain-list ...) entfernen sie in
+   components.css — dort ist dann `role="list"` im Markup Pflicht,
+   weil Safari/VoiceOver markerlose Listen nicht mehr als Liste ansagt. */
+ul,
+ol {
+  padding-inline-start: 1.35em;
+  max-width: var(--measure);
+}
+
+li + li {
+  margin-top: var(--space-2);
+}
+
+li::marker {
+  color: var(--accent-strong);
+}
+
+dl {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Links
+   Standard: unterstrichen. Ein Link ohne Unterstreichung braucht eine
+   andere, ebenso deutliche Kennzeichnung (Button, Navigationskontext).
+   --------------------------------------------------------------------------- */
+
+a {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color var(--duration) var(--ease),
+    text-decoration-color var(--duration) var(--ease);
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration-thickness: 2px;
+}
+
+a:active {
+  color: var(--brand-active);
+}
+
+/* ---------------------------------------------------------------------------
+   5. Fokus — global, sichtbar, nie ersatzlos entfernt.
+   Der Offset ist Absicht: der Ring liegt auf der Flaeche dahinter und
+   verschwindet nie im Element.
+   --------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Auf dunklen Flaechen invertiert. */
+.site-footer :focus-visible,
+.section--dark :focus-visible,
+.on-dark :focus-visible {
+  outline: var(--focus-ring-inverse);
+}
+
+::selection {
+  background-color: var(--brand-soft);
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------------------
+   6. Tabellen (Grundlage; die Optik macht components.css)
+   --------------------------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+caption {
+  text-align: left;
+}
+
+th {
+  text-align: left;
+  font-weight: var(--weight-semibold);
+}
+
+/* ---------------------------------------------------------------------------
+   7. Skip-Link — erstes fokussierbares Element der Seite.
+   --------------------------------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  inset-block-start: var(--space-3);
+  inset-inline-start: var(--space-3);
+  z-index: var(--z-skip-link);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: var(--space-2) var(--space-5);
+  background-color: var(--surface-raised);
+  color: var(--brand);
+  border: var(--rule-strong);
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--space-4)));
+  transition: transform var(--duration) var(--ease);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------------------
+   8. Hilfsklassen — bewusst wenige.
+   --------------------------------------------------------------------------- */
+
+/* Fuer Screenreader vorhanden, optisch verborgen. Pflicht ueberall dort, wo
+   eine Bedeutung sonst nur ueber Farbe transportiert wuerde. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Eyebrow / Kicker ueber einer Ueberschrift.
+   ACHTUNG: `--caps` nur bis ca. 30 Zeichen benutzen — laengere Zeilen
+   brechen in Versalien bei 320px auf drei Zeilen. */
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+  max-width: var(--measure-narrow);
+}
+
+.eyebrow--caps {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+/* Einleitungssatz unter einer Ueberschrift. */
+.lead {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-small {
+  font-size: var(--step--1);
+  line-height: var(--leading-ui);
+}
+
+/* Zahlenkolonnen: Sprechzeiten, Telefonnummern, Urlaubsdaten. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.measure-narrow {
+  max-width: var(--measure-narrow);
+}
+
+.measure-wide {
+  max-width: var(--measure-wide);
+}
+
+.measure-none {
+  max-width: none;
+}
+
+/* Fliesstextbloecke (laengere Erklaerungen). Impressum und Datenschutz bringen
+   ihre eigene Dokumentflaeche mit (.legal-doc in page-legal.css). */
+.prose {
+  max-width: var(--measure);
+}
+
+.prose > * + * {
+  margin-top: var(--stack-gap);
+}
+
+/* ---------------------------------------------------------------------------
+   9. Druck
+   Farben regelt tokens.css; hier nur, was auf Papier keinen Sinn ergibt.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  .skip-link,
+  .site-header,
+  .site-menu,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid-page;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

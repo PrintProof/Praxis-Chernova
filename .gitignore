@@ -1,7 +1,13 @@
-.next
-node_modules
-*.log
-.DS_Store
-out
+# Build- und Werkzeugausgaben — nichts davon gehoert ins Repository.
+.next/
+out/
+node_modules/
 *.tsbuildinfo
-.idea
+*.log
+
+# Editor- und Systemdateien
+.idea/
+.DS_Store
+
+# Wegwerf-Artefakte der Browser-Automatisierung (Screenshots, Konsolenlogs)
+.playwright-mcp/

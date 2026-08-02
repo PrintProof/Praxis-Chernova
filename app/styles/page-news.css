@@ -1,0 +1,454 @@
+/* =============================================================================
+   page-news.css — Seite "Aktuelles"
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+   Hier stehen ausschliesslich die Besonderheiten dieser einen Seite. Alles
+   Wiederholbare (Callout, Hinweisband, Vertretungskarte, Statusmarke) liegt
+   bereits in components.css und wird hier nur noch angeordnet.
+
+   Es werden ausschliesslich Tokens der SEMANTIK-Ebene benutzt.
+   Alle eigenen Klassen tragen das Praefix `.news-`.
+
+   AUFBAU DER SEITE (bewusst unterschiedliche Flaechen, damit ein Rhythmus
+   entsteht statt einer Kachelwand):
+     Hero              Salbeiband
+     Naechster Urlaub  Creme  — Zeichnung, grosser Zeitraum, Vertretungsspalte
+     Jahresuebersicht  Papier — Sandkasten "Planen Sie rechtzeitig!" + Tabelle
+                                (nur ab ZWEI Zeitraeumen; bei genau einem waere
+                                 die Tabelle eine Kopie des Blocks darueber)
+     116 117 / 112     Salbeiband mit zwei Sandkaesten
+     Sprechzeiten      Creme  — kleiner Anhang mit Verweis
+
+   SANDREGEL DIESER SEITE: Sand markiert das, was zeitkritisch ist — der
+   Merksatz ueber der Uebersicht und der 116-117-Block. Der Hinweis im
+   Detailblock bleibt deshalb bewusst ein ruhiger Papierkasten.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Der hervorgehobene naechste (oder laufende) Urlaub
+   Zwei Ebenen:
+     `.news-feature__main`  Zeichnung + Daten (ab 44em nebeneinander)
+     `.news-feature__aside` Spalte "Vertretung uebernehmen" (ab 64em rechts)
+   Bewusst KEINE Karte um das Ganze: der Block steht direkt auf der
+   Seitenflaeche, die Hierarchie entsteht ueber Groesse und Weissraum.
+   --------------------------------------------------------------------------- */
+
+.news-feature {
+  display: grid;
+  gap: var(--block-gap);
+  align-items: start;
+}
+
+.news-feature__main {
+  display: grid;
+  gap: var(--block-gap);
+  align-items: center;
+  min-width: 0;
+}
+
+/* Feste Spaltenbreite statt minmax(0, 12rem): sonst schrumpft die Zeichnung,
+   sobald der Text daneben viel Platz verlangt.
+   `align-items: start` statt der geerbten Zentrierung: die Zeichnung ist
+   niedriger als die Datenspalte und haengt sonst mit rund 100px Leerraum
+   ueber sich neben dem Rueckkehrsatz statt neben dem Status. */
+@media (min-width: 44em) {
+  .news-feature__main {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+/* Zwei Spalten erst, wenn es wirklich eine Vertretungsspalte gibt — sonst
+   bliebe rechts eine leere Haelfte stehen.
+   Die Schwelle liegt bewusst bei 68em (= --container): ab dort hat der
+   Container seine volle Breite, und fuer den grossen Zeitraum bleiben neben
+   Zeichnung und Vertretungsspalte noch rund 456px — genug, damit
+   "20.07.2026 – 07.08.2026" in einer Zeile steht. Frueher umgeschaltet
+   waere die Hauptinformation zweizeilig. */
+@media (min-width: 68em) {
+  .news-feature:has(.news-feature__aside) {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    column-gap: var(--space-8);
+  }
+}
+
+/* Mobil darf die Zeichnung nicht die ganze Spalte fuellen, sonst schiebt sie
+   den Zeitraum unter die Falz. */
+.news-feature__figure {
+  max-width: 13rem;
+}
+
+/* Ab 44em steht die Zeichnung in ihrer eigenen 15rem-Spalte und darf die
+   Groesse der uebrigen Seiten haben. Der 13rem-Deckel ist eine reine
+   Mobilmassnahme; er MUSS hier aufgehoben werden, sonst rendert dieselbe
+   Zeichnung auf /aktuelles nur halb so gross wie auf / und /leistungen.
+   Diese Regel steht bewusst NACH dem Deckel — eine Media Query erhoeht die
+   Spezifitaet nicht, es entscheidet die Reihenfolge. */
+@media (min-width: 44em) {
+  .news-feature__figure {
+    max-width: none;
+  }
+}
+
+.news-feature__body {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  min-width: 0;
+}
+
+.news-feature__status {
+  max-width: none;
+}
+
+/* Der Zeitraum ist die Hauptinformation der Seite: gross, tabellarisch,
+   aber eine Stufe unter der h1 — die Hierarchie bleibt lesbar. */
+.news-feature__range {
+  font-family: var(--font-ui);
+  font-size: var(--step-3);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-heading);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  max-width: none;
+}
+
+.news-feature__return {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  color: var(--text);
+}
+
+.news-feature__note {
+  color: var(--text-muted);
+}
+
+/* Kleiner Hinweiskasten unter dem Rueckkehrdatum. Papier statt Sand
+   (siehe Sandregel oben), der Akzentbalken links traegt die Betonung. */
+.news-feature__hint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  padding: var(--space-4);
+  background-color: var(--surface);
+  border: var(--rule);
+  border-inline-start: var(--bw-bar) solid var(--accent-strong);
+  border-radius: var(--radius-card);
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.news-feature__hint-icon {
+  color: var(--accent-strong);
+  margin-top: 0.3em;
+}
+
+.news-feature__none {
+  color: var(--text-muted);
+}
+
+/* Spalte "Vertretung uebernehmen" — je eine Karte pro Praxis. */
+.news-feature__aside {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  min-width: 0;
+}
+
+.news-feature__aside-title {
+  font-family: var(--font-ui);
+  font-size: var(--step-1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  color: var(--text);
+  margin: 0;
+}
+
+/* `.substitute` ist auf Creme-Flaechen ausgelegt (Standard: --bg) und waere
+   in diesem Abschnitt unsichtbar. Hier liegt der Block direkt auf der
+   Seitenflaeche, also traegt die Vertretungskarte das warme Papier. */
+.news-feature__aside .substitute {
+  background-color: var(--surface);
+  border: var(--rule);
+}
+
+/* Solange die Spalte noch ueber die volle Breite laeuft (44em-68em), duerfen
+   mehrere Vertretungen nebeneinander stehen. Ab 68em ist die Spalte schmal,
+   dann greift die Mindestbreite und es bleibt bei einer Karte je Zeile. */
+@media (min-width: 44em) {
+  .news-feature__aside .substitute-list {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   2. Leerzustand — keine geplanten Schliesszeiten
+   Die Seite muss auch dann eine Aussage haben. Zeichnung und Hinweis stehen
+   nebeneinander, damit die Seite nicht wie ein Fehler aussieht.
+   --------------------------------------------------------------------------- */
+
+.news-empty {
+  display: grid;
+  gap: var(--block-gap);
+  align-items: center;
+}
+
+@media (min-width: 52em) {
+  .news-empty {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    column-gap: var(--space-8);
+  }
+}
+
+.news-empty__figure {
+  max-width: 15rem;
+}
+
+/* ---------------------------------------------------------------------------
+   3. "Planen Sie rechtzeitig!" — Sandkasten ueber der Jahresuebersicht
+   Erbt Flaeche, Kante und Farben von `.callout`; hier nur der eigene Titel
+   und etwas weniger Luft, weil der Kasten im Abschnittskopf steht.
+   --------------------------------------------------------------------------- */
+
+.news-plan {
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  max-width: var(--measure);
+}
+
+/* Gibt es nur einen gepflegten Zeitraum, entfaellt die Jahresuebersicht und
+   der Merksatz steht direkt unter dem Detailblock (siehe
+   components/vacation-overview.tsx). Dann braucht er den vollen Blockabstand
+   statt des engeren Abstands im Abschnittskopf. */
+.news-feature + .news-plan {
+  margin-top: var(--block-gap);
+}
+
+.news-plan__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--step-1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  color: var(--sand-text);
+  margin: 0;
+  max-width: none;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Jahresuebersicht — echte Tabelle, die auf dem Telefon zu Karten wird
+   -----------------------------------------------------------------------------
+   Grundzustand (schmal) = Karten: jede Zeile ist ein Block, jede Zelle traegt
+   ihre Spaltenbeschriftung als sichtbaren Text. Es wird NICHT horizontal
+   gescrollt.
+   Ab 60em = gewoehnliche vierspaltige Tabelle mit sichtbarem Kopf.
+
+   WICHTIG: Das Ueberschreiben der `display`-Werte nimmt den Tabellenelementen
+   in den Browsern ihre Tabellensemantik. Das Markup setzt deshalb ausdrueckliche
+   role-Attribute (table/rowgroup/row/columnheader/cell); diese Datei darf die
+   Struktur also umbrechen, ohne dass Screenreader den Zusammenhang verlieren.
+   --------------------------------------------------------------------------- */
+
+.news-table {
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.news-table thead {
+  /* Schmal: der Kopf steckt in den Zellen selbst (.news-table__label). */
+  display: none;
+}
+
+.news-table tbody,
+.news-table__row,
+.news-table td {
+  display: block;
+}
+
+.news-table__row {
+  padding: var(--card-padding);
+  background-color: var(--bg);
+  border: var(--rule);
+  border-radius: var(--radius-card);
+  min-width: 0;
+}
+
+.news-table__row + .news-table__row {
+  margin-top: var(--block-gap);
+}
+
+.news-table td {
+  padding: 0;
+  border: 0;
+}
+
+.news-table td + td {
+  margin-top: var(--space-4);
+}
+
+.news-table__label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  line-height: var(--leading-ui);
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.news-table__range {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--step-1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.news-table__value {
+  display: block;
+  color: var(--text);
+  max-width: var(--measure);
+}
+
+@media (min-width: 60em) {
+  .news-table {
+    display: table;
+    table-layout: fixed;
+  }
+
+  .news-table thead {
+    display: table-header-group;
+  }
+
+  .news-table tbody {
+    display: table-row-group;
+  }
+
+  .news-table__row {
+    display: table-row;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .news-table thead th {
+    padding: 0 var(--space-4) var(--space-3);
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-label);
+    line-height: var(--leading-ui);
+    color: var(--text-muted);
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: var(--rule-strong);
+  }
+
+  .news-table td {
+    display: table-cell;
+    padding: var(--space-5) var(--space-4);
+    border-bottom: var(--rule);
+    vertical-align: top;
+  }
+
+  .news-table td + td {
+    margin-top: 0;
+  }
+
+  /* Der Kopf steht jetzt sichtbar ueber der Spalte — das Label in der Zelle
+     waere eine Wiederholung. */
+  .news-table__label {
+    display: none;
+  }
+
+  /* Feste Spaltenanteile: der Zeitraum soll einzeilig bleiben, die Statusmarke
+     braucht wenig, die Vertretungsangabe am meisten Platz. */
+  .news-table th:first-child {
+    width: 31%;
+  }
+
+  .news-table th:nth-child(2) {
+    width: 14%;
+  }
+
+  .news-table th:last-child {
+    width: 20%;
+  }
+}
+
+/* Kompakte Vertretungsangabe in der Uebersichtszelle. */
+.news-subs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.news-subs__item {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.news-subs__name {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+.news-subs__line {
+  color: var(--text-muted);
+}
+
+.news-subs__phone {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: var(--tap-min);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-medium);
+  overflow-wrap: normal;
+}
+
+.news-subs__note {
+  font-size: var(--step--1);
+  line-height: var(--leading-ui);
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   5. Abschliessender Verweis auf die Sprechzeiten
+   Kleiner Anhang, bewusst als Textlink statt als dritter Button in Folge.
+   --------------------------------------------------------------------------- */
+
+.news-hours .section__header {
+  margin-bottom: var(--space-2);
+}
+
+/* ---------------------------------------------------------------------------
+   Uebersicht bei genau EINEM gepflegten Zeitraum
+   Statt einer einzeiligen Tabelle, die den Detailblock darueber wortwoertlich
+   wiederholen wuerde, steht hier ein Satz. Der Abschnitt behaelt damit seinen
+   festen Platz und sagt ausdruecklich, dass nichts weiter geplant ist —
+   sonst waere nicht unterscheidbar, ob nichts ansteht oder etwas fehlt.
+   --------------------------------------------------------------------------- */
+
+.news-overview__single {
+  margin-top: var(--block-gap);
+  max-width: 60ch;
+  color: var(--text-muted);
+}

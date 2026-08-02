@@ -1,0 +1,411 @@
+/* =============================================================================
+   tokens.css — Visuelles Fundament der Praxis-Website
+   -----------------------------------------------------------------------------
+   Diese Datei enthaelt AUSSCHLIESSLICH Custom Properties auf :root sowie
+   praeferenzbasierte @media-Anpassungen. Keine Komponenten-Selektoren.
+   Reihenfolge der Layer: tokens -> base -> layout -> components -> pages.
+
+   Zwei Ebenen:
+   1. PRIMITIVE  (--green-*, --warm-*, --ochre-*)  = die reine Farbrampe.
+      Niemals direkt in Komponenten verwenden.
+   2. SEMANTIK   (--bg, --text, --brand, --sand ...) = die einzige Ebene,
+      die Komponenten-CSS benutzen darf.
+
+   Alle Textfarb-Paare sind gegen WCAG 2.2 nachgerechnet (Werte in Kommentaren).
+   Kein Dark Mode: die Seite ist bewusst nur hell (color-scheme: light).
+   Keine Webfonts, keine externen Ressourcen (DSGVO).
+   ============================================================================= */
+
+:root {
+  /* Verhindert, dass Browser/OS die Seite automatisch invertieren, und faerbt
+     native Steuerelemente (Checkbox, Fokus von <details>) im Praxisgruen. */
+  color-scheme: light;
+  accent-color: var(--brand);
+
+  /* ===========================================================================
+     1. PRIMITIVE — Farbrampen
+     ========================================================================= */
+
+  /* Salbeigruen: warm, leicht gelbstichig, bewusst nicht blaustichig.
+     400 = Kundenvorgabe Akzent, 700 = Kundenvorgabe Primaerfarbe. */
+  --green-50: #f0f4ee;
+  --green-100: #e2ebe1;
+  --green-200: #c9dcc9;
+  --green-300: #a6c6ae;
+  --green-400: #7fa98b;
+  --green-500: #5c8a6d;
+  --green-600: #427054;
+  --green-700: #2f5d45;
+  --green-800: #244838;
+  --green-900: #1a3529;
+  --green-950: #12241b;
+
+  /* Warme Neutralstufen: Creme, Papier, Linien, Sekundaertext.
+     Nach unten hin leicht ins Salbei kippend, damit Grau nie kalt wirkt. */
+  --warm-50: #fdfcf8;
+  --warm-100: #f7f4ec;
+  --warm-200: #f1eee3;
+  --warm-300: #e8e4d6;
+  --warm-400: #d5d0be;
+  --warm-500: #adab99;
+  --warm-600: #7c8172;
+  --warm-700: #576055;
+  --warm-800: #3b423a;
+  --warm-900: #262c26;
+
+  /* Ocker/Sand: ausschliesslich fuer Hinweisflaechen (116 117, Urlaub). */
+  --ochre-100: #faf3e2;
+  --ochre-200: #f4e9ce;
+  --ochre-300: #e9daaf;
+  --ochre-400: #d3be84;
+  --ochre-500: #a98a3a;
+  --ochre-600: #7c6018;
+  --ochre-700: #6b5b31;
+  --ochre-800: #3d3418;
+
+  --white: #ffffff;
+
+  /* Altrosa: reserviert fuer das Herz im Praxislogo (components/practice-logo.tsx
+     referenziert --logo-heart direkt). Markenzeichen, nicht umfaerben. */
+  --rose-500: #a74d5f;
+
+  /* ===========================================================================
+     2. SEMANTIK — Flaechen
+     Genau fuenf Flaechenrollen. Mehr Ebenen erzeugen genau das visuelle
+     Rauschen, das die Praxis kritisiert hat.
+     ========================================================================= */
+
+  /* Die Seite selbst: warmes Creme. Traegt den Grossteil des Inhalts. */
+  --bg: var(--warm-100);
+  /* Standard-Panel: warmes Papier, eine Stufe heller als die Seite. */
+  --surface: var(--warm-50);
+  /* Hoechste Stufe: reines Weiss. Nur fuer Sticky-Header und genau EIN
+     hervorgehobenes Panel pro Seite. Nie direkt neben --surface stellen. */
+  --surface-raised: var(--white);
+  /* Salbei-getoentes Band: trennt einen Abschnitt vom Fluss, OHNE Karte.
+     Bewusst waermer (gelblicher) als --green-50: ueber grosse Flaechen kippt
+     ein reiner Salbeiton sonst ins Kuehl-Minzige. Abstand zum Creme: dE 4.1. */
+  --surface-muted: #ecefe2;
+  /* Dunkles Band: Footer, ggf. ein bewusster Kontrastblock. */
+  --surface-dark: var(--green-800);
+
+  /* ===========================================================================
+     3. SEMANTIK — Linien
+     --border      = Haarlinie, dekorativ (Trenner, Kartenkontur)
+     --border-strong = bedeutungstragende Begrenzung, erfuellt 3:1 gegen alle
+                       hellen Flaechen (aktive Zustaende, Formularrahmen)
+     ========================================================================= */
+  --border: var(--warm-300);
+  --border-subtle: var(--warm-200);
+  --border-strong: var(--warm-600); /* 3.65:1 auf --bg, 4.01:1 auf Weiss */
+  /* Rahmen interaktiver Elemente (Sekundaer-Button, Formularfeld). Gruen statt
+     Oliv-Grau: haelt die Kontur in der Marke und erfuellt 3:1 auf allen
+     hellen Flaechen (min. 4.73:1 auf --sand). */
+  --border-interactive: var(--green-600);
+  --border-brand: var(--green-200);
+  --border-on-dark: rgba(255, 255, 255, 0.18);
+
+  --rule: 1px solid var(--border);
+  --rule-subtle: 1px solid var(--border-subtle);
+  --rule-strong: 1px solid var(--border-strong);
+
+  /* ===========================================================================
+     4. SEMANTIK — Text
+     ========================================================================= */
+  --text: #1c2b23; /* 13.46:1 auf --bg */
+  --text-muted: var(--warm-700); /* 5.95:1 auf --bg, 5.42:1 auf --sand */
+  --text-on-dark: #edf1ea; /* 8.92:1 auf --surface-dark */
+  --text-on-dark-muted: #c0cdc1; /* 6.19:1 auf --surface-dark */
+
+  /* ===========================================================================
+     5. SEMANTIK — Marke, Links, Akzent
+     ========================================================================= */
+  --brand: var(--green-700); /* 6.89:1 auf --bg — als Textfarbe zulaessig */
+  --brand-hover: var(--green-800);
+  --brand-active: var(--green-900);
+  --brand-muted: #3d6b51; /* 5.59:1 auf --bg — Eyebrows, kleine Labels */
+  --brand-soft: var(--green-100); /* zarte Flaeche, z.B. aktiver Nav-Zustand */
+  --brand-wash: var(--green-50);
+  --on-brand: var(--warm-50); /* 7.38:1 auf --brand */
+
+  /* --accent ist DEKORATIV (2.40:1 auf --bg): Trennlinien, Flaechen,
+     Fuellungen in Illustrationen. NIEMALS fuer Text oder fuer eine Linie,
+     die allein eine Information traegt. */
+  --accent: var(--green-400);
+  /* --accent-strong erfuellt 3:1 auf allen hellen Flaechen: Icon- und
+     Illustrationskonturen, grosse Schrift ab 24px. */
+  --accent-strong: var(--green-500);
+
+  --link: var(--brand);
+  --link-hover: var(--green-900);
+
+  /* ===========================================================================
+     6. SEMANTIK — Hinweisflaeche (Sand)
+     Reserviert fuer 116 117 und Urlaubs-/Vertretungshinweise.
+     Nicht als allgemeine Kartenfarbe zweckentfremden.
+     ========================================================================= */
+  --sand: var(--ochre-200); /* dE 10.9 gegen --bg: klar erkennbar, nicht laut */
+  --sand-soft: var(--ochre-100); /* verschachtelte Bloecke, z.B. Vertretungspraxis */
+  --sand-border: var(--ochre-300);
+  --sand-border-strong: var(--ochre-400);
+  --sand-accent: var(--ochre-600); /* 4.91:1 auf --sand — Icon, Balken, Label */
+  --sand-muted: var(--ochre-700); /* 5.49:1 auf --sand */
+  --sand-text: var(--ochre-800); /* 10.21:1 auf --sand */
+
+  /* ===========================================================================
+     7. SEMANTIK — Fokus
+     Fast schwarzes Gruen: auf jeder hellen Flaeche >= 10:1, klar als Fokus
+     lesbar und trotzdem in der Farbwelt. Auf --surface-dark --focus-inverse.
+     Immer mit outline-offset arbeiten, damit der Ring auf der Flaeche
+     DAHINTER liegt und nie im Element verschwindet.
+     ========================================================================= */
+  --focus: var(--green-900); /* 12.05:1 auf --bg */
+  --focus-inverse: var(--warm-50); /* 9.93:1 auf --surface-dark */
+  --focus-width: 3px;
+  --focus-offset: 3px;
+  --focus-ring: var(--focus-width) solid var(--focus);
+  --focus-ring-inverse: var(--focus-width) solid var(--focus-inverse);
+
+  /* ---------------------------------------------------------------------------
+     Praxislogo (components/practice-logo.tsx + app/icon.svg)
+     Das bestehende Logo der Praxis: Stethoskop in Dunkelblau, Herz in Altrosa.
+     BEWUSST unabhaengig von --brand: die Marke gehoert der Praxis und wandert
+     nicht mit, wenn die Farbwelt der Website sich aendert. Nicht umfaerben.
+     Beide Werte muessen mit den festen Farben in app/icon.svg uebereinstimmen.
+     --------------------------------------------------------------------------- */
+  --logo-ink: #183753; /* Stethoskop; 11.6:1 auf --bg */
+  --logo-heart: var(--rose-500); /* #a74d5f */
+
+  /* Auf dunklem Grund (Fusszeile) traegt das Logo eine helle Plakette, damit
+     die Originalfarben erhalten bleiben, statt das Logo zu invertieren. */
+  --logo-plate: var(--warm-50);
+
+  /* ===========================================================================
+     8. TYPOGRAFIE — nur System-Fonts, kein Webfont-Request
+     ========================================================================= */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif;
+  --font-serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino,
+    "Book Antiqua", Charter, Cambria, Georgia, "Times New Roman", serif;
+
+  --font-body: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-heading: var(--font-serif);
+
+  /* Modulare Skala, fluid zwischen 320px und 1240px Viewport.
+     Fliesstext 17px mobil -> 18px Desktop. Die Skala ist bewusst flach:
+     die alte Seite hatte eine 77px-Ueberschrift, die bei langen deutschen
+     Woertern ueber drei Zeilen brach. H1 endet hier bei 44px. */
+  /* Kleinschrift fuer Zusatzzeilen (z.B. die Einschraenkung im
+     Online-Termin-Button). Bewusst nicht kleiner als 13px — die Praxis hat
+     viele aeltere Patientinnen und Patienten. */
+  --step--2: clamp(0.8125rem, 0.7908rem + 0.1087vw, 0.875rem); /* 13 -> 14 */
+  --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem); /* 15 -> 16 */
+  --step-0: clamp(1.0625rem, 1.0408rem + 0.1087vw, 1.125rem); /* 17 -> 18 */
+  --step-1: clamp(1.1875rem, 1.1223rem + 0.3261vw, 1.375rem); /* 19 -> 22 */
+  --step-2: clamp(1.375rem, 1.2446rem + 0.6522vw, 1.75rem); /* 22 -> 28 */
+  --step-3: clamp(1.625rem, 1.4293rem + 0.9783vw, 2.1875rem); /* 26 -> 35 */
+  --step-4: clamp(1.9375rem, 1.6549rem + 1.413vw, 2.75rem); /* 31 -> 44 */
+  --step-5: clamp(2.25rem, 1.837rem + 2.0652vw, 3.4375rem); /* 36 -> 55 */
+
+  --leading-display: 1.08;
+  --leading-heading: 1.18;
+  --leading-title: 1.3;
+  --leading-snug: 1.4;
+  --leading-ui: 1.45;
+  --leading-body: 1.65;
+
+  --tracking-display: -0.021em;
+  --tracking-heading: -0.012em;
+  --tracking-normal: 0em;
+  --tracking-label: 0.015em;
+  --tracking-caps: 0.1em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  /* System-Serifen (Georgia, Palatino) kennen kein 600 — der Browser
+     faelscht es. Serifen-Ueberschriften daher nur 400 oder 700. */
+  --weight-heading: 400;
+  --weight-heading-strong: 700;
+
+  /* Zeilenlaenge. --measure ist die Vorgabe fuer Fliesstext (~68 Zeichen). */
+  --measure: 68ch;
+  --measure-narrow: 46ch;
+  --measure-wide: 76ch;
+
+  /* ===========================================================================
+     9. ABSTAENDE — 4px-Basis; ab Stufe 5 groessere Spruenge, damit die
+     grossen Abstaende wirklich gross sind und Sektionen atmen.
+     ========================================================================= */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.5rem; /* 24 */
+  --space-6: 2rem; /* 32 */
+  --space-7: 2.5rem; /* 40 */
+  --space-8: 3rem; /* 48 */
+  --space-9: 3.5rem; /* 56 */
+  --space-10: 4rem; /* 64 */
+  --space-11: 5rem; /* 80 */
+  --space-12: 6rem; /* 96 */
+  --space-13: 7rem; /* 112 */
+  --space-14: 8rem; /* 128 */
+  --space-15: 10rem; /* 160 */
+  --space-16: 12rem; /* 192 */
+
+  /* Rhythmus-Tokens: bitte diese statt roher --space-* fuer Sektionen nutzen. */
+  --section-y: clamp(2.75rem, 6vw, 5rem); /* vertikale Luft je Sektion */
+  --section-y-lg: clamp(4rem, 9vw, 7.5rem); /* Hero, Seitenabschluss */
+  --block-gap: clamp(1.5rem, 3.5vw, 2.5rem); /* zwischen Bloecken einer Sektion */
+  --stack-gap: var(--space-4); /* zwischen Absaetzen eines Blocks */
+  --card-padding: clamp(1.25rem, 3vw, 2rem);
+
+  /* ===========================================================================
+     10. RADIEN & RAHMENSTAERKEN
+     Bewusst klein. Die alte Seite hatte 22-26px auf allem — das erzeugt den
+     generischen "runde weisse Kachel"-Look.
+     ========================================================================= */
+  --radius-xs: 0.25rem; /* 4 */
+  --radius-sm: 0.375rem; /* 6 */
+  --radius-md: 0.625rem; /* 10 */
+  --radius-lg: 1rem; /* 16 */
+  --radius-xl: 1.5rem; /* 24 — nur Hero-/Illustrationsrahmen */
+  --radius-pill: 62.5rem;
+
+  --radius-card: var(--radius-md);
+  --radius-button: var(--radius-sm);
+  --radius-field: var(--radius-sm);
+
+  --bw-hairline: 1px;
+  --bw-thick: 2px;
+  --bw-bar: 3px; /* linker Akzentbalken an Hinweisen */
+
+  /* ===========================================================================
+     11. SCHATTEN — warm getoent (Braun-Oliv statt Blaugrau), sehr flach.
+     Faustregel: Flaeche + Haarlinie zuerst, Schatten nur wenn etwas wirklich
+     ueber dem Inhalt schwebt.
+     ========================================================================= */
+  --shadow-xs: 0 1px 1px rgba(58, 48, 30, 0.04);
+  --shadow-sm: 0 1px 2px rgba(58, 48, 30, 0.05), 0 2px 6px -3px rgba(58, 48, 30, 0.07);
+  --shadow-md: 0 2px 4px rgba(58, 48, 30, 0.04), 0 10px 22px -12px rgba(58, 48, 30, 0.13);
+  --shadow-lg: 0 4px 8px rgba(58, 48, 30, 0.04), 0 22px 44px -22px rgba(58, 48, 30, 0.18);
+  --shadow-none: none;
+
+  /* ===========================================================================
+     12. BEWEGUNG
+     ========================================================================= */
+  --duration-fast: 120ms;
+  --duration: 180ms;
+  --duration-slow: 320ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ===========================================================================
+     13. LAYOUT
+     ========================================================================= */
+  --container: 68rem; /* 1088px — Standardbreite */
+  --container-narrow: 42rem; /* 672px — Fliesstext, Impressum, Datenschutz */
+  --container-wide: 78rem; /* 1248px — nur volle Baender */
+  --gutter: clamp(1.25rem, 4vw, 2.5rem); /* seitlicher Innenabstand */
+  --header-h: clamp(4rem, 6vw, 5rem);
+  --tap-min: 2.75rem; /* 44px Mindest-Touchziel */
+
+  /* ===========================================================================
+     14. IKONOGRAFIE & ILLUSTRATION (Inline-SVG, handgezeichnete Linien)
+     ========================================================================= */
+  --icon-sm: 1.125rem;
+  --icon: 1.375rem;
+  --icon-lg: 2rem;
+  --icon-stroke: 1.6; /* stroke-width fuer Icons (unitless, viewBox 24) */
+  --illustration-stroke: 1.75; /* etwas kraeftiger fuer grosse Zeichnungen */
+  --illustration-max: 22rem;
+
+  /* ===========================================================================
+     15. EBENEN
+     ========================================================================= */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 50;
+  --z-header: 60;
+  --z-skip-link: 100;
+}
+
+/* =============================================================================
+   Reduzierte Bewegung — Pflicht.
+   Erst die Tokens neutralisieren, dann als Sicherheitsnetz alles abschalten,
+   was spaetere Layer eventuell doch animieren.
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 1ms;
+    --duration: 1ms;
+    --duration-slow: 1ms;
+    --ease: linear;
+    --ease-in-out: linear;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================================================
+   Erhoehter Kontrast — Linien und Sekundaertext werden fester.
+   Reine Token-Anpassung, keine Layoutaenderung.
+   ============================================================================= */
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: var(--warm-800); /* 9.43:1 auf --bg */
+    --sand-muted: #4e421f; /* 8.19:1 auf --sand */
+    --border: var(--warm-500);
+    --border-subtle: var(--warm-400);
+    --border-strong: var(--warm-800);
+    --sand-border: var(--ochre-400);
+    --brand-muted: var(--green-800);
+    --accent: var(--accent-strong);
+    --shadow-xs: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+  }
+}
+
+/* =============================================================================
+   Druck — Patientinnen und Patienten drucken Sprechzeiten und Adresse aus.
+   Flaechen entfaerben, Schatten weg, Linien kraeftiger.
+   ============================================================================= */
+@media print {
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --surface-muted: #ffffff;
+    --surface-dark: #ffffff;
+    --sand: #ffffff;
+    --sand-soft: #ffffff;
+    --text: #000000;
+    --text-muted: #333333;
+    --text-on-dark: #000000;
+    --text-on-dark-muted: #333333;
+    --sand-text: #000000;
+    --sand-muted: #333333;
+    --border: #999999;
+    --border-subtle: #bbbbbb;
+    --border-strong: #444444;
+    --sand-border: #666666;
+    --shadow-xs: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --section-y: 1.5rem;
+    --section-y-lg: 2rem;
+  }
+}

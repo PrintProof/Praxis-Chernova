@@ -1,0 +1,216 @@
+/* =============================================================================
+   page-legal.css — Impressum und Datenschutzerklaerung
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+   Gilt ausschliesslich fuer /impressum und /datenschutz (Praefix `.legal-`).
+
+   AUFGABE: zwei lange Rechtstexte lesbar setzen. Kein Schmuck, keine Icons,
+   kein Kartenraster — ein Impressum ist ein Dokument, kein Marketing-Abschnitt.
+   Die ganze Gestaltung besteht aus vier Mitteln:
+
+     1. EINE schmale Lesespalte fuer Kopf UND Text, damit Ueberschrift und
+        Fliesstext auf derselben Kante stehen. Die Spalte entsteht ueber
+        `max-width` (siehe --legal-measure), NICHT ueber einen schmalen
+        zentrierten Container: sonst begaenne der Text rund 200px weiter rechts
+        als Marke, Navigation und Fusszeilenanschrift, und die Seite haette
+        eine zweite Ausrichtungsachse.
+     2. Das Inhaltsverzeichnis als einziges Panel der Seite — der eine
+        Blickfang, den eine reine Textseite verdient (zehn Abschnitte je
+        Dokument).
+     3. Ein deutlicher Abstandssprung: viel Luft zwischen den Abschnitten,
+        wenig innerhalb. Die Haarlinie dazwischen ist die begruendete Ausnahme
+        von "Abschnitte trennt Luft, keine Linie": bei zehn gleichrangigen
+        Abschnitten in einer einzigen Spalte waere Luft allein mehrdeutig.
+     4. Datenzeilen (Anschrift, Rufnummern, Gesetzesnamen) als enger Block mit
+        Zierlinie statt als Folge von Einzelabsaetzen.
+
+   Nur Semantik-Tokens, keine rohen Farbwerte.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Seitenkopf
+   Das Salbeiband traegt nur Eyebrow und h1. Der untere Innenabstand ist
+   bewusst kleiner als der Standard: darunter folgt sofort das
+   Inhaltsverzeichnis, und zwei volle Sektionsabstaende hintereinander wuerden
+   den Kopf vom Dokument abreissen.
+   --------------------------------------------------------------------------- */
+
+.legal-hero {
+  padding-block: clamp(2.25rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.25rem);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Dokumentflaeche
+   Die Lesespalte beginnt an derselben linken Kante wie alles andere auf der
+   Website; begrenzt wird nur ihre BREITE. 38rem entspricht rund 68 Zeichen —
+   dieselbe Zeilenlaenge wie zuvor, nur ohne den Versatz nach rechts.
+   --------------------------------------------------------------------------- */
+
+.legal-doc {
+  --legal-measure: 38rem;
+
+  padding-block: clamp(2rem, 5vw, 3.25rem) var(--section-y-lg);
+}
+
+.legal-toc,
+.legal-doc__body {
+  max-width: var(--legal-measure);
+}
+
+/* ---------------------------------------------------------------------------
+   3. Inhaltsverzeichnis
+   Das einzige Panel der Seite (--surface + Haarlinie, kein Schatten).
+   Ab 40em zweispaltig: zehn Eintraege mit 44px Trefferflaeche waeren sonst
+   ein halber Bildschirm, bevor der eigentliche Text ueberhaupt beginnt.
+   --------------------------------------------------------------------------- */
+
+.legal-toc {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  padding: var(--card-padding);
+  background-color: var(--surface);
+  border: var(--rule);
+  border-radius: var(--radius-card);
+}
+
+.legal-toc__title {
+  max-width: none;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+}
+
+.legal-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+
+.legal-toc__item {
+  margin: 0;
+  break-inside: avoid;
+}
+
+/* Ohne Unterstreichung im Ruhezustand: die Liste steht in einem <nav> und
+   enthaelt ausschliesslich Links — es gibt keinen Fliesstext, mit dem sie
+   verwechselt werden koennte. Hover bringt die Unterstreichung zurueck, den
+   Fokusring liefert base.css. */
+.legal-toc__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  min-height: var(--tap-min);
+  padding-block: var(--space-3);
+  color: var(--link);
+  font-family: var(--font-ui);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  text-decoration: none;
+}
+
+.legal-toc__link:hover {
+  color: var(--link-hover);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* Reine Orientierungsnummer (im Markup aria-hidden). Rechtsbuendig, damit
+   ein- und zweistellige Nummern dieselbe Textkante ergeben. */
+.legal-toc__index {
+  flex: none;
+  min-width: 1.4rem;
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--brand-muted);
+}
+
+/* `overflow-wrap: break-word` erbt jedes Element von <body> (base.css) und
+   trennt notfalls mitten im Wort. In der zweispaltigen Liste ist eine Spalte
+   nur rund 200px breit, "Verbraucherstreitbeilegung" brach dort als
+   "Verbraucherstreitbeilegu / ng". Hier also der Rueckweg zur normalen
+   Worttrennung plus echte Silbentrennung — <html lang="de"> steht, damit
+   greifen die deutschen Trennmuster ("Verbraucherstreit-/beilegung"). */
+.legal-toc__label {
+  min-width: 0;
+  overflow-wrap: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+@media (min-width: 40em) {
+  .legal-toc__list {
+    columns: 2;
+    column-gap: var(--space-7);
+    column-rule: var(--rule-subtle);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   4. Abschnitte des Dokuments
+   Grosser Abstand aussen, kleiner innen. Die Ueberschrift bleibt die Serife
+   (h2 aus base.css), faellt aber auf --step-2 zurueck: zehn Ueberschriften in
+   35px hintereinander wirken lauter als der Text, den sie ordnen.
+   --------------------------------------------------------------------------- */
+
+.legal-section + .legal-section {
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+  padding-top: clamp(1.75rem, 4vw, 2.75rem);
+  border-top: var(--rule-subtle);
+}
+
+.legal-section__heading {
+  max-width: 32ch;
+  margin-bottom: var(--space-4);
+  font-size: var(--step-2);
+  line-height: var(--leading-title);
+}
+
+/* Nach einem Sprung aus dem Inhaltsverzeichnis: ruhige, statische Bestaetigung
+   ohne Bewegung und ohne Layoutsprung. Reine Zugabe — welcher Abschnitt
+   gemeint ist, sagt bereits die Ueberschrift an der Sprungposition. */
+.legal-section:target .legal-section__heading {
+  color: var(--brand);
+}
+
+.legal-section__text {
+  display: grid;
+  gap: var(--space-5);
+}
+
+/* ---------------------------------------------------------------------------
+   5. Datenzeilen
+   Anschriften, Rufnummern, Gesetzesnamen: eng gesetzt, tabellarische Ziffern,
+   eine Zierlinie in --accent als Blockmarke. Die Linie ist rein dekorativ —
+   die Information steht vollstaendig im Text.
+   --------------------------------------------------------------------------- */
+
+.legal-lines {
+  padding-inline-start: var(--space-4);
+  border-inline-start: var(--bw-thick) solid var(--accent);
+  line-height: var(--leading-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------------
+   6. Redaktionell offene Punkte
+   "[BITTE ERGAENZEN: ...]" / "[BITTE PRUEFEN: ...]" aus content/legal.ts.
+   Bewusst KEIN Warnton und kein Sand (der ist fuer 116 117 und Urlaub
+   reserviert): ein ruhiger Salbeigrund plus gestrichelte Linie liest sich als
+   redaktionelle Notiz, nicht als Fehler. Die Bedeutung steht ausserdem
+   woertlich im Text — die Auszeichnung traegt sie nicht allein.
+   --------------------------------------------------------------------------- */
+
+.legal-open {
+  padding: 0.05em 0.3em;
+  background-color: var(--brand-soft);
+  border-bottom: 1px dashed var(--border-strong);
+  border-radius: var(--radius-xs);
+  color: var(--text);
+}

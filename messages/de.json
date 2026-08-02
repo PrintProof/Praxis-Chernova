@@ -1,23 +1,39 @@
 {
   "accessibility": {
-    "skipToContent": "Zum Inhalt springen"
+    "skipToContent": "Zum Inhalt springen",
+    "newTabHint": "Öffnet in einem neuen Tab",
+    "currentPage": "Aktuelle Seite"
   },
   "nav": {
     "primary": "Hauptnavigation",
+    "footer": "Weitere Seiten",
+    "menu": "Menü",
+    "menuAria": "Hauptmenü ein- und ausblenden",
     "home": "Start",
     "services": "Leistungen",
+    "news": "Aktuelles",
     "contact": "Kontakt",
     "legal": "Impressum",
     "privacy": "Datenschutz"
   },
   "common": {
-    "specialtyShort": "Fachärztin für Innere Medizin und Allgemeinmedizin"
+    "specialtyShort": "Fachärztin für Innere Medizin und Allgemeinmedizin",
+    "homeAria": "Zur Startseite"
   },
   "cta": {
-    "bookAppointment": "Online-Termin (nur Bestandspatienten)",
-    "contactDirections": "Kontakt & Anfahrt",
+    "call": "Anrufen",
+    "callAria": "Praxis anrufen: {phone}",
+    "callPrescription": "Rezepttelefon anrufen",
+    "callPrescriptionAria": "Rezepttelefon anrufen: {phone}",
+    "contactAndHours": "Sprechzeiten & Kontakt",
+    "toNews": "Aktuelles ansehen",
+    "bookOnlineShort": "Online-Termin",
+    "bookOnlineAudience": "nur für Bestandspatienten",
+    "bookOnlineNote": "Online-Termine sind für Bestandspatientinnen und Bestandspatienten. Sind Sie neu in der Praxis, rufen Sie uns bitte an.",
+    "bookOnlineHint": "Die Buchung öffnet sich bei arzt-direkt in einem neuen Tab.",
+    "newPatientsHint": "Neue Patientinnen und Patienten melden sich bitte telefonisch.",
     "openRoute": "Route planen",
-    "newPatientsHint": "Neue Patientinnen und Patienten melden sich bitte telefonisch."
+    "openRouteHint": "Der Link öffnet die Adresse in Google Maps in einem neuen Tab."
   },
   "days": {
     "monday": "Montag",
@@ -26,89 +42,143 @@
     "thursday": "Donnerstag",
     "friday": "Freitag"
   },
-  "hero": {
-    "eyebrow": "Hausärztlich-internistische Praxis in Bielefeld",
-    "lead": "",
-    "body": "Kontakt, Sprechzeiten und Terminbuchung auf einen Blick.",
-    "externalHint": ""
-  },
   "home": {
-    "summary": {
-      "ariaLabel": "Schnellüberblick",
-      "hoursTitle": "Sprechzeiten",
-      "hoursValue": "Mo-Fr vormittags, Mo und Do zusätzlich nachmittags"
+    "hero": {
+      "eyebrow": "Hausärztlich-internistische Praxis in Bielefeld-Brackwede",
+      "lead": "Termine, Rezepte und organisatorische Fragen klären Sie telefonisch."
     },
-    "quick": {
-      "title": "Kontakt und Sprechzeiten auf einen Blick",
-      "phoneHint": "Für Termine und andere Anliegen bitte die Hauptnummer nutzen.",
-      "prescriptionHint": "Für Wiederholungsrezepte und Überweisungen.",
-      "addressHint": "Praxisstandort in Bielefeld-Brackwede."
+    "about": {
+      "title": "Die Praxis",
+      "body": "Veronika Chernova ist Fachärztin für Innere Medizin und Allgemeinmedizin. Die Praxis in Bielefeld-Brackwede ist Ihre Anlaufstelle bei akuten Beschwerden und begleitet Sie bei chronischen Erkrankungen."
     },
-    "organisation": {
-      "title": "Wichtige Hinweise",
-      "items": {
-        "prescriptions": {
-          "label": "Rezepte & Überweisungen",
-          "value": "Rezepte und Überweisungen können über das Rezepttelefon oder die Arzt-Direkt Praxis App angefordert werden."
-        },
-        "pickup": {
-          "label": "Abholung / eRezept",
-          "value": "Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr."
-        },
-        "appointments": {
-          "label": "Termine & Anliegen",
-          "value": "Termine und andere Anliegen bitte ausschließlich telefonisch über die Hauptnummer."
-        }
+    "hours": {
+      "title": "Sprechzeiten",
+      "note": "Während der Schließzeiten der Praxis gelten abweichende Zeiten.",
+      "link": "Schließzeiten und Vertretung ansehen"
+    },
+    "guide": {
+      "body": "Alle Kontaktwege, die Anfahrt und die Abläufe für Termine, Rezepte und Hausbesuche stehen unter <contact>Kontakt & Anfahrt</contact>. Das medizinische Angebot der Praxis finden Sie unter <services>Leistungen</services>."
+    }
+  },
+  "services": {
+    "eyebrow": "Medizinisches Angebot",
+    "title": "Leistungen",
+    "lead": "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an.",
+    "appointment": {
+      "title": "Termin vereinbaren",
+      "body": "Termine vereinbaren Sie telefonisch. Alle Nummern und die Sprechzeiten stehen auf der Kontaktseite."
+    }
+  },
+  "news": {
+    "eyebrow": "Hinweise der Praxis",
+    "title": "Aktuelles",
+    "lead": "Hier stehen die geplanten Schließzeiten der Praxis mit der jeweiligen Vertretung sowie die Nummern für Zeiten, in denen die Praxis nicht erreichbar ist.",
+    "vacation": {
+      "title": "Urlaub und Vertretung",
+      "description": "Vergangene Zeiträume werden automatisch ausgeblendet.",
+      "planAhead": "Rezepte und Überweisungen für die Schließzeit fordern Sie bitte rechtzeitig vorher an.",
+      "returnLine": "Ab {weekday}, den {date} sind wir wieder für Sie da.",
+      "urgentHintSingle": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an die unten genannte Vertretungspraxis.",
+      "urgentHintPlural": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an eine der unten genannten Vertretungspraxen.",
+      "overviewTitle": "Alle geplanten Schließzeiten",
+      "overviewTitleYear": "Schließzeiten {year}",
+      "planAheadTitle": "Planen Sie rechtzeitig!",
+      "onlyCurrent": "Weitere Schließzeiten sind zurzeit nicht geplant. Sobald ein neuer Zeitraum feststeht, finden Sie ihn hier."
+    },
+    "hours": {
+      "title": "Sprechzeiten außerhalb der Urlaubszeiten",
+      "body": "Die regulären Sprechzeiten und alle Kontaktwege finden Sie auf der Kontaktseite."
+    }
+  },
+  "contact": {
+    "eyebrow": "So erreichen Sie uns",
+    "title": "Kontakt & Anfahrt",
+    "lead": "Termine, Rezepte und organisatorische Fragen klären Sie telefonisch. Auf dieser Seite finden Sie alle Nummern, die Sprechzeiten, die Anfahrt und die wichtigsten Abläufe.",
+    "channels": {
+      "title": "Telefon und Fax",
+      "ariaLabel": "Telefonnummern der Praxis",
+      "phone": {
+        "title": "Telefon",
+        "description": "Für Termine und alle organisatorischen Anliegen."
+      },
+      "prescriptionPhone": {
+        "title": "Rezepttelefon",
+        "description": "Für Wiederholungsrezepte und Überweisungen."
+      },
+      "fax": {
+        "title": "Fax"
+      }
+    },
+    "hours": {
+      "title": "Sprechzeiten",
+      "description": "Abweichende Zeiten während des Praxisurlaubs stehen unter Aktuelles.",
+      "ariaLabel": "Sprechzeiten der Praxis"
+    },
+    "directions": {
+      "title": "Adresse & Anfahrt",
+      "addressLabel": "Adresse",
+      "ariaLabel": "Adresse und Anfahrt"
+    },
+    "processes": {
+      "title": "Organisatorisches",
+      "appointments": {
+        "title": "Termine"
+      },
+      "prescriptions": {
+        "title": "Rezepte und Überweisungen"
+      },
+      "houseCalls": {
+        "title": "Hausbesuche"
       }
     }
   },
-  "notice": {
-    "title": "Urlaub & Vertretung",
-    "overviewLabel": "Urlaub",
-    "closedLabel": "Unsere Praxis bleibt in folgendem Zeitraum geschlossen:",
-    "substituteLabel": "Vertretungspraxis",
-    "substitutesLabel": "Vertretungspraxen"
-  },
-  "contact": {
-    "eyebrow": "",
-    "title": "Kontakt & Anfahrt",
-    "lead": "",
-    "visitTitle": "Praxisbesuch",
-    "visitDescription": "",
-    "addressTitle": "Adresse",
-    "mainPhoneTitle": "Telefon",
-    "mainPhoneDescription": "Für Termine und organisatorische Anliegen.",
-    "prescriptionPhoneTitle": "Rezepttelefon",
-    "prescriptionPhoneDescription": "Für Rezepte und Überweisungen.",
-    "faxLabel": "Fax",
-    "openingHoursTitle": "Öffnungszeiten",
-    "openingHoursDescription": "Montag bis Freitag mit zusätzlichen Nachmittagssprechzeiten an ausgewählten Tagen.",
-    "openingHoursSectionTitle": "Sprechzeiten",
-    "openingHoursSectionBody": "",
-    "organisationTitle": "Wichtige Abläufe",
-    "organisationBody": "",
-    "prescriptionsTitle": "Rezepttelefon",
-    "prescriptionsLineOne": "Rezepte und Überweisungen können über das Rezepttelefon oder die Arzt-Direkt Praxis App angefordert werden.",
-    "prescriptionsLineTwo": "Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr.",
-    "appointmentsTitle": "Termine und andere Anliegen",
-    "appointmentsLine": "Termine und andere Anliegen bitte ausschließlich telefonisch über die Hauptnummer.",
-    "houseCallsTitle": "Hausbesuche",
-    "houseCallsLine": "Hausbesuche werden nur in einem Umkreis von 2 km um die Praxis durchgeführt.",
-    "directionsTitle": "Anfahrt",
-    "directionsBody": "",
-    "directionsHint": ""
-  },
-  "services": {
-    "eyebrow": "",
-    "title": "Leistungen",
-    "lead": "",
-    "sections": {
-      "overview": {
-        "title": "Hausärztlich-internistische Versorgung",
-        "body": "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an."
-      }
+  "vacation": {
+    "compact": {
+      "upcomingLabel": "Praxisurlaub",
+      "currentLabel": "Praxis derzeit geschlossen",
+      "link": "Vertretung und Details",
+      "linkAria": "Vertretung und Details zum Praxisurlaub unter Aktuelles ansehen",
+      "regionLabel": "Hinweis zum Praxisurlaub"
     },
-    "bookingNotice": "Sie werden direkt auf die externe Buchungsseite von arzt-direkt weitergeleitet."
+    "list": {
+      "caption": "Geplante Schließzeiten der Praxis",
+      "periodColumn": "Zeitraum",
+      "kindColumn": "Praxisurlaub",
+      "noteColumn": "Hinweis",
+      "substituteColumn": "Vertretung",
+      "statusCurrent": "Läuft aktuell",
+      "statusUpcoming": "Geplant",
+      "statusLabel": "Status",
+      "empty": "Zurzeit sind keine Praxisurlaube geplant.",
+      "emptyHint": "Sobald ein Zeitraum feststeht, finden Sie ihn an dieser Stelle.",
+      "emptyCell": "–"
+    },
+    "substitute": {
+      "takeOverSingle": "Vertretung übernimmt",
+      "takeOverPlural": "Vertretung übernehmen",
+      "none": "Keine Vertretung angegeben"
+    }
+  },
+  "emergency": {
+    "title": "Außerhalb der Sprechzeiten",
+    "regionLabel": "Ärztlicher Bereitschaftsdienst und Notfall",
+    "noticeLabel": "Hinweis",
+    "urgentLabel": "Dringender Hinweis",
+    "service": {
+      "title": "Ärztlicher Bereitschaftsdienst",
+      "number": "116 117",
+      "body": "Außerhalb der Sprechzeiten erreichen Sie den ärztlichen Bereitschaftsdienst unter 116 117. Der Anruf ist bundesweit kostenfrei.",
+      "callLabel": "116 117 anrufen"
+    },
+    "rescue": {
+      "title": "Im Notfall",
+      "number": "112",
+      "body": "Bei einem lebensbedrohlichen Notfall wählen Sie bitte sofort den Rettungsdienst unter 112.",
+      "callLabel": "112 anrufen"
+    }
+  },
+  "legalCommon": {
+    "tocTitle": "Inhalt dieser Seite"
   },
   "legalPage": {
     "eyebrow": "Rechtliche Pflichtangaben",
@@ -119,9 +189,8 @@
     "title": "Datenschutzerklärung"
   },
   "footer": {
-    "contactTitle": "Kontakt",
+    "navTitle": "Seiten",
     "legalTitle": "Rechtliches",
-    "bookingNotice": "",
-    "legalPlaceholder": ""
+    "addressLabel": "Anschrift"
   }
 }

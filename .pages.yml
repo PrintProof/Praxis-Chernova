@@ -1,3 +1,13 @@
+# Bearbeitungsformular fuer das Praxisteam in Pages CMS (https://pagescms.org).
+#
+# WICHTIG: Eine Vertretungspraxis ist ein Eintrag UNTERHALB eines Zeitraums,
+# kein eigener Zeitraum. Bis August 2026 kannte dieses Formular nur eine
+# einzige Vertretung ("substitute", Einzahl); das Praxisteam hat deshalb
+# denselben Urlaub mehrfach angelegt, einmal je Vertretungspraxis, und auf der
+# Website erschienen daraus mehrere Urlaube. Seitdem ist "substitutes" eine
+# Liste. Die Website fasst zusaetzlich Zeitraeume mit identischem Datum wieder
+# zusammen (lib/vacation-logic.ts, mergePeriodsByRange), damit alte Eintraege
+# richtig dargestellt werden, ohne dass jemand sie nachpflegen muss.
 content:
   - name: vacation
     label: "Urlaub / Schliesszeiten"
@@ -7,9 +17,11 @@ content:
     fields:
       - name: periods
         label: "Schliesszeiten"
-        description: "Hier alle Zeitraeume eintragen, in denen die Praxis geschlossen ist. Mit dem Plus-Symbol einen neuen Zeitraum hinzufuegen. Abgelaufene Eintraege werden auf der Website automatisch ausgeblendet und koennen geloescht werden."
+        description: "Alle Zeitraeume, in denen die Praxis geschlossen ist. Mit dem Plus-Symbol einen neuen Zeitraum hinzufuegen. Abgelaufene Eintraege blendet die Website automatisch aus und koennen geloescht werden. Bitte je Urlaub nur EINEN Eintrag anlegen - mehrere Vertretungspraxen tragen Sie weiter unten im selben Eintrag ein."
         type: object
-        list: true
+        list:
+          collapsible:
+            summary: "{start} bis {end}"
         fields:
           - name: start
             label: "Von (erster Schliesstag)"
@@ -29,14 +41,16 @@ content:
 
           - name: note
             label: "Hinweis (optional)"
-            description: "Optionaler Text, z. B. 'Betriebsurlaub' oder 'In dringenden Faellen wenden Sie sich bitte an die Vertretungspraxis.'. Kann leer bleiben."
+            description: "Optionaler Text, z. B. 'Wir sind wegen Betriebsurlaub nicht erreichbar'. Kann leer bleiben."
             type: text
 
           - name: substitutes
-            label: "Vertretungen (optional)"
-            description: "Eine oder mehrere Vertretungspraxen für diesen Zeitraum. Mit dem Plus-Symbol weitere hinzufügen, sonst leer lassen."
+            label: "Vertretungspraxen (optional)"
+            description: "Hier ALLE Vertretungspraxen fuer diesen Zeitraum eintragen. Mit dem Plus-Symbol weitere hinzufuegen - bitte dafuer KEINEN zweiten Urlaub anlegen. Die Website zeigt alle Eintraege untereinander an. Wenn es keine Vertretung gibt, leer lassen."
             type: object
-            list: true
+            list:
+              collapsible:
+                summary: "{name}"
             fields:
               - name: name
                 label: "Name der Praxis / des Arztes"
@@ -60,5 +74,5 @@ content:
                 type: string
               - name: note
                 label: "Zusatzhinweis zur Vertretung (optional)"
-                description: "Optionaler Text, z. B. 'Sprechzeiten: Mo-Fr 08:00-12:00 Uhr'. Kann leer bleiben."
+                description: "Optionaler Text, z. B. 'Nur telefonisch erreichbar' oder 'Online-Termine unter ...'. Kann leer bleiben."
                 type: text

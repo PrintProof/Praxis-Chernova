@@ -1,0 +1,837 @@
+/* =============================================================================
+   layout.css — Container, Sektionsrhythmus, Kopfzeile, Navigation, Fusszeile,
+                Grundraster
+   -----------------------------------------------------------------------------
+   Layer 3 von 5: tokens -> base -> LAYOUT -> components -> pages.
+
+   Leitgedanke: Der Wechsel zwischen den Abschnitten entsteht durch
+   FLAECHEN und LUFT, nicht durch immer gleiche weisse Karten.
+   Es gibt genau fuenf Flaechenrollen (--bg, --surface, --surface-raised,
+   --surface-muted, --surface-dark) plus die reservierte Hinweisflaeche --sand.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Container
+   --------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Fliesstextseiten: Impressum, Datenschutz, lange Erklaerbloecke. */
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+/* Nur fuer breite Baender (z.B. eine volle Kartenreihe). Sparsam einsetzen. */
+.container--wide {
+  max-width: var(--container-wide);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Sektionen — der vertikale Rhythmus der Seite.
+   Abstaende IMMER ueber --section-y / --section-y-lg, nie ueber rohe --space-*.
+   --------------------------------------------------------------------------- */
+
+.section {
+  padding-block: var(--section-y);
+}
+
+/* Hero und Seitenabschluss duerfen mehr Luft haben. */
+.section--lg {
+  padding-block: var(--section-y-lg);
+}
+
+/* Kleiner Anhang-Block (z.B. Verweis auf eine andere Seite). */
+.section--sm {
+  padding-block: clamp(1.75rem, 4vw, 3rem);
+}
+
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section--flush-bottom {
+  padding-bottom: 0;
+}
+
+/* --- Flaechenrollen (volle Breite, randlos — kein Kasten) ------------------ */
+
+/* Standard: der Abschnitt steht direkt auf dem Creme-Hintergrund. */
+.section--page {
+  background-color: transparent;
+}
+
+/* Salbei-getoentes Band. Das Arbeitspferd fuer "dieser Abschnitt ist anders". */
+.section--muted {
+  background-color: var(--surface-muted);
+}
+
+/* Warmes Papier. Etwas heller als die Seite, gut fuer Datenabschnitte. */
+.section--surface {
+  background-color: var(--surface);
+  border-block: var(--rule-subtle);
+}
+
+/* Dunkles Band. Sehr sparsam — der Footer ist bereits dunkel. */
+.section--dark {
+  background-color: var(--surface-dark);
+  color: var(--text-on-dark);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--text-on-dark);
+}
+
+.section--dark .eyebrow,
+.section--dark .text-muted,
+.section--dark .lead {
+  color: var(--text-on-dark-muted);
+}
+
+.section--dark a {
+  color: var(--text-on-dark);
+}
+
+/* Zwei gleiche Baender direkt hintereinander wuerden zu einem verschmelzen:
+   die doppelte Innenluft wird zusammengezogen. */
+.section--muted + .section--muted,
+.section--surface + .section--surface {
+  padding-top: 0;
+}
+
+/* Optionale Haarlinie, wenn Luft allein mehrdeutig waere. */
+.section--divided {
+  border-top: var(--rule);
+}
+
+/* --- Sektionskopf --------------------------------------------------------- */
+
+.section__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--measure-wide);
+  margin-bottom: var(--block-gap);
+}
+
+.section__eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+  max-width: var(--measure-narrow);
+}
+
+.section--dark .section__eyebrow {
+  color: var(--text-on-dark-muted);
+}
+
+.section__title {
+  /* Groesse/Schnitt kommen aus base.css (h2 bzw. h3). */
+  margin: 0;
+}
+
+.section__description {
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.section--dark .section__description {
+  color: var(--text-on-dark-muted);
+}
+
+.section__body {
+  display: block;
+}
+
+/* Zentrierte Variante — sparsam, sonst wirkt die Seite wie eine Landingpage. */
+.section--center .section__header {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.section--center .section__title,
+.section--center .section__description,
+.section--center .section__eyebrow {
+  margin-inline: auto;
+}
+
+/* Optionale Haarlinie unter dem Sektionskopf. */
+.section__header--ruled {
+  padding-bottom: var(--space-4);
+  border-bottom: var(--rule);
+}
+
+/* ---------------------------------------------------------------------------
+   3. Seiten-Hero — der Kopf jeder Seite. Genau ein <h1> pro Seite.
+   --------------------------------------------------------------------------- */
+
+.page-hero {
+  padding-block: clamp(2.25rem, 6vw, 4rem) var(--section-y);
+}
+
+/* Auf Unterseiten hebt das Salbei-Band den Kopf vom Inhalt ab. */
+.page-hero--muted {
+  background-color: var(--surface-muted);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Bewusst OHNE max-width: dieses Element traegt zugleich .container
+   (margin-inline: auto). Eine zusaetzliche Breitenbegrenzung wuerde den
+   Hero zentrieren und gegenueber allen Sektionen verschieben. Die
+   Zeilenlaenge regeln die Kindelemente (h1, __lead, __specialty). */
+.page-hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.page-hero__eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+  max-width: var(--measure-narrow);
+  margin-bottom: calc(var(--space-1) * -1);
+}
+
+.page-hero__title {
+  max-width: 18ch;
+}
+
+/* Die Fachbezeichnung — steht nur im Startseiten-Hero. */
+.page-hero__specialty {
+  font-family: var(--font-ui);
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.page-hero__lead {
+  font-size: var(--step-1);
+  line-height: var(--leading-snug);
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.page-hero__actions {
+  margin-top: var(--space-4);
+}
+
+/* Hero mit Illustration daneben. */
+@media (min-width: 56em) {
+  .page-hero--split .page-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--block-gap);
+  }
+
+  .page-hero--split .page-hero__figure {
+    justify-self: end;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   4. Kopfzeile
+   Mobil: zwei Reihen (Marke oben, Aktionsleiste darunter) — bei 320px passen
+   Marke, Menue-Schalter und Online-Termin-Button nicht nebeneinander.
+   Ab 62em: eine Reihe (Marke | Navigation | Aktionen).
+   Das mobile Menue ist reines CSS: <details> schaltet ueber den
+   Geschwisterselektor die Navigation sichtbar. Kein JavaScript.
+
+   Rangfolge der Kopfzeile, wenn der Platz knapp wird (von unverzichtbar nach
+   verzichtbar): Marke > Navigation > Online-Termin > Rufnummer > Hinweiszeile.
+   Der Button darf die Marke nie zerdruecken; stattdessen faellt zuerst die
+   Hinweiszeile weg, dann die sichtbare Rufnummer, dann der Anruf-Link.
+   Die Staffelung im Einzelnen: >=24em Anruf-Icon, >=30em ausgeschriebene
+   Rufnummer, >=40em Hinweiszeile unter dem Button, 62em-68em Rufnummer noch
+   einmal aus (engste Stelle: erste einreihige Kopfzeile), >=68em alles.
+   --------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background-color: var(--surface-raised);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.site-header__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "brand brand"
+    "menu  cta";
+  align-items: center;
+  column-gap: var(--space-3);
+  row-gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+/* --- Marke ---------------------------------------------------------------- */
+
+.site-brand {
+  grid-area: brand;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-1);
+  /* Wie Menueschalter, Anruf-Link und Termin-Button: volle Trefferflaeche.
+     Ohne die Mindesthoehe blieb die Marke als einziges Bedienelement der
+     Kopfzeile bei 37px. */
+  min-height: var(--tap-min);
+  border-bottom: var(--rule-subtle);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-brand:hover {
+  color: var(--brand);
+}
+
+/* Das Logo-viewBox ist 80x64, also 5:4 — die Breite MUSS aus der Hoehe
+   berechnet werden, sonst staucht es. `color` faerbt das Stethoskop
+   (currentColor), das Herz bringt seine eigene Farbe mit. */
+.site-brand__mark {
+  flex: none;
+  height: 1.75rem;
+  width: calc(1.75rem * 1.25);
+  color: var(--logo-ink);
+}
+
+.site-brand__name {
+  font-family: var(--font-heading);
+  font-size: var(--step-0);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-heading);
+}
+
+/* --- Menue-Schalter (nur mobil sichtbar) ---------------------------------- */
+
+.site-menu {
+  grid-area: menu;
+  justify-self: start;
+}
+
+.site-menu__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding-inline: var(--space-3);
+  border: 1px solid var(--border-interactive);
+  border-radius: var(--radius-button);
+  background-color: transparent;
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  cursor: pointer;
+  list-style: none;
+  transition: background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.site-menu__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.site-menu__toggle::marker {
+  content: "";
+}
+
+.site-menu__toggle:hover {
+  background-color: var(--brand-wash);
+  color: var(--brand-hover);
+}
+
+.site-menu__icon {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  flex: none;
+}
+
+.site-menu[open] .site-menu__icon--closed,
+.site-menu:not([open]) .site-menu__icon--open {
+  display: none;
+}
+
+/* --- Kopfzeilen-Aktionen (Online-Termin + Anruf) --------------------------- */
+
+/* Anruf-Link und Button nebeneinander. Bewusst flex und nicht grid: der
+   Anruf-Link ist auf schmalen Displays ausgeblendet, und ein Rasterplatz, den
+   es je nach Breite gibt oder nicht, verschiebt den Button. */
+.site-header__actions {
+  grid-area: cta;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* Primaeraktion: Online-Termin. Eine Stufe kleiner gesetzt als ein Button im
+   Seiteninhalt — er soll die Kopfzeile fuehren, nicht dominieren. Bewusst
+   ohne Icon: jedes Symbol kostet hier rund 30px, die Marke und die Navigation
+   brauchen sie dringender. Dass der Link in einem neuen Tab oeffnet, steht im
+   zugaenglichen Namen. */
+.site-header__cta {
+  font-size: var(--step--1);
+  padding-inline: var(--space-2);
+}
+
+/* Kein Icon in der Kopfzeile: jedes Symbol kostet hier rund 30px, die Marke
+   und die Navigation brauchen sie dringender. Auf den Seiten-Buttons (Start,
+   Kontakt) ist Platz, dort steht das Kalendersymbol. */
+.site-header__cta .button__icon {
+  display: none;
+}
+
+/* Der Zusatz bleibt EINZEILIG. Umbrechen lassen war die Alternative, machte
+   die Sticky-Kopfzeile aber 144px hoch — "Bestandspatienten" ist ein langes
+   Wort und brach auf drei Zeilen um. Gemessene Breite einzeilig: rund 218px. */
+.site-header__cta .button__note {
+  white-space: nowrap;
+}
+
+/* Die Sticky-Kopfzeile traegt den Button auf jeder Seite mit. Zwei Textzeilen
+   kosten Hoehe, deshalb hier knapper als auf den Seiten-Buttons: engere
+   Innenluft und dichtere Zeilen. */
+.site-header .site-header__cta {
+  padding-block: var(--space-2);
+}
+
+.site-header .site-header__cta .button__text {
+  line-height: var(--leading-tight);
+}
+
+.site-header__call {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-button);
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-ui);
+  text-decoration: none;
+  transition: background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.site-header__call:hover {
+  background-color: var(--brand-wash);
+  color: var(--brand-hover);
+}
+
+.site-header__call-icon {
+  flex: none;
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.site-header__call-number {
+  display: none;
+}
+
+/* Unter 26em traegt der Menue-Schalter nur das Symbol; der zugaengliche Name
+   steht im aria-label des <summary>. Gerechnet fuer die zweite Kopfzeilenreihe
+   (Schalter + Anruf-Symbol + Button + zwei Abstaende):
+     mit Beschriftung  90 + 44 + 199 + 16 = 349px
+     nur Symbol        44 + 44 + 199 + 16 = 303px
+   Bei 390px stehen 358px zur Verfuegung, bei 320px nur 288px. Deshalb faellt
+   zuerst die Beschriftung, dann (unter 24em) der Anruf-Link. */
+@media (max-width: 25.99em) {
+  .site-menu__label {
+    display: none;
+  }
+}
+
+/* Ab 24em ist neben Menue-Schalter und Button Platz fuer den Anruf-Link.
+   Bei 320px ist er es nicht — dort fuehrt der Hero der Startseite die
+   Rufnummer als Hauptaktion. */
+@media (min-width: 24em) {
+  .site-header__call {
+    display: inline-flex;
+  }
+}
+
+/* Ab 32em wird die Rufnummer ausgeschrieben. Ein blosses Hoerersymbol ist
+   eine schwache Beschriftung, und das Telefon ist laut Praxistext der
+   Hauptweg. In der zweizeiligen Kopfzeile ist dafuer Platz: die zweite Zeile
+   traegt nur Menue-Schalter, Anruf-Link und Button.
+   Gemessen: bei 512px bleiben zwischen Menue-Schalter und Aktionsleiste rund
+   60px Luft — Reserve genug fuer breiter laufende System-Schriften. Bei 390px
+   waeren es minus 40px, deshalb dort weiterhin nur das Symbol. */
+@media (min-width: 32em) {
+  .site-header__call-number {
+    display: inline;
+  }
+}
+
+/* 62em-68em ist der engste Zustand der ganzen Kopfzeile: Marke, Navigation
+   und Aktionen stehen erstmals in EINER Reihe, die Breite reicht dafuer aber
+   gerade eben. Hier faellt die ausgeschriebene Nummer wieder weg, damit die
+   Marke nicht zusammengeschoben wird (Rangfolge siehe oben). Ab 68em ist die
+   Zeile breit genug und die Nummer kommt zurueck. */
+
+
+/* --- Navigation ----------------------------------------------------------- */
+
+/* Bewusst OHNE eigenes grid-template-area: solange die Navigation
+   `display: none` ist, entsteht keine dritte Rasterzeile — und damit auch
+   kein zusaetzlicher row-gap in der geschlossenen Kopfzeile. */
+.site-nav {
+  grid-column: 1 / -1;
+  display: none;
+  min-width: 0;
+}
+
+/* Reines CSS-Menue: der geoeffnete <details>-Schalter zeigt die Navigation. */
+.site-menu[open] ~ .site-nav {
+  display: block;
+}
+
+.site-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  border-top: var(--rule-subtle);
+}
+
+.site-nav__item {
+  margin: 0;
+  border-bottom: var(--rule-subtle);
+}
+
+.site-nav__item + .site-nav__item {
+  margin-top: 0;
+}
+
+.site-nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-button);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--step-0);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-ui);
+  text-decoration: none;
+  transition: background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.site-nav__link:hover {
+  background-color: var(--brand-wash);
+  color: var(--brand);
+}
+
+/* Aktive Seite: Farbe UND Schnitt UND Balken — nie nur Farbe.
+   Zusaetzlich steht im Markup ein visuell verstecktes "Aktuelle Seite". */
+.site-nav__link[aria-current="page"] {
+  color: var(--brand);
+  font-weight: var(--weight-semibold);
+  background-color: var(--brand-wash);
+  box-shadow: inset var(--bw-bar) 0 0 0 var(--brand);
+}
+
+/* Eine Reihe erst ab 62em. Marke (rund 290px) und Navigation (rund 310px)
+   fuellen bei 896px zusammen mit dem Button die Zeile so weit, dass die
+   Marke zusammengeschoben wuerde — dann lieber zwei Reihen und das
+   Menue behalten. */
+@media (min-width: 68em) {
+  .site-header__inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "brand nav cta";
+    min-height: var(--header-h);
+    /* space-4 statt space-5: mit dem zweizeiligen Button und der
+       ausgeschriebenen Rufnummer braucht die Reihe 1091px, der Container
+       fasst 1088px. Der engere Abstand gibt die fehlenden 24px frei. */
+    column-gap: var(--space-4);
+    row-gap: 0;
+    padding-block: var(--space-2);
+  }
+
+  .site-brand {
+    border-bottom: 0;
+    padding-block: 0;
+  }
+
+  .site-brand__mark {
+    height: 2.1rem;
+    width: calc(2.1rem * 1.25);
+  }
+
+  .site-brand__name {
+    font-size: var(--step-1);
+  }
+
+  .site-menu {
+    display: none;
+  }
+
+  .site-nav {
+    grid-area: nav;
+    display: block;
+    justify-self: end;
+  }
+
+  .site-nav__list {
+    flex-direction: row;
+    align-items: center;
+    /* Ohne eigenen Abstand: die Innenabstaende der Links trennen bereits,
+       und jeder zusaetzliche Pixel fehlt der Marke. */
+    gap: 0;
+    border-top: 0;
+  }
+
+  .site-nav__item {
+    border-bottom: 0;
+  }
+
+  .site-nav__link {
+    font-size: var(--step--1);
+    padding-inline: var(--space-2);
+  }
+
+  .site-nav__link[aria-current="page"] {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .site-nav__link[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: var(--space-2);
+    right: var(--space-2);
+    bottom: 0.3rem;
+    height: var(--bw-thick);
+    border-radius: var(--bw-thick);
+    background-color: var(--brand);
+  }
+}
+
+/* Ab 68em steht die Kopfzeile in EINER Reihe — dort passt die ausgeschriebene
+   Rufnummer nicht mehr, seit der Button zwei Zeilen traegt. Gerechnet gegen
+   die Inhaltsbreite des Containers (1088px minus 2x40px Innenabstand = 1008px):
+   Marke 300 + Navigation 310 + Rufnummer 152 + Button 258 + drei Abstaende 48
+   = 1068px, also 60px zu viel. Ohne die ausgeschriebene Nummer sind es 960px —
+   48px Reserve. Deshalb hier zurueck auf das Symbol; die Nummer traegt das
+   aria-label, steht gross im Hero der Startseite und vollstaendig auf /kontakt.
+   In der ZWEIREIHIGEN Kopfzeile (unter 68em) bleibt sie ab 32em ausgeschrieben,
+   dort teilt sich die zweite Reihe nur Menue, Anruf-Link und Button. */
+@media (min-width: 68em) {
+  .site-header__call-number {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   5. Fusszeile — drei schmale Bloecke, keine Kontaktdaten mehr.
+   Bewusst ungleiche Spalten (1.5 / 1 / 1), damit kein Kachelraster entsteht.
+   --------------------------------------------------------------------------- */
+
+.site-footer {
+  background-color: var(--surface-dark);
+  color: var(--text-on-dark);
+  padding-block: var(--section-y) var(--space-8);
+}
+
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--block-gap);
+}
+
+.site-footer__block {
+  min-width: 0;
+}
+
+.site-footer__title {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-on-dark-muted);
+  margin-bottom: var(--space-2);
+  max-width: none;
+}
+
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+/* Fusszeile: dunkelgruener Grund. Das Logo wird NICHT invertiert oder
+   umgefaerbt — es sitzt in Originalfarben auf einer hellen Plakette, damit die
+   Marke ueberall identisch aussieht. Die Plakette traegt das 5:4-Logo, ist
+   selbst aber quadratisch mit etwas Luft. */
+.site-footer__mark {
+  flex: none;
+  box-sizing: content-box;
+  height: 1.9rem;
+  width: calc(1.9rem * 1.25);
+  padding: 0.55rem 0.4rem;
+  border-radius: var(--radius-md);
+  background-color: var(--logo-plate);
+  color: var(--logo-ink);
+}
+
+.site-footer__name {
+  font-family: var(--font-heading);
+  font-size: var(--step-1);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-on-dark);
+  max-width: none;
+}
+
+.site-footer__address {
+  color: var(--text-on-dark-muted);
+  max-width: 28ch;
+}
+
+.site-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer__links > li {
+  margin: 0;
+}
+
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--text-on-dark);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+}
+
+.site-footer__link:hover {
+  color: var(--white);
+  border-bottom-color: currentColor;
+}
+
+@media (min-width: 40em) {
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   6. Grundraster & Stapel
+   --------------------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  gap: var(--block-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 40em) {
+  .grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 46em) {
+  .grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Ungleiche Spalten — Text neben Illustration oder Nebeninformation. */
+@media (min-width: 52em) {
+  .grid--split {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .grid--split-center {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+/* Der zweite Block wandert optisch nach oben (z.B. Illustration links). */
+.grid--reverse > :first-child {
+  order: 2;
+}
+
+/* Automatisch umbrechende Spalten, wenn die Anzahl variabel ist. */
+.grid--auto {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+/* Vertikaler Stapel mit gleichmaessigem Abstand. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap);
+}
+
+.stack--tight {
+  gap: var(--space-2);
+}
+
+.stack--loose {
+  gap: var(--block-gap);
+}
+
+/* Horizontale Gruppe, die bei Bedarf umbricht. */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Trennlinie zwischen zwei Bloecken innerhalb einer Sektion. */
+.divider {
+  border: 0;
+  border-top: var(--rule);
+  margin-block: var(--block-gap);
+}

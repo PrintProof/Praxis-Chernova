@@ -1,0 +1,210 @@
+/* =============================================================================
+   page-contact.css — Feinheiten der Seite /kontakt
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+
+   Hier steht ausschliesslich, was die Kontaktseite von den gemeinsamen
+   Bausteinen unterscheidet. Alles Wiederholbare (.phone-line, .hours-list,
+   .rule-list, .button, .address, .hint) kommt unveraendert aus components.css.
+
+   Leitidee der Seite: EIN Schwerpunkt je Abschnitt, und jeder Abschnitt hat
+   eine andere Bauform. Die Hauptrufnummer ist die einzige Flaeche der Seite,
+   alles andere traegt sich ueber Haarlinien und Luft.
+
+   Es werden ausschliesslich Tokens der SEMANTIK-Ebene benutzt.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Kontaktwege — Hauptanschluss gross, Nebenanschluesse daneben.
+   Bewusst KEIN Dreier-Raster: die drei Nummern sind nicht gleichwertig.
+   --------------------------------------------------------------------------- */
+
+.contact-channels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--space-5);
+  column-gap: var(--block-gap);
+}
+
+/* Basisklasse aller drei Eintraege. Die Bauform (display/gap) kommt aus
+   .phone-line in components.css — hier steht nur, was der Listenkontext
+   zuruecksetzen muss. */
+.contact-channels__item {
+  margin: 0;
+  min-width: 0;
+}
+
+/* Beschriftung ueber der Nummer. Bewusst klein: den Ton gibt die Rufnummer an,
+   nicht das Wort "Telefon". */
+.contact-channels__label {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+  max-width: none;
+}
+
+/* Die Hauptnummer: einzige Papierflaeche der Seite und groesste Schrift.
+   Rahmen ODER Schatten — hier der Rahmen, kein Schatten. */
+.contact-channels__item--primary {
+  padding: var(--card-padding);
+  background-color: var(--surface);
+  border: var(--rule);
+  border-radius: var(--radius-card);
+  gap: var(--space-2);
+}
+
+.contact-channels__item--primary .contact-channels__label {
+  color: var(--brand-muted);
+}
+
+.contact-channels__item--primary .phone-line__number {
+  font-size: var(--step-3);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+}
+
+.contact-channels__item--primary .phone-line__description {
+  max-width: var(--measure);
+}
+
+/* Nebenanschluesse: keine Flaeche, nur eine Haarlinie dazwischen — und eine
+   Stufe kleiner. Rezepttelefon und Fax sind Nebenwege, das muss man sehen,
+   ohne es lesen zu muessen. */
+.contact-channels__item--minor .phone-line__number {
+  font-size: var(--step-1);
+}
+
+.contact-channels__item--minor + .contact-channels__item--minor {
+  padding-top: var(--space-5);
+  border-top: var(--rule);
+}
+
+/* Fax ist kein Anrufziel: keine Mindesthoehe eines Touchziels noetig. */
+.contact-channels .phone-line__number--static {
+  min-height: 0;
+}
+
+@media (min-width: 52em) {
+  .contact-channels {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    column-gap: var(--space-9);
+    align-items: start;
+  }
+
+  /* Der Kasten steht neben BEIDEN Nebenanschluessen. */
+  .contact-channels__item--primary {
+    grid-row: span 2;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   2. Sprechzeiten — Zebra-Liste aus components.css, hier nur die Spaltenmasse
+   und die Aufteilung der Tage mit zwei Sprechzeiten.
+   Kein "heute"-Marker: die Seite ist statisch exportiert (siehe
+   components/opening-hours.tsx).
+   --------------------------------------------------------------------------- */
+
+.contact-hours .hours-list {
+  max-width: 36rem;
+}
+
+/* Der Abschnittskopf wird auf dieselbe Breite gedeckelt wie die Tabelle
+   darunter. Vorher liefen Ueberschrift und Erklaersatz ueber die volle
+   Inhaltsbreite, waehrend die Tabelle nach 36rem endete — rechts blieben
+   ueber 400px leer, und der Abschnitt las sich als zwei Spalten, von denen
+   eine fehlt. Jetzt ist er sichtbar EIN Block. */
+.contact-hours .section__header {
+  max-width: 36rem;
+}
+
+/* Die beiden Zeitbloecke von Montag und Donnerstag stehen nebeneinander und
+   brechen auf schmalen Displays untereinander um. */
+.contact-hours__times {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-5);
+  row-gap: var(--space-1);
+}
+
+.contact-hours__slot {
+  white-space: nowrap;
+}
+
+@media (min-width: 24em) {
+  .contact-hours .hours-list__row {
+    grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   3. Adresse & Anfahrt — grosser Adressblock, daneben die eine Aktion.
+   Keine eingebettete Karte, kein iframe (DSGVO).
+   --------------------------------------------------------------------------- */
+
+/* EINE Spalte, auf jeder Breite: Anschrift, darunter der Button. Die
+   zweispaltige Variante schob den Button in eine fast 600px breite zweite
+   Spalte und liess zwischen Adresse und Aktion ein Loch — der Abschnitt wirkte
+   unfertig, waehrend die uebrigen Abschnitte der Seite durchlaufen. */
+.contact-directions__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  justify-items: start;
+}
+
+.contact-directions__address {
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-title);
+  font-variant-numeric: tabular-nums;
+  max-width: 22ch;
+}
+
+.contact-directions__action {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Organisatorisches — zweispaltige Linienliste auf dem Papierband.
+   Die Flaechenrolle ist bewusst `surface` und nicht `muted`: der direkt
+   anschliessende Notdienst-Block ist selbst ein Salbeiband.
+   --------------------------------------------------------------------------- */
+
+.contact-processes__body {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* Die beiden Hinweissaetze zur Online-Buchung gehoeren zusammen und stehen
+   direkt unter dem Button — nicht als Fussnote am Abschnittsende. */
+.contact-processes__hints {
+  display: grid;
+  gap: var(--space-1);
+}
+
+/* ---------------------------------------------------------------------------
+   5. Druck — Sprechzeiten und Anschrift werden tatsaechlich ausgedruckt.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  .contact-channels__item--primary,
+  .contact-directions__layout,
+  .contact-hours .hours-list {
+    break-inside: avoid;
+  }
+
+  .contact-channels {
+    row-gap: var(--space-4);
+  }
+}

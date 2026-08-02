@@ -64,7 +64,30 @@ function loadVacationPeriods(): VacationPeriod[] {
   }
 }
 
-export const vacationPeriods: VacationPeriod[] = loadVacationPeriods();
+let cachedPeriods: VacationPeriod[] | null = null;
+
+/**
+ * Die gepflegten Urlaubszeiträume.
+ *
+ * In der ENTWICKLUNG wird die Datei bei jedem Aufruf neu gelesen. Sonst hält
+ * der laufende Dev-Server den Stand vom Serverstart fest: `vacation.json` wird
+ * per `readFileSync` gelesen und ist damit kein Modul, das Turbopack beim
+ * Speichern neu auswerten würde. Das Praxisteam pflegt die Datei über Pages
+ * CMS — ohne das hier zeigt `npm run dev` nach einer CMS-Änderung weiterhin
+ * die alten Daten, was aussieht, als fehlten Urlaube oder Vertretungen.
+ *
+ * Im PRODUKTIONSBUILD wird einmal gelesen und gecacht: dort ändert sich die
+ * Datei während des Builds nicht, und alle Seiten sollen denselben Stand sehen.
+ */
+export function getVacationPeriods(): VacationPeriod[] {
+  if (process.env.NODE_ENV === 'development') {
+    return loadVacationPeriods();
+  }
+
+  cachedPeriods ??= loadVacationPeriods();
+
+  return cachedPeriods;
+}
 
 export const bookingUrl = 'https://app.arzt-direkt.de/praxis-chernova/booking';
 

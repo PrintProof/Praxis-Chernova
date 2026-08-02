@@ -1,0 +1,255 @@
+/* =============================================================================
+   page-home.css — Startseite
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+
+   Hier stehen ausschliesslich echte Spezialfaelle der Startseite. Alles
+   Wiederverwendbare (Buttons, Karten, Hero-Grundgeruest, Kartenraster) liegt
+   in layout.css bzw. components.css und wird von hier nur nachjustiert.
+
+   Aufbau der Seite und ihr Flaechenrhythmus:
+     Hinweisband (Sand, nur bei Urlaub)
+       -> Hero            (Creme, Typografie + Illustration nebeneinander)
+       -> "Die Praxis"    (Salbeiband, eine Spalte)
+       -> "Sprechzeiten"  (Papier, Datenliste + schmale Randspalte)
+       -> Fusszeile       (dunkel)
+   Drei Abschnitte, drei verschiedene Strukturmuster — kein dreifach
+   wiederholtes Kachelraster.
+
+   ALLES BEGINNT AUF DERSELBEN LINKEN KANTE. Kein Abschnitt der Startseite
+   benutzt einen schmalen mittigen Container: der verschiebt seinen Inhalt
+   gegenueber Kopfzeile, Hero und Fusszeile und erzeugt beim Scrollen einen
+   Versatz. Zeilenlaengen werden ueber `max-width` am Textelement begrenzt.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Eingangsbereich
+   Kein Kasten und keine Karte: die Typografie steht direkt auf dem Creme der
+   Seite, rechts daneben die Illustration mit ihrer eigenen organischen
+   Grundflaeche. Die Spalten sind bewusst ungleich (1.3 / 1) — ein 50/50-Raster
+   waere genau die Gleichfoermigkeit, die vermieden werden soll. Nebenbei
+   sichert das breitere Textfeld zu, dass "Praxis Veronika Chernova" auf dem
+   Desktop einzeilig laeuft.
+   --------------------------------------------------------------------------- */
+
+/* Oberer Abstand bleibt der Standard aus layout.css (der Hero beginnt direkt
+   unter Kopfzeile bzw. Hinweisband). Nach unten die normale Sektionsluft:
+   die grosse Stufe (--section-y-lg) hat auf dem Desktop unter den Aktionen
+   eine leere Flaeche von ueber 100px erzeugt — der Hero wirkte dadurch
+   unfertig statt ruhig. */
+.home-hero {
+  padding-bottom: var(--section-y);
+}
+
+/* Textspalte. `.page-hero--split` erwartet im Inner-Grid genau zwei Kinder,
+   deshalb dieser Wrapper — er uebernimmt den vertikalen Stapelabstand, den
+   `.page-hero__inner` sonst selbst verteilt. */
+.home-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+/* Der Praxisname ist der visuelle Schwerpunkt der Seite und darf die volle
+   Spaltenbreite nutzen. Die Standardgrenze von 18ch wuerde ihn auch auf
+   grossen Bildschirmen zwangsweise umbrechen. */
+.home-hero .page-hero__title {
+  max-width: none;
+}
+
+/* Der Eyebrow ist mit 56 Zeichen laenger als die Standardgrenze von 46ch und
+   wuerde sonst auch auf dem Desktop zweizeilig brechen. Nicht in Versalien
+   setzen — dafuer ist er zu lang. */
+.home-hero .page-hero__eyebrow {
+  max-width: 58ch;
+}
+
+/* Fachbezeichnung — die einzige Stelle der Website ausser dem Impressum, an
+   der sie steht. Ein kurzer Zierstrich setzt sie vom Namen ab und gruppiert
+   den Kopf sichtbar in "Name" und "Beschreibung". Der Strich ist reine
+   Dekoration in --accent; die Information selbst steht im Text.
+   Bewusst keine engere max-width: die 49 Zeichen sollen auf dem Desktop in
+   eine Zeile passen. */
+.home-hero .page-hero__specialty {
+  position: relative;
+  padding-top: var(--space-5);
+}
+
+.home-hero .page-hero__specialty::before {
+  content: "";
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-start: 0;
+  width: 3.25rem;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--accent);
+}
+
+/* Kompakter Absatz statt breitem Textband: der Lead soll als Block neben der
+   Illustration stehen, nicht als Zeile quer ueber den Bildschirm laufen. */
+.home-hero .page-hero__lead {
+  max-width: 44ch;
+}
+
+/* Deutlicher Abstandssprung vor dem Aktionsblock: grosser Abstand aussen,
+   kleiner innen — daran erkennt man einen gesetzten Block. */
+.home-hero .page-hero__actions {
+  margin-top: var(--space-5);
+}
+
+/* Aktionsblock = zwei Buttons + der Hinweis darunter. Der Hinweis gehoert
+   optisch zu den Buttons und steht deshalb enger an ihnen als der Block am
+   Text darueber. Bewusst ohne `align-items`: so bleibt `.button-row` unter
+   30em voll breit (gestapelte Buttons ueber die ganze Spalte). */
+.home-hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Etwas breiter als die Standardhinweiszeile (46ch): der zweisaetzige Hinweis
+   soll unter den Buttons als kompakter Block stehen, nicht als schmale
+   Textsaeule mit fuenf Zeilen. */
+.home-hero__hint {
+  max-width: 52ch;
+}
+
+/* Mobil steht die Illustration unter den Aktionen: erst handeln koennen,
+   dann das Bild. Etwas kleiner, damit der Hero nicht ausufert. */
+.home-hero__figure {
+  margin-top: var(--space-4);
+}
+
+.home-hero__illustration {
+  max-width: min(100%, 17rem);
+}
+
+@media (min-width: 56em) {
+  /* Etwas gleichmaessigere Spalten als zuvor (1.6 / 1) und eine groessere
+     Zeichnung: die Illustration war deutlich niedriger als die Textspalte,
+     wodurch rechts unter ihr eine grosse Leerflaeche stand. Jetzt sind die
+     beiden Spalten annaehernd gleich hoch und mittig zueinander gesetzt. */
+  .home-hero.page-hero--split .page-hero__inner {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    column-gap: clamp(2rem, 4vw, 3rem);
+    align-items: center;
+  }
+
+  /* Die Spalte bleibt gestreckt, damit die Grafik ihre Breite aus dem Raster
+     bezieht; rechtsbuendig gestellt wird sie ueber den Aussenabstand. */
+  .home-hero.page-hero--split .home-hero__figure {
+    justify-self: stretch;
+    margin-top: 0;
+  }
+
+  .home-hero__illustration {
+    max-width: min(100%, 27rem);
+    margin-inline-start: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   2. "Die Praxis" — Salbeiband, EINE Spalte an der Seitenkante.
+
+   Vorher stand die Ueberschrift in einer eigenen 15rem-Spalte links. Weil
+   dort nur zwei Woerter stehen, blieb auf dem Desktop eine grosse leere
+   Flaeche, und der Absatz hing weit rechts im Band. Danach war der Block
+   mittig gesetzt (`width="narrow"`) — damit begann er rund 200px weiter
+   rechts als Hero und Kopfzeile und riss eine zweite Ausrichtungsachse auf.
+
+   Jetzt: eine Spalte, linke Kante wie ueberall, Breite ueber die
+   Zeilenlaenge des Absatzes begrenzt. Der Rhythmus zum Rest der Seite
+   entsteht ueber die Flaeche und die Bauform, nicht ueber die Einrueckung.
+   --------------------------------------------------------------------------- */
+
+.home-about {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+/* Kurzer Zierstrich ueber der Ueberschrift — dasselbe Motiv wie an der
+   Fachbezeichnung im Hero. Reine Dekoration in --accent. */
+.home-about__title {
+  position: relative;
+  max-width: none;
+  padding-top: var(--space-5);
+}
+
+.home-about__title::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 3.25rem;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--accent);
+}
+
+/* Der Vorstellungstext der Praxis. Eine Stufe groesser als Standard, weil er
+   kurz ist und die Frage "Wer ist das?" beantwortet — die Groesse ersetzt
+   hier einen Kasten. 54ch statt der Standardvorgabe: bei --step-1 (22px) sind
+   68 Zeichen rund 750px und damit deutlich zu lang zum Lesen. */
+.home-about__body {
+  font-size: var(--step-1);
+  line-height: var(--leading-ui);
+  color: var(--text);
+  max-width: 54ch;
+}
+
+/* ---------------------------------------------------------------------------
+   3. "Sprechzeiten" — Datenliste links, schmale Randspalte rechts.
+
+   Hier stand frueher die dreispaltige Kartenreihe "Was Sie hier finden", deren
+   Ueberschriften woertlich die Hauptnavigation wiederholten. An ihrer Stelle
+   steht jetzt die Angabe, die auf einer Praxis-Startseite wirklich gesucht
+   wird. Die Zebra-Liste selbst kommt unveraendert aus components.css
+   (`.hours-list`), die Zeitbloecke aus page-contact.css — es gibt fuer beides
+   genau eine Quelle.
+
+   Die Randspalte traegt nur Text und Links: der Wegweiser in die Unterseiten
+   ist ein Satz, kein Raster.
+   --------------------------------------------------------------------------- */
+
+/* Letzter Abschnitt vor der dunklen Fusszeile: mehr Luft nach unten, damit
+   die Seite endet statt abzubrechen. */
+.home-hours {
+  padding-bottom: var(--section-y-lg);
+}
+
+.home-hours__layout {
+  display: grid;
+  gap: var(--block-gap);
+  align-items: start;
+}
+
+/* Erst wenn beide Spalten ihre volle Breite behalten: die Sprechzeiten
+   brauchen 34rem, darunter stuenden Tag und Uhrzeit zu eng beieinander. */
+@media (min-width: 52em) {
+  .home-hours__layout {
+    grid-template-columns: minmax(0, 34rem) minmax(0, 1fr);
+    column-gap: var(--space-9);
+  }
+}
+
+.home-hours__aside {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.home-hours__note {
+  color: var(--text-muted);
+}
+
+/* Der Wegweiser steht bewusst eine Spur ruhiger als der Hinweis darueber und
+   ist durch den groesseren Abstand als eigener Gedanke erkennbar. */
+.home-hours__guide {
+  margin-top: var(--space-3);
+  color: var(--text);
+}

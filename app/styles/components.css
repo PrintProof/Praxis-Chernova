@@ -1,0 +1,1044 @@
+/* =============================================================================
+   components.css — die wiederverwendbaren Bausteine
+   -----------------------------------------------------------------------------
+   Layer 4 von 5: tokens -> base -> layout -> COMPONENTS -> pages.
+
+   Grundregeln (bindend fuer alle Seiten):
+   - FLAECHE VOR KARTE. Standard ist Inhalt direkt auf --bg, getrennt durch
+     Luft. Mehr als drei Karten uebereinander auf einer Seite = Konzeptfehler.
+   - RAHMEN ODER SCHATTEN, NIE BEIDES als Dekoration.
+   - Genau drei Buttonstufen, maximal EIN Primaerbutton pro Bildschirm.
+   - --sand ist reserviert fuer 116 117 und Urlaub/Vertretung. Nicht als
+     allgemeine Kartenfarbe zweckentfremden.
+   - Nur Tokens der SEMANTIK-Ebene, keine rohen Farbwerte.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Buttons — genau drei Stufen plus eine Telefonvariante.
+   Kein transform beim Hover: das wirkt spielerisch, nicht serioes.
+   --------------------------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-button);
+  font-family: var(--font-ui);
+  font-size: var(--step-0);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease), border-color var(--duration) var(--ease);
+}
+
+/* Stufe 1 — Primaer. Fuer die eine wichtigste Handlung des Bildschirms. */
+.button--primary {
+  background-color: var(--brand);
+  color: var(--on-brand);
+  border-color: var(--brand);
+}
+
+.button--primary:hover {
+  background-color: var(--brand-hover);
+  border-color: var(--brand-hover);
+  color: var(--on-brand);
+}
+
+.button--primary:active {
+  background-color: var(--brand-active);
+  border-color: var(--brand-active);
+}
+
+/* Stufe 2 — Sekundaer. Kontur in --border-interactive erfuellt 3:1 auf
+   allen hellen Flaechen, auch auf --sand. */
+.button--secondary {
+  background-color: transparent;
+  color: var(--brand);
+  border-color: var(--border-interactive);
+}
+
+.button--secondary:hover {
+  background-color: var(--brand-wash);
+  color: var(--brand-hover);
+  border-color: var(--brand-hover);
+}
+
+.button--secondary:active {
+  background-color: var(--brand-soft);
+}
+
+/* Stufe 3 — Dezent. Ein Textlink in Buttongroesse, ohne Kasten. */
+.button--quiet {
+  background-color: transparent;
+  color: var(--link);
+  border-color: transparent;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.button--quiet:hover {
+  color: var(--link-hover);
+  background-color: var(--brand-wash);
+}
+
+/* Telefonvariante: Label oben, Nummer darunter (tabellarische Ziffern).
+   Das aria-label MUSS die Nummer enthalten (WCAG 2.5.3). */
+.button--phone {
+  padding-block: var(--space-3);
+  text-align: left;
+}
+
+.button__icon {
+  flex: none;
+  width: var(--icon);
+  height: var(--icon);
+}
+
+.button__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: var(--leading-snug);
+}
+
+.button__label {
+  display: block;
+}
+
+.button__value {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: var(--weight-regular);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Buchungsvariante: Aktion oben, Einschraenkung darunter — IM Button.
+   Der Zusatz "nur fuer unsere Patientinnen und Patienten" stand vorher als
+   eigene Zeile daneben. Dort wurde er entweder ueberlesen oder auf das
+   falsche Element bezogen (in der Kopfzeile begann die Zeile unter der
+   RUFNUMMER). Im Button ist der Bezug eindeutig, und er verschwindet nicht
+   mehr auf schmalen Bildschirmen. */
+.button--booking {
+  padding-block: var(--space-3);
+  text-align: left;
+}
+
+/* Bewusst KEINE Transparenz und keine gedaempfte Farbe: der Zusatz erbt die
+   volle Buttonfarbe und unterscheidet sich nur ueber Groesse und Gewicht.
+   Damit bleibt der Kontrast identisch zum Hauptlabel (7.38:1 auf --brand) —
+   wichtig fuer eine Hausarztpraxis mit vielen aelteren Patientinnen und
+   Patienten. */
+.button__note {
+  display: block;
+  font-size: var(--step--2);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  text-wrap: balance;
+}
+
+.button--block {
+  width: 100%;
+}
+
+/* Buttongruppe: bei sehr schmalen Displays gestapelt und voll breit. */
+.button-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+@media (min-width: 30em) {
+  .button-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .button-row > * {
+    flex: 0 0 auto;
+  }
+}
+
+/* Kleiner Erlaeuterungssatz unter einem Button. */
+.hint {
+  font-size: var(--step--1);
+  line-height: var(--leading-ui);
+  color: var(--text-muted);
+  max-width: var(--measure-narrow);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Textlinks
+   --------------------------------------------------------------------------- */
+
+.link {
+  color: var(--link);
+  font-weight: var(--weight-medium);
+}
+
+/* Weiterfuehrender Link mit Chevron. Der Chevron ist reines CSS
+   (kein Glyph, keine Grafik) und damit fuer Screenreader unsichtbar. */
+.link--arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  text-decoration-line: underline;
+  text-underline-offset: 0.22em;
+}
+
+.link--arrow::after {
+  content: "";
+  flex: none;
+  width: 0.42em;
+  height: 0.42em;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: translate var(--duration) var(--ease);
+}
+
+.link--arrow:hover::after {
+  translate: 2px 0;
+}
+
+/* Vertikale Linkliste ohne Marker. Markup braucht role="list". */
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.link-list > li {
+  margin: 0;
+}
+
+/* Liste ohne Marker, wenn die Aufzaehlung rein strukturell ist.
+   Markup braucht role="list". */
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+
+.plain-list > li {
+  margin: 0;
+}
+
+/* Aufzaehlung mit Salbei-Punkt. Markup braucht role="list". */
+.bullet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  max-width: var(--measure);
+}
+
+.bullet-list > li {
+  position: relative;
+  margin: 0;
+  padding-inline-start: var(--space-6);
+}
+
+.bullet-list > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--accent-strong);
+}
+
+/* ---------------------------------------------------------------------------
+   3. Karten — bewusst wenige Varianten.
+   Eine Karte ist eine Behauptung ("eigenstaendiges Objekt") und muss verdient
+   sein. Fuer "das gehoert zusammen" reicht fast immer .rule-list.
+   --------------------------------------------------------------------------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--card-padding);
+  background-color: var(--surface);
+  border: var(--rule);
+  border-radius: var(--radius-card);
+  list-style: none;
+  margin: 0;
+  min-width: 0;
+}
+
+/* Ohne Flaeche: nur die Haarlinie definiert die Karte. */
+.card--plain {
+  background-color: transparent;
+}
+
+/* Salbei-Karte, z.B. innerhalb eines Creme-Abschnitts. */
+.card--muted {
+  background-color: var(--surface-muted);
+  border-color: var(--border-subtle);
+}
+
+/* Die einzige Karte mit Schatten. Hoechstens EINE pro Seite. */
+.card--raised {
+  background-color: var(--surface-raised);
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-md);
+}
+
+.card__title {
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  color: var(--text);
+  margin: 0;
+}
+
+.card__body {
+  color: var(--text-muted);
+  max-width: var(--measure-narrow);
+}
+
+/* Haelt den Link am unteren Rand, damit ungleich hohe Karten ruhig wirken. */
+.card__action {
+  margin-top: auto;
+  padding-top: var(--space-1);
+  align-self: flex-start;
+}
+
+/* Ganze Karte klickbar: der echte Linktext bleibt der Linktext, die
+   Trefferflaeche wird nur vergroessert. */
+.card--link {
+  position: relative;
+  transition: border-color var(--duration) var(--ease),
+    background-color var(--duration) var(--ease);
+}
+
+.card--link:hover {
+  border-color: var(--border-interactive);
+}
+
+.card--link .card__action::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card--link:has(.card__action:focus-visible) {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.card--link .card__action:focus-visible {
+  outline: none;
+}
+
+/* Kartenreihe. Markup: <ul class="card-grid" role="list"> mit <li class="card"> */
+.card-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--block-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.card-grid > li {
+  margin: 0;
+}
+
+@media (min-width: 46em) {
+  .card-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 40em) {
+  .card-grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   4. Linienliste — der Standard fuer "mehrere gleichartige Eintraege".
+   Kein Kartenraster, nur Haarlinien und Luft.
+   Markup: <ul class="rule-list" role="list"> mit <li class="rule-list__item">
+   --------------------------------------------------------------------------- */
+
+.rule-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+}
+
+.rule-list__item {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-block: var(--space-5);
+  border-bottom: var(--rule);
+  min-width: 0;
+}
+
+.rule-list__item:first-child {
+  border-top: var(--rule);
+}
+
+.rule-list__title {
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  color: var(--text);
+  margin: 0;
+}
+
+.rule-list__body {
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.rule-list__meta {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+/* Zweispaltig: Titel links, Erklaerung rechts. Gibt der Seite Rhythmus. */
+@media (min-width: 48em) {
+  .rule-list--split .rule-list__item {
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   5. Hinweisflaeche Sand (Callout) — 116 117 und Urlaub/Vertretung.
+   Zwei Tonlagen: Standard (Hinweis) und --urgent (kraeftigere Kante).
+   Die Stufe steht ZUSAETZLICH als Text im Markup (visually-hidden),
+   niemals nur als Farbe.
+   --------------------------------------------------------------------------- */
+
+.callout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--card-padding);
+  background-color: var(--sand);
+  color: var(--sand-text);
+  border: 1px solid var(--sand-border);
+  border-inline-start: var(--bw-bar) solid var(--sand-accent);
+  border-radius: var(--radius-card);
+}
+
+/* Dringlichere Tonlage (Rettungsdienst 112): deutlich kraeftigere Kante.
+   Bewusst kein Rot — es ist ein Hinweis, keine Fehlermeldung. */
+.callout--urgent {
+  border-color: var(--sand-border-strong);
+  border-inline-start-width: 6px;
+}
+
+.callout__title {
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  color: var(--sand-text);
+  margin: 0;
+}
+
+.callout__body,
+.callout__lead {
+  color: var(--sand-text);
+  max-width: var(--measure);
+}
+
+.callout__meta {
+  font-size: var(--step--1);
+  line-height: var(--leading-ui);
+  color: var(--sand-muted);
+  max-width: var(--measure);
+}
+
+/* Die grosse Nummer (116 117 / 112). Tabellarisch, damit nichts tanzt. */
+.callout__number {
+  font-family: var(--font-ui);
+  font-size: var(--step-3);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-title);
+  font-variant-numeric: tabular-nums;
+  color: var(--sand-text);
+  margin: 0;
+  max-width: none;
+}
+
+.callout__icon {
+  color: var(--sand-accent);
+}
+
+.callout .hint {
+  color: var(--sand-muted);
+}
+
+.callout a {
+  color: var(--brand);
+}
+
+.callout a:hover {
+  color: var(--brand-hover);
+}
+
+/* Verschachtelter Block (z.B. eine Vertretungspraxis im Urlaubs-Callout). */
+.callout__nested {
+  background-color: var(--sand-soft);
+  border: 1px solid var(--sand-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+}
+
+/* Zwei gleichrangige Bloecke nebeneinander (Bereitschaftsdienst / Notfall). */
+.callout-grid {
+  display: grid;
+  gap: var(--block-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 46em) {
+  .callout-grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+/* Kurzfassung des Notdiensthinweises (components/emergency-service.tsx,
+   variant="compact"): Beschriftung und Nummer als Paar, beide Paare in einer
+   Zeile. Bewusst OHNE Sandflaeche und ohne Kasten — auf /kontakt steht der
+   Block als ruhiger Abschluss unter den Kontaktwegen, waehrend /aktuelles die
+   ausfuehrliche Sandfassung traegt. Die Nummer bleibt gross und ein echtes
+   Anrufziel (44px Trefferflaeche). */
+.emergency-line {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-9);
+}
+
+.emergency-line__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  min-width: 0;
+}
+
+.emergency-line__label {
+  font-family: var(--font-ui);
+  color: var(--text);
+}
+
+.emergency-line__number {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--brand);
+  text-decoration-line: underline;
+  text-underline-offset: 0.22em;
+  overflow-wrap: normal;
+}
+
+.emergency-line__number:hover {
+  color: var(--brand-hover);
+}
+
+/* ---------------------------------------------------------------------------
+   6. Hinweisband (Urlaub, einzeilig) — schmales Sandband unter der Kopfzeile.
+   Volle Breite, statisch im Seitenfluss. Niemals Modal oder Overlay.
+   --------------------------------------------------------------------------- */
+
+.notice-bar {
+  background-color: var(--sand);
+  color: var(--sand-text);
+  border-top: var(--bw-bar) solid var(--sand-accent);
+  border-bottom: 1px solid var(--sand-border);
+}
+
+.notice-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  padding-block: var(--space-2);
+  min-height: var(--tap-min);
+}
+
+.notice-bar__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--sand-text);
+}
+
+.notice-bar__icon {
+  color: var(--sand-accent);
+}
+
+.notice-bar__range {
+  font-variant-numeric: tabular-nums;
+  color: var(--sand-text);
+}
+
+.notice-bar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  color: var(--brand);
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  text-decoration-line: underline;
+  text-underline-offset: 0.22em;
+}
+
+.notice-bar__link:hover {
+  color: var(--brand-hover);
+}
+
+@media (min-width: 40em) {
+  .notice-bar__link {
+    margin-inline-start: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   7. Definitionslisten — Sprechzeiten und Kontaktzeilen.
+   Markup: <dl class="…"><div class="…__row"><dt>…</dt><dd>…</dd></div></dl>
+   --------------------------------------------------------------------------- */
+
+/* 7a. Sprechzeiten. Zebra-Zeilen, tabellarische Ziffern, ab 320px gestapelt. */
+.hours-list {
+  display: block;
+  max-width: 34rem;
+}
+
+.hours-list__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--rule-subtle);
+}
+
+.hours-list__row:first-child {
+  border-top: var(--rule-subtle);
+}
+
+.hours-list__row:nth-of-type(odd) {
+  background-color: var(--surface);
+}
+
+.hours-list__day {
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+.hours-list__time {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+@media (min-width: 24em) {
+  .hours-list__row {
+    grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+}
+
+/* 7b. Allgemeine Datenliste (Adresse, Kennzahlen, Feldpaare). */
+.data-list {
+  display: block;
+}
+
+.data-list__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-bottom: var(--rule-subtle);
+}
+
+.data-list__row:first-child {
+  border-top: var(--rule-subtle);
+}
+
+.data-list__term {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+}
+
+.data-list__value {
+  margin: 0;
+  color: var(--text);
+}
+
+@media (min-width: 34em) {
+  .data-list__row {
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   8. Kontaktweg (Nummer als Hauptdarsteller)
+   Markup: <div class="phone-line"> mit Label, Nummer (Link) und Erlaeuterung.
+   --------------------------------------------------------------------------- */
+
+.phone-line {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.phone-line__number {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-normal);
+  color: var(--brand);
+  text-decoration-line: underline;
+  text-underline-offset: 0.22em;
+  overflow-wrap: normal;
+}
+
+.phone-line__number:hover {
+  color: var(--brand-hover);
+}
+
+/* Nummer ohne Link (Fax). Gleiche Optik, aber ohne Linkfarbe. */
+.phone-line__number--static {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: var(--weight-medium);
+}
+
+.phone-line__description {
+  color: var(--text-muted);
+  max-width: var(--measure-narrow);
+}
+
+/* ---------------------------------------------------------------------------
+   9. Statusmarke — kleine Pille. NUR fuer Status, nie fuer Buttons.
+   Die Bedeutung steht zusaetzlich als Text im Markup.
+   --------------------------------------------------------------------------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.1rem var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-label);
+  white-space: nowrap;
+}
+
+/* Laeuft aktuell — Sandton, weil zeitkritisch. */
+.tag--current {
+  background-color: var(--sand);
+  color: var(--sand-text);
+  border-color: var(--sand-border-strong);
+}
+
+/* Geplant — ruhiger Salbeiton. */
+.tag--upcoming {
+  background-color: var(--brand-soft);
+  color: var(--brand-hover);
+  border-color: var(--border-brand);
+}
+
+/* ---------------------------------------------------------------------------
+   10. Vertretungspraxen
+   Die Urlaubsuebersicht selbst (Tabelle und Detailblock) liegt in
+   page-news.css — sie gibt es nur auf /aktuelles. Gemeinsam genutzt wird von
+   dort nur die Kartenliste der Vertretungspraxen.
+   --------------------------------------------------------------------------- */
+
+/* Vertretungspraxis: verschachtelter Block auf Creme im Papier-Kasten. */
+.substitute-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.substitute-list > li {
+  margin: 0;
+}
+
+.substitute {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background-color: var(--bg);
+  border: var(--rule-subtle);
+  border-radius: var(--radius-card);
+  min-width: 0;
+}
+
+.substitute__name {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  max-width: none;
+}
+
+.substitute__line {
+  color: var(--text-muted);
+  max-width: none;
+}
+
+.substitute__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-medium);
+  overflow-wrap: normal;
+}
+
+.substitute__note {
+  font-size: var(--step--1);
+  line-height: var(--leading-ui);
+  color: var(--text-muted);
+}
+
+/* Leerzustand — gestrichelte Kontur, damit "hier steht nichts" eindeutig ist. */
+.empty-state {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--card-padding);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-card);
+  background-color: transparent;
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+/* ---------------------------------------------------------------------------
+   11. Tabelle — nur wenn echte Matrixdaten vorliegen.
+   Eine Tabelle muesste bei 320px horizontal scrollen. Wo eine noetig ist
+   (Urlaubsuebersicht), bricht sie deshalb zu Karten um — siehe .news-table
+   in page-news.css.
+   --------------------------------------------------------------------------- */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table caption {
+  padding-bottom: var(--space-3);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--rule-subtle);
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table thead th {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+  border-bottom: var(--rule);
+}
+
+.data-table tbody tr:nth-child(odd) td {
+  background-color: var(--surface);
+}
+
+/* Notausgang, falls eine Tabelle doch einmal breiter wird als der Container. */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------------------------------------------------------------------------
+   11b. Flaechenkollisionen abfangen
+   Karten und Zebrastreifen benutzen --surface. Steht so ein Baustein in einer
+   Sektion, die selbst --surface ist, waere er unsichtbar. Diese drei Regeln
+   drehen die Flaeche dann eine Stufe zurueck. Grundsatz bleibt: eine
+   `tone="surface"`-Sektion traegt flache Inhalte (Listen, Prosa), keine Karten.
+   --------------------------------------------------------------------------- */
+
+.section--surface .hours-list__row:nth-of-type(odd) {
+  background-color: var(--bg);
+}
+
+.section--surface .card {
+  background-color: var(--bg);
+}
+
+.section--surface .substitute {
+  background-color: var(--surface);
+}
+
+/* ---------------------------------------------------------------------------
+   12. Ikonografie & Illustration
+   Handgezeichnete Linien-SVG, inline, stroke="currentColor", fill="none".
+   Icons stehen NEBEN Text, nie in farbigen Kreisen.
+   --------------------------------------------------------------------------- */
+
+.icon {
+  flex: none;
+  width: var(--icon);
+  height: var(--icon);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.15em;
+}
+
+.icon--sm {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.icon--lg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+/* Bedeutungstragende Kontur: erfuellt 3:1 auf allen hellen Flaechen. */
+.icon--accent {
+  color: var(--accent-strong);
+}
+
+/* Icon + Text in einer Zeile. */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Grosse Zeichnung. Hoechstens EINE pro Sektion.
+   Die SVG bitte mit einer viewBox in Zielgroesse zeichnen (z.B. 0 0 320 220)
+   und stroke-width="1.75" setzen — dann stimmt die Linienstaerke.
+   Immer aria-hidden="true" und focusable="false". Niemals Text im SVG. */
+.illustration {
+  display: block;
+  width: 100%;
+  max-width: var(--illustration-max);
+  height: auto;
+  color: var(--accent-strong);
+}
+
+.illustration [stroke] {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Rein dekorative Fuellungen duerfen --accent benutzen. */
+.illustration__fill {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.illustration__wash {
+  fill: var(--brand-wash);
+  stroke: none;
+}
+
+/* Optionaler ruhiger Rahmen um eine Illustration. Der einzige Ort fuer
+   --radius-xl. */
+.illustration-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background-color: var(--surface);
+  border: var(--rule);
+  border-radius: var(--radius-xl);
+}
+
+/* ---------------------------------------------------------------------------
+   13. Adressblock
+   --------------------------------------------------------------------------- */
+
+.address {
+  font-style: normal;
+  line-height: var(--leading-ui);
+  color: var(--text);
+  max-width: 30ch;
+}
+
+.address__label {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}

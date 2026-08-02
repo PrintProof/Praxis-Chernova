@@ -1,0 +1,62 @@
+/* =============================================================================
+   page-services.css — die Ausnahmen der Leistungen-Seite
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+
+   Hier steht ausschliesslich, was sich mit dem gemeinsamen Inventar nicht
+   loesen laesst. Alles andere (Hero, Sektionen, .button) kommt unveraendert
+   aus layout.css / components.css.
+   Es werden nur Tokens der SEMANTIK-Ebene benutzt, keine rohen Farbwerte.
+
+   Die Seite traegt bewusst nur EINE Aussage (keine Leistungsliste, keine DMP —
+   ausdrueckliche Entscheidung der Praxis). Entsprechend wenig steht hier.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. Zeichnung
+   Der einzige visuelle Schwerpunkt der Seite, deshalb genau einmal: ab 52em
+   rechts neben dem Terminhinweis (via .grid--split-center), darunter zentriert.
+   Kein Rahmen, keine Karte — die Zeichnung liegt direkt auf dem
+   Creme-Hintergrund, damit ihre Salbeiflaeche traegt.
+   --------------------------------------------------------------------------- */
+
+.services-care__figure {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 52em) {
+  .services-care__figure {
+    justify-content: flex-end;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   2. "Termin vereinbaren"
+   Kein Abschnittskopf ueber der Sektion: die Ueberschrift gehoert in die linke
+   Spalte, damit sie neben der Zeichnung steht statt ueber beiden Spalten. Sie
+   traegt darum die Groesse einer Abschnittsueberschrift.
+   --------------------------------------------------------------------------- */
+
+.services-appointment__title {
+  margin: 0;
+  font-size: var(--step-2);
+  line-height: var(--leading-tight);
+}
+
+.services-appointment__body {
+  margin-top: var(--space-3);
+  max-width: 46ch;
+}
+
+.services-appointment .button-row {
+  margin-top: var(--space-5);
+}
+
+/* Der Hinweis gehoert zum Button darueber und steht deshalb enger an ihm als
+   der Block am Text davor. Etwas breiter als die Standardhinweiszeile, damit
+   die zwei kurzen Saetze nicht als schmale Textsaeule stehen. */
+.services-appointment__note {
+  margin-top: var(--space-4);
+  max-width: 56ch;
+}
