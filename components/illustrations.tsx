@@ -235,6 +235,29 @@ export function Shield(props: IconProps) {
 }
 
 /**
+ * Bildschirm mit Kamerablase — die Videosprechstunde.
+ *
+ * Aufbau: ein liegendes Rechteck als Bildschirm mit gerundeten Ecken, darunter
+ * Standfuss und Sockel, und IM Bildschirm eine angedeutete Person (Kopfkreis
+ * plus Schulterbogen).
+ *
+ * Erster Entwurf hatte statt der Person eine Linse rechts oben und einen Bogen
+ * unten links — das las sich als Foto-Symbol (Berg mit Sonne). Die Person im
+ * Bildschirm macht die Bedeutung eindeutig: ein Gespraech, keine Aufnahme.
+ */
+export function Video(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M3.6 6.6 C3.6 5.7 4.3 5 5.2 5 L18.8 5 C19.7 5 20.4 5.7 20.4 6.6 L20.4 15.1 C20.4 16 19.7 16.7 18.8 16.7 L5.2 16.7 C4.3 16.7 3.6 16 3.6 15.1 Z" />
+      <path d="M9 19.6 L15 19.6" />
+      <path d="M12 16.7 L12 19.6" />
+      <circle cx="12" cy="9.3" r="1.9" />
+      <path d="M8.9 14.4 C9.3 12.5 10.5 11.7 12 11.7 C13.5 11.7 14.7 12.5 15.1 14.4" />
+    </Icon>
+  );
+}
+
+/**
  * Medizinische Mund-Nasen-Maske — der Hygienehinweis bei Erkaeltungssymptomen.
  *
  * Aufbau: der Maskenkoerper als leicht nach unten gewoelbtes Viereck mit

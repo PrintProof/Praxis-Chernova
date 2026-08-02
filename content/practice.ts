@@ -166,26 +166,37 @@ export const practice = {
 
   /**
    * Terminvergabe — wortgetreu aus dem Merkblatt der Praxis
-   * ("Terminvereinbarung und Hinweise", übergeben am 02.08.2026).
+   * ("Terminvereinbarung", Fassung vom 02.08.2026).
    *
-   * Kern: Termine gelten für den AKTUELLEN TAG. Es gibt genau zwei Wege,
-   * online ab 00:00 Uhr und telefonisch zwischen 7:30 und 8:30 Uhr.
+   * Kern: Termine gelten für den AKTUELLEN TAG. Es gibt genau zwei Wege der
+   * Vereinbarung — online ab 00:00 Uhr und telefonisch zwischen 7:30 und
+   * 8:30 Uhr. Die Videosprechstunde ist KEIN dritter Weg, sondern eine
+   * Behandlungsform, die über dieselben zwei Wege vereinbart wird.
    *
    * Damit ist die frühere Aussage "Termine und andere Anliegen bitte
    * ausschließlich telefonisch" überholt — sie widersprach ohnehin dem
    * Online-Buchungsbutton und ist deshalb entfallen.
    */
   appointments: {
-    /** Online-Buchung: ab wann für den aktuellen Tag. */
+    /** Online-Buchung: ab wann die Termine des Tages freigeschaltet werden. */
     onlineFrom: '00:00 Uhr',
-    onlineLine: 'Termine für den aktuellen Tag können ab 00:00 Uhr online gebucht werden.',
-    onlineAudience: 'Für Patientinnen und Patienten, die in unserer Praxis bereits bekannt sind.',
-    /** Telefonische Terminvergabe: das tägliche Zeitfenster. */
+    onlineLine:
+      'Online-Termine für den jeweiligen Behandlungstag werden täglich ab 00:00 Uhr freigeschaltet und können anschließend bequem online gebucht werden.',
+    onlineAudience: 'Für bereits in unserer Praxis bekannte Patientinnen und Patienten.',
+    /** Telefonische Terminvergabe: das taegliche Zeitfenster. */
     phoneWindow: '7:30 – 8:30 Uhr',
-    phoneLine: 'Alternativ können Termine für den aktuellen Tag telefonisch über unsere Hauptnummer zwischen 7:30 Uhr und 8:30 Uhr vereinbart werden.',
+    phoneLine:
+      'Alternativ können Termine für den aktuellen Tag telefonisch über unsere Hauptnummer in der Zeit von 7:30 Uhr bis 8:30 Uhr vereinbart werden.',
+    /**
+     * Videosprechstunde — KEIN dritter Buchungsweg, sondern eine
+     * Behandlungsform. Vereinbart wird sie ueber dieselben zwei Wege, deshalb
+     * steht sie in der Anzeige unter den beiden Karten und nicht daneben.
+     */
+    videoLine:
+      'Für geeignete Anliegen bieten wir Ihnen auch eine Videosprechstunde an. Sie ermöglicht Ihnen eine ärztliche Beratung bequem von zu Hause oder unterwegs und kann Ihnen in vielen Fällen den Weg in die Praxis ersparen. Ob eine Videosprechstunde für Ihr Anliegen geeignet ist, entscheiden wir gemeinsam mit Ihnen.',
     /** Die verbindliche Regel: keine Behandlung ohne Termin. */
     byAppointmentOnly:
-      'Um Wartezeiten zu vermeiden und einen reibungslosen Praxisablauf zu gewährleisten, erfolgt die Behandlung ausschließlich nach vorheriger Terminvereinbarung. Bitte kommen Sie nur mit einem vereinbarten Termin in die Praxis.'
+      'Um Wartezeiten zu vermeiden und einen reibungslosen Praxisablauf zu gewährleisten, erfolgt die Behandlung ausschließlich nach vorheriger Terminvereinbarung. Bitte kommen Sie daher nur mit einem vereinbarten Termin in unsere Praxis.'
   },
 
   /** Hygienehinweis aus demselben Merkblatt. */

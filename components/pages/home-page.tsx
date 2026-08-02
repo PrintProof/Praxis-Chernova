@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import {AlertCircle, Calendar, Mask, Phone, PracticeIllustration} from '@/components/illustrations';
+import {AlertCircle, Calendar, Mask, Phone, PracticeIllustration, Video} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
@@ -150,6 +150,20 @@ export function HomePage() {
             </p>
           </article>
         </div>
+
+        {/* Videosprechstunde — bewusst NICHT als dritte Karte neben den beiden
+            Buchungswegen: sie ist kein Weg, einen Termin zu bekommen, sondern
+            eine Behandlungsform, die man ueber genau dieselben zwei Wege
+            vereinbart. Als gleichrangige Karte haette sie eine dritte Uhrzeit
+            suggeriert, die es nicht gibt. Gleiche Kartenform (Wiedererkennung),
+            aber getoente Flaeche: ein Angebot, keine Anleitung. */}
+        <article className="way way--offer home-appointment__video">
+          <p className="way__head">
+            <Video className="icon way__icon" />
+            <span className="way__title">{t('home.appointment.videoTitle')}</span>
+          </p>
+          <p className="way__body">{practice.appointments.videoLine}</p>
+        </article>
 
         {/* Die verbindliche Regel auf der reservierten Sandflaeche — sie ist
             der Hinweis, wegen dem sonst jemand vergeblich vor der Tuer steht. */}

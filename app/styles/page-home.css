@@ -340,3 +340,21 @@
 .home-appointment__mask {
   margin-top: var(--space-5);
 }
+
+/* Videosprechstunde: gleiche Kartenform wie die beiden Buchungswege, damit sie
+   als zusammengehoerig gelesen wird — aber getoente Flaeche statt Weiss, weil
+   sie ein ANGEBOT ist und keine Anleitung. Volle Breite unter dem Zweispalter,
+   sonst stuende sie als einsame dritte Karte in einer halben Reihe. */
+.way--offer {
+  background-color: var(--brand-soft);
+  border-color: var(--border-brand);
+}
+
+.home-appointment__video {
+  margin-top: var(--space-5);
+}
+
+.home-appointment__video .way__body {
+  margin-top: var(--space-2);
+  max-width: var(--measure);
+}

@@ -62,12 +62,13 @@
     "appointment": {
       "eyebrow": "So kommen Sie zu uns",
       "title": "Termin vereinbaren",
-      "description": "Termine gelten jeweils für den aktuellen Tag. Es gibt zwei Wege.",
+      "description": "Termine gelten jeweils für den aktuellen Tag. Für die Vereinbarung gibt es zwei Wege.",
       "onlineTitle": "Online buchen",
       "onlineWhen": "ab 00:00 Uhr",
       "phoneTitle": "Telefonisch",
       "phoneWhen": "7:30 – 8:30 Uhr",
       "forToday": "für den aktuellen Tag",
+      "videoTitle": "Videosprechstunde",
       "ruleTitle": "Bitte nur mit vereinbartem Termin",
       "maskTitle": "Bei Erkältungssymptomen",
       "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
