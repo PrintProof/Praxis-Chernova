@@ -12,7 +12,7 @@ const CLINIC_ID = `${getSiteUrl('/')}#praxis`;
  *
  * Die Praxis ist auf jeder Seite dieselbe Entitaet: `@id` und `url` zeigen
  * deshalb konstant auf die Startseite, waehrend `mainEntityOfPage` die
- * jeweils aufgerufene Seite benennt (auch die Route `news` / /aktuelles).
+ * jeweils aufgerufene Seite benennt (auch die Route `news` / /schliesszeiten).
  */
 export function StructuredData({pathname}: {pathname: string}) {
   const jsonLd = {

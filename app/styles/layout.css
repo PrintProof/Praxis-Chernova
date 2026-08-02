@@ -569,17 +569,25 @@
    fuellen bei 896px zusammen mit dem Button die Zeile so weit, dass die
    Marke zusammengeschoben wuerde — dann lieber zwei Reihen und das
    Menue behalten. */
-@media (min-width: 68em) {
+@media (min-width: 62em) {
+  /* ZWEI Reihen statt einer: Marke und Aktionen oben, die Navigation darunter
+     ueber die volle Breite.
+     Gerechnet gegen die Inhaltsbreite des Containers (1008px): einreihig
+     braeuchten Marke 300 + Navigation 622 + Rufnummer 152 + Button 218 plus
+     Abstaende rund 1340px — das passt bei keiner Bildschirmbreite, weil
+     --container bei 1088px deckelt. Zweireihig sind es 702px oben und 622px
+     unten, beides mit reichlich Reserve. Sieben Navigationspunkte sind
+     ausdruecklicher Wunsch der Praxis; die zweite Reihe ist der Preis dafuer,
+     dass alle sichtbar bleiben statt in einem Menue zu verschwinden. */
   .site-header__inner {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    grid-template-areas: "brand nav cta";
-    min-height: var(--header-h);
-    /* space-4 statt space-5: mit dem zweizeiligen Button und der
-       ausgeschriebenen Rufnummer braucht die Reihe 1091px, der Container
-       fasst 1088px. Der engere Abstand gibt die fehlenden 24px frei. */
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "brand cta"
+      "nav   nav";
+    justify-content: space-between;
     column-gap: var(--space-4);
-    row-gap: 0;
-    padding-block: var(--space-2);
+    row-gap: var(--space-1);
+    padding-block: var(--space-2) 0;
   }
 
   .site-brand {
@@ -603,7 +611,13 @@
   .site-nav {
     grid-area: nav;
     display: block;
-    justify-self: end;
+    /* Ueber die volle Containerbreite gestreckt, damit die Trennlinie zur
+       oberen Reihe durchlaeuft — mit `start` endete sie an der Navigation und
+       sah wie ein Versehen aus. Die Punkte selbst beginnen trotzdem auf der
+       Seitenachse, weil die Liste linksbuendig ist. */
+    justify-self: stretch;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 0;
   }
 
   .site-nav__list {
@@ -641,20 +655,10 @@
   }
 }
 
-/* Ab 68em steht die Kopfzeile in EINER Reihe — dort passt die ausgeschriebene
-   Rufnummer nicht mehr, seit der Button zwei Zeilen traegt. Gerechnet gegen
-   die Inhaltsbreite des Containers (1088px minus 2x40px Innenabstand = 1008px):
-   Marke 300 + Navigation 310 + Rufnummer 152 + Button 258 + drei Abstaende 48
-   = 1068px, also 60px zu viel. Ohne die ausgeschriebene Nummer sind es 960px —
-   48px Reserve. Deshalb hier zurueck auf das Symbol; die Nummer traegt das
-   aria-label, steht gross im Hero der Startseite und vollstaendig auf /kontakt.
-   In der ZWEIREIHIGEN Kopfzeile (unter 68em) bleibt sie ab 32em ausgeschrieben,
-   dort teilt sich die zweite Reihe nur Menue, Anruf-Link und Button. */
-@media (min-width: 68em) {
-  .site-header__call-number {
-    display: none;
-  }
-}
+/* Die ausgeschriebene Rufnummer bleibt auf JEDER Breite ab 32em sichtbar:
+   seit die Kopfzeile ab 62em zwei Reihen hat, teilt sich die obere Reihe nur
+   Marke, Anruf-Link und Button (gemessen 702px bei 1008px Platz). */
+
 
 /* ---------------------------------------------------------------------------
    5. Fusszeile — drei schmale Bloecke, keine Kontaktdaten mehr.

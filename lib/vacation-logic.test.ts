@@ -711,7 +711,7 @@ const MO_FR: ReadonlySet<number> = new Set([1, 2, 3, 4, 5]);
 
   // Zusammenspiel mit getUpcomingVacations: aus drei mach eins.
   const upcoming = getUpcomingVacations(mergePeriodsByRange(dreifach), day(2026, 7, 25));
-  eq('merge: /aktuelles zeigt danach genau EINEN laufenden Urlaub', upcoming.length, 1);
+  eq('merge: /schliesszeiten zeigt danach genau EINEN laufenden Urlaub', upcoming.length, 1);
   eq('merge: mit allen drei Vertretungen', upcoming[0].substitutes?.length, 3);
 }
 

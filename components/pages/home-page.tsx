@@ -34,7 +34,7 @@ import {getPath} from '@/lib/routing';
  * Bewusst NICHT auf dieser Seite (jede dieser Angaben hat genau einen
  * kanonischen Ort und wird von hier nur verlinkt):
  *   - Adresse, Rezepttelefon, Fax, organisatorische Ablaeufe -> /kontakt
- *   - Urlaubsdetails samt Vertretungspraxen -> /aktuelles
+ *   - Urlaubsdetails samt Vertretungspraxen -> /schliesszeiten
  * Vom Urlaub steht hier nur das zeitkritische Hinweisband; es rendert sich
  * selbst nur, wenn wirklich ein Urlaub ansteht.
  *
@@ -122,7 +122,7 @@ export function HomePage() {
 
           <div className="home-hours__aside">
             <p className="home-hours__note">{t('home.hours.note')}</p>
-            <Link className="link link--arrow" href={getPath('news')}>
+            <Link className="link link--arrow" href={getPath('closures')}>
               {t('home.hours.link')}
             </Link>
             <p className="home-hours__guide">

@@ -3,7 +3,8 @@ export type RouteKey =
   | 'appointments'
   | 'prescriptions'
   | 'services'
-  | 'news'
+  | 'housecalls'
+  | 'closures'
   | 'contact'
   | 'legal'
   | 'privacy';
@@ -13,7 +14,8 @@ export const routeByKey: Record<RouteKey, string> = {
   appointments: '/termine',
   prescriptions: '/rezepte',
   services: '/leistungen',
-  news: '/aktuelles',
+  housecalls: '/hausbesuche',
+  closures: '/schliesszeiten',
   contact: '/kontakt',
   legal: '/impressum',
   privacy: '/datenschutz'

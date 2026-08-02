@@ -10,7 +10,7 @@ import {formatVacationRange, getNextOrCurrentVacationNow, isOngoing} from '@/lib
  *
  * Steht auf Start- und Kontaktseite direkt unter der Kopfzeile. Bewusst nur
  * Label, Zeitraum und ein Link: die Vertretungsdaten stehen kanonisch auf
- * /aktuelles und werden hier nicht wiederholt. Gibt es keinen anstehenden
+ * /schliesszeiten und werden hier nicht wiederholt. Gibt es keinen anstehenden
  * Zeitraum, rendert die Komponente nichts — dann bleibt die Seite ruhig.
  *
  * Statischer Block im Seitenfluss, kein Overlay, kein Modal, kein Skript.
@@ -37,7 +37,7 @@ export function NextVacationBanner() {
         {/* Der sichtbare Linktext ist im aria-label enthalten (WCAG 2.5.3). */}
         <Link
           className="notice-bar__link"
-          href={getPath('news')}
+          href={getPath('closures')}
           aria-label={t('vacation.compact.linkAria')}
         >
           {t('vacation.compact.link')}

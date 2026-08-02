@@ -130,7 +130,7 @@ function FeaturedVacation({period, running}: FeaturedVacationProps) {
           </p>
           <p className="news-feature__range">{formatVacationRange(period)}</p>
           <p className="news-feature__return">
-            {t('news.vacation.returnLine', {weekday: back.weekday, date: back.date})}
+            {t('closures.vacation.returnLine', {weekday: back.weekday, date: back.date})}
           </p>
           {period.note ? <p className="news-feature__note">{period.note}</p> : null}
           {substitutes.length > 0 ? (
@@ -138,8 +138,8 @@ function FeaturedVacation({period, running}: FeaturedVacationProps) {
               <Info className="icon icon--sm news-feature__hint-icon" />
               <span>
                 {substitutes.length > 1
-                  ? t('news.vacation.urgentHintPlural')
-                  : t('news.vacation.urgentHintSingle')}
+                  ? t('closures.vacation.urgentHintPlural')
+                  : t('closures.vacation.urgentHintSingle')}
               </span>
             </p>
           ) : (
@@ -209,7 +209,7 @@ type VacationTableProps = {
  * Jahresübersicht als echte Tabelle.
  *
  * Ab 60em eine gewöhnliche vierspaltige Tabelle, darunter bricht jede Zeile in
- * eine Karte um (siehe page-news.css) — eine horizontal scrollende Tabelle wäre
+ * eine Karte um (siehe page-closures.css) — eine horizontal scrollende Tabelle wäre
  * auf dem Telefon unbrauchbar. Weil dafür die `display`-Werte der
  * Tabellenelemente überschrieben werden, verlieren sie in Browsern ihre
  * Tabellensemantik; die `role`-Angaben stellen sie ausdrücklich wieder her.
@@ -275,9 +275,9 @@ function PlanAhead() {
     <div className="callout news-plan">
       <p className="news-plan__title">
         <AlertCircle className="icon icon--sm callout__icon" />
-        <span>{t('news.vacation.planAheadTitle')}</span>
+        <span>{t('closures.vacation.planAheadTitle')}</span>
       </p>
-      <p className="callout__body">{t('news.vacation.planAhead')}</p>
+      <p className="callout__body">{t('closures.vacation.planAhead')}</p>
     </div>
   );
 }
@@ -299,12 +299,12 @@ export function VacationOverview() {
   // alle Zeiträume in diesem einen Jahr beginnen.
   const overviewTitle =
     years.length === 1
-      ? t('news.vacation.overviewTitleYear', {year: String(years[0])})
-      : t('news.vacation.overviewTitle');
+      ? t('closures.vacation.overviewTitleYear', {year: String(years[0])})
+      : t('closures.vacation.overviewTitle');
 
   return (
     <>
-      <Section title={t('news.vacation.title')}>
+      <Section title={t('closures.vacation.title')}>
         {featured ? (
           <FeaturedVacation period={featured} running={featuredRunning} />
         ) : (
@@ -325,14 +325,14 @@ export function VacationOverview() {
       {featured ? (
         <Section
           title={overviewTitle}
-          description={showTable ? t('news.vacation.description') : undefined}
+          description={showTable ? t('closures.vacation.description') : undefined}
           headerExtra={<PlanAhead />}
           tone="surface"
         >
           {showTable ? (
             <VacationTable periods={upcoming} now={now} />
           ) : (
-            <p className="news-overview__single">{t('news.vacation.onlyCurrent')}</p>
+            <p className="news-overview__single">{t('closures.vacation.onlyCurrent')}</p>
           )}
         </Section>
       ) : null}

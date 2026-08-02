@@ -44,7 +44,7 @@ Two practical traps: the viewBox is **80×64 (5:4), not square** — always deri
 
 The site is **German-only**. There is no multi-locale routing, no `[locale]` route tree, and no `next-intl` middleware/provider. `lib/i18n.ts` defines a single locale (`de`) and exposes `getTranslator()`, a thin wrapper over `next-intl`'s `createTranslator` that reads `messages/de.json` synchronously. Components call `t('namespace.key')` with no locale argument.
 
-`lib/routing.ts` is the single source of truth for URLs: `routeByKey` maps a `RouteKey` to its German path (`/leistungen`, `/aktuelles`, `/kontakt`, …), and `getPath(routeKey)` returns it. **Always build internal links with `getPath` and Next's `<Link>`** — never hardcode paths, or the production `basePath` gets lost.
+`lib/routing.ts` is the single source of truth for URLs: `routeByKey` maps a `RouteKey` to its German path (`/leistungen`, `/schliesszeiten`, `/kontakt`, …), and `getPath(routeKey)` returns it. **Always build internal links with `getPath` and Next's `<Link>`** — never hardcode paths, or the production `basePath` gets lost.
 
 ## Information architecture — the one rule that matters
 
@@ -52,23 +52,26 @@ The practice's core complaint about the previous version was duplicated informat
 
 | Information | Canonical home |
 |---|---|
-| How to get an appointment (both routes + time windows), video consultation, "only with an appointment" rule, mask notice, **house calls** | `/termine` |
+| How to get an appointment (both routes + time windows), video consultation, "only with an appointment" rule, mask notice | `/termine` |
 | Prescriptions and referrals: app/Rezepttelefon, 24/7 availability, processing times, eGK precondition | `/rezepte` |
-| Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
-| Opening hours | `/` — the `Sprechzeiten` section. Removed from `/kontakt` entirely. |
-| All vacation periods + substitutes, 116 117 / 112 | `/aktuelles` (other pages show only the compact `NextVacationBanner`; `/kontakt` also carries the compact 116 117 block) |
-| What the practice is | `/` — the `Die Praxis` section |
+| House calls | `/hausbesuche` |
 | Services | `/leistungen` — see the caveat below |
+| Vacation periods + substitutes, 116 117 / 112 | `/schliesszeiten` (other pages show only the compact `NextVacationBanner`; `/kontakt` also carries the compact 116 117 block) |
+| Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
+| Opening hours | `/` — the `Sprechzeiten` section. Not on `/kontakt`. |
+| What the practice is | `/` — the `Die Praxis` section |
 
-**The home page is deliberately thin.** The practice asked for it: hero (name, the two buttons, the illustration — no eyebrow, no specialty line, no lead), then `Die Praxis`, then `Sprechzeiten`. Nothing else. Everything operational moved to `/termine` and `/rezepte`. Don't grow it back.
+**The home page is deliberately thin.** The practice asked for it: hero (name, the two buttons, the illustration — no eyebrow, no specialty line, no lead), then `Die Praxis`, then `Sprechzeiten`. Nothing else. Don't grow it back.
 
-**`/leistungen` is not in the primary navigation.** Measured: six nav items don't fit the single-row header — brand 300 + nav 462 + phone 44 + button 218 + gaps = 1072px against a 1008px content box, and `--container` caps at 1088px so a wider viewport never helps. The page carries one sentence and stays reachable from the footer and from the `Sprechzeiten` section on `/`.
+**`/leistungen` carries one sentence and nothing else** — a deliberate, repeated decision by the practice (commit 9d7bed2, reaffirmed twice since). `practice.services` stays in `content/practice.ts` as data but is **not rendered**. Don't break it out into a list, don't explain the DMP programmes, and keep the page's meta description free of claims the page doesn't make.
 
-Before adding a block of prose or contact detail to a page, check whether it already lives somewhere else. If it does, link instead.
+### The header has two rows above 62em — don't "fix" it
 
-**Appointments live on the home page, not on `/kontakt`.** The section `#termin` ("Termin vereinbaren") is the canonical answer to the most common question a GP practice gets, so it sits where everyone lands. It holds both routes with their time windows (online from 00:00, phone 07:30–08:30, always for the *current day*), the video-consultation offer, the binding "treatment only by prior appointment" rule and the mask notice for cold symptoms. **The video consultation is not a third booking route** — it is a form of treatment arranged through those same two routes, so it sits below the two cards as a tinted offer, not beside them as an equal card with a time window it doesn't have. `/kontakt` states the binding rule once — someone on the contact page must not have to leave to learn it — and links to `#termin` for the how. All wording comes from the practice's own leaflet and lives in `content/practice.ts` (`appointments`, `maskNote`), so the two pages cannot drift apart.
+Seven nav items are an explicit wish of the practice: everything visible, nothing hidden in a menu. They do not fit one row. Measured against the container's 1008px content box: brand 300 + nav 622 + phone 152 + button 218 + gaps ≈ 1340px, and `--container` caps at 1088px so a wider viewport never helps.
 
-**`/leistungen` carries one sentence and nothing else** — "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an." This is a deliberate, repeated decision by the practice (commit 9d7bed2 "Leistungsseite: nur die Aussage, keine Unterpunkte", reaffirmed after the 2026-08 redesign, which had expanded it into a services list plus DMP explanations). `practice.services` stays in `content/practice.ts` as data but is **not rendered**. Don't break it out into a list, don't explain the DMP programmes, and keep the page's meta description free of claims the page doesn't make. Ask the practice before adding anything here.
+So above 62em the header is `"brand cta" / "nav nav"` — brand and actions on top, navigation full-width below with a hairline divider. Header height ≈ 122px (one row would have been ≈ 81px). That is the price of the practice's requirement. Below 62em nothing changed: the CSS-only `<details>` menu still holds the navigation.
+
+If you add an eighth item, re-measure before assuming it fits.
 
 ### Adding or changing a page/route
 
@@ -105,12 +108,12 @@ The merge is what makes already-entered data correct without anyone re-typing it
 
 The display has **three parts**:
 
-1. **`components/next-vacation-banner.tsx`** (`NextVacationBanner`, no props) — a compact sand-coloured bar naming only the *next or currently running* vacation, linking to `/aktuelles`. Rendered on `/`, `/leistungen` and `/kontakt`. Returns `null` when nothing is upcoming.
-2. **`components/vacation-overview.tsx`** — the full display on `/aktuelles`, in two parts:
+1. **`components/next-vacation-banner.tsx`** (`NextVacationBanner`, no props) — a compact sand-coloured bar naming only the *next or currently running* vacation, linking to `/schliesszeiten`. Rendered on `/`, `/leistungen` and `/kontakt`. Returns `null` when nothing is upcoming.
+2. **`components/vacation-overview.tsx`** — the full display on `/schliesszeiten`, in two parts:
    - a **featured block** for the next/current period (illustration, large date range, return date, and a column of substitute cards with `tel:` links);
    - a **"Schließzeiten" section** that is always present as long as at least one period exists, so the practice can always see what is stored. With **two or more** periods it holds the full table (all periods, including the running one — there the repetition is wanted: the table is the year plan, the block above is the acute notice). With **exactly one** it holds a sentence saying no further closures are planned — a one-row table would repeat the featured block verbatim, which is the duplication the practice complained about.
    Below ~60em the table becomes labelled cards (explicit ARIA `role` attributes, because the `display` overrides strip table semantics).
-3. **`components/emergency-service.tsx`** (`EmergencyService`, `variant?: 'full' | 'compact'`) — the 116 117 / 112 block. `full` on `/aktuelles`, `compact` on `/kontakt`.
+3. **`components/emergency-service.tsx`** (`EmergencyService`, `variant?: 'full' | 'compact'`) — the 116 117 / 112 block. `full` on `/schliesszeiten`, `compact` on `/kontakt`.
 
 All pure, node-testable logic lives in **`lib/vacation-logic.ts`** (type-only import of `VacationPeriod`, no real data, no React): `parseIsoDate`, `isOngoing`, `getUpcomingVacations`, `getImminentVacation`, `getNextOrCurrentVacation`, `getReturnDate`, `formatWeekday`, `formatDate`, `formatReturnDate`, `formatCompactRange`, `formatVacationRange`, `telHref`, `vacationListYear`, `getVacationYears`.
 

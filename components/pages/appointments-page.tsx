@@ -1,4 +1,4 @@
-import {AlertCircle, Calendar, HouseCall, Mask, Phone, Video} from '@/components/illustrations';
+import {AlertCircle, Calendar, Mask, Phone, Video} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
 import {PhoneSentence} from '@/components/phone-sentence';
@@ -18,7 +18,8 @@ import {getTranslator} from '@/lib/i18n';
  *   1. Wie bekomme ich einen Termin?   (zwei Wege mit Uhrzeit)
  *   2. Geht es auch ohne herzukommen?  (Videosprechstunde)
  *   3. Was gilt beim Besuch?           (Terminpflicht, Maske)
- *   4. Und wenn ich nicht kommen kann? (Hausbesuche)
+ * Hausbesuche haben eine eigene Seite (/hausbesuche) — so von der Praxis
+ * gewuenscht.
  */
 export function AppointmentsPage() {
   const t = getTranslator();
@@ -114,23 +115,6 @@ export function AppointmentsPage() {
         </div>
       </Section>
 
-      {/* 4. Hausbesuche — auf Wunsch der Praxis ein eigener Bereich. Sie
-             gehoeren hierher und nicht unter "Kontakt": ein Hausbesuch ist
-             eine Form, gesehen zu werden, keine Kontaktmoeglichkeit. */}
-      <Section
-        id="hausbesuche"
-        className="appointment-housecalls"
-        title={t('appointments.houseCallsTitle')}
-        tone="muted"
-      >
-        {/* Ein Satz, kein Kasten: die Seite traegt bereits vier umrandete
-            Bloecke, ein fuenfter machte sie zur Kaestchensammlung. Die
-            Ueberschrift steht im Abschnittskopf. */}
-        <p className="appointment-housecalls__line">
-          <HouseCall className="icon appointment-housecalls__icon" />
-          <span>{practice.houseCallsNote}</span>
-        </p>
-      </Section>
     </PageShell>
   );
 }

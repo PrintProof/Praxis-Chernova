@@ -4,13 +4,13 @@ import {getTranslator} from '@/lib/i18n';
 /**
  * Ärztlicher Bereitschaftsdienst (116 117) und Rettungsdienst (112).
  *
- * Diese eine Komponente wird auf /aktuelles UND /kontakt eingebunden — die
+ * Diese eine Komponente wird auf /schliesszeiten UND /kontakt eingebunden — die
  * einzige bewusst in Kauf genommene Wiederholung, weil sie sicherheitsrelevant
  * ist. Weil es genau EINE Komponente mit genau EINEM Satz Textschlüsseln gibt,
  * kann der Text nicht auseinanderlaufen.
  *
  * ZWEI AUSFÜHRUNGEN, damit die beiden Seiten nicht zeichengleich enden:
- *   `full`    — /aktuelles. Zwei Sandkästen mit Erklärung und Anrufbutton.
+ *   `full`    — /schliesszeiten. Zwei Sandkästen mit Erklärung und Anrufbutton.
  *               Dort ist die Praxis geschlossen; der Hinweis ist akut und
  *               bekommt das volle Gewicht.
  *   `compact` — /kontakt. Eine Zeile mit beiden Nummern als `tel:`-Links,

@@ -11,12 +11,13 @@
     "menuAria": "Hauptmenü ein- und ausblenden",
     "home": "Start",
     "services": "Leistungen",
-    "news": "Aktuelles",
     "contact": "Kontakt",
     "legal": "Impressum",
     "privacy": "Datenschutz",
     "appointments": "Termine",
-    "prescriptions": "Rezepte"
+    "prescriptions": "Rezepte",
+    "closures": "Schließzeiten",
+    "housecalls": "Hausbesuche"
   },
   "common": {
     "homeAria": "Zur Startseite",
@@ -61,27 +62,6 @@
       "title": "Termin vereinbaren",
       "body": "Termine gelten jeweils für den aktuellen Tag und werden online oder telefonisch vereinbart.",
       "link": "Alles zur Terminvereinbarung"
-    }
-  },
-  "news": {
-    "eyebrow": "Hinweise der Praxis",
-    "title": "Aktuelles",
-    "lead": "Hier stehen die geplanten Schließzeiten der Praxis mit der jeweiligen Vertretung sowie die Nummern für Zeiten, in denen die Praxis nicht erreichbar ist.",
-    "vacation": {
-      "title": "Urlaub und Vertretung",
-      "description": "Vergangene Zeiträume werden automatisch ausgeblendet.",
-      "planAhead": "Rezepte und Überweisungen für die Schließzeit fordern Sie bitte rechtzeitig vorher an.",
-      "returnLine": "Ab {weekday}, den {date} sind wir wieder für Sie da.",
-      "urgentHintSingle": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an die unten genannte Vertretungspraxis.",
-      "urgentHintPlural": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an eine der unten genannten Vertretungspraxen.",
-      "overviewTitle": "Alle geplanten Schließzeiten",
-      "overviewTitleYear": "Schließzeiten {year}",
-      "planAheadTitle": "Planen Sie rechtzeitig!",
-      "onlyCurrent": "Weitere Schließzeiten sind zurzeit nicht geplant. Sobald ein neuer Zeitraum feststeht, finden Sie ihn hier."
-    },
-    "hours": {
-      "title": "Sprechzeiten außerhalb der Urlaubszeiten",
-      "body": "Die regulären Sprechzeiten und alle Kontaktwege finden Sie auf der Kontaktseite."
     }
   },
   "contact": {
@@ -185,8 +165,7 @@
     "videoTitle": "Videosprechstunde",
     "ruleTitle": "Bitte nur mit vereinbartem Termin",
     "maskTitle": "Bei Erkältungssymptomen",
-    "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme.",
-    "houseCallsTitle": "Hausbesuche"
+    "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
   },
   "prescriptions": {
     "eyebrow": "Ohne in die Praxis zu kommen",
@@ -195,5 +174,31 @@
     "phoneLabel": "Rezepttelefon",
     "howTitle": "So fordern Sie an",
     "timingTitle": "Wann alles bereitliegt"
+  },
+  "closures": {
+    "eyebrow": "Wann die Praxis geschlossen ist",
+    "title": "Schließzeiten",
+    "lead": "Hier stehen die geplanten Schließzeiten der Praxis mit der jeweiligen Vertretung sowie die Nummern für Zeiten, in denen die Praxis nicht erreichbar ist.",
+    "vacation": {
+      "title": "Urlaub und Vertretung",
+      "description": "Vergangene Zeiträume werden automatisch ausgeblendet.",
+      "planAhead": "Rezepte und Überweisungen für die Schließzeit fordern Sie bitte rechtzeitig vorher an.",
+      "returnLine": "Ab {weekday}, den {date} sind wir wieder für Sie da.",
+      "urgentHintSingle": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an die unten genannte Vertretungspraxis.",
+      "urgentHintPlural": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an eine der unten genannten Vertretungspraxen.",
+      "overviewTitle": "Alle geplanten Schließzeiten",
+      "overviewTitleYear": "Schließzeiten {year}",
+      "planAheadTitle": "Planen Sie rechtzeitig!",
+      "onlyCurrent": "Weitere Schließzeiten sind zurzeit nicht geplant. Sobald ein neuer Zeitraum feststeht, finden Sie ihn hier."
+    },
+    "hours": {
+      "title": "Sprechzeiten außerhalb der Urlaubszeiten",
+      "body": "Die regulären Sprechzeiten und alle Kontaktwege finden Sie auf der Kontaktseite."
+    }
+  },
+  "housecalls": {
+    "eyebrow": "Wenn Sie nicht kommen können",
+    "title": "Hausbesuche",
+    "arrangeTitle": "Hausbesuch vereinbaren"
   }
 }

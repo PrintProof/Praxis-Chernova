@@ -7,13 +7,24 @@ import {getTranslator} from '@/lib/i18n';
 import {getPath, type RouteKey} from '@/lib/routing';
 
 /**
- * Hauptnavigation. Leistungen steht bewusst NICHT hier: die Seite traegt eine
- * einzige Aussage, und gemessen passen sechs Punkte nicht in die einreihige
- * Kopfzeile — Marke 300 + Navigation 462 + Rufnummer 44 + Button 218 + Abstaende
- * ergeben 1072px, der Container fasst 1008px. Erreichbar bleibt sie ueber die
- * Fusszeile und den Verweis im Abschnitt "Sprechzeiten" der Startseite.
+ * Hauptnavigation — sieben Punkte, alle sichtbar. So von der Praxis gewuenscht.
+ *
+ * Deshalb steht die Kopfzeile ab 62em in ZWEI Reihen: Marke und Aktionen oben,
+ * die Navigation darunter ueber die volle Breite. Einreihig ginge es nicht —
+ * gemessen braeuchte sie Marke 300 + Navigation 622 + Rufnummer + Button +
+ * Abstaende = 1232px, der Container fasst 1008px. Zweireihig sind es 594px in
+ * Zeile 1 und 622px in Zeile 2, beides mit reichlich Reserve. Als Nebeneffekt
+ * ist wieder Platz fuer die ausgeschriebene Rufnummer.
  */
-const navItems = ['home', 'appointments', 'prescriptions', 'news', 'contact'] as const;
+const navItems = [
+  'home',
+  'appointments',
+  'prescriptions',
+  'housecalls',
+  'services',
+  'closures',
+  'contact'
+] as const;
 
 /**
  * Kopfzeile: Marke links, Navigation, rechts die Aktionen.

@@ -9,8 +9,9 @@ const primaryRoutes = [
   'home',
   'appointments',
   'prescriptions',
+  'housecalls',
   'services',
-  'news',
+  'closures',
   'contact'
 ] as const;
 const legalRoutes = ['legal', 'privacy'] as const satisfies readonly RouteKey[];
@@ -25,7 +26,7 @@ const legalRoutes = ['legal', 'privacy'] as const satisfies readonly RouteKey[];
  * Bewusst NICHT mehr hier: Telefon, Rezepttelefon und Fax (standen dreifach
  * auf der Seite; sie leben jetzt ausschliesslich auf /kontakt), die
  * Fachbezeichnung und der 116-117-Hinweis (der gehoert laut Vorgabe nur auf
- * /aktuelles und /kontakt — im Footer stuende er auf jeder Seite).
+ * /schliesszeiten und /kontakt — im Footer stuende er auf jeder Seite).
  *
  * Die Blockueberschriften sind <p>, kein <h2>: sonst wuerde die
  * Ueberschriftenhierarchie der Seite am Ende noch einmal aufgemacht.
