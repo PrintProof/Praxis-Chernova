@@ -144,8 +144,18 @@ export function ContactPage() {
           <li className="rule-list__item">
             <h3 className="rule-list__title">{t('contact.processes.appointments.title')}</h3>
             <div className="contact-processes__body">
-              {/* Erst die verbindliche Regel, dann das Zusatzangebot. */}
-              <p className="rule-list__body">{practice.prescriptionNotes.appointmentsLine}</p>
+              {/* Die verbindliche Regel steht auch hier — wer auf /kontakt
+                  landet, darf nicht erst zur Startseite muessen, um zu
+                  erfahren, dass es ohne Termin nicht geht. Ein Satz, EINE
+                  Quelle (content/practice.ts), kann nicht auseinanderlaufen.
+                  Die beiden Wege mit ihren Zeitfenstern werden NICHT
+                  wiederholt; dorthin fuehrt der Link darunter. */}
+              <p className="rule-list__body">{practice.appointments.byAppointmentOnly}</p>
+              <p className="rule-list__body">
+                <Link className="link--arrow" href={`${getPath('home')}#termin`}>
+                  {t('contact.processes.appointments.link')}
+                </Link>
+              </p>
               <div className="button-row">
                 <a
                   className="button button--secondary button--booking"

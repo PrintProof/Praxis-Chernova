@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import {Calendar, Phone, PracticeIllustration} from '@/components/illustrations';
+import {AlertCircle, Calendar, Mask, Phone, PracticeIllustration} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
@@ -107,6 +107,72 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Terminvereinbarung — der kanonische Ort fuer die Frage "Wie bekomme
+          ich einen Termin?".
+          Bewusst auf der STARTSEITE und nicht auf /kontakt: es ist die
+          haeufigste Frage an eine Hausarztpraxis, und die beiden Zeitfenster
+          erklaeren die Buttons im Hero direkt darueber. /kontakt verweist
+          hierher, statt den Block zu wiederholen.
+          Die Karten tragen KEINE eigenen Buttons — die stehen unmittelbar
+          darueber im Hero. Vier Buttons auf einem Bildschirm waeren Laerm.
+          Quelle aller Texte: das Merkblatt der Praxis (content/practice.ts). */}
+      <Section
+        id="termin"
+        className="home-appointment"
+        eyebrow={t('home.appointment.eyebrow')}
+        title={t('home.appointment.title')}
+        description={t('home.appointment.description')}
+        tone="surface"
+      >
+        <div className="home-appointment__ways">
+          <article className="way">
+            <p className="way__head">
+              <Calendar className="icon way__icon" />
+              <span className="way__title">{t('home.appointment.onlineTitle')}</span>
+            </p>
+            <p className="way__when">{t('home.appointment.onlineWhen')}</p>
+            <p className="way__scope">{t('home.appointment.forToday')}</p>
+            <p className="way__body">{practice.appointments.onlineAudience}</p>
+          </article>
+
+          <article className="way">
+            <p className="way__head">
+              <Phone className="icon way__icon" />
+              <span className="way__title">{t('home.appointment.phoneTitle')}</span>
+            </p>
+            <p className="way__when">{t('home.appointment.phoneWhen')}</p>
+            <p className="way__scope">{t('home.appointment.forToday')}</p>
+            <p className="way__body">
+              <a className="way__phone" href={practice.phoneHref}>
+                {practice.phone}
+              </a>
+            </p>
+          </article>
+        </div>
+
+        {/* Die verbindliche Regel auf der reservierten Sandflaeche — sie ist
+            der Hinweis, wegen dem sonst jemand vergeblich vor der Tuer steht. */}
+        <div className="callout home-appointment__rule">
+          <p className="callout__title">
+            <AlertCircle className="icon icon--sm callout__icon" />
+            <span>{t('home.appointment.ruleTitle')}</span>
+          </p>
+          <p className="callout__body">{practice.appointments.byAppointmentOnly}</p>
+        </div>
+
+        {/* Hygienehinweis: bewusst NICHT auf der Sandflaeche, sondern ruhiger.
+            Sand ist fuer 116 117 und Schliesszeiten reserviert; zwei gleich
+            laute Kaesten nebeneinander heben sich gegenseitig auf. */}
+        <div className="note home-appointment__mask">
+          <p className="note__title">
+            <Mask className="icon note__icon" />
+            <span>{t('home.appointment.maskTitle')}</span>
+          </p>
+          <p className="note__body">{practice.maskNote}</p>
+          <p className="note__thanks">{t('home.appointment.thanks')}</p>
+        </div>
+      </Section>
 
       {/* "Die Praxis" — ein ruhiger Block im Salbeiband, EINE Spalte.
           Bewusst ohne schmalen mittigen Container: der begann rund 200px

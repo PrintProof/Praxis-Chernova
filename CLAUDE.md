@@ -54,11 +54,14 @@ The practice's core complaint about the previous version was duplicated informat
 |---|---|
 | Phone, prescription phone, fax, address block, directions | `/kontakt` (main number also in header/footer, address also in footer) |
 | Opening-hours table | `/kontakt` (also on `/` as the single shared `OpeningHours` component — one source, no duplicated prose) |
-| Prescriptions, appointments, house-call rules | `/kontakt` |
+| **How to get an appointment** (both routes + time windows), the "only with an appointment" rule and the mask notice | `/` section `#termin` — see below |
+| Prescriptions, house-call rules | `/kontakt` |
 | All vacation periods + substitutes, 116 117 / 112 | `/aktuelles` (`/` and `/kontakt` show only the compact `NextVacationBanner`) |
 | Services | `/leistungen` — see the caveat below |
 
 Before adding a block of prose or contact detail to a page, check whether it already lives somewhere else. If it does, link instead.
+
+**Appointments live on the home page, not on `/kontakt`.** The section `#termin` ("Termin vereinbaren") is the canonical answer to the most common question a GP practice gets, so it sits where everyone lands. It holds both routes with their time windows (online from 00:00, phone 07:30–08:30, always for the *current day*), the binding "treatment only by prior appointment" rule and the mask notice for cold symptoms. `/kontakt` states the binding rule once — someone on the contact page must not have to leave to learn it — and links to `#termin` for the how. All wording comes from the practice's own leaflet and lives in `content/practice.ts` (`appointments`, `maskNote`), so the two pages cannot drift apart.
 
 **`/leistungen` carries one sentence and nothing else** — "Wir bieten das gesamte Spektrum der hausärztlichen Leistungen an." This is a deliberate, repeated decision by the practice (commit 9d7bed2 "Leistungsseite: nur die Aussage, keine Unterpunkte", reaffirmed after the 2026-08 redesign, which had expanded it into a services list plus DMP explanations). `practice.services` stays in `content/practice.ts` as data but is **not rendered**. Don't break it out into a list, don't explain the DMP programmes, and keep the page's meta description free of claims the page doesn't make. Ask the practice before adding anything here.
 

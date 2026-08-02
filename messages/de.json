@@ -45,7 +45,7 @@
   "home": {
     "hero": {
       "eyebrow": "Hausärztlich-internistische Praxis in Bielefeld-Brackwede",
-      "lead": "Termine, Rezepte und organisatorische Fragen klären Sie telefonisch."
+      "lead": "Termine für den aktuellen Tag vereinbaren Sie online oder telefonisch."
     },
     "about": {
       "title": "Die Praxis",
@@ -58,6 +58,19 @@
     },
     "guide": {
       "body": "Alle Kontaktwege, die Anfahrt und die Abläufe für Termine, Rezepte und Hausbesuche stehen unter <contact>Kontakt & Anfahrt</contact>. Das medizinische Angebot der Praxis finden Sie unter <services>Leistungen</services>."
+    },
+    "appointment": {
+      "eyebrow": "So kommen Sie zu uns",
+      "title": "Termin vereinbaren",
+      "description": "Termine gelten jeweils für den aktuellen Tag. Es gibt zwei Wege.",
+      "onlineTitle": "Online buchen",
+      "onlineWhen": "ab 00:00 Uhr",
+      "phoneTitle": "Telefonisch",
+      "phoneWhen": "7:30 – 8:30 Uhr",
+      "forToday": "für den aktuellen Tag",
+      "ruleTitle": "Bitte nur mit vereinbartem Termin",
+      "maskTitle": "Bei Erkältungssymptomen",
+      "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
     }
   },
   "services": {
@@ -122,7 +135,8 @@
     "processes": {
       "title": "Organisatorisches",
       "appointments": {
-        "title": "Termine"
+        "title": "Termine",
+        "link": "So vereinbaren Sie einen Termin"
       },
       "prescriptions": {
         "title": "Rezepte und Überweisungen"

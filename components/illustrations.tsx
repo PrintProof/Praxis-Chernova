@@ -234,6 +234,26 @@ export function Shield(props: IconProps) {
   );
 }
 
+/**
+ * Medizinische Mund-Nasen-Maske — der Hygienehinweis bei Erkaeltungssymptomen.
+ *
+ * Aufbau: der Maskenkoerper als leicht nach unten gewoelbtes Viereck mit
+ * gerundeten Ecken, zwei Faltenlinien in der Mitte, links und rechts je ein
+ * Ohrband als flacher Bogen. Bewusst kein Gesicht — das Symbol soll sachlich
+ * bleiben und in derselben Strichstaerke wie die uebrigen Icons lesen.
+ */
+export function Mask(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M6.2 8.1 C9.9 6.9 14.1 6.9 17.8 8.1 L17.8 13.4 C17.8 15.9 15.2 17.9 12 17.9 C8.8 17.9 6.2 15.9 6.2 13.4 Z" />
+      <path d="M6.4 11 L17.6 11" />
+      <path d="M6.7 13.6 L17.3 13.6" />
+      <path d="M6.2 8.8 L3.6 10.2 C2.8 10.6 2.7 11.6 3.4 12.2 L5.2 13.7" />
+      <path d="M17.8 8.8 L20.4 10.2 C21.2 10.6 21.3 11.6 20.6 12.2 L18.8 13.7" />
+    </Icon>
+  );
+}
+
 /** Drei Linien — Menue oeffnen (mobil). */
 export function Menu(props: IconProps) {
   return (

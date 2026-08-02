@@ -161,8 +161,36 @@ export const practice = {
   ],
   prescriptionNotes: {
     orderLine: 'Rezepte und Überweisungen können über das Rezepttelefon oder die Arzt-Direkt Praxis App angefordert werden.',
-    pickupLine: 'Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr.',
-    appointmentsLine: 'Termine und andere Anliegen bitte ausschließlich telefonisch über die Hauptnummer.'
+    pickupLine: 'Abholung bzw. eRezept ab dem nächsten Arbeitstag ab 10:00 Uhr.'
   },
+
+  /**
+   * Terminvergabe — wortgetreu aus dem Merkblatt der Praxis
+   * ("Terminvereinbarung und Hinweise", übergeben am 02.08.2026).
+   *
+   * Kern: Termine gelten für den AKTUELLEN TAG. Es gibt genau zwei Wege,
+   * online ab 00:00 Uhr und telefonisch zwischen 7:30 und 8:30 Uhr.
+   *
+   * Damit ist die frühere Aussage "Termine und andere Anliegen bitte
+   * ausschließlich telefonisch" überholt — sie widersprach ohnehin dem
+   * Online-Buchungsbutton und ist deshalb entfallen.
+   */
+  appointments: {
+    /** Online-Buchung: ab wann für den aktuellen Tag. */
+    onlineFrom: '00:00 Uhr',
+    onlineLine: 'Termine für den aktuellen Tag können ab 00:00 Uhr online gebucht werden.',
+    onlineAudience: 'Für Patientinnen und Patienten, die in unserer Praxis bereits bekannt sind.',
+    /** Telefonische Terminvergabe: das tägliche Zeitfenster. */
+    phoneWindow: '7:30 – 8:30 Uhr',
+    phoneLine: 'Alternativ können Termine für den aktuellen Tag telefonisch über unsere Hauptnummer zwischen 7:30 Uhr und 8:30 Uhr vereinbart werden.',
+    /** Die verbindliche Regel: keine Behandlung ohne Termin. */
+    byAppointmentOnly:
+      'Um Wartezeiten zu vermeiden und einen reibungslosen Praxisablauf zu gewährleisten, erfolgt die Behandlung ausschließlich nach vorheriger Terminvereinbarung. Bitte kommen Sie nur mit einem vereinbarten Termin in die Praxis.'
+  },
+
+  /** Hygienehinweis aus demselben Merkblatt. */
+  maskNote:
+    'Zum Schutz unserer Patientinnen und Patienten sowie unseres Praxisteams bitten wir Sie, unsere Praxis bei Erkältungssymptomen (z. B. Husten, Schnupfen oder Halsschmerzen) nur mit einer medizinischen Mund-Nasen-Maske zu betreten.',
+
   houseCallsNote: 'Hausbesuche werden nur in einem Umkreis von 2 km um die Praxis durchgeführt.'
 } as const;

@@ -462,7 +462,62 @@
   border-inline-start-width: 6px;
 }
 
+/* ---------------------------------------------------------------------------
+   .note — die RUHIGE Schwester des Sand-Callouts.
+   Fuer Hinweise, die wichtig, aber nicht zeitkritisch sind (z.B. die Bitte um
+   eine Maske bei Erkaeltungssymptomen). Die Sandflaeche bleibt 116 117 und den
+   Schliesszeiten vorbehalten — stuenden zwei gleich laute Kaesten nebeneinander,
+   hoben sie sich gegenseitig auf. Traeger ist hier die Kante, nicht die Flaeche.
+   --------------------------------------------------------------------------- */
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--card-padding);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-inline-start: var(--bw-bar) solid var(--accent-strong);
+  border-radius: var(--radius-card);
+}
+
+.note__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--step-1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  color: var(--text);
+}
+
+.note__icon {
+  color: var(--brand);
+}
+
+.note__body {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--text-muted);
+}
+
+.note__thanks {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+/* Traegt optional ein `.callout__icon` vor dem Text — deshalb hier schon
+   Flex und Abstand, statt das in jeder Seitendatei zu wiederholen (so war es
+   in .news-plan__title dupliziert). Ohne Icon aendert sich nichts: der
+   visually-hidden Dringlichkeitshinweis der 116-117-Kaesten ist absolut
+   positioniert und nimmt im Flex-Fluss keinen Platz ein. */
 .callout__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   font-family: var(--font-ui);
   font-size: var(--step-2);
   font-weight: var(--weight-semibold);
