@@ -11,9 +11,9 @@
      Hinweisband (Sand, nur bei Urlaub)
        -> Hero            (Creme, Typografie + Bildmarke nebeneinander)
        -> "Die Praxis"    (Roséband, eine Spalte)
-       -> Besuchsregeln   (Creme, zwei Hinweiskaesten)
        -> "Sprechzeiten"  (Papier, Datenliste + schmale Randspalte)
-       -> Wegweiser       (Creme, ein Satz Fliesstext)
+       -> Besuchsregeln   (Creme, zwei Hinweiskaesten)
+       -> Wegweiser       (Creme, ein Satz Fliesstext, ohne oberen Abstand)
        -> Fusszeile       (dunkel)
    Fuenf Abschnitte, fuenf verschiedene Strukturmuster — kein fuenffach
    wiederholtes Kachelraster.
@@ -312,6 +312,12 @@
    Kachelraster war die Doppelung der Hauptnavigation, die die Praxis
    kritisiert hat. Letzter Abschnitt vor der dunklen Fusszeile, deshalb mehr
    Luft nach unten — damit die Seite endet statt abzubrechen.
+
+   Nach oben dagegen gar keine: der Abschnitt setzt direkt auf den
+   Besuchsregeln auf, beide stehen auf derselben cremefarbenen Flaeche. Mit
+   beidseitigem Abstand klaffte dort die doppelte Sektionsluft und der Satz
+   trieb frei zwischen Kaesten und Fusszeile. Das `flushTop` steht am
+   <Section> in home-page.tsx, nicht hier.
    --------------------------------------------------------------------------- */
 
 .home-guide {

@@ -42,11 +42,12 @@ import {getPath} from '@/lib/routing';
  * selbst nur, wenn wirklich ein Urlaub ansteht.
  *
  * REIHENFOLGE (August 2026 von der Praxis so gewuenscht):
- *   Hero (Bildmarke) -> "Die Praxis" -> die zwei Besuchsregeln ->
- *   "Sprechzeiten" -> Wegweiser in die Unterseiten.
+ *   Hero (Bildmarke) -> "Die Praxis" -> "Sprechzeiten" ->
+ *   die zwei Besuchsregeln -> Wegweiser in die Unterseiten.
  * Die Regeln standen vorher am Seitenende und der Wegweiser als Randnotiz
- * neben der Sprechzeitentabelle — beides genau andersherum als das, was
- * jemand beim Ueberfliegen zuerst braucht.
+ * neben der Sprechzeitentabelle. Die Praxis wollte die Regeln hoeher, aber
+ * ausdruecklich NICHT ganz nach oben: "direkt nach den Sprechzeiten" und
+ * der Wegweiser danach ans Ende.
  *
  * Fuenf Abschnitte, fuenf verschiedene Strukturmuster (zweispaltiger Hero mit
  * Bildmarke, ruhiges Roséband, zwei Hinweiskaesten, Datenliste mit
@@ -115,20 +116,6 @@ export function HomePage() {
         <p className="home-about__body">{t('home.about.body')}</p>
       </Section>
 
-      {/* Terminpflicht und Hygienehinweis. Sie standen bis August 2026 am
-          ENDE der Seite; die Praxis wollte sie weiter nach oben, weil es die
-          zwei Regeln sind, an denen sonst jemand vergeblich vor der Tuer
-          steht bzw. ohne Maske hereinkommt.
-          Sie stehen jetzt direkt hinter der Vorstellung der Praxis und noch
-          vor den Sprechzeiten — bewusst NICHT vor "Die Praxis": das <h1> und
-          die Vorstellung sollen den Anfang der Seite tragen, nicht zwei
-          organisatorische Kaesten.
-          Dieselben zwei Kaesten stehen am Ende von /termine (components/
-          visit-rules.tsx erklaert, warum das keine Inhaltsdoppelung ist). */}
-      <Section titleHidden title={t('home.rules.title')}>
-        <VisitRules />
-      </Section>
-
       {/* Sprechzeiten — die meistgesuchte Angabe einer Praxis-Startseite.
           Links die Datenliste, rechts eine schmale Randspalte mit dem Hinweis
           auf abweichende Zeiten und dem Link zu den Schliesszeiten. Beides
@@ -148,14 +135,27 @@ export function HomePage() {
         </div>
       </Section>
 
+      {/* Terminpflicht und Hygienehinweis, DIREKT NACH den Sprechzeiten.
+          Genau diese Stelle hat die Praxis benannt (Sprachnachricht vom
+          09.08.2026, 17:11): nicht ganz nach oben, sondern hinter die Zeiten
+          und noch vor den Wegweiser. Wer nachgesehen hat, wann geoeffnet ist,
+          liest als naechstes, was beim Kommen gilt.
+          Dieselben zwei Kaesten stehen am Ende von /termine (components/
+          visit-rules.tsx erklaert, warum das keine Inhaltsdoppelung ist). */}
+      <Section titleHidden title={t('home.rules.title')}>
+        <VisitRules />
+      </Section>
+
       {/* Wegweiser in die Unterseiten — der Abschluss der Seite. Er stand bis
           August 2026 als Randnotiz neben der Sprechzeitentabelle; die Praxis
-          wollte ihn weiter unten haben, damit zuerst die Regeln und die Zeiten
-          gelesen werden. Fliesstext mit Inline-Links statt Kacheln: ein
-          Wegweiser ist ein Satz, kein Raster.
+          wollte ihn ganz ans Ende. Fliesstext mit Inline-Links statt Kacheln:
+          ein Wegweiser ist ein Satz, kein Raster.
+          `flushTop`, weil der Abschnitt direkt auf den Regeln aufsetzt und
+          beide auf derselben cremefarbenen Flaeche stehen: mit beidseitigem
+          Abstand klaffte dazwischen die doppelte Sektionsluft.
           Die Ueberschrift traegt nur die Vorlesereihenfolge — sichtbar waere
           sie eine leere Geste ueber zwei Zeilen Text. */}
-      <Section className="home-guide" titleHidden title={t('home.guide.title')}>
+      <Section className="home-guide" titleHidden title={t('home.guide.title')} flushTop>
         <p className="home-guide__body">
           {t.rich('home.guide.body', {
             appointments: (chunks) => (
