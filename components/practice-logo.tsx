@@ -4,7 +4,39 @@ type PracticeLogoProps = {
   decorative?: boolean;
   /** Nur relevant bei `decorative={false}`: der zugaengliche Name der Bildmarke. */
   label?: string;
+  /**
+   * Enger Ausschnitt statt des Standard-viewBox. Fuer grosse Darstellungen —
+   * siehe den Kommentar an `VIEWBOX_TIGHT`. Standard: false.
+   */
+  tight?: boolean;
 };
+
+/**
+ * Der historische Ausschnitt, 80x64 also 5:4. Die Zeichnung selbst nutzt davon
+ * nur 65% der Breite: links und rechts steht Leerraum, und unten ragt das
+ * Bruststueck 1.55 Einheiten HERAUS und wird abgeschnitten (SVG clippt am
+ * viewBox). Bei Kopf- und Fusszeilengroesse faellt beides nicht auf, deshalb
+ * bleibt dieser Ausschnitt der Standard — `.site-brand__mark` und
+ * `.site-footer__mark` rechnen mit 5:4, und `app/icon.svg` hat denselben
+ * viewBox.
+ */
+const VIEWBOX_DEFAULT = '0 0 80 64';
+
+/**
+ * Genau die gezeichnete Flaeche plus eine Einheit Luft, im Browser ueber
+ * getBBox() gemessen (inkl. halber Strichbreite): x 16.35, y 8.04,
+ * 52.10 x 57.51 Einheiten. Ergibt 54.2 x 59.6, also hochkant statt quer.
+ *
+ * Wozu: mit dem Standardausschnitt ist die Marke immer von unsichtbarem
+ * Leerraum umgeben. Wer sie gross zeigt (Hero der Startseite), bekommt sie
+ * dadurch rund ein Drittel zu klein und sichtbar aus der Mitte geschoben —
+ * der Leerraum ist links breiter als rechts. Hier ist sie exakt zentriert
+ * und vollstaendig, das Bruststueck wird nicht angeschnitten.
+ *
+ * ACHTUNG: andere Proportion als der Standard. Wer die Groesse setzt, darf
+ * nicht mit dem 1.25-Faktor aus layout.css rechnen.
+ */
+const VIEWBOX_TIGHT = '15.4 7 54.2 59.6';
 
 /**
  * Bildmarke der Praxis: ein Stethoskop, dessen Buegel ein Herz umschliesst.
@@ -24,12 +56,14 @@ type PracticeLogoProps = {
  *
  * Das viewBox ist 80x64, also 5:4 und NICHT quadratisch. Wer die Groesse setzt,
  * muss das Seitenverhaeltnis wahren (siehe `.site-brand__mark` in layout.css),
- * sonst wird das Logo gestaucht.
+ * sonst wird das Logo gestaucht. Fuer grosse Darstellungen gibt es `tight`
+ * mit einem engeren Ausschnitt und anderer Proportion.
  */
 export function PracticeLogo({
   className,
   decorative = true,
-  label = 'Praxis Veronika Chernova'
+  label = 'Praxis Veronika Chernova',
+  tight = false
 }: PracticeLogoProps) {
   const accessibilityProps = decorative
     ? ({'aria-hidden': true, focusable: false} as const)
@@ -37,7 +71,7 @@ export function PracticeLogo({
 
   return (
     <svg
-      viewBox="0 0 80 64"
+      viewBox={tight ? VIEWBOX_TIGHT : VIEWBOX_DEFAULT}
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

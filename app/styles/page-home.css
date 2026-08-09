@@ -106,10 +106,10 @@
   margin-top: var(--space-5);
 }
 
-/* Aktionsblock = zwei Buttons + der Hinweis darunter. Der Hinweis gehoert
-   optisch zu den Buttons und steht deshalb enger an ihnen als der Block am
-   Text darueber. Bewusst ohne `align-items`: so bleibt `.button-row` unter
-   30em voll breit (gestapelte Buttons ueber die ganze Spalte). */
+/* Aktionsblock. Er enthaelt heute nur noch den Anrufen-Button — der
+   Online-Termin und der Hinweis darunter sind auf Wunsch der Praxis aus dem
+   Hero verschwunden. Der Stapel bleibt trotzdem: Bewusst ohne `align-items`,
+   so bleibt `.button-row` unter 30em voll breit. */
 .home-hero__actions {
   display: flex;
   flex-direction: column;
@@ -142,22 +142,30 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: min(100%, 17rem);
+  max-width: min(100%, 19rem);
   aspect-ratio: 1;
-  padding: var(--space-6);
+  margin-inline: auto;
   background-color: var(--brand-soft);
   border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
 }
 
-/* viewBox ist 80x64, also 5:4: Breite setzen, Hoehe folgt von selbst.
+/* Die Marke wird ueber die HOEHE gesetzt: mit `tight` ist ihr Ausschnitt
+   hochkant (54.2 x 59.6), die Hoehe ist also die lange Seite.
+   Warum 70% und nicht mehr: die Marke muss in die runde Flaeche passen. Bei
+   70% Hoehe misst sie 64% x 70% des Durchmessers, ihre Diagonale liegt damit
+   bei 0.95 D — und weil die Ecken einer Herz-Stethoskop-Zeichnung gar nicht
+   besetzt sind, bleibt an allen vier Seiten sichtbar Luft zum Rand. Mehr als
+   ~74% ginge rechnerisch nicht mehr auf.
+   Die Platte traegt deshalb bewusst KEIN padding — der Abstand entsteht hier.
+
    Die geteilte Klasse `.illustration` waere hier FALSCH — sie setzt
    `color: var(--accent-strong)` und wuerde damit das Stethoskop umfaerben,
    und ihr `vector-effect: non-scaling-stroke` liesse die 2.5er-Linien bei
    dieser Groesse haarfein werden. */
 .home-hero__logo {
   display: block;
-  width: 72%;
-  height: auto;
+  width: auto;
+  height: 70%;
   color: var(--logo-ink);
 }
 
@@ -173,15 +181,24 @@
   }
 
   /* Die Spalte bleibt gestreckt, damit die Grafik ihre Breite aus dem Raster
-     bezieht; rechtsbuendig gestellt wird sie ueber den Aussenabstand. */
+     bezieht; rechtsbuendig gestellt wird sie ueber den Aussenabstand.
+     `stretch` ist hier TRAGEND, nicht kosmetisch: die Platte hat ihre Breite
+     nur ueber `width: 100%` und keinen Inhalt, der sie aufspannen koennte
+     (das SVG wird ueber die Hoehe gesetzt). Mit dem Rasterstandard `end`
+     (layout.css) kollabieren Figur, Platte und Logo auf 0x0 und die Marke
+     verschwindet spurlos — nachgemessen. */
   .home-hero.page-hero--split .home-hero__figure {
     justify-self: stretch;
     margin-top: 0;
   }
 
+  /* Auf dem Desktop steht die Flaeche rechtsbuendig in ihrer Spalte (mobil ist
+     sie mittig). `auto 0` statt `margin-inline-start: auto`, sonst bliebe das
+     `auto` der Grundregel auf der rechten Seite stehen und sie waere weiterhin
+     zentriert. */
   .home-hero__plate {
-    max-width: min(100%, 24rem);
-    margin-inline-start: auto;
+    max-width: min(100%, 26rem);
+    margin-inline: auto 0;
   }
 }
 
