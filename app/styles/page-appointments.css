@@ -87,14 +87,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.appointment-rules__rule {
-  margin-top: var(--block-gap);
-}
-
-.appointment-rules__mask {
-  margin-top: var(--space-5);
-}
-
 /* Videosprechstunde: gleiche Kartenform wie die beiden Buchungswege, damit sie
    als zusammengehoerig gelesen wird — aber getoente Flaeche statt Weiss, weil
    sie ein ANGEBOT ist und keine Anleitung. Volle Breite unter dem Zweispalter,
@@ -121,10 +113,10 @@
   color: var(--text-muted);
 }
 
-/* Terminpflicht und Hygienehinweis stehen als Paar untereinander. */
-.appointment-rules__mask {
-  margin-top: var(--space-5);
-}
+/* Terminpflicht und Hygienehinweis schliessen die Seite ab. Die zwei Kaesten
+   kommen aus components/visit-rules.tsx und tragen ihren Abstand selbst
+   (`.visit-rules__mask` in components.css) — hier ist bewusst nichts noetig,
+   der Abschnitt nimmt Flaeche und Luft aus layout.css. */
 
 /* Videosprechstunde: Symbol links, Text daneben. `flex-direction` MUSS
    ueberschrieben werden — .way setzt column, sonst stuende das Symbol allein

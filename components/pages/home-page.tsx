@@ -1,10 +1,12 @@
 import Link from 'next/link';
 
-import {AlertCircle, Mask, Phone, PracticeIllustration} from '@/components/illustrations';
+import {Phone} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
+import {PracticeLogo} from '@/components/practice-logo';
 import {Section} from '@/components/section';
+import {VisitRules} from '@/components/visit-rules';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
 import {getPath} from '@/lib/routing';
@@ -12,13 +14,14 @@ import {getPath} from '@/lib/routing';
 /**
  * Startseite.
  *
- * Sie beantwortet drei Fragen und hoert dann auf: Wer ist das? Wie erreiche
- * ich die Praxis sofort? Wann ist geoeffnet?
+ * Sie beantwortet vier Fragen und hoert dann auf: Wer ist das? Wie erreiche
+ * ich die Praxis sofort? Was muss ich beim Kommen beachten? Wann ist
+ * geoeffnet?
  *
- * Die beiden Wege zu einem Termin stehen im Hero: anrufen (gilt fuer alle)
- * und online buchen (gilt fuer Bestandspatientinnen und Bestandspatienten).
- * Genau dieser Unterschied steht als kurzer Hinweis darunter — die
- * ausfuehrliche Fassung bleibt auf /kontakt.
+ * Im Hero steht genau EINE Aktion: anrufen. Sie gilt fuer alle Anliegen und
+ * fuer alle Menschen. Der Online-Termin wurde von der Praxis bewusst aus dem
+ * Hero entfernt und steht nur noch in der Kopfzeile; erklaert wird er auf
+ * /termine.
  *
  * WARUM HIER DIE SPRECHZEITEN STEHEN
  * Frueher endete die Seite mit drei gleich grossen weissen Karten, deren
@@ -38,9 +41,16 @@ import {getPath} from '@/lib/routing';
  * Vom Urlaub steht hier nur das zeitkritische Hinweisband; es rendert sich
  * selbst nur, wenn wirklich ein Urlaub ansteht.
  *
- * Drei Abschnitte, drei verschiedene Strukturmuster (zweispaltiger Hero mit
- * Illustration, ruhiges Roséband, Datenliste mit Randspalte) — statt
- * dreimal derselben Kachelreihe.
+ * REIHENFOLGE (August 2026 von der Praxis so gewuenscht):
+ *   Hero (Bildmarke) -> "Die Praxis" -> die zwei Besuchsregeln ->
+ *   "Sprechzeiten" -> Wegweiser in die Unterseiten.
+ * Die Regeln standen vorher am Seitenende und der Wegweiser als Randnotiz
+ * neben der Sprechzeitentabelle — beides genau andersherum als das, was
+ * jemand beim Ueberfliegen zuerst braucht.
+ *
+ * Fuenf Abschnitte, fuenf verschiedene Strukturmuster (zweispaltiger Hero mit
+ * Bildmarke, ruhiges Roséband, zwei Hinweiskaesten, Datenliste mit
+ * Randspalte, ein Satz Fliesstext) — statt fuenfmal derselben Kachelreihe.
  */
 export function HomePage() {
   const t = getTranslator();
@@ -80,10 +90,17 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Leitmotiv der Startseite. Rein dekorativ: die Grafik traegt keine
-              Information, die nicht auch im Text steht. */}
+          {/* Leitmotiv der Startseite ist die Bildmarke der Praxis selbst:
+              das Stethoskop, das ein Herz umschliesst — dasselbe Zeichen wie
+              auf Visitenkarte und Fensterfolie. Es steht hier auf Wunsch der
+              Praxis (August 2026) anstelle der frueheren Illustration mit
+              Fenster, Pflanze und Tasse.
+              Rein dekorativ: die Marke traegt keine Information, die nicht
+              auch als Text daneben steht (der Praxisname ist das <h1>). */}
           <div className="page-hero__figure home-hero__figure">
-            <PracticeIllustration className="illustration home-hero__illustration" />
+            <div className="home-hero__plate">
+              <PracticeLogo className="home-hero__logo" />
+            </div>
           </div>
         </div>
       </section>
@@ -98,11 +115,26 @@ export function HomePage() {
         <p className="home-about__body">{t('home.about.body')}</p>
       </Section>
 
+      {/* Terminpflicht und Hygienehinweis. Sie standen bis August 2026 am
+          ENDE der Seite; die Praxis wollte sie weiter nach oben, weil es die
+          zwei Regeln sind, an denen sonst jemand vergeblich vor der Tuer
+          steht bzw. ohne Maske hereinkommt.
+          Sie stehen jetzt direkt hinter der Vorstellung der Praxis und noch
+          vor den Sprechzeiten — bewusst NICHT vor "Die Praxis": das <h1> und
+          die Vorstellung sollen den Anfang der Seite tragen, nicht zwei
+          organisatorische Kaesten.
+          Dieselben zwei Kaesten stehen am Ende von /termine (components/
+          visit-rules.tsx erklaert, warum das keine Inhaltsdoppelung ist). */}
+      <Section titleHidden title={t('home.rules.title')}>
+        <VisitRules />
+      </Section>
+
       {/* Sprechzeiten — die meistgesuchte Angabe einer Praxis-Startseite.
           Links die Datenliste, rechts eine schmale Randspalte mit dem Hinweis
-          auf abweichende Zeiten und den zwei Saetzen, die frueher als
-          Kartenraster gesetzt waren. Fliesstext mit Inline-Links statt
-          Kacheln: ein Wegweiser ist eine Zeile Text, kein Raster. */}
+          auf abweichende Zeiten und dem Link zu den Schliesszeiten. Beides
+          gehoert sachlich zu den Sprechzeiten; der allgemeine Wegweiser in die
+          Unterseiten stand frueher ebenfalls hier und schliesst die Seite
+          jetzt als eigener Abschnitt ab. */}
       <Section className="home-hours" title={t('home.hours.title')} tone="surface">
         <div className="home-hours__layout">
           <OpeningHours />
@@ -112,43 +144,30 @@ export function HomePage() {
             <Link className="link link--arrow" href={getPath('closures')}>
               {t('home.hours.link')}
             </Link>
-            <p className="home-hours__guide">
-              {t.rich('home.guide.body', {
-                appointments: (chunks) => (
-                  <Link href={getPath('appointments')}>{chunks}</Link>
-                ),
-                prescriptions: (chunks) => (
-                  <Link href={getPath('prescriptions')}>{chunks}</Link>
-                ),
-                housecalls: (chunks) => <Link href={getPath('housecalls')}>{chunks}</Link>,
-                contact: (chunks) => <Link href={getPath('contact')}>{chunks}</Link>
-              })}
-            </p>
           </div>
         </div>
       </Section>
 
-      {/* Terminpflicht und Hygienehinweis standen bis August 2026 auf /termine.
-          Die Praxis wollte beide auf der Startseite haben — es sind die zwei
-          Regeln, an denen sonst jemand vergeblich vor der Tuer steht bzw. ohne
-          Maske hereinkommt. Auf /termine stehen sie deshalb NICHT mehr. */}
-      <Section titleHidden title={t('home.rules.title')}>
-        <div className="callout home-rules__rule">
-          <p className="callout__title">
-            <AlertCircle className="icon icon--sm callout__icon" />
-            <span>{t('home.rules.appointmentOnly')}</span>
-          </p>
-          <p className="callout__body">{practice.appointments.byAppointmentOnly}</p>
-        </div>
-
-        <div className="note home-rules__mask">
-          <p className="note__title">
-            <Mask className="icon note__icon" />
-            <span>{t('home.rules.mask')}</span>
-          </p>
-          <p className="note__body">{practice.maskNote}</p>
-          <p className="note__thanks">{t('home.rules.thanks')}</p>
-        </div>
+      {/* Wegweiser in die Unterseiten — der Abschluss der Seite. Er stand bis
+          August 2026 als Randnotiz neben der Sprechzeitentabelle; die Praxis
+          wollte ihn weiter unten haben, damit zuerst die Regeln und die Zeiten
+          gelesen werden. Fliesstext mit Inline-Links statt Kacheln: ein
+          Wegweiser ist ein Satz, kein Raster.
+          Die Ueberschrift traegt nur die Vorlesereihenfolge — sichtbar waere
+          sie eine leere Geste ueber zwei Zeilen Text. */}
+      <Section className="home-guide" titleHidden title={t('home.guide.title')}>
+        <p className="home-guide__body">
+          {t.rich('home.guide.body', {
+            appointments: (chunks) => (
+              <Link href={getPath('appointments')}>{chunks}</Link>
+            ),
+            prescriptions: (chunks) => (
+              <Link href={getPath('prescriptions')}>{chunks}</Link>
+            ),
+            housecalls: (chunks) => <Link href={getPath('housecalls')}>{chunks}</Link>,
+            contact: (chunks) => <Link href={getPath('contact')}>{chunks}</Link>
+          })}
+        </p>
       </Section>
 
     </PageShell>

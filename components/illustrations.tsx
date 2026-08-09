@@ -480,9 +480,15 @@ const PRACTICE_MAIN = [
 ] as const;
 
 /**
- * Leitmotiv der Startseite: ein Bogenfenster mit Pflanze und Tasse auf der
- * Fensterbank. Bewusst kein Stethoskop, kein Geraet, kein EKG — die Aussage
- * ist Ruhe und Verlaesslichkeit, nicht Medizintechnik.
+ * Ein Bogenfenster mit Pflanze und Tasse auf der Fensterbank. Bewusst kein
+ * Stethoskop, kein Geraet, kein EKG — die Aussage ist Ruhe und
+ * Verlaesslichkeit, nicht Medizintechnik.
+ *
+ * AKTUELL NICHT VERWENDET. Das war bis August 2026 das Leitmotiv der
+ * Startseite; die Praxis wollte dort stattdessen ihre eigene Bildmarke sehen
+ * (components/practice-logo.tsx, das Zeichen von Visitenkarte und
+ * Fensterfolie). Die Illustration bleibt stehen, falls ein anderer Abschnitt
+ * sie einmal braucht — sie ist fertig und kostet ungenutzt nichts.
  */
 export function PracticeIllustration(props: IllustrationProps) {
   return (

@@ -57,9 +57,20 @@ The practice's core complaint about the previous version was duplicated informat
 | House calls — **arranged by phone only** | `/hausbesuche` |
 | Vacation periods + substitutes, 116 117 / 112 | `/schliesszeiten` (other pages show only the compact `NextVacationBanner`; `/kontakt` also carries the compact 116 117 block) |
 | Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
-| What the practice is, opening hours, **"only with an appointment" rule, mask notice** | `/` |
+| What the practice is, opening hours | `/` |
+| **"only with an appointment" rule, mask notice** | `/` **and** the end of `/termine` — the one deliberate exception, see below |
 
-**The home page is deliberately thin, in this order:** hero (practice name + the *Anrufen* button + illustration — no eyebrow, no specialty line, no lead, **no booking button**), `Die Praxis`, `Sprechzeiten`, then the two visit rules. Nothing else. Don't grow it back.
+**The home page is deliberately thin, in this order:** hero (practice name + the *Anrufen* button + the practice's own logo — no eyebrow, no specialty line, no lead, **no booking button**), `Die Praxis`, the two visit rules, `Sprechzeiten`, then the signpost paragraph into the sub-pages. Nothing else. Don't grow it back.
+
+The practice moved the two visit rules **up** (August 2026): they used to close the page, but they are the two things someone needs *before* arriving. The signpost moved the other way — it used to sit as a side note beside the opening-hours table and is now the page's closing section (`.home-guide`). Rules deliberately stay behind `Die Praxis`: the `<h1>` and the introduction carry the top of the page, not two organisational boxes.
+
+**The hero shows `PracticeLogo`, not an illustration.** The practice asked for its own mark — the stethoscope looping around a heart, the one on its business card and on the newly filmed window — instead of the previous drawing of a window with a plant. `PracticeIllustration` in `components/illustrations.tsx` is therefore currently unused but kept. The logo sits on a soft `--brand-soft` field (`.home-hero__plate`), because it is a line mark with no surface of its own and looked lost in the column. Do **not** put the shared `.illustration` class on it: that sets `color: var(--accent-strong)` (recolouring the stethoscope through `currentColor`) and `vector-effect: non-scaling-stroke` (hairline strokes at hero size).
+
+### The two visit rules live in one component and render twice
+
+`components/visit-rules.tsx` renders the pair (appointment-only callout + mask note) and **nothing else** — no `<Section>`, so each page picks tone, position and heading itself: the home page hides the heading, `/termine` shows it (`appointments.rulesTitle`). It is rendered on `/` and at the end of `/termine`.
+
+Yes, that is a deliberate exception to the one-canonical-home rule above, made by the practice in August 2026: many people land on `/termine` to book and should see both rules there too. The exception is narrow and safe because **the sentences themselves still exist exactly once** (`practice.appointments.byAppointmentOnly`, `practice.maskNote`, `home.rules.*`) — what repeats is the presentation, not the content, and it cannot drift. Don't extend it to a third page without asking, and don't inline-copy the JSX.
 
 **The Online-Termin button lives in the header only.** The practice removed it from the hero but explicitly kept it top right. Online booking itself stays fully intact (`/termine` still explains it).
 

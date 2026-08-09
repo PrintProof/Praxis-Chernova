@@ -521,6 +521,23 @@
   color: var(--text-muted);
 }
 
+/* ---------------------------------------------------------------------------
+   .visit-rules — die zwei Regeln zum Praxisbesuch (Terminpflicht, Maske bei
+   Erkaeltung). Sie stehen auf der Startseite UND am Ende von /termine, gerendert
+   aus einer Komponente (components/visit-rules.tsx). Deshalb liegt ihr Abstand
+   hier und nicht in einer der beiden Seitendateien.
+
+   Der Sand-Callout traegt die verbindliche Regel, der ruhigere .note-Kasten den
+   Hygienehinweis — die Rangfolge ist Absicht, siehe den Abschnitt oben.
+   --------------------------------------------------------------------------- */
+
+/* Der obere Kasten braucht keinen eigenen Abstand: darueber liegt entweder der
+   Sektionskopf (`.section__header`, margin-bottom: --block-gap) oder — bei
+   verborgener Ueberschrift — der Sektionsabstand selbst. */
+.visit-rules__mask {
+  margin-top: var(--space-5);
+}
+
 /* Traegt optional ein `.callout__icon` vor dem Text — deshalb hier schon
    Flex und Abstand, statt das in jeder Seitendatei zu wiederholen (so war es
    in .news-plan__title dupliziert). Ohne Icon aendert sich nichts: der

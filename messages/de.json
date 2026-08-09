@@ -50,6 +50,7 @@
       "ariaLabel": "Sprechzeiten der Praxis"
     },
     "guide": {
+      "title": "Weitere Informationen",
       "body": "Termine, Rezepte und Hausbesuche sind unter <appointments>Termine</appointments>, <prescriptions>Rezepte</prescriptions> und <housecalls>Hausbesuche</housecalls> erklärt. Alle Kontaktwege und die Anfahrt stehen unter <contact>Kontakt & Anfahrt</contact>."
     },
     "rules": {
@@ -157,7 +158,8 @@
     "phoneTitle": "Telefonisch",
     "phoneWhen": "7:30 – 8:30 Uhr",
     "forToday": "für den aktuellen Tag",
-    "videoTitle": "Videosprechstunde"
+    "videoTitle": "Videosprechstunde",
+    "rulesTitle": "Beim Besuch der Praxis"
   },
   "prescriptions": {
     "eyebrow": "Ohne in die Praxis zu kommen",

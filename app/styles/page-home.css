@@ -9,12 +9,19 @@
 
    Aufbau der Seite und ihr Flaechenrhythmus:
      Hinweisband (Sand, nur bei Urlaub)
-       -> Hero            (Creme, Typografie + Illustration nebeneinander)
+       -> Hero            (Creme, Typografie + Bildmarke nebeneinander)
        -> "Die Praxis"    (Roséband, eine Spalte)
+       -> Besuchsregeln   (Creme, zwei Hinweiskaesten)
        -> "Sprechzeiten"  (Papier, Datenliste + schmale Randspalte)
+       -> Wegweiser       (Creme, ein Satz Fliesstext)
        -> Fusszeile       (dunkel)
-   Drei Abschnitte, drei verschiedene Strukturmuster — kein dreifach
+   Fuenf Abschnitte, fuenf verschiedene Strukturmuster — kein fuenffach
    wiederholtes Kachelraster.
+
+   Der Flaechenwechsel ist Absicht und muss bei jeder Umsortierung geprueft
+   werden: zwei `muted`- oder zwei `surface`-Abschnitte direkt hintereinander
+   verschmelzen (layout.css: `.section--muted + .section--muted`) und sehen
+   dann wie ein Rendering-Fehler aus.
 
    ALLES BEGINNT AUF DERSELBEN LINKEN KANTE. Kein Abschnitt der Startseite
    benutzt einen schmalen mittigen Container: der verschiebt seinen Inhalt
@@ -25,8 +32,8 @@
 /* ---------------------------------------------------------------------------
    1. Eingangsbereich
    Kein Kasten und keine Karte: die Typografie steht direkt auf dem Creme der
-   Seite, rechts daneben die Illustration mit ihrer eigenen organischen
-   Grundflaeche. Die Spalten sind bewusst ungleich (1.3 / 1) — ein 50/50-Raster
+   Seite, rechts daneben die Bildmarke der Praxis auf ihrer weichen
+   Traegerflaeche. Die Spalten sind bewusst ungleich (1.3 / 1) — ein 50/50-Raster
    waere genau die Gleichfoermigkeit, die vermieden werden soll. Nebenbei
    sichert das breitere Textfeld zu, dass "Praxis Veronika Chernova" auf dem
    Desktop einzeilig laeuft.
@@ -116,20 +123,48 @@
   max-width: 52ch;
 }
 
-/* Mobil steht die Illustration unter den Aktionen: erst handeln koennen,
+/* Mobil steht die Bildmarke unter den Aktionen: erst handeln koennen,
    dann das Bild. Etwas kleiner, damit der Hero nicht ausufert. */
 .home-hero__figure {
   margin-top: var(--space-4);
 }
 
-.home-hero__illustration {
+/* Die Bildmarke ist eine reine Strichzeichnung ohne eigene Flaeche — die
+   fruehere Illustration brachte ihre organische Grundflaeche selbst mit.
+   Ohne Traegerflaeche steht das Logo in der rechten Spalte verloren, deshalb
+   sitzt es hier auf einem ruhigen Feld, genau wie auf der Fensterfolie der
+   Praxis. Die vier ungleichen Radien nehmen die weiche Form der frueheren
+   Grundflaeche auf; ein exakter Kreis waere fuer diese Seite zu streng.
+   Bewusst NICHT `.illustration-frame`: das ist ein Rahmen mit Kante, hier
+   soll die Flaeche randlos bleiben. */
+.home-hero__plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   max-width: min(100%, 17rem);
+  aspect-ratio: 1;
+  padding: var(--space-6);
+  background-color: var(--brand-soft);
+  border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
+}
+
+/* viewBox ist 80x64, also 5:4: Breite setzen, Hoehe folgt von selbst.
+   Die geteilte Klasse `.illustration` waere hier FALSCH — sie setzt
+   `color: var(--accent-strong)` und wuerde damit das Stethoskop umfaerben,
+   und ihr `vector-effect: non-scaling-stroke` liesse die 2.5er-Linien bei
+   dieser Groesse haarfein werden. */
+.home-hero__logo {
+  display: block;
+  width: 72%;
+  height: auto;
+  color: var(--logo-ink);
 }
 
 @media (min-width: 56em) {
   /* Etwas gleichmaessigere Spalten als zuvor (1.6 / 1) und eine groessere
-     Zeichnung: die Illustration war deutlich niedriger als die Textspalte,
-     wodurch rechts unter ihr eine grosse Leerflaeche stand. Jetzt sind die
+     Flaeche rechts: das Motiv war deutlich niedriger als die Textspalte,
+     wodurch rechts unter ihm eine grosse Leerflaeche stand. Jetzt sind die
      beiden Spalten annaehernd gleich hoch und mittig zueinander gesetzt. */
   .home-hero.page-hero--split .page-hero__inner {
     grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
@@ -144,8 +179,8 @@
     margin-top: 0;
   }
 
-  .home-hero__illustration {
-    max-width: min(100%, 27rem);
+  .home-hero__plate {
+    max-width: min(100%, 24rem);
     margin-inline-start: auto;
   }
 }
@@ -210,15 +245,11 @@
    (`.hours-list`), die Zeitbloecke aus page-contact.css — es gibt fuer beides
    genau eine Quelle.
 
-   Die Randspalte traegt nur Text und Links: der Wegweiser in die Unterseiten
-   ist ein Satz, kein Raster.
+   Die Randspalte traegt nur noch, was sachlich zu den Sprechzeiten gehoert:
+   den Hinweis auf abweichende Zeiten und den Link zu den Schliesszeiten. Der
+   allgemeine Wegweiser stand bis August 2026 ebenfalls hier und ist jetzt der
+   Schlussabschnitt der Seite (Abschnitt 5).
    --------------------------------------------------------------------------- */
-
-/* Letzter Abschnitt vor der dunklen Fusszeile: mehr Luft nach unten, damit
-   die Seite endet statt abzubrechen. */
-.home-hours {
-  padding-bottom: var(--section-y-lg);
-}
 
 .home-hours__layout {
   display: grid;
@@ -247,21 +278,30 @@
   color: var(--text-muted);
 }
 
-/* Der Wegweiser steht bewusst eine Spur ruhiger als der Hinweis darueber und
-   ist durch den groesseren Abstand als eigener Gedanke erkennbar. */
-.home-hours__guide {
-  margin-top: var(--space-3);
-  color: var(--text);
-}
-
 /* ---------------------------------------------------------------------------
-   Regeln zum Praxisbesuch — Terminpflicht und Hygienehinweis.
-   Standen bis August 2026 auf /termine; die Praxis wollte beide auf der
-   Startseite haben. Sand traegt die verbindliche Regel, der ruhigere
-   .note-Kasten den Hygienehinweis: zwei gleich laute Kaesten uebereinander
-   heben sich gegenseitig auf.
+   4. Besuchsregeln — Terminpflicht und Hygienehinweis.
+
+   Die zwei Kaesten selbst liegen in components/visit-rules.tsx und werden
+   auch am Ende von /termine gerendert; ihr Innenleben steht deshalb in
+   components.css (`.visit-rules__*`), nicht hier. Auf der Startseite braucht
+   der Abschnitt keine einzige eigene Regel — er nimmt Flaeche und Abstand
+   unveraendert aus layout.css.
    --------------------------------------------------------------------------- */
 
-.home-rules__mask {
-  margin-top: var(--space-5);
+/* ---------------------------------------------------------------------------
+   5. Wegweiser — der Abschluss der Seite.
+
+   Ein Satz Fliesstext mit Inline-Links, kein Kachelraster: genau das
+   Kachelraster war die Doppelung der Hauptnavigation, die die Praxis
+   kritisiert hat. Letzter Abschnitt vor der dunklen Fusszeile, deshalb mehr
+   Luft nach unten — damit die Seite endet statt abzubrechen.
+   --------------------------------------------------------------------------- */
+
+.home-guide {
+  padding-bottom: var(--section-y-lg);
+}
+
+.home-guide__body {
+  max-width: var(--measure);
+  color: var(--text);
 }

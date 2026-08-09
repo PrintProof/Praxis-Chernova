@@ -3,6 +3,7 @@ import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
 import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
+import {VisitRules} from '@/components/visit-rules';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
 
@@ -17,8 +18,11 @@ import {getTranslator} from '@/lib/i18n';
  * Reihenfolge folgt dem Ablauf einer Patientin:
  *   1. Wie bekomme ich einen Termin?   (zwei Wege mit Uhrzeit)
  *   2. Geht es auch ohne herzukommen?  (Videosprechstunde)
- * Terminpflicht und Hygienehinweis stehen auf der STARTSEITE, Hausbesuche auf
- * /hausbesuche — beides so von der Praxis gewuenscht.
+ *   3. Was gilt, wenn ich komme?       (Terminpflicht, Maske bei Erkaeltung)
+ * Schritt 3 wiederholt die zwei Kaesten der Startseite — auf ausdruecklichen
+ * Wunsch der Praxis (August 2026), weil viele direkt hier landen. Warum das
+ * die Ein-Ort-Regel nicht verletzt, steht in components/visit-rules.tsx.
+ * Hausbesuche stehen weiterhin nur auf /hausbesuche.
  */
 export function AppointmentsPage() {
   const t = getTranslator();
@@ -89,6 +93,14 @@ export function AppointmentsPage() {
           <Video className="icon appointment-video__icon" />
           <p className="way__body">{practice.appointments.videoLine}</p>
         </div>
+      </Section>
+
+      {/* 3. Die zwei Besuchsregeln als Abschluss. Anders als auf der
+             Startseite traegt der Abschnitt hier eine SICHTBARE Ueberschrift:
+             sie steht am Ende einer langen Seite und muss sich vom
+             Videosprechstunden-Band darueber absetzen. */}
+      <Section className="appointment-rules" title={t('appointments.rulesTitle')}>
+        <VisitRules />
       </Section>
 
     </PageShell>
