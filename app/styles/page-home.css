@@ -129,7 +129,7 @@
   margin-top: var(--space-4);
 }
 
-/* Die Bildmarke ist eine reine Strichzeichnung ohne eigene Flaeche — die
+/* Die Bildmarke ist eine freistehende Zeichnung ohne eigene Grundflaeche — die
    fruehere Illustration brachte ihre organische Grundflaeche selbst mit.
    Ohne Traegerflaeche steht das Logo in der rechten Spalte verloren, deshalb
    sitzt es hier auf einem ruhigen Feld, genau wie auf der Fensterfolie der
@@ -149,24 +149,28 @@
   border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
 }
 
-/* Die Marke wird ueber die HOEHE gesetzt: mit `tight` ist ihr Ausschnitt
-   hochkant (54.2 x 59.6), die Hoehe ist also die lange Seite.
-   Warum 70% und nicht mehr: die Marke muss in die runde Flaeche passen. Bei
-   70% Hoehe misst sie 64% x 70% des Durchmessers, ihre Diagonale liegt damit
-   bei 0.95 D — und weil die Ecken einer Herz-Stethoskop-Zeichnung gar nicht
-   besetzt sind, bleibt an allen vier Seiten sichtbar Luft zum Rand. Mehr als
-   ~74% ginge rechnerisch nicht mehr auf.
+/* Die Marke wird ueber die BREITE gesetzt: ihr Ausschnitt ist quer (5:4), die
+   Breite ist also die lange Seite. Und anders als frueher fuellt die Zeichnung
+   ihren Ausschnitt praktisch aus — links und rechts randbuendig, oben und
+   unten je 0.27 Einheiten Luft —, es gibt also keinen nennenswerten
+   unsichtbaren Rand mehr, den man wegrechnen muesste.
+   Warum 76% und nicht mehr: die Marke muss in die runde Flaeche passen. Bei
+   76% Breite misst sie 76% x 61% des Durchmessers, ihre Diagonale liegt damit
+   bei 0.97 D — die Ecken einer Herz-Stethoskop-Zeichnung sind gar nicht
+   besetzt, also bleibt an allen vier Seiten sichtbar Luft zum Rand.
    Die Platte traegt deshalb bewusst KEIN padding — der Abstand entsteht hier.
 
-   Die geteilte Klasse `.illustration` waere hier FALSCH — sie setzt
-   `color: var(--accent-strong)` und wuerde damit das Stethoskop umfaerben,
-   und ihr `vector-effect: non-scaling-stroke` liesse die 2.5er-Linien bei
-   dieser Groesse haarfein werden. */
+   Die geteilte Klasse `.illustration` waere hier FALSCH — nicht wegen ihres
+   `width: 100%` (gleiche Spezifitaet, und page-home.css wird nach
+   components.css geladen, die 76% gewinnen also), sondern wegen ihres
+   `max-width: var(--illustration-max)`: dagegen setzt diese Regel nichts, es
+   wuerde also unwidersprochen greifen. Ihr `color: var(--accent-strong)` und
+   ihr `vector-effect: non-scaling-stroke` treffen die Marke dagegen gar nicht
+   mehr: sie bringt ihre Farben selbst mit und hat kein `stroke`. */
 .home-hero__logo {
   display: block;
-  width: auto;
-  height: 70%;
-  color: var(--logo-ink);
+  width: 76%;
+  height: auto;
 }
 
 @media (min-width: 56em) {
@@ -184,7 +188,7 @@
      bezieht; rechtsbuendig gestellt wird sie ueber den Aussenabstand.
      `stretch` ist hier TRAGEND, nicht kosmetisch: die Platte hat ihre Breite
      nur ueber `width: 100%` und keinen Inhalt, der sie aufspannen koennte
-     (das SVG wird ueber die Hoehe gesetzt). Mit dem Rasterstandard `end`
+     (das SVG hat selbst nur eine Prozentbreite). Mit dem Rasterstandard `end`
      (layout.css) kollabieren Figur, Platte und Logo auf 0x0 und die Marke
      verschwindet spurlos — nachgemessen. */
   .home-hero.page-hero--split .home-hero__figure {

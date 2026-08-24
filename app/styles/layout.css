@@ -305,13 +305,12 @@
 }
 
 /* Das Logo-viewBox ist 80x64, also 5:4 — die Breite MUSS aus der Hoehe
-   berechnet werden, sonst staucht es. `color` faerbt das Stethoskop
-   (currentColor), das Herz bringt seine eigene Farbe mit. */
+   berechnet werden, sonst staucht es. Farben braucht es hier keine: die
+   Bildmarke bringt ihre drei Logo-Tokens selbst mit. */
 .site-brand__mark {
   flex: none;
   height: 1.75rem;
   width: calc(1.75rem * 1.25);
-  color: var(--logo-ink);
 }
 
 .site-brand__name {
@@ -711,7 +710,6 @@
   padding: 0.55rem 0.4rem;
   border-radius: var(--radius-md);
   background-color: var(--logo-plate);
-  color: var(--logo-ink);
 }
 
 .site-footer__name {

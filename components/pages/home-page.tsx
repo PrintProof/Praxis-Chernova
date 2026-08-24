@@ -100,7 +100,7 @@ export function HomePage() {
               auch als Text daneben steht (der Praxisname ist das <h1>). */}
           <div className="page-hero__figure home-hero__figure">
             <div className="home-hero__plate">
-              <PracticeLogo className="home-hero__logo" tight />
+              <PracticeLogo className="home-hero__logo" />
             </div>
           </div>
         </div>

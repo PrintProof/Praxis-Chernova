@@ -27,8 +27,12 @@
      1. PRIMITIVE — Farbrampen
      ========================================================================= */
 
-  /* Bordeaux: die Farbe des Herzens im Praxislogo (500 = #a74d5f, exakt der
-     Logo-Ton). Farbton rund 348 Grad, warm und gedeckt — kein Signalrot.
+  /* Bordeaux: aufgenommen vom Herzen im Praxislogo, aber bewusst eine Stufe
+     gedeckter als dieses (500 = #a74d5f gegen #a7203e der Marke) — als
+     Flaechen- und Textfarbe waere der volle Logo-Ton auf einer ganzen Seite
+     zu laut. Der echte Logo-Ton steht als --logo-heart weiter unten und wird
+     ausschliesslich von der Bildmarke benutzt.
+     Farbton rund 348 Grad, warm und gedeckt — kein Signalrot.
      500 ist der Ankerpunkt; nach oben wird aufgehellt, nach unten vertieft.
      Als TEXTfarbe ist 500 zu hell (4.85:1 auf --bg), deshalb traegt --brand
      die 700er Stufe. */
@@ -173,13 +177,15 @@
 
   /* ---------------------------------------------------------------------------
      Praxislogo (components/practice-logo.tsx + app/icon.svg)
-     Das bestehende Logo der Praxis: Stethoskop in Dunkelblau, Herz in Altrosa.
-     BEWUSST unabhaengig von --brand: die Marke gehoert der Praxis und wandert
-     nicht mit, wenn die Farbwelt der Website sich aendert. Nicht umfaerben.
-     Beide Werte muessen mit den festen Farben in app/icon.svg uebereinstimmen.
+     Die drei Farben der Originalvorlage der Praxis, aus dem Bild gemessen —
+     keine Naeherung und keine Ableitung aus --brand. Die Marke gehoert der
+     Praxis und wandert nicht mit, wenn die Farbwelt der Website sich aendert.
+     Nicht umfaerben. Alle drei Werte muessen mit den fest verdrahteten Farben
+     in app/icon.svg uebereinstimmen.
      --------------------------------------------------------------------------- */
-  --logo-ink: #183753; /* Stethoskop; 11.6:1 auf --bg */
-  --logo-heart: var(--wine-500); /* #a74d5f — identisch mit app/icon.svg */
+  --logo-tube: #959699; /* obere Ohrbuegel; hell, so ist die Vorlage */
+  --logo-ink: #423e3d; /* Ohroliven und unterer Schlauch; 9.8:1 auf --bg */
+  --logo-heart: #a7203e; /* Herz und Bruststueck; 6.6:1 auf --bg */
 
   /* Auf dunklem Grund (Fusszeile) traegt das Logo eine helle Plakette, damit
      die Originalfarben erhalten bleiben, statt das Logo zu invertieren. */

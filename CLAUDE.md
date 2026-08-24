@@ -36,9 +36,19 @@ Prefer an existing shared class over inventing a new one. Put page-specific rule
 
 ### The logo is not part of the palette
 
-`components/practice-logo.tsx` is the practice's existing mark — a stethoscope looping around a heart. It survived the 2026-08 redesign unchanged, by explicit instruction. **Don't redraw, simplify or recolour it.** Its colours live in dedicated tokens (`--logo-ink` navy `#183753`, `--logo-heart` rose `#a74d5f`) that are deliberately *not* derived from `--brand`, so a future palette change can't drag the mark along. The same paths and hard-coded colours are the favicon in `app/icon.svg` — change one, change both.
+`components/practice-logo.tsx` is the practice's own mark — a stethoscope whose ear tubes frame a heart and whose tubing loops into a bow on the right. **Don't redraw, simplify or recolour it.**
 
-Two practical traps: the viewBox is **80×64 (5:4), not square** — always derive the width from the height or it squashes; and on the dark footer the mark sits on a light plate (`--logo-plate`) rather than being inverted, so it looks identical everywhere.
+It is a **trace of the practice's original artwork**, not a rendition of it. The August 2026 redesign shipped a hand-drawn approximation; the doctor's verdict was that it "doesn't look like the real logo yet", so in August 2026 the original file was separated by colour, vectorised (potrace), and checked back against the source — 0.3 % of pixels differ, all of it edge antialiasing. Anything that makes the mark *look different from the practice's file* is a regression, however tidy the code gets. If you ever need the source again: the practice sent it by WhatsApp, 1567 × 1243 px.
+
+Three consequences worth knowing before you touch it:
+
+- **Filled shapes, no strokes.** There is no `stroke`/`stroke-width` and no `currentColor` anywhere in the mark any more. It therefore scales cleanly from favicon to hero, and `vector-effect: non-scaling-stroke` has nothing to act on.
+- **Three colours, drawn in a load-bearing order** — `--logo-tube` grey `#959699` (upper ear tubes), then `--logo-ink` charcoal `#423e3d` (ear olives + the whole lower tube), then `--logo-heart` red `#a7203e` (heart + chest piece). Lower layers sit a hair wider under the upper ones so no light seam flashes at the colour joins. Don't reorder them.
+- The tokens are deliberately *not* derived from `--brand`, so a palette change can't drag the mark along. Note `--logo-heart` `#a7203e` and the site's bordeaux `--wine-500` `#a74d5f` are **near-neighbours but not the same colour** — that is intentional (the full logo red is too loud as a page-wide surface/text colour). Don't "fix" the discrepancy by unifying them.
+
+The same paths and the same colours — hard-coded there, since a standalone file has no CSS variables — are the favicon in `app/icon.svg`. **Change one, change both.**
+
+Two practical traps: the viewBox is **80×64 (5:4), not square** — always derive the width from the height or it squashes; and on the dark footer the mark sits on a light plate (`--logo-plate`) rather than being inverted, so it looks identical everywhere. The artwork now fills that viewBox — flush against the left and right edges, with 0.27 units of air top and bottom (height 63.47 of 64, vertically centred). There is no meaningful invisible margin left to compensate for and no `tight` prop any more; the 5:4 box is kept exactly so `calc(height * 1.25)` in `layout.css` stays correct.
 
 ## Text strings (German-only)
 
@@ -64,7 +74,7 @@ The practice's core complaint about the previous version was duplicated informat
 
 The practice moved the two visit rules **up** (August 2026) — they used to close the page — but explicitly **not all the way up**: "directly after the opening hours", so someone who just checked when the practice is open reads next what applies when they come. An earlier revision put them ahead of `Sprechzeiten`; the practice corrected that. The signpost moved the other way: it used to sit as a side note beside the opening-hours table and is now the page's closing section (`.home-guide`, rendered `flushTop` because it sits on the same cream surface as the rules right above it).
 
-**The hero shows `PracticeLogo`, not an illustration.** The practice asked for its own mark — the stethoscope looping around a heart, the one on its business card and on the newly filmed window — instead of the previous drawing of a window with a plant. `PracticeIllustration` in `components/illustrations.tsx` is therefore currently unused but kept. The logo sits on a soft `--brand-soft` field (`.home-hero__plate`), because it is a line mark with no surface of its own and looked lost in the column. Do **not** put the shared `.illustration` class on it: that sets `color: var(--accent-strong)` (recolouring the stethoscope through `currentColor`) and `vector-effect: non-scaling-stroke` (hairline strokes at hero size).
+**The hero shows `PracticeLogo`, not an illustration.** The practice asked for its own mark — the stethoscope looping around a heart, the one on its business card and on the newly filmed window — instead of the previous drawing of a window with a plant. `PracticeIllustration` in `components/illustrations.tsx` is therefore currently unused but kept. The logo sits on a soft `--brand-soft` field (`.home-hero__plate`), because it is a free-standing mark with no surface of its own and looked lost in the column. It is sized off its **width** (`.home-hero__logo`, 76 % of the plate) — the mark is landscape and fills its viewBox, so width is the long side. Do **not** put the shared `.illustration` class on it: it carries sizing and framing rules that don't fit here.
 
 ### The two visit rules live in one component and render twice
 
