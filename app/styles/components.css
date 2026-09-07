@@ -515,12 +515,6 @@
   color: var(--text-muted);
 }
 
-.note__thanks {
-  margin: 0;
-  font-size: var(--step--1);
-  color: var(--text-muted);
-}
-
 /* ---------------------------------------------------------------------------
    .visit-rules — die zwei Regeln zum Praxisbesuch (Terminpflicht, Maske bei
    Erkaeltung). Sie stehen auf der Startseite UND am Ende von /termine, gerendert

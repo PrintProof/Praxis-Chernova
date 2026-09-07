@@ -23,6 +23,17 @@ import {getTranslator} from '@/lib/i18n';
  * Sand traegt die verbindliche Regel, der ruhigere `.note`-Kasten den
  * Hygienehinweis — zwei gleich laute Kaesten uebereinander heben sich
  * gegenseitig auf.
+ *
+ * SEPTEMBER 2026 — BEIDE KAESTEN AUF DEN KERN GEKUERZT.
+ * Die Praxis hat den Fliesstext beider Kaesten durchgestrichen (Screenshots
+ * vom 07.09.2026): "kurz und klar, weniger Text, dafuer kommt mehr an".
+ * Der Terminkasten traegt seine Regel jetzt allein in der Ueberschrift
+ * ("Bitte nur mit vereinbartem Termin") und hat gar keinen Fliesstext mehr;
+ * beim Maskenkasten sagt die Ueberschrift den Anlass und der Satz nur noch
+ * die Regel. Der Dank am Ende ist entfallen.
+ * Die langen Merkblatt-Saetze stehen weiterhin in content/practice.ts
+ * (`appointments.byAppointmentOnly`), nur eben ungerendert — sie sind der
+ * Wortlaut der Praxis und keine Wegwerfware.
  */
 export function VisitRules() {
   const t = getTranslator();
@@ -34,7 +45,6 @@ export function VisitRules() {
           <AlertCircle className="icon icon--sm callout__icon" />
           <span>{t('home.rules.appointmentOnly')}</span>
         </p>
-        <p className="callout__body">{practice.appointments.byAppointmentOnly}</p>
       </div>
 
       <div className="note visit-rules__mask">
@@ -43,7 +53,6 @@ export function VisitRules() {
           <span>{t('home.rules.mask')}</span>
         </p>
         <p className="note__body">{practice.maskNote}</p>
-        <p className="note__thanks">{t('home.rules.thanks')}</p>
       </div>
     </>
   );

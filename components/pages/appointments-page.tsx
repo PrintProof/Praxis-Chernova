@@ -1,7 +1,6 @@
 import {Calendar, Phone, Video} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
-import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
 import {VisitRules} from '@/components/visit-rules';
 import {practice} from '@/content/practice';
@@ -31,15 +30,18 @@ export function AppointmentsPage() {
     <PageShell routeKey="appointments" notice={<NextVacationBanner />}>
       <section className="page-hero page-hero--muted">
         <div className="container page-hero__inner">
-          <p className="page-hero__eyebrow">{t('appointments.eyebrow')}</p>
           <h1 className="page-hero__title">{t('appointments.title')}</h1>
           <p className="page-hero__lead">{t('appointments.lead')}</p>
         </div>
       </section>
 
       {/* 1. Die beiden Wege. Traeger der Karten ist die UHRZEIT, nicht die
-             Ueberschrift: wer die Seite ueberfliegt, sucht genau diese Zahl. */}
-      <Section className="appointment-ways" title={t('appointments.waysTitle')}>
+             Ueberschrift: wer die Seite ueberfliegt, sucht genau diese Zahl.
+             Deshalb steht ueber ihnen auch keine Ueberschrift mehr: "Termin
+             vereinbaren" wiederholte nur die <h1> "Termine" zwei Zeilen
+             darunter — von der Praxis im September 2026 gestrichen, wie die
+             Kurzzeile "So kommen Sie zu uns" ueber dem Titel. */}
+      <Section className="appointment-ways">
         <div className="appointment-ways__grid">
           <article className="way">
             <p className="way__head">
@@ -51,6 +53,16 @@ export function AppointmentsPage() {
             <p className="way__body">{practice.appointments.onlineAudience}</p>
           </article>
 
+          {/* Die Telefon-Karte spiegelt die Online-Karte: dort steht, fuer wen
+              der Weg gedacht ist ("bereits bekannte Patientinnen und
+              Patienten"), hier steht das Gegenstueck.
+              Bis September 2026 stand unter beiden Karten ein ganzer Absatz
+              dazu ("Patientinnen und Patienten, die unsere Praxis-App noch
+              nicht nutzen, melden sich bitte telefonisch unter ... bei uns.").
+              Die Praxis hat ihn gestrichen; die Aussage ist in drei Woerter
+              in die Karte gewandert, wo sie beim Vergleich der beiden Wege
+              ohnehin gebraucht wird. Massgeblich bleibt die APP-NUTZUNG, nicht
+              "neu in der Praxis" — so von der Praxis ausdruecklich korrigiert. */}
           <article className="way">
             <p className="way__head">
               <Phone className="icon way__icon" />
@@ -58,6 +70,7 @@ export function AppointmentsPage() {
             </p>
             <p className="way__when">{t('appointments.phoneWhen')}</p>
             <p className="way__scope">{t('appointments.forToday')}</p>
+            <p className="way__body">{t('appointments.phoneNoApp')}</p>
             <p className="way__body">
               <a className="way__phone" href={practice.phoneHref}>
                 {practice.phone}
@@ -65,16 +78,6 @@ export function AppointmentsPage() {
             </p>
           </article>
         </div>
-
-        {/* Massgeblich ist die APP-NUTZUNG, nicht "neu in der Praxis" — so von
-            der Praxis ausdruecklich korrigiert. Das Zeitfenster steht hier
-            nicht nochmal: es steht gross in der Telefon-Karte darueber. */}
-        <PhoneSentence
-          className="appointment-ways__fallback"
-          text={practice.appointments.appOptOut}
-          href={practice.phoneHref}
-          display={practice.phone}
-        />
       </Section>
 
       {/* 2. Videosprechstunde — bewusst KEINE dritte Karte neben den beiden

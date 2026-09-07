@@ -105,12 +105,14 @@
   max-width: var(--measure);
 }
 
-/* Wer die Praxis-App nicht nutzt, ruft an. Steht direkt unter den beiden
-   Karten, weil es genau die Wahl zwischen ihnen erklaert. */
-.appointment-ways__fallback {
-  margin-top: var(--block-gap);
-  max-width: var(--measure);
-  color: var(--text-muted);
+/* Zwei Textzeilen in derselben Karte (Telefon: "Auch ohne Praxis-App." und die
+   Rufnummer) ruecken zusammen — der Abstand der Karte (`gap`) reicht, der
+   Zusatzabstand von `.way__body` gilt nur fuer die erste Zeile nach den
+   Uhrzeiten. Bis September 2026 stand der App-Hinweis als eigener Absatz
+   UNTER beiden Karten (`.appointment-ways__fallback`); die Praxis hat ihn
+   gestrichen, seither steht er in der Karte. */
+.way__body + .way__body {
+  margin-top: 0;
 }
 
 /* Terminpflicht und Hygienehinweis schliessen die Seite ab. Die zwei Kaesten

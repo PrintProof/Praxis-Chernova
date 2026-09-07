@@ -431,15 +431,6 @@
 }
 
 /* ---------------------------------------------------------------------------
-   5. Abschliessender Verweis auf die Sprechzeiten
-   Kleiner Anhang, bewusst als Textlink statt als dritter Button in Folge.
-   --------------------------------------------------------------------------- */
-
-.news-hours .section__header {
-  margin-bottom: var(--space-2);
-}
-
-/* ---------------------------------------------------------------------------
    Uebersicht bei genau EINEM gepflegten Zeitraum
    Statt einer einzeiligen Tabelle, die den Detailblock darueber wortwoertlich
    wiederholen wuerde, steht hier ein Satz. Der Abschnitt behaelt damit seinen

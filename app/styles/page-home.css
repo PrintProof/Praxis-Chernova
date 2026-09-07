@@ -266,10 +266,12 @@
    (`.hours-list`), die Zeitbloecke aus page-contact.css — es gibt fuer beides
    genau eine Quelle.
 
-   Die Randspalte traegt nur noch, was sachlich zu den Sprechzeiten gehoert:
-   den Hinweis auf abweichende Zeiten und den Link zu den Schliesszeiten. Der
-   allgemeine Wegweiser stand bis August 2026 ebenfalls hier und ist jetzt der
-   Schlussabschnitt der Seite (Abschnitt 5).
+   Die Randspalte traegt nur noch den Link zu den Schliesszeiten. Der
+   allgemeine Wegweiser stand bis August 2026 ebenfalls hier und ist im
+   September 2026 ganz entfallen; der erklaerende Satz ueber dem Link
+   ("Waehrend der Schliesszeiten ... abweichende Zeiten.") ebenso. Sie bleibt
+   als eigene Spalte bestehen: der Link gehoert sachlich zu den Sprechzeiten,
+   und unter der Tabelle haette er wie eine Fussnote der Tabelle gewirkt.
    --------------------------------------------------------------------------- */
 
 .home-hours__layout {
@@ -295,40 +297,20 @@
   min-width: 0;
 }
 
-.home-hours__note {
-  color: var(--text-muted);
-}
-
 /* ---------------------------------------------------------------------------
-   4. Besuchsregeln — Terminpflicht und Hygienehinweis.
+   4. Besuchsregeln — Terminpflicht und Hygienehinweis. Der SCHLUSSABSCHNITT
+   der Seite.
 
    Die zwei Kaesten selbst liegen in components/visit-rules.tsx und werden
    auch am Ende von /termine gerendert; ihr Innenleben steht deshalb in
-   components.css (`.visit-rules__*`), nicht hier. Auf der Startseite braucht
-   der Abschnitt keine einzige eigene Regel — er nimmt Flaeche und Abstand
-   unveraendert aus layout.css.
+   components.css (`.visit-rules__*`), nicht hier.
+
+   Einzige eigene Regel: mehr Luft nach unten. Bis September 2026 folgte den
+   Regeln noch ein Wegweiser-Absatz (`.home-guide`), der diese Luft trug —
+   die Praxis hat ihn gestrichen, und ohne sie stiessen die Kaesten hart an
+   die dunkle Fusszeile: die Seite bricht dann ab, statt zu enden.
    --------------------------------------------------------------------------- */
 
-/* ---------------------------------------------------------------------------
-   5. Wegweiser — der Abschluss der Seite.
-
-   Ein Satz Fliesstext mit Inline-Links, kein Kachelraster: genau das
-   Kachelraster war die Doppelung der Hauptnavigation, die die Praxis
-   kritisiert hat. Letzter Abschnitt vor der dunklen Fusszeile, deshalb mehr
-   Luft nach unten — damit die Seite endet statt abzubrechen.
-
-   Nach oben dagegen gar keine: der Abschnitt setzt direkt auf den
-   Besuchsregeln auf, beide stehen auf derselben cremefarbenen Flaeche. Mit
-   beidseitigem Abstand klaffte dort die doppelte Sektionsluft und der Satz
-   trieb frei zwischen Kaesten und Fusszeile. Das `flushTop` steht am
-   <Section> in home-page.tsx, nicht hier.
-   --------------------------------------------------------------------------- */
-
-.home-guide {
+.home-rules {
   padding-bottom: var(--section-y-lg);
-}
-
-.home-guide__body {
-  max-width: var(--measure);
-  color: var(--text);
 }

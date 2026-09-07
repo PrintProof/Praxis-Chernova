@@ -24,14 +24,18 @@ export function PrescriptionsPage() {
   return (
     <PageShell routeKey="prescriptions" notice={<NextVacationBanner />}>
       <section className="page-hero page-hero--muted">
+        {/* Nur der Titel. Kurzzeile ("Ohne in die Praxis zu kommen") und Lead
+            ("Rezepte und Ueberweisungen fordern Sie an, ohne dafuer in die
+            Praxis zu kommen.") sind im September 2026 von der Praxis
+            gestrichen worden: dreimal derselbe Gedanke uebereinander, zweimal
+            woertlich derselbe Titel. Was zu tun ist, sagt der Abschnitt
+            darunter — deshalb traegt auch der keine Ueberschrift mehr. */}
         <div className="container page-hero__inner">
-          <p className="page-hero__eyebrow">{t('prescriptions.eyebrow')}</p>
           <h1 className="page-hero__title">{t('prescriptions.title')}</h1>
-          <p className="page-hero__lead">{t('prescriptions.lead')}</p>
         </div>
       </section>
 
-      <Section className="prescription-how" title={t('prescriptions.howTitle')}>
+      <Section className="prescription-how">
         <PhoneSentence
           className="prescription-how__body"
           linkClassName="prescription-how__phone"

@@ -175,7 +175,7 @@ export const practice = {
      * Repository weiterhin genau einmal.
      */
     orderLine:
-      'Rezepte und Überweisungen können bequem über die Arzt-Direkt Praxis-App (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',
+      'Beides kann bequem über die Arzt-Direkt Praxis-App (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',
     /**
      * Der Gegenpol zum engen Terminfenster (7:30-8:30): das Rezepttelefon
      * nimmt jederzeit entgegen. Deshalb in der Anzeige eigens hervorgehoben.
@@ -219,7 +219,7 @@ export const practice = {
      * steht sie in der Anzeige unter den beiden Karten und nicht daneben.
      */
     videoLine:
-      'Für geeignete Anliegen bieten wir Ihnen auch eine Videosprechstunde an. Sie ermöglicht Ihnen eine ärztliche Beratung bequem von zu Hause oder unterwegs und kann Ihnen in vielen Fällen den Weg in die Praxis ersparen.',
+      'Wir bieten Ihnen auch eine Videosprechstunde an. Sie ermöglicht Ihnen eine ärztliche Beratung bequem von zu Hause oder unterwegs und kann Ihnen in vielen Fällen den Weg in die Praxis ersparen.',
     /**
      * Wer die Praxis-App nicht nutzt, ruft an. Das Kriterium ist ausdruecklich
      * die APP-NUTZUNG, nicht "neu in der Praxis" — die frühere Formulierung
@@ -227,13 +227,26 @@ export const practice = {
      * Praxis genau deshalb korrigieren lassen: auch langjaehrige Patientinnen
      * und Patienten ohne App gehoeren telefonisch angemeldet.
      * `{phone}` wird beim Rendern durch die Hauptnummer ersetzt (PhoneSentence).
+     *
+     * WIRD DERZEIT NICHT GERENDERT: die Praxis hat den Absatz im September 2026
+     * gestrichen (Screenshot vom 07.09.2026, ganzer Absatz gelb markiert). Die
+     * Aussage steht jetzt als drei Woerter in der Telefon-Karte auf /termine
+     * ("Auch ohne Praxis-App.", messages/de.json -> appointments.phoneNoApp).
+     * Der Satz bleibt als Merkblatt-Wortlaut erhalten.
      */
     appOptOut:
       'Patientinnen und Patienten, die unsere Praxis-App noch nicht nutzen, melden sich bitte telefonisch unter {phone} bei uns.',
     /** Ergaenzt appOptOut dort, wo das Zeitfenster nicht ohnehin sichtbar ist. */
     phoneWindowLine:
       'Die telefonische Terminvereinbarung ist täglich von 7:30 Uhr bis 8:30 Uhr möglich.',
-    /** Die verbindliche Regel: keine Behandlung ohne Termin. */
+    /**
+     * Die verbindliche Regel: keine Behandlung ohne Termin.
+     *
+     * WIRD DERZEIT NICHT GERENDERT: die Praxis hat den Fliesstext im September
+     * 2026 durchgestrichen (Screenshot vom 07.09.2026) — die Regel steht kurz
+     * und klar in der Ueberschrift des Kastens ("Bitte nur mit vereinbartem
+     * Termin"). Der Satz bleibt als Merkblatt-Wortlaut erhalten.
+     */
     byAppointmentOnly:
       'Um Wartezeiten zu vermeiden und einen reibungslosen Praxisablauf zu gewährleisten, erfolgt die Behandlung ausschließlich nach vorheriger Terminvereinbarung. Bitte kommen Sie daher nur mit einem vereinbarten Termin in unsere Praxis.'
   },
@@ -247,9 +260,16 @@ export const practice = {
   houseCallsArrangement:
     'Hausbesuche werden ausschließlich telefonisch vereinbart. Bitte rufen Sie uns dafür unter {phone} an.',
 
-  /** Hygienehinweis aus demselben Merkblatt. */
+  /**
+   * Hygienehinweis. Im September 2026 von der Praxis auf den Kernsatz gekürzt
+   * (Screenshot vom 07.09.2026): die Höflichkeitseinleitung "Zum Schutz unserer
+   * Patientinnen und Patienten sowie unseres Praxisteams bitten wir Sie, unsere
+   * Praxis bei Erkältungssymptomen ..." ist durchgestrichen, ebenso der
+   * Dank am Ende. Den Anlass trägt jetzt die Überschrift des Kastens
+   * ("Bei Erkältungssymptomen"), der Satz nur noch die Regel.
+   */
   maskNote:
-    'Zum Schutz unserer Patientinnen und Patienten sowie unseres Praxisteams bitten wir Sie, unsere Praxis bei Erkältungssymptomen (z. B. Husten, Schnupfen oder Halsschmerzen) nur mit einer medizinischen Mund-Nasen-Maske zu betreten.',
+    'Bitte nur mit einer medizinischen Mund-Nasen-Maske (z. B. bei Husten, Schnupfen oder Halsschmerzen).',
 
   /**
    * Hausbesuche — wortgetreu aus dem Merkblatt der Praxis.

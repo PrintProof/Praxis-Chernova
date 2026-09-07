@@ -41,17 +41,18 @@ import {getPath} from '@/lib/routing';
  * Vom Urlaub steht hier nur das zeitkritische Hinweisband; es rendert sich
  * selbst nur, wenn wirklich ein Urlaub ansteht.
  *
- * REIHENFOLGE (August 2026 von der Praxis so gewuenscht):
+ * REIHENFOLGE:
  *   Hero (Bildmarke) -> "Die Praxis" -> "Sprechzeiten" ->
- *   die zwei Besuchsregeln -> Wegweiser in die Unterseiten.
- * Die Regeln standen vorher am Seitenende und der Wegweiser als Randnotiz
- * neben der Sprechzeitentabelle. Die Praxis wollte die Regeln hoeher, aber
- * ausdruecklich NICHT ganz nach oben: "direkt nach den Sprechzeiten" und
- * der Wegweiser danach ans Ende.
+ *   die zwei Besuchsregeln. Ende.
+ * Die Regeln standen vorher am Seitenende, dann folgte ihnen noch ein
+ * Wegweiser-Absatz in die Unterseiten. Die Praxis wollte die Regeln hoeher,
+ * aber ausdruecklich NICHT ganz nach oben ("direkt nach den Sprechzeiten",
+ * August 2026) — und hat den Wegweiser im September 2026 ganz gestrichen.
+ * Damit sind sie wieder der Schlussabschnitt.
  *
- * Fuenf Abschnitte, fuenf verschiedene Strukturmuster (zweispaltiger Hero mit
- * Bildmarke, ruhiges Roséband, zwei Hinweiskaesten, Datenliste mit
- * Randspalte, ein Satz Fliesstext) — statt fuenfmal derselben Kachelreihe.
+ * Vier Abschnitte, vier verschiedene Strukturmuster (zweispaltiger Hero mit
+ * Bildmarke, ruhiges Roséband, Datenliste mit Randspalte, zwei
+ * Hinweiskaesten) — statt viermal derselben Kachelreihe.
  */
 export function HomePage() {
   const t = getTranslator();
@@ -117,17 +118,18 @@ export function HomePage() {
       </Section>
 
       {/* Sprechzeiten — die meistgesuchte Angabe einer Praxis-Startseite.
-          Links die Datenliste, rechts eine schmale Randspalte mit dem Hinweis
-          auf abweichende Zeiten und dem Link zu den Schliesszeiten. Beides
-          gehoert sachlich zu den Sprechzeiten; der allgemeine Wegweiser in die
-          Unterseiten stand frueher ebenfalls hier und schliesst die Seite
-          jetzt als eigener Abschnitt ab. */}
+          Links die Datenliste, rechts eine schmale Randspalte mit dem Link zu
+          den Schliesszeiten.
+          Der erklaerende Satz "Waehrend der Schliesszeiten der Praxis gelten
+          abweichende Zeiten." stand bis September 2026 ueber dem Link und ist
+          von der Praxis gestrichen worden (Screenshot vom 07.09.2026): der
+          Link sagt dasselbe in der Haelfte der Woerter, und wer wirklich
+          betroffen ist, klickt ohnehin. */}
       <Section className="home-hours" title={t('home.hours.title')} tone="surface">
         <div className="home-hours__layout">
           <OpeningHours />
 
           <div className="home-hours__aside">
-            <p className="home-hours__note">{t('home.hours.note')}</p>
             <Link className="link link--arrow" href={getPath('closures')}>
               {t('home.hours.link')}
             </Link>
@@ -135,39 +137,23 @@ export function HomePage() {
         </div>
       </Section>
 
-      {/* Terminpflicht und Hygienehinweis, DIREKT NACH den Sprechzeiten.
+      {/* Terminpflicht und Hygienehinweis — der ABSCHLUSS der Seite, direkt
+          nach den Sprechzeiten.
           Genau diese Stelle hat die Praxis benannt (Sprachnachricht vom
           09.08.2026, 17:11): nicht ganz nach oben, sondern hinter die Zeiten
           und noch vor den Wegweiser. Wer nachgesehen hat, wann geoeffnet ist,
           liest als naechstes, was beim Kommen gilt.
           Dieselben zwei Kaesten stehen am Ende von /termine (components/
-          visit-rules.tsx erklaert, warum das keine Inhaltsdoppelung ist). */}
-      <Section titleHidden title={t('home.rules.title')}>
-        <VisitRules />
-      </Section>
+          visit-rules.tsx erklaert, warum das keine Inhaltsdoppelung ist).
 
-      {/* Wegweiser in die Unterseiten — der Abschluss der Seite. Er stand bis
-          August 2026 als Randnotiz neben der Sprechzeitentabelle; die Praxis
-          wollte ihn ganz ans Ende. Fliesstext mit Inline-Links statt Kacheln:
-          ein Wegweiser ist ein Satz, kein Raster.
-          `flushTop`, weil der Abschnitt direkt auf den Regeln aufsetzt und
-          beide auf derselben cremefarbenen Flaeche stehen: mit beidseitigem
-          Abstand klaffte dazwischen die doppelte Sektionsluft.
-          Die Ueberschrift traegt nur die Vorlesereihenfolge — sichtbar waere
-          sie eine leere Geste ueber zwei Zeilen Text. */}
-      <Section className="home-guide" titleHidden title={t('home.guide.title')} flushTop>
-        <p className="home-guide__body">
-          {t.rich('home.guide.body', {
-            appointments: (chunks) => (
-              <Link href={getPath('appointments')}>{chunks}</Link>
-            ),
-            prescriptions: (chunks) => (
-              <Link href={getPath('prescriptions')}>{chunks}</Link>
-            ),
-            housecalls: (chunks) => <Link href={getPath('housecalls')}>{chunks}</Link>,
-            contact: (chunks) => <Link href={getPath('contact')}>{chunks}</Link>
-          })}
-        </p>
+          DANACH KOMMT NICHTS MEHR. Bis September 2026 schloss die Seite mit
+          einem Wegweiser-Absatz ("Termine, Rezepte und Hausbesuche sind unter
+          ... erklaert. Alle Kontaktwege und die Anfahrt stehen unter ...").
+          Die Praxis hat ihn gestrichen (Screenshot vom 07.09.2026, ganzer
+          Absatz gelb markiert): er sagte in zwei Zeilen Fliesstext genau das,
+          was die sechs Punkte der Hauptnavigation ohnehin sagen. */}
+      <Section className="home-rules" titleHidden title={t('home.rules.title')}>
+        <VisitRules />
       </Section>
 
     </PageShell>

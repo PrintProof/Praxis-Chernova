@@ -70,15 +70,35 @@ The practice's core complaint about the previous version was duplicated informat
 | What the practice is, opening hours | `/` |
 | **"only with an appointment" rule, mask notice** | `/` **and** the end of `/termine` — the one deliberate exception, see below |
 
-**The home page is deliberately thin, in this order:** hero (practice name + the *Anrufen* button + the practice's own logo — no eyebrow, no specialty line, no lead, **no booking button**), `Die Praxis`, `Sprechzeiten`, the two visit rules, then the signpost paragraph into the sub-pages. Nothing else. Don't grow it back.
+**The home page is deliberately thin, in this order:** hero (practice name + the *Anrufen* button + the practice's own logo — no eyebrow, no specialty line, no lead, **no booking button**), `Die Praxis`, `Sprechzeiten`, the two visit rules. Nothing else. Don't grow it back.
 
-The practice moved the two visit rules **up** (August 2026) — they used to close the page — but explicitly **not all the way up**: "directly after the opening hours", so someone who just checked when the practice is open reads next what applies when they come. An earlier revision put them ahead of `Sprechzeiten`; the practice corrected that. The signpost moved the other way: it used to sit as a side note beside the opening-hours table and is now the page's closing section (`.home-guide`, rendered `flushTop` because it sits on the same cream surface as the rules right above it).
+The practice moved the two visit rules **up** (August 2026) — they used to close the page — but explicitly **not all the way up**: "directly after the opening hours", so someone who just checked when the practice is open reads next what applies when they come. An earlier revision put them ahead of `Sprechzeiten`; the practice corrected that. In September 2026 the signpost paragraph that followed them was deleted, so they close the page again (`.home-rules` carries the extra bottom air the deleted `.home-guide` used to provide — without it the boxes butt against the dark footer).
+
+### The September 2026 shortening pass — don't undo it
+
+The practice went through the live site with a highlighter (screenshots, 07.09.2026) and struck what it read as filler: *"kurz und klar, weniger Text, dann kommt mehr an."* Everything below was removed **on request** and must not be "restored" as an improvement:
+
+| Gone | Where it was |
+|---|---|
+| Signpost paragraph "Termine, Rezepte und Hausbesuche sind unter …" | end of `/` (`home.guide`) |
+| "Während der Schließzeiten der Praxis gelten abweichende Zeiten." | above the closures link on `/` (the link stayed) |
+| Body text of the appointment-only callout | `/` and `/termine` — the heading now carries the rule alone |
+| "Zum Schutz unserer Patientinnen und Patienten …" preamble + "Vielen Dank für Ihr Verständnis …" | mask note, shortened to the rule itself |
+| Section "Sprechzeiten außerhalb der Urlaubszeiten" | end of `/schliesszeiten` (`closures.hours`, `.news-hours`) |
+| Eyebrow + section heading "Termin vereinbaren" | `/termine` — both repeated the `<h1>` |
+| Paragraph "Patientinnen und Patienten, die unsere Praxis-App noch nicht nutzen …" | `/termine`; survives as three words in the phone card (`appointments.phoneNoApp`) |
+| "Für geeignete Anliegen" | opening of `appointments.videoLine` |
+| Eyebrow, lead and heading "So fordern Sie an" | `/rezepte` — three restatements of the `<h1>` above each other |
+
+Eyebrows on `/kontakt`, `/hausbesuche` and `/schliesszeiten` were **kept**: the practice only reviewed `/termine` and `/rezepte`, so only those two lost theirs. If it ever asks for consistency, they go too.
 
 **The hero shows `PracticeLogo`, not an illustration.** The practice asked for its own mark — the stethoscope looping around a heart, the one on its business card and on the newly filmed window — instead of the previous drawing of a window with a plant. `PracticeIllustration` in `components/illustrations.tsx` is therefore currently unused but kept. The logo sits on a soft `--brand-soft` field (`.home-hero__plate`), because it is a free-standing mark with no surface of its own and looked lost in the column. It is sized off its **width** (`.home-hero__logo`, 76 % of the plate) — the mark is landscape and fills its viewBox, so width is the long side. Do **not** put the shared `.illustration` class on it: it carries sizing and framing rules that don't fit here.
 
 ### The two visit rules live in one component and render twice
 
 `components/visit-rules.tsx` renders the pair (appointment-only callout + mask note) and **nothing else** — no `<Section>`, so each page picks tone, position and heading itself: the home page hides the heading, `/termine` shows it (`appointments.rulesTitle`). It is rendered on `/` and at the end of `/termine`.
+
+Both boxes are down to their core since September 2026: the sand callout is **a heading with no body**, the mask note a heading plus one sentence. The long leaflet sentences are still in `content/practice.ts` (`appointments.byAppointmentOnly`, and `appOptOut` for the same reason) — kept as the practice's own wording, deliberately unrendered, each marked as such in a comment. Same pattern as `practice.services`.
 
 Yes, that is a deliberate exception to the one-canonical-home rule above, made by the practice in August 2026: many people land on `/termine` to book and should see both rules there too. The exception is narrow and safe because **the sentences themselves still exist exactly once** (`practice.appointments.byAppointmentOnly`, `practice.maskNote`, `home.rules.*`) — what repeats is the presentation, not the content, and it cannot drift. Don't extend it to a third page without asking, and don't inline-copy the JSX.
 

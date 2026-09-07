@@ -1,11 +1,7 @@
-import Link from 'next/link';
-
 import {EmergencyService} from '@/components/emergency-service';
 import {PageShell} from '@/components/page-shell';
-import {Section} from '@/components/section';
 import {VacationOverview} from '@/components/vacation-overview';
 import {getTranslator} from '@/lib/i18n';
-import {getPath} from '@/lib/routing';
 
 /**
  * /schliesszeiten — ausschliesslich zeitkritische Betriebsinformationen:
@@ -31,18 +27,13 @@ export function ClosuresPage() {
 
       <VacationOverview />
 
+      {/* Danach kommt nichts mehr. Bis September 2026 schloss die Seite mit
+          einem Abschnitt "Sprechzeiten ausserhalb der Urlaubszeiten", der auf
+          die Kontaktseite verwies. Die Praxis hat ihn gestrichen (Screenshot
+          vom 07.09.2026, Ueberschrift, Satz und Link komplett markiert): auf
+          einer Seite ueber Schliesszeiten sind die regulaeren Sprechzeiten ein
+          Nebenschauplatz, und die Hauptnavigation fuehrt ohnehin dorthin. */}
       <EmergencyService />
-
-      <Section
-        title={t('closures.hours.title')}
-        description={t('closures.hours.body')}
-        spacing="sm"
-        className="news-hours"
-      >
-        <Link className="link link--arrow" href={getPath('contact')}>
-          {t('cta.contactAndHours')}
-        </Link>
-      </Section>
     </PageShell>
   );
 }

@@ -25,7 +25,6 @@
   "cta": {
     "call": "Anrufen",
     "callAria": "Praxis anrufen: {phone}",
-    "contactAndHours": "Sprechzeiten & Kontakt",
     "bookOnlineShort": "Online-Termin",
     "bookOnlineAudience": "nur für Bestandspatienten",
     "openRoute": "Route planen",
@@ -41,23 +40,17 @@
   "home": {
     "about": {
       "title": "Die Praxis",
-      "body": "Veronika Chernova ist Fachärztin für Innere Medizin und Allgemeinmedizin. In unserer Praxis in Bielefeld-Brackwede bieten wir eine persönliche, vertrauensvolle und moderne hausärztliche Versorgung. Unser Ziel ist es, Sie kompetent und individuell in allen Gesundheitsfragen zu begleiten."
+      "body": "Veronika Chernova ist Fachärztin für Innere und Allgemeinmedizin. In unserer Praxis bieten wir eine persönliche, vertrauensvolle und moderne hausärztliche Versorgung. Unser Ziel ist es, Sie kompetent und individuell in allen Gesundheitsfragen zu begleiten."
     },
     "hours": {
       "title": "Sprechzeiten",
-      "note": "Während der Schließzeiten der Praxis gelten abweichende Zeiten.",
       "link": "Schließzeiten und Vertretung ansehen",
       "ariaLabel": "Sprechzeiten der Praxis"
-    },
-    "guide": {
-      "title": "Weitere Informationen",
-      "body": "Termine, Rezepte und Hausbesuche sind unter <appointments>Termine</appointments>, <prescriptions>Rezepte</prescriptions> und <housecalls>Hausbesuche</housecalls> erklärt. Alle Kontaktwege und die Anfahrt stehen unter <contact>Kontakt & Anfahrt</contact>."
     },
     "rules": {
       "title": "Beim Besuch der Praxis",
       "appointmentOnly": "Bitte nur mit vereinbartem Termin",
-      "mask": "Bei Erkältungssymptomen",
-      "thanks": "Vielen Dank für Ihr Verständnis und Ihre Rücksichtnahme."
+      "mask": "Bei Erkältungssymptomen"
     }
   },
   "contact": {
@@ -149,24 +142,20 @@
     "addressLabel": "Anschrift"
   },
   "appointments": {
-    "eyebrow": "So kommen Sie zu uns",
     "title": "Termine",
     "lead": "Termine gelten jeweils für den aktuellen Tag. Für die Vereinbarung gibt es zwei Wege.",
-    "waysTitle": "Termin vereinbaren",
     "onlineTitle": "Online buchen",
     "onlineWhen": "ab 00:00 Uhr",
     "phoneTitle": "Telefonisch",
     "phoneWhen": "7:30 – 8:30 Uhr",
     "forToday": "für den aktuellen Tag",
+    "phoneNoApp": "Auch ohne Praxis-App.",
     "videoTitle": "Videosprechstunde",
     "rulesTitle": "Beim Besuch der Praxis"
   },
   "prescriptions": {
-    "eyebrow": "Ohne in die Praxis zu kommen",
     "title": "Rezepte und Überweisungen",
-    "lead": "Rezepte und Überweisungen fordern Sie an, ohne dafür in die Praxis zu kommen.",
     "phoneLabel": "Rezepttelefon",
-    "howTitle": "So fordern Sie an",
     "timingTitle": "Wann alles bereitliegt"
   },
   "closures": {
@@ -184,10 +173,6 @@
       "overviewTitleYear": "Schließzeiten {year}",
       "planAheadTitle": "Planen Sie rechtzeitig!",
       "onlyCurrent": "Weitere Schließzeiten sind zurzeit nicht geplant. Sobald ein neuer Zeitraum feststeht, finden Sie ihn hier."
-    },
-    "hours": {
-      "title": "Sprechzeiten außerhalb der Urlaubszeiten",
-      "body": "Die regulären Sprechzeiten und alle Kontaktwege finden Sie auf der Kontaktseite."
     }
   },
   "housecalls": {
