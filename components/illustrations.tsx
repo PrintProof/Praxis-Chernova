@@ -179,17 +179,6 @@ export function Fax(props: IconProps) {
   );
 }
 
-/** Haus — Hausbesuch. */
-export function HouseCall(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <path d="M3.4 10.6 L12 3.6 L20.6 10.6" />
-      <path d="M5.8 8.6 L5.8 19 A1.8 1.8 0 0 0 7.6 20.8 L16.4 20.8 A1.8 1.8 0 0 0 18.2 19 L18.2 8.6" />
-      <path d="M10.2 20.8 L10.2 15.4 A1.8 1.8 0 0 1 13.8 15.4 L13.8 20.8" />
-    </Icon>
-  );
-}
-
 /** Stethoskop — aerztliche Leistung. */
 export function Stethoscope(props: IconProps) {
   return (

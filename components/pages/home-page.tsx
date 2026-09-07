@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import {EmergencyService} from '@/components/emergency-service';
 import {Phone} from '@/components/illustrations';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {OpeningHours} from '@/components/opening-hours';
@@ -43,16 +44,16 @@ import {getPath} from '@/lib/routing';
  *
  * REIHENFOLGE:
  *   Hero (Bildmarke) -> "Die Praxis" -> "Sprechzeiten" ->
- *   die zwei Besuchsregeln. Ende.
+ *   die zwei Besuchsregeln -> 116 117 / 112. Ende.
  * Die Regeln standen vorher am Seitenende, dann folgte ihnen noch ein
  * Wegweiser-Absatz in die Unterseiten. Die Praxis wollte die Regeln hoeher,
  * aber ausdruecklich NICHT ganz nach oben ("direkt nach den Sprechzeiten",
- * August 2026) — und hat den Wegweiser im September 2026 ganz gestrichen.
- * Damit sind sie wieder der Schlussabschnitt.
+ * August 2026) — und hat den Wegweiser im September 2026 gestrichen und
+ * stattdessen den Notdienstblock ans Ende gesetzt.
  *
- * Vier Abschnitte, vier verschiedene Strukturmuster (zweispaltiger Hero mit
- * Bildmarke, ruhiges Roséband, Datenliste mit Randspalte, zwei
- * Hinweiskaesten) — statt viermal derselben Kachelreihe.
+ * Fuenf Abschnitte, fuenf verschiedene Strukturmuster (zweispaltiger Hero mit
+ * Bildmarke, ruhiges Roséband, Datenliste mit Randspalte, zwei Hinweiskaesten,
+ * zwei Sandkaesten mit Rufnummer) — statt fuenfmal derselben Kachelreihe.
  */
 export function HomePage() {
   const t = getTranslator();
@@ -152,9 +153,20 @@ export function HomePage() {
           Die Praxis hat ihn gestrichen (Screenshot vom 07.09.2026, ganzer
           Absatz gelb markiert): er sagte in zwei Zeilen Fliesstext genau das,
           was die sechs Punkte der Hauptnavigation ohnehin sagen. */}
-      <Section className="home-rules" titleHidden title={t('home.rules.title')}>
+      <Section titleHidden title={t('home.rules.title')}>
         <VisitRules />
       </Section>
+
+      {/* 116 117 / 112 als LETZTER Block — von der Praxis im September 2026
+          ausdruecklich auch auf die Startseite gewuenscht ("unter bei
+          Erkaeltungssymptomen"). Wer abends oder am Wochenende auf der
+          Startseite landet, findet damit sofort die Nummer, die dann gilt,
+          statt erst /urlaubszeiten oeffnen zu muessen.
+          Dieselbe Komponente wie dort und auf /kontakt: die Nummern koennen
+          nicht auseinanderlaufen, und der Bereitschaftsdienst bleibt sauber
+          getrennt vom Urlaubshinweis (KV-Vorgabe, siehe
+          components/emergency-service.tsx). */}
+      <EmergencyService />
 
     </PageShell>
   );

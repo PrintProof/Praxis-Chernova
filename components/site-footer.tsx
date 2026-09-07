@@ -9,7 +9,6 @@ const primaryRoutes = [
   'home',
   'appointments',
   'prescriptions',
-  'housecalls',
   'closures',
   'contact'
 ] as const;

@@ -1,7 +1,7 @@
 import {Clock, Info, Prescription} from '@/components/illustrations';
+import {LinkedSentence} from '@/components/linked-sentence';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
-import {PhoneSentence} from '@/components/phone-sentence';
 import {Section} from '@/components/section';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
@@ -35,30 +35,42 @@ export function PrescriptionsPage() {
         </div>
       </section>
 
+      {/* Der Anforderungssatz. Beide Wege darin sind anklickbar: die Praxis-App
+          fuehrt zu arzt-direkt, die Rufnummer waehlt. Halbfett, damit man den
+          Woertern ansieht, dass sie Links sind — ausdruecklicher Wunsch der
+          Praxis (September 2026), weil der App-Weg vorher nur Text war. */}
       <Section className="prescription-how">
-        <PhoneSentence
+        <LinkedSentence
           className="prescription-how__body"
-          linkClassName="prescription-how__phone"
           text={practice.prescriptionNotes.orderLine}
-          href={practice.prescriptionPhoneHref}
-          display={practice.prescriptionPhoneDisplay}
+          links={[
+            {
+              token: 'app',
+              href: practice.bookingUrl,
+              label: t('prescriptions.appLinkLabel'),
+              className: 'prescription-how__app',
+              external: true
+            },
+            {
+              token: 'phone',
+              href: practice.prescriptionPhoneHref,
+              label: practice.prescriptionPhoneDisplay,
+              className: 'prescription-how__phone'
+            }
+          ]}
         />
-
-        {/* Voraussetzung fuers eRezept. Steht bewusst hier, direkt beim
-            Anfordern — wer sie erst weiter unten liest, hat schon angefordert. */}
-        <div className="note prescription-how__note">
-          <p className="note__title">
-            <Info className="icon note__icon" />
-            <span>{t('common.pleaseNote')}</span>
-          </p>
-          <p className="note__body">{practice.prescriptionNotes.cardRequirement}</p>
-        </div>
       </Section>
 
       {/* Danach die Rufnummer mit der Rund-um-die-Uhr-Erreichbarkeit. Sie
-          steht bewusst NICHT mehr ganz oben: die Praxis wollte, dass zuerst
-          die App kommt. Prominent bleibt sie trotzdem — zweiter Abschnitt,
-          eigenes Panel, Satz in Lead-Groesse. */}
+          steht bewusst NICHT ganz oben: die Praxis wollte, dass zuerst
+          die App kommt. Prominent bleibt sie trotzdem — eigenes Panel,
+          Satz in Lead-Groesse.
+
+          DIREKT DARUNTER die Voraussetzung fuers eRezept. Sie stand bis
+          September 2026 eine Sektion hoeher, gleich unter dem Anforderungssatz;
+          die Praxis wollte sie unter den Rezepttelefon-Block. Das passt auch
+          sachlich: die Voraussetzung gilt fuer BEIDE Wege, also gehoert sie
+          hinter beide und nicht zwischen sie. */}
       <Section className="prescription-intro" titleHidden title={t('prescriptions.phoneLabel')} tone="surface">
         <div className="prescription-panel">
           <div className="prescription-panel__phone">
@@ -78,6 +90,14 @@ export function PrescriptionsPage() {
               {practice.prescriptionNotes.phoneAvailability}
             </p>
           </div>
+        </div>
+
+        <div className="note prescription-intro__note">
+          <p className="note__title">
+            <Info className="icon note__icon" />
+            <span>{t('common.pleaseNote')}</span>
+          </p>
+          <p className="note__body">{practice.prescriptionNotes.cardRequirement}</p>
         </div>
       </Section>
 

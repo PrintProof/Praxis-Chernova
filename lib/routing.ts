@@ -2,7 +2,6 @@ export type RouteKey =
   | 'home'
   | 'appointments'
   | 'prescriptions'
-  | 'housecalls'
   | 'closures'
   | 'contact'
   | 'legal'
@@ -12,7 +11,9 @@ export const routeByKey: Record<RouteKey, string> = {
   home: '/',
   appointments: '/termine',
   prescriptions: '/rezepte',
-  housecalls: '/hausbesuche',
+  // Der Pfad heisst weiterhin /schliesszeiten, die Seite ueberall
+  // "Urlaubszeiten" (Wunsch der Praxis, September 2026). Die Umbenennung des
+  // Pfades waere ein toter Link fuer alles, was die Praxis schon verteilt hat.
   closures: '/schliesszeiten',
   contact: '/kontakt',
   legal: '/impressum',

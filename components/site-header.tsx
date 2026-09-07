@@ -7,20 +7,24 @@ import {getTranslator} from '@/lib/i18n';
 import {getPath, type RouteKey} from '@/lib/routing';
 
 /**
- * Hauptnavigation — sieben Punkte, alle sichtbar. So von der Praxis gewuenscht.
+ * Hauptnavigation — alle Punkte sichtbar, nichts in einem Menue versteckt.
+ * So von der Praxis gewuenscht.
  *
  * Deshalb steht die Kopfzeile ab 62em in ZWEI Reihen: Marke und Aktionen oben,
- * die Navigation darunter ueber die volle Breite. Einreihig ginge es nicht —
- * gemessen braeuchte sie Marke 300 + Navigation 622 + Rufnummer + Button +
- * Abstaende = 1232px, der Container fasst 1008px. Zweireihig sind es 594px in
- * Zeile 1 und 622px in Zeile 2, beides mit reichlich Reserve. Als Nebeneffekt
- * ist wieder Platz fuer die ausgeschriebene Rufnummer.
+ * die Navigation darunter ueber die volle Breite. Mit den frueheren sechs
+ * Punkten ging einreihig nicht — gemessen braeuchte sie Marke 300 +
+ * Navigation 622 + Rufnummer + Button + Abstaende = 1232px, der Container
+ * fasst 1008px.
+ *
+ * Seit dem Wegfall von /hausbesuche (September 2026) sind es fuenf Punkte, und
+ * es bleibt bei zwei Reihen: die Navigation ist zwar schmaler, aber die
+ * Zweireihigkeit ist die stabile Form — beim naechsten Punkt braeuchte es
+ * sonst wieder einen Umbau. Wer sie einreihig will, muss neu messen.
  */
 const navItems = [
   'home',
   'appointments',
   'prescriptions',
-  'housecalls',
   'closures',
   'contact'
 ] as const;

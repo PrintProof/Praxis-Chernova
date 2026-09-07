@@ -305,12 +305,9 @@
    auch am Ende von /termine gerendert; ihr Innenleben steht deshalb in
    components.css (`.visit-rules__*`), nicht hier.
 
-   Einzige eigene Regel: mehr Luft nach unten. Bis September 2026 folgte den
-   Regeln noch ein Wegweiser-Absatz (`.home-guide`), der diese Luft trug —
-   die Praxis hat ihn gestrichen, und ohne sie stiessen die Kaesten hart an
-   die dunkle Fusszeile: die Seite bricht dann ab, statt zu enden.
+   Der Abschnitt braucht keine einzige eigene Regel — er nimmt Flaeche und
+   Abstand unveraendert aus layout.css. Auch keine Extraluft nach unten mehr:
+   den Seitenabschluss bildet seit September 2026 der Notdienstblock
+   (components/emergency-service.tsx), ein getoentes Band, das die Seite von
+   sich aus gegen die dunkle Fusszeile abschliesst.
    --------------------------------------------------------------------------- */
-
-.home-rules {
-  padding-bottom: var(--section-y-lg);
-}

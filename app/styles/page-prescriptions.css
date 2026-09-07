@@ -87,7 +87,17 @@
   white-space: nowrap;
 }
 
-.prescription-how__note {
+/* Der Weg ueber die Praxis-App fuehrt aus der Seite heraus zu arzt-direkt.
+   Gleiches Gewicht wie die Rufnummer daneben — beide sind Wege, beide sind
+   Links, und die Praxis wollte, dass man das sieht. Kein `white-space: nowrap`:
+   "Arzt-Direkt Praxis-App" darf auf dem Telefon umbrechen. */
+.prescription-how__app {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+}
+
+/* Die Voraussetzung fuers eRezept, unter dem Rezepttelefon-Panel. */
+.prescription-intro__note {
   margin-top: var(--block-gap);
   max-width: 46rem;
 }

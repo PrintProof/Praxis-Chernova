@@ -21,7 +21,10 @@ import {getTranslator} from '@/lib/i18n';
  * Schritt 3 wiederholt die zwei Kaesten der Startseite — auf ausdruecklichen
  * Wunsch der Praxis (August 2026), weil viele direkt hier landen. Warum das
  * die Ein-Ort-Regel nicht verletzt, steht in components/visit-rules.tsx.
- * Hausbesuche stehen weiterhin nur auf /hausbesuche.
+ *
+ * Hausbesuche standen bis September 2026 auf einer eigenen Seite; die hat die
+ * Praxis abgeschafft. Sie werden seither nirgends auf der Website erwaehnt —
+ * die Saetze dazu liegen ungerendert in content/practice.ts.
  */
 export function AppointmentsPage() {
   const t = getTranslator();

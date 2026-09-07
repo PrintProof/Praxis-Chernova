@@ -4,15 +4,17 @@ import {getTranslator} from '@/lib/i18n';
 /**
  * Ärztlicher Bereitschaftsdienst (116 117) und Rettungsdienst (112).
  *
- * Diese eine Komponente wird auf /schliesszeiten UND /kontakt eingebunden — die
- * einzige bewusst in Kauf genommene Wiederholung, weil sie sicherheitsrelevant
- * ist. Weil es genau EINE Komponente mit genau EINEM Satz Textschlüsseln gibt,
- * kann der Text nicht auseinanderlaufen.
+ * Diese eine Komponente wird auf der Startseite, auf /schliesszeiten UND auf
+ * /kontakt eingebunden — die einzige bewusst in Kauf genommene Wiederholung,
+ * weil sie sicherheitsrelevant ist. Weil es genau EINE Komponente mit genau
+ * EINEM Satz Textschlüsseln gibt, kann der Text nicht auseinanderlaufen.
+ * Auf die Startseite hat die Praxis den Block im September 2026 ausdrücklich
+ * dazubestellt: als letzten Abschnitt, hinter den Besuchsregeln.
  *
- * ZWEI AUSFÜHRUNGEN, damit die beiden Seiten nicht zeichengleich enden:
- *   `full`    — /schliesszeiten. Zwei Sandkästen mit Erklärung und Anrufbutton.
- *               Dort ist die Praxis geschlossen; der Hinweis ist akut und
- *               bekommt das volle Gewicht.
+ * ZWEI AUSFÜHRUNGEN, damit die Seiten nicht zeichengleich enden:
+ *   `full`    — Startseite und /schliesszeiten. Zwei Sandkästen mit Erklärung
+ *               und Anrufbutton. Der Hinweis ist akut und bekommt dort das
+ *               volle Gewicht.
  *   `compact` — /kontakt. Eine Zeile mit beiden Nummern als `tel:`-Links,
  *               direkt unter den Kontaktwegen der Praxis. Die Nummern — der
  *               sicherheitsrelevante Teil — stehen unverkürzt da, nur die

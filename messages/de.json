@@ -15,8 +15,7 @@
     "privacy": "Datenschutz",
     "appointments": "Termine",
     "prescriptions": "Rezepte",
-    "closures": "Schließzeiten",
-    "housecalls": "Hausbesuche"
+    "closures": "Urlaubszeiten"
   },
   "common": {
     "homeAria": "Zur Startseite",
@@ -44,13 +43,13 @@
     },
     "hours": {
       "title": "Sprechzeiten",
-      "link": "Schließzeiten und Vertretung ansehen",
+      "link": "Urlaubszeiten und Vertretung ansehen",
       "ariaLabel": "Sprechzeiten der Praxis"
     },
     "rules": {
       "title": "Beim Besuch der Praxis",
-      "appointmentOnly": "Bitte nur mit vereinbartem Termin",
-      "mask": "Bei Erkältungssymptomen"
+      "appointmentOnly": "Bitte nur mit vereinbartem Termin in die Praxis kommen",
+      "mask": "Bei Erkältungssymptomen (z. B. Husten, Schnupfen oder Halsschmerzen)"
     }
   },
   "contact": {
@@ -85,11 +84,11 @@
       "upcomingLabel": "Praxisurlaub",
       "currentLabel": "Praxis derzeit geschlossen",
       "link": "Vertretung und Details",
-      "linkAria": "Vertretung und Details zum Praxisurlaub unter Aktuelles ansehen",
+      "linkAria": "Vertretung und Details zum Praxisurlaub unter Urlaubszeiten ansehen",
       "regionLabel": "Hinweis zum Praxisurlaub"
     },
     "list": {
-      "caption": "Geplante Schließzeiten der Praxis",
+      "caption": "Geplante Urlaubszeiten der Praxis",
       "periodColumn": "Zeitraum",
       "kindColumn": "Praxisurlaub",
       "noteColumn": "Hinweis",
@@ -156,28 +155,24 @@
   "prescriptions": {
     "title": "Rezepte und Überweisungen",
     "phoneLabel": "Rezepttelefon",
-    "timingTitle": "Wann alles bereitliegt"
+    "timingTitle": "Wann alles bereitliegt",
+    "appLinkLabel": "Arzt-Direkt Praxis-App"
   },
   "closures": {
     "eyebrow": "Wann die Praxis geschlossen ist",
-    "title": "Schließzeiten",
-    "lead": "Hier stehen die geplanten Schließzeiten der Praxis mit der jeweiligen Vertretung sowie die Nummern für Zeiten, in denen die Praxis nicht erreichbar ist.",
+    "title": "Urlaubszeiten",
+    "lead": "Hier stehen die geplanten Urlaubszeiten der Praxis mit der jeweiligen Vertretung sowie die Nummern für Zeiten, in denen die Praxis nicht erreichbar ist.",
     "vacation": {
       "title": "Urlaub und Vertretung",
       "description": "Vergangene Zeiträume werden automatisch ausgeblendet.",
-      "planAhead": "Rezepte und Überweisungen für die Schließzeit fordern Sie bitte rechtzeitig vorher an.",
+      "planAhead": "Rezepte und Überweisungen für die Urlaubszeit fordern Sie bitte rechtzeitig vorher an.",
       "returnLine": "Ab {weekday}, den {date} sind wir wieder für Sie da.",
       "urgentHintSingle": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an die unten genannte Vertretungspraxis.",
       "urgentHintPlural": "In dringenden Fällen wenden Sie sich in dieser Zeit bitte an eine der unten genannten Vertretungspraxen.",
-      "overviewTitle": "Alle geplanten Schließzeiten",
-      "overviewTitleYear": "Schließzeiten {year}",
+      "overviewTitle": "Alle geplanten Urlaubszeiten",
+      "overviewTitleYear": "Urlaubszeiten {year}",
       "planAheadTitle": "Planen Sie rechtzeitig!",
-      "onlyCurrent": "Weitere Schließzeiten sind zurzeit nicht geplant. Sobald ein neuer Zeitraum feststeht, finden Sie ihn hier."
+      "onlyCurrent": "Weitere Urlaubszeiten sind zurzeit nicht geplant. Sobald ein neuer Zeitraum feststeht, finden Sie ihn hier."
     }
-  },
-  "housecalls": {
-    "eyebrow": "Wenn Sie nicht kommen können",
-    "title": "Hausbesuche",
-    "arrangeTitle": "Hausbesuch vereinbaren"
   }
 }

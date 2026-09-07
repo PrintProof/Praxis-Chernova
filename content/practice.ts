@@ -169,13 +169,17 @@ export const practice = {
    */
   prescriptionNotes: {
     /**
-     * `{phone}` ist der Platzhalter für die Rezepttelefonnummer. Sie steht
-     * NICHT im Text, sondern wird beim Rendern aus `prescriptionPhoneDisplay`
-     * eingesetzt und als `tel:`-Link ausgegeben — so gibt es die Nummer im
-     * Repository weiterhin genau einmal.
+     * ZWEI PLATZHALTER, beide werden beim Rendern zu Links (LinkedSentence):
+     *   `{phone}` — die Rezepttelefonnummer aus `prescriptionPhoneDisplay`,
+     *     als `tel:`-Link. Sie steht NICHT im Text, damit es jede Rufnummer
+     *     im Repository weiterhin genau einmal gibt.
+     *   `{app}` — die Arzt-Direkt Praxis-App, als externer Link auf
+     *     `bookingUrl`. Die Praxis hat im September 2026 ausdrücklich darum
+     *     gebeten, dass man von hier direkt zu arzt-direkt kommt und dass man
+     *     dem Wort ansieht, dass es klickbar ist (deshalb halbfett).
      */
     orderLine:
-      'Beides kann bequem über die Arzt-Direkt Praxis-App (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',
+      'Beides kann bequem über die {app} (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',
     /**
      * Der Gegenpol zum engen Terminfenster (7:30-8:30): das Rezepttelefon
      * nimmt jederzeit entgegen. Deshalb in der Anzeige eigens hervorgehoben.
@@ -255,7 +259,12 @@ export const practice = {
    * Hausbesuche werden AUSSCHLIESSLICH telefonisch vereinbart — nicht ueber
    * die App und nicht online. Deshalb steht hier ein eigener Satz statt des
    * allgemeinen `appointments.appOptOut`, der auf die App-Nutzung abstellt.
-   * `{phone}` wird beim Rendern durch die Hauptnummer ersetzt (PhoneSentence).
+   * `{phone}` wird beim Rendern durch die Hauptnummer ersetzt (LinkedSentence).
+   *
+   * WIRD DERZEIT NICHT GERENDERT: die Praxis hat die Seite /hausbesuche im
+   * September 2026 abgeschafft — wie im August die Seite /leistungen. Beide
+   * Hausbesuch-Saetze bleiben als Merkblatt-Wortlaut hier stehen, damit eine
+   * spaetere Rueckkehr kein Abtippen ist.
    */
   houseCallsArrangement:
     'Hausbesuche werden ausschließlich telefonisch vereinbart. Bitte rufen Sie uns dafür unter {phone} an.',
@@ -265,16 +274,20 @@ export const practice = {
    * (Screenshot vom 07.09.2026): die Höflichkeitseinleitung "Zum Schutz unserer
    * Patientinnen und Patienten sowie unseres Praxisteams bitten wir Sie, unsere
    * Praxis bei Erkältungssymptomen ..." ist durchgestrichen, ebenso der
-   * Dank am Ende. Den Anlass trägt jetzt die Überschrift des Kastens
-   * ("Bei Erkältungssymptomen"), der Satz nur noch die Regel.
+   * Dank am Ende.
+   *
+   * Den ANLASS trägt die Überschrift des Kastens, samt Beispielen: die Praxis
+   * hat die Klammer "(z. B. Husten, Schnupfen oder Halsschmerzen)" ausdrücklich
+   * nach oben in die Überschrift verschoben (`home.rules.mask`). Hier steht
+   * deshalb nur noch die Regel — ein Satz, keine Wiederholung der Beispiele.
    */
-  maskNote:
-    'Bitte nur mit einer medizinischen Mund-Nasen-Maske (z. B. bei Husten, Schnupfen oder Halsschmerzen).',
+  maskNote: 'Bitte nur mit einer medizinischen Mund-Nasen-Maske.',
 
   /**
    * Hausbesuche — wortgetreu aus dem Merkblatt der Praxis.
    * Nennt jetzt auch die Voraussetzung (starke Mobilitaetseinschraenkung), die
    * in der frueheren Fassung fehlte: dort stand nur die 2-km-Grenze.
+   * WIRD DERZEIT NICHT GERENDERT, siehe `houseCallsArrangement`.
    */
   houseCallsNote:
     'Bei stark mobilitätseingeschränkten Patientinnen und Patienten führen wir Hausbesuche in einem Umkreis von 2 km rund um unsere Praxis durch.'
