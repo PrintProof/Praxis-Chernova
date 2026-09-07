@@ -91,6 +91,22 @@ export function getVacationPeriods(): VacationPeriod[] {
 
 export const bookingUrl = 'https://app.arzt-direkt.de/praxis-chernova/booking';
 
+/**
+ * Infoseite der Arzt-Direkt Praxis-App beim Hersteller, mit den Links in beide
+ * App Stores.
+ *
+ * WARUM NICHT DIE ARZT-DIREKT-SEITE DER PRAXIS: die bietet (Stand 07.09.2026,
+ * nachgesehen) genau zwei Dinge an — "Termin buchen" und "Zur
+ * Videosprechstunde". Ein Rezeptformular gibt es dort nicht; Rezepte laufen
+ * bei arzt-direkt ueber die App (Rezeptinfos -> "+" -> anfordern), genau wie
+ * es das Merkblatt der Praxis sagt. Wer auf /rezepte auf "Arzt-Direkt
+ * Praxis-App" klickt, will die App — nicht das Buchungsformular.
+ *
+ * Sollte die Praxis das Modul "Online-Rezeption" von arzt-direkt buchen, gibt
+ * es ein echtes Rezeptformular mit eigener Adresse. Dann gehoert die hierher.
+ */
+export const appInfoUrl = 'https://arzt-direkt.de/arzt-direkt-app/';
+
 export const practice = {
   name: 'Praxis Veronika Chernova',
   physicianName: 'Veronika Chernova',
@@ -109,6 +125,7 @@ export const practice = {
   prescriptionPhoneDisplay: '0521 417 44 73',
   prescriptionPhoneHref: 'tel:+495214174473',
   bookingUrl,
+  appInfoUrl,
   mapUrl:
     'https://www.google.com/maps/search/?api=1&query=Treppenstra%C3%9Fe+15%2C+33647+Bielefeld',
   verifiedFacts: [
@@ -174,9 +191,10 @@ export const practice = {
      *     als `tel:`-Link. Sie steht NICHT im Text, damit es jede Rufnummer
      *     im Repository weiterhin genau einmal gibt.
      *   `{app}` — die Arzt-Direkt Praxis-App, als externer Link auf
-     *     `bookingUrl`. Die Praxis hat im September 2026 ausdrücklich darum
-     *     gebeten, dass man von hier direkt zu arzt-direkt kommt und dass man
-     *     dem Wort ansieht, dass es klickbar ist (deshalb halbfett).
+     *     `appInfoUrl` (NICHT `bookingUrl`, Begründung dort). Die Praxis hat
+     *     im September 2026 ausdrücklich darum gebeten, dass man von hier
+     *     direkt zu arzt-direkt kommt und dass man dem Wort ansieht, dass es
+     *     klickbar ist (deshalb halbfett).
      */
     orderLine:
       'Beides kann bequem über die {app} (für bereits in unserer Praxis bekannte Patientinnen und Patienten) oder über unser Rezepttelefon {phone} angefordert werden.',

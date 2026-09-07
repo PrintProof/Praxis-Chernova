@@ -8,7 +8,7 @@ Static marketing/info website for a German medical practice ("Praxis Veronika Ch
 
 **Everything stays a React Server Component.** There is no `'use client'` anywhere and no browser JavaScript of our own; interactivity (the mobile menu) is CSS-only via `<details>/<summary>`. Keep it that way.
 
-**No external requests, ever.** No webfonts (system font stack only), no CDN, no analytics, no remote images. This is a German medical practice — third-party requests are a GDPR problem. The only external URLs in the markup are click-through links (arzt-direkt booking, Google Maps) plus non-fetching namespace URLs (`schema.org` in JSON-LD, `w3.org` in SVG).
+**No external requests, ever.** No webfonts (system font stack only), no CDN, no analytics, no remote images. This is a German medical practice — third-party requests are a GDPR problem. The only external URLs in the markup are click-through links (arzt-direkt booking, the arzt-direkt app page, Google Maps) plus non-fetching namespace URLs (`schema.org` in JSON-LD, `w3.org` in SVG).
 
 ## Commands
 
@@ -54,7 +54,7 @@ Two practical traps: the viewBox is **80×64 (5:4), not square** — always deri
 
 The site is **German-only**. There is no multi-locale routing, no `[locale]` route tree, and no `next-intl` middleware/provider. `lib/i18n.ts` defines a single locale (`de`) and exposes `getTranslator()`, a thin wrapper over `next-intl`'s `createTranslator` that reads `messages/de.json` synchronously. Components call `t('namespace.key')` with no locale argument.
 
-`lib/routing.ts` is the single source of truth for URLs: `routeByKey` maps a `RouteKey` to its German path (`/termine`, `/schliesszeiten`, `/kontakt`, …), and `getPath(routeKey)` returns it. Note that `closures` still lives at **`/schliesszeiten`** although the page is called *Urlaubszeiten* everywhere since September 2026 — renaming the path would dead-link whatever the practice has already handed out. Path and label are allowed to disagree; don't "fix" it without asking. **Always build internal links with `getPath` and Next's `<Link>`** — never hardcode paths, or the production `basePath` gets lost.
+`lib/routing.ts` is the single source of truth for URLs: `routeByKey` maps a `RouteKey` to its German path (`/termine`, `/urlaubszeiten`, `/kontakt`, …), and `getPath(routeKey)` returns it. The `closures` route was `/schliesszeiten` until September 2026 and is now **`/urlaubszeiten`** — path, label and title renamed together, because the old address had never been handed out. **Always build internal links with `getPath` and Next's `<Link>`** — never hardcode paths, or the production `basePath` gets lost.
 
 ## Information architecture — the one rule that matters
 
@@ -64,8 +64,8 @@ The practice's core complaint about the previous version was duplicated informat
 |---|---|
 | How to get an appointment (both routes + time windows), video consultation | `/termine` |
 | Prescriptions and referrals: app first, then Rezepttelefon, 24/7 availability, processing times, eGK precondition | `/rezepte` |
-| Vacation periods + substitutes | `/schliesszeiten` (other pages show only the compact `NextVacationBanner`) |
-| 116 117 / 112 | `/schliesszeiten` and the end of `/`, both `full`; `/kontakt` carries the `compact` variant — one component, so the numbers can't drift |
+| Vacation periods + substitutes | `/urlaubszeiten` (other pages show only the compact `NextVacationBanner`) |
+| 116 117 / 112 | `/urlaubszeiten` and the end of `/`, both `full`; `/kontakt` carries the `compact` variant — one component, so the numbers can't drift |
 | Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
 | What the practice is, opening hours | `/` |
 | **"only with an appointment" rule, mask notice** | `/` **and** the end of `/termine` — the one deliberate exception, see below |
@@ -84,24 +84,26 @@ The practice went through the live site with a highlighter (screenshots, 07.09.2
 | "Während der Schließzeiten der Praxis gelten abweichende Zeiten." | above the closures link on `/` (the link stayed) |
 | Body text of the appointment-only callout | `/` and `/termine` — the heading now carries the rule alone |
 | "Zum Schutz unserer Patientinnen und Patienten …" preamble + "Vielen Dank für Ihr Verständnis …" | mask note, shortened to the rule itself |
-| Section "Sprechzeiten außerhalb der Urlaubszeiten" | end of `/schliesszeiten` (`closures.hours`, `.news-hours`) |
+| Section "Sprechzeiten außerhalb der Urlaubszeiten" | end of `/urlaubszeiten` (`closures.hours`, `.news-hours`) |
 | Eyebrow + section heading "Termin vereinbaren" | `/termine` — both repeated the `<h1>` |
 | Paragraph "Patientinnen und Patienten, die unsere Praxis-App noch nicht nutzen …" | `/termine`; survives as three words in the phone card (`appointments.phoneNoApp`) |
 | "Für geeignete Anliegen" | opening of `appointments.videoLine` |
 | Eyebrow, lead and heading "So fordern Sie an" | `/rezepte` — three restatements of the `<h1>` above each other |
 
-Eyebrows on `/kontakt` and `/schliesszeiten` were **kept**: the practice only reviewed `/termine` and `/rezepte`, so only those two lost theirs. If it ever asks for consistency, they go too.
+Eyebrows on `/kontakt` and `/urlaubszeiten` were **kept**: the practice only reviewed `/termine` and `/rezepte`, so only those two lost theirs. If it ever asks for consistency, they go too.
 
 ### … and the second round, same evening
 
 Reviewing the result the practice asked for these, all implemented:
 
 - **`/hausbesuche` deleted** — the third page to go after `/leistungen`. House calls are now mentioned nowhere on the site; `practice.houseCallsNote` and `houseCallsArrangement` stay as unrendered leaflet wording. Nav is down to five items (the header stays two-row, see below).
-- **"Schließzeiten" → "Urlaubszeiten"** in every visible string — nav, `<h1>`, table captions, overview headings, the link on `/`, the browser title (which still said the long-dead "Aktuelles"). The **path stays `/schliesszeiten`**.
+- **"Schließzeiten" → "Urlaubszeiten"** everywhere — nav, `<h1>`, table captions, overview headings, the link on `/`, the browser title (which still said the long-dead "Aktuelles"), **and the path** (`/schliesszeiten` → `/urlaubszeiten`). The word no longer appears anywhere in the built output.
 - **116 117 / 112 added to the end of `/`** (see the IA table).
 - The appointment-only heading is now a full sentence: *"Bitte nur mit vereinbartem Termin in die Praxis kommen"*.
 - The mask box moved its examples **into the heading**: *"Bei Erkältungssymptomen (z. B. Husten, Schnupfen oder Halsschmerzen)"*, leaving `practice.maskNote` as the bare rule.
-- On `/rezepte` the words *"Arzt-Direkt Praxis-App"* are a **bold external link** to `practice.bookingUrl`, and the "Bitte beachten Sie" note moved **below** the Rezepttelefon panel (it is a precondition for both routes, so it belongs after both).
+- On `/rezepte` the words *"Arzt-Direkt Praxis-App"* are a **bold external link**, and the "Bitte beachten Sie" note moved **below** the Rezepttelefon panel (it is a precondition for both routes, so it belongs after both).
+
+  The link target is `practice.appInfoUrl` (the vendor's app page with both store links), **not** `bookingUrl`. Checked on 07.09.2026: the practice's own arzt-direkt page offers only *Termin buchen* and *Zur Videosprechstunde* — no prescription form. Prescriptions run inside the app, exactly as the leaflet says. If the practice ever books arzt-direkt's *Online-Rezeption* module there will be a real Rezeptbestellung form with its own URL; that one belongs in `appInfoUrl` instead.
 
 **The hero shows `PracticeLogo`, not an illustration.** The practice asked for its own mark — the stethoscope looping around a heart, the one on its business card and on the newly filmed window — instead of the previous drawing of a window with a plant. `PracticeIllustration` in `components/illustrations.tsx` is therefore currently unused but kept. The logo sits on a soft `--brand-soft` field (`.home-hero__plate`), because it is a free-standing mark with no surface of its own and looked lost in the column. It is sized off its **width** (`.home-hero__logo`, 76 % of the plate) — the mark is landscape and fills its viewBox, so width is the long side. Do **not** put the shared `.illustration` class on it: it carries sizing and framing rules that don't fit here.
 
@@ -160,12 +162,12 @@ The merge is what makes already-entered data correct without anyone re-typing it
 
 The display has **three parts**:
 
-1. **`components/next-vacation-banner.tsx`** (`NextVacationBanner`, no props) — a compact sand-coloured bar naming only the *next or currently running* vacation, linking to `/schliesszeiten`. Rendered on `/`, `/termine`, `/rezepte` and `/kontakt`. Returns `null` when nothing is upcoming.
-2. **`components/vacation-overview.tsx`** — the full display on `/schliesszeiten`, in two parts:
+1. **`components/next-vacation-banner.tsx`** (`NextVacationBanner`, no props) — a compact sand-coloured bar naming only the *next or currently running* vacation, linking to `/urlaubszeiten`. Rendered on `/`, `/termine`, `/rezepte` and `/kontakt`. Returns `null` when nothing is upcoming.
+2. **`components/vacation-overview.tsx`** — the full display on `/urlaubszeiten`, in two parts:
    - a **featured block** for the next/current period (illustration, large date range, return date, and a column of substitute cards with `tel:` links);
    - an **overview section** ("Alle geplanten Urlaubszeiten") that is always present as long as at least one period exists, so the practice can always see what is stored. With **two or more** periods it holds the full table (all periods, including the running one — there the repetition is wanted: the table is the year plan, the block above is the acute notice). With **exactly one** it holds a sentence saying no further closures are planned — a one-row table would repeat the featured block verbatim, which is the duplication the practice complained about.
    Below ~60em the table becomes labelled cards (explicit ARIA `role` attributes, because the `display` overrides strip table semantics).
-3. **`components/emergency-service.tsx`** (`EmergencyService`, `variant?: 'full' | 'compact'`) — the 116 117 / 112 block. `full` on `/schliesszeiten` and at the end of `/`, `compact` on `/kontakt`. It is a **general** out-of-hours notice and must stay spatially separate from the vacation notice: KV rules forbid naming the on-call service as the practice's holiday substitute.
+3. **`components/emergency-service.tsx`** (`EmergencyService`, `variant?: 'full' | 'compact'`) — the 116 117 / 112 block. `full` on `/urlaubszeiten` and at the end of `/`, `compact` on `/kontakt`. It is a **general** out-of-hours notice and must stay spatially separate from the vacation notice: KV rules forbid naming the on-call service as the practice's holiday substitute.
 
 All pure, node-testable logic lives in **`lib/vacation-logic.ts`** (type-only import of `VacationPeriod`, no real data, no React): `parseIsoDate`, `isOngoing`, `getUpcomingVacations`, `getImminentVacation`, `getNextOrCurrentVacation`, `getReturnDate`, `formatWeekday`, `formatDate`, `formatReturnDate`, `formatCompactRange`, `formatVacationRange`, `telHref`, `vacationListYear`, `getVacationYears`.
 

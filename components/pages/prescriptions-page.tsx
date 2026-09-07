@@ -46,7 +46,7 @@ export function PrescriptionsPage() {
           links={[
             {
               token: 'app',
-              href: practice.bookingUrl,
+              href: practice.appInfoUrl,
               label: t('prescriptions.appLinkLabel'),
               className: 'prescription-how__app',
               external: true

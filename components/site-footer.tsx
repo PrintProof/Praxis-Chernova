@@ -24,7 +24,7 @@ const legalRoutes = ['legal', 'privacy'] as const satisfies readonly RouteKey[];
  * Bewusst NICHT mehr hier: Telefon, Rezepttelefon und Fax (standen dreifach
  * auf der Seite; sie leben jetzt ausschliesslich auf /kontakt), die
  * Fachbezeichnung und der 116-117-Hinweis (der gehoert laut Vorgabe nur auf
- * /schliesszeiten und /kontakt — im Footer stuende er auf jeder Seite).
+ * /urlaubszeiten und /kontakt — im Footer stuende er auf jeder Seite).
  *
  * Die Blockueberschriften sind <p>, kein <h2>: sonst wuerde die
  * Ueberschriftenhierarchie der Seite am Ende noch einmal aufgemacht.

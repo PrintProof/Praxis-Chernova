@@ -38,7 +38,7 @@ import {getPath} from '@/lib/routing';
  * Bewusst NICHT auf dieser Seite (jede dieser Angaben hat genau einen
  * kanonischen Ort und wird von hier nur verlinkt):
  *   - Adresse, Rezepttelefon, Fax, organisatorische Ablaeufe -> /kontakt
- *   - Urlaubsdetails samt Vertretungspraxen -> /schliesszeiten
+ *   - Urlaubsdetails samt Vertretungspraxen -> /urlaubszeiten
  * Vom Urlaub steht hier nur das zeitkritische Hinweisband; es rendert sich
  * selbst nur, wenn wirklich ein Urlaub ansteht.
  *
@@ -120,7 +120,7 @@ export function HomePage() {
 
       {/* Sprechzeiten — die meistgesuchte Angabe einer Praxis-Startseite.
           Links die Datenliste, rechts eine schmale Randspalte mit dem Link zu
-          den Schliesszeiten.
+          den Urlaubszeiten.
           Der erklaerende Satz "Waehrend der Schliesszeiten der Praxis gelten
           abweichende Zeiten." stand bis September 2026 ueber dem Link und ist
           von der Praxis gestrichen worden (Screenshot vom 07.09.2026): der

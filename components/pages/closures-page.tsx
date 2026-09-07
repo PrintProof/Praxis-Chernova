@@ -4,9 +4,10 @@ import {VacationOverview} from '@/components/vacation-overview';
 import {getTranslator} from '@/lib/i18n';
 
 /**
- * /schliesszeiten — ausschliesslich zeitkritische Betriebsinformationen:
- * Schliesszeiten samt Vertretung und die Nummern fuer Zeiten ausserhalb der
- * Sprechstunde. Bewusst kein Praxis-Blog: ein veralteter Beitrag wuerde die
+ * /urlaubszeiten — ausschliesslich zeitkritische Betriebsinformationen:
+ * Urlaubszeiten samt Vertretung und die Nummern fuer Zeiten ausserhalb der
+ * Sprechstunde. Hiess bis September 2026 /schliesszeiten; die Praxis nennt
+ * es Urlaub, also heisst es hier auch so — Route, Titel und Navigation. Bewusst kein Praxis-Blog: ein veralteter Beitrag wuerde die
  * einzige wirklich wichtige Information verdecken.
  *
  * Kein Hinweisband auf dieser Seite — die Vollansicht steht direkt darunter,

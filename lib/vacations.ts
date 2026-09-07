@@ -82,7 +82,7 @@ export function formatReturnDate(period: VacationPeriod): {weekday: string; date
 
 /**
  * Alle noch nicht beendeten Urlaube (end >= heute), nach start aufsteigend.
- * Datenquelle der vollständigen Übersicht auf /schliesszeiten.
+ * Datenquelle der vollständigen Übersicht auf /urlaubszeiten.
  */
 export function getUpcomingVacationsNow(now: Date): VacationPeriod[] {
   return getUpcomingVacations(displayPeriods(), now);

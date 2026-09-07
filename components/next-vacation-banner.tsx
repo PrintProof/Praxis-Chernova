@@ -10,7 +10,7 @@ import {formatVacationRange, getNextOrCurrentVacationNow, isOngoing} from '@/lib
  *
  * Steht auf Start- und Kontaktseite direkt unter der Kopfzeile. Bewusst nur
  * Label, Zeitraum und ein Link: die Vertretungsdaten stehen kanonisch auf
- * /schliesszeiten und werden hier nicht wiederholt. Gibt es keinen anstehenden
+ * /urlaubszeiten und werden hier nicht wiederholt. Gibt es keinen anstehenden
  * Zeitraum, rendert die Komponente nichts — dann bleibt die Seite ruhig.
  *
  * Statischer Block im Seitenfluss, kein Overlay, kein Modal, kein Skript.
