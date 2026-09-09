@@ -3,7 +3,16 @@
     {
       "start": "2026-09-15",
       "end": "2026-09-15",
-      "note": "Aus Praxisinternen Gründen "
+      "note": "Aus Praxisinternen Gründen ",
+      "substitutes": [
+        {
+          "name": "Hausarztpraxis Dres Lankes ",
+          "street": "Hauptstraße 93",
+          "postalCode": "33647",
+          "city": "Bielefeld",
+          "phone": "0521 55 77 133"
+        }
+      ]
     }
   ]
 }
