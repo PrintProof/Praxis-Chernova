@@ -30,7 +30,16 @@
     },
     {
       "start": "2026-12-28",
-      "end": "2027-01-01"
+      "end": "2027-01-01",
+      "substitutes": [
+        {
+          "name": "Hausarztpraxis Oxana Berlin",
+          "street": "Lippstädter Str. 63",
+          "postalCode": "33659",
+          "city": "Bielefeld",
+          "phone": "05209 40 77"
+        }
+      ]
     }
   ]
 }
