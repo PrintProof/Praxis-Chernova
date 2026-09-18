@@ -604,12 +604,19 @@
    Erkaeltungssymptomen ..."), der Satz die Regel ("Bitte nur mit einer
    medizinischen Mund-Nasen-Maske."). In Fliesstextgroesse las sich die Regel
    wie eine Fussnote zum Anlass, obwohl sie die eigentliche Aussage ist.
-   Die ruhigere Farbe bleibt: sie haelt die Rangfolge, ohne den Satz kleiner
-   zu machen. Gilt bewusst nur im Maskenkasten — `.note__body` traegt sonst
-   (z.B. auf /rezepte) weiterhin Fliesstext. */
+   Deshalb traegt der Satz GENAU die Werte der Ueberschrift darueber —
+   Groesse, Zeilenhoehe, Schnitt und Farbe. Die zwei Zeilen sind ein Satz in
+   zwei Teilen ("Bei Erkaeltungssymptomen ..." / "... bitte nur mit Maske"),
+   und so lesen sie sich jetzt auch. Aendert sich `.note__title`, muss das
+   hier mitwandern.
+   Gilt bewusst nur im Maskenkasten — `.note__body` traegt sonst (z.B. auf
+   /rezepte) weiterhin ruhigen Fliesstext. */
 .visit-rules__mask .note__body {
+  font-family: var(--font-ui);
   font-size: var(--step-1);
+  font-weight: var(--weight-semibold);
   line-height: var(--leading-title);
+  color: var(--text);
 }
 
 /* Traegt optional ein `.callout__icon` vor dem Text — deshalb hier schon
