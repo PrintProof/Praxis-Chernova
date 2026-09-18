@@ -1,7 +1,8 @@
 import type {NextConfig} from 'next';
 
-const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
-const repoName = 'Praxis-Chernova';
+// Eine Quelle fuer den Basispfad — Anwendungscode verlinkt Dateien aus
+// `public/` ueber `assetPath()` aus derselben Datei (siehe lib/base-path.ts).
+import {basePath} from './lib/base-path';
 
 const nextConfig: NextConfig = {
   output: 'export',
@@ -9,8 +10,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: isGitHubPages ? `/${repoName}` : undefined,
-  assetPrefix: isGitHubPages ? `/${repoName}/` : undefined
+  basePath: basePath || undefined,
+  assetPrefix: basePath ? `${basePath}/` : undefined
 };
 
 export default nextConfig;

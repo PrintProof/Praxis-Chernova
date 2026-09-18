@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Static marketing/info website for a German medical practice ("Praxis Veronika Chernova", a GP/internal-medicine practice in Bielefeld). Next.js 16 App Router + React 19, TypeScript (strict), exported to fully static HTML and deployed to GitHub Pages. There is no backend, database, or client-side data fetching — all content is baked in at build time.
 
-**Everything stays a React Server Component.** There is no `'use client'` anywhere and no browser JavaScript of our own; interactivity (the mobile menu) is CSS-only via `<details>/<summary>`. Keep it that way.
+**Everything stays a React Server Component.** There is no `'use client'` anywhere and no browser JavaScript of our own. Interactivity is CSS-only: the mobile menu via `<details>/<summary>`, the vacation overlay via a checkbox that ships `checked`. Keep it that way — both patterns are documented where they live.
 
-**No external requests, ever.** No webfonts (system font stack only), no CDN, no analytics, no remote images. This is a German medical practice — third-party requests are a GDPR problem. The only external URLs in the markup are click-through links (arzt-direkt booking, the arzt-direkt app page, Google Maps) plus non-fetching namespace URLs (`schema.org` in JSON-LD, `w3.org` in SVG).
+**No external requests, ever.** No webfonts (system font stack only), no CDN, no analytics, no remote images. This is a German medical practice — third-party requests are a GDPR problem. The only external URLs in the markup are click-through links (arzt-direkt booking, the arzt-direkt app page, the arzt-direkt waiting room for the open video consultation, Google Maps) plus non-fetching namespace URLs (`schema.org` in JSON-LD, `w3.org` in SVG). PDFs are served from `public/downloads/`, never hot-linked.
 
 ## Commands
 
@@ -24,9 +24,9 @@ There is **no linter/formatter**. Run `npm run typecheck`, `npm test` and `npm r
 
 ## Styling
 
-No CSS framework. Hand-written CSS, split into ten files under **`app/styles/`**, all imported by `app/layout.tsx` **in a load-bearing order**:
+No CSS framework. Hand-written CSS, split into eleven files under **`app/styles/`**, all imported by `app/layout.tsx` **in a load-bearing order**:
 
-`tokens.css` → `base.css` → `layout.css` → `components.css` → `page-home.css` → `page-appointments.css` → `page-prescriptions.css` → `page-closures.css` → `page-contact.css` → `page-legal.css`
+`tokens.css` → `base.css` → `layout.css` → `components.css` → `page-home.css` → `page-appointments.css` → `page-prescriptions.css` → `page-extras.css` → `page-closures.css` → `page-contact.css` → `page-legal.css`
 
 - `tokens.css` — only `:root` custom properties: sage-green colour ramp + semantic aliases, `clamp()` type scale, spacing, radii, shadows, `--container`.
 - `base.css` / `layout.css` / `components.css` — element defaults; container, header, nav, footer, section rhythm; reusable buttons, cards, callouts, tables, `.visually-hidden`.
@@ -62,9 +62,10 @@ The practice's core complaint about the previous version was duplicated informat
 
 | Information | Canonical home |
 |---|---|
-| How to get an appointment (both routes + time windows), video consultation | `/termine` |
+| How to get an appointment (both routes + time windows), video consultation, **open video consultation** (Mon/Wed/Fri 12–13) | `/termine` |
 | Prescriptions and referrals: app first, then Rezepttelefon, 24/7 availability, processing times, eGK precondition | `/rezepte` |
-| Vacation periods + substitutes | `/urlaubszeiten` (other pages show only the compact `NextVacationBanner`) |
+| Services beyond standard care (currently the Vitamin-Kur) | `/extra-leistungen` |
+| Vacation periods + substitutes | `/urlaubszeiten` (other pages show the compact `NextVacationBanner`; `/` additionally pops the `VacationDialog` once) |
 | 116 117 / 112 | `/urlaubszeiten` and the end of `/`, both `full`; `/kontakt` carries the `compact` variant — one component, so the numbers can't drift |
 | Phone, prescription phone, fax, address, directions | `/kontakt` (main number also in header/footer, address also in footer) |
 | What the practice is, opening hours | `/` |
@@ -111,7 +112,7 @@ Reviewing the result the practice asked for these, all implemented:
 
 `components/visit-rules.tsx` renders the pair (appointment-only callout + mask note) and **nothing else** — no `<Section>`, so each page picks tone, position and heading itself: the home page hides the heading, `/termine` shows it (`appointments.rulesTitle`). It is rendered on `/` and at the end of `/termine`.
 
-Both boxes are down to their core since September 2026: the sand callout is **a heading with no body**, the mask note a heading plus one sentence. The long leaflet sentences are still in `content/practice.ts` (`appointments.byAppointmentOnly`, and `appOptOut` for the same reason) — kept as the practice's own wording, deliberately unrendered, each marked as such in a comment. Same pattern as `practice.services`.
+Both boxes are down to their core since September 2026: the sand callout is **a heading with no body**, the mask note a heading plus one sentence — and that sentence is set at **the same size as its heading** (`.visit-rules__mask .note__body`, `--step-1`), because the practice found it read as a footnote to the occasion when it is in fact the rule. The rule is scoped to the mask box; `.note__body` elsewhere (e.g. `/rezepte`) stays body size. The long leaflet sentences are still in `content/practice.ts` (`appointments.byAppointmentOnly`, and `appOptOut` for the same reason) — kept as the practice's own wording, deliberately unrendered, each marked as such in a comment. Same pattern as `practice.services`.
 
 Yes, that is a deliberate exception to the one-canonical-home rule above, made by the practice in August 2026: many people land on `/termine` to book and should see both rules there too. The exception is narrow and safe because **the sentences themselves still exist exactly once** (`practice.appointments.byAppointmentOnly`, `practice.maskNote`, `home.rules.*`) — what repeats is the presentation, not the content, and it cannot drift. Don't extend it to a third page without asking, and don't inline-copy the JSX.
 
@@ -119,9 +120,33 @@ Yes, that is a deliberate exception to the one-canonical-home rule above, made b
 
 **There is no `/leistungen` page.** The practice had it removed in August 2026 after it had carried a single sentence for months. `practice.services` remains in `content/practice.ts` as data but nothing renders it, and `CareIllustration` was deleted with the page. Don't recreate it without asking.
 
+**`/extra-leistungen` is not that page coming back.** The practice asked for it in September 2026 together with its Vitamin-Kur poster. The difference is the point: `/leistungen` listed what any GP practice does anyway; this page lists only what a patient has to ask for and what is documented nowhere else on the site. One `<Section>` per offer — short text, then the practice's own poster as a PDF. A second offer means a second section, nothing more.
+
+### The practice's posters are PDFs, not retyped pages
+
+`public/downloads/` holds the A4 sheets that also hang in the waiting room; `components/handout-link.tsx` renders the card that links them (shared: `/extra-leistungen` and `/termine`, so the styling lives in `components.css` as `.handout`). The pages carry a few lines of context and then the sheet — deliberately not the whole sheet retyped, both because the page text has to stay short and because a retyped copy silently drifts from the file. The Vitamin-Kur **price** is a case in point: it is on the poster as an "Aktionsangebot" and deliberately **not** on the page.
+
+Two traps:
+
+- **Link them with `assetPath()` (`lib/base-path.ts`), never a bare `href="/downloads/…"`.** Next prefixes the GitHub Pages `basePath` for `<Link>` and for its own assets, but not for a plain anchor into `public/` — the link would 404 in production. `<Link>` is wrong here too: the targets are files, not routes, and Next would try to prefetch them.
+- `next.config.ts` **imports** `basePath` from that same file, so configuration and application code cannot drift. Don't re-inline the `GITHUB_ACTIONS` check anywhere else.
+
+### The vacation notice pops up on the home page — without JavaScript
+
+`components/vacation-dialog.tsx` shows the next/current vacation as an overlay that has to be clicked away. The practice asked for it in September 2026 because the quiet bar was being overlooked. **The bar stays** — after dismissing, the information must still be on the page.
+
+It renders **on `/` only**, passed through the new `overlay` prop of `PageShell` (which puts it before the header, so its close control is the first thing Tab reaches). On every page would mean re-popping on each internal navigation: React remounts the checkbox on a route change, so `defaultChecked` fires again.
+
+The mechanism is a checkbox that ships `checked` in the HTML; backdrop and panel are its **siblings** and hang off `:checked` via `~`. All three close surfaces (backdrop, ×, "Verstanden") are `<label for>` on it. Deliberately `~` and not `:has()` — sibling combinators work in any browser that renders the page at all. `:has()` is used only for the scroll lock on `<body>`, where losing it costs nothing.
+
+Two consequences worth keeping:
+
+- The checkbox is invisible but **focusable**, and its focus ring is mirrored onto the "Verstanden" label — a `<label>` cannot take focus itself. Once unchecked, CSS gives the checkbox `display: none` so a dead control doesn't head the tab order forever.
+- No `aria-modal="true"`: without script the focus cannot be trapped, so the promise would be false. `role="dialog"` with a real name (label + date range) is what it can honestly claim.
+
 ### The header has two rows above 62em — don't "fix" it
 
-Showing every nav item — nothing hidden in a menu — is an explicit wish of the practice. With the six items it had until September 2026 they did not fit one row: measured against the container's 1008px content box, brand + nav + phone + button + gaps exceed it by a wide margin, and `--container` caps at 1088px so a wider viewport never helps. Deleting `/hausbesuche` brought it down to five, but the two-row header stayed — it is the stable form, and the next added item would otherwise force the layout back again.
+Showing every nav item — nothing hidden in a menu — is an explicit wish of the practice. With six items they did not fit one row: measured against the container's 1008px content box, brand + nav + phone + button + gaps exceed it by a wide margin, and `--container` caps at 1088px so a wider viewport never helps. Deleting `/hausbesuche` briefly brought it down to five, but the two-row header stayed — and that paid off immediately: `/extra-leistungen` (September 2026) put it back at six, with no layout change, because the nav row has the full container width to itself.
 
 So above 62em the header is `"brand cta" / "nav nav"` — brand and actions on top, navigation full-width below with a hairline divider. Header height ≈ 122px. Below 62em nothing changed: the CSS-only `<details>` menu holds the navigation.
 
@@ -133,7 +158,8 @@ A single route exists in several places that must stay in sync:
 1. `lib/routing.ts` — add the `RouteKey` and its path to `routeByKey`.
 2. `app/<path>/page.tsx` — the route file (`metadata`/`generateMetadata` + render the shared component).
 3. `components/pages/<name>-page.tsx` — the actual page, wrapped in `<PageShell routeKey>`.
-4. `messages/de.json` — add the needed keys (translations are read synchronously; a missing key throws at build/render).
+4. `messages/de.json` — add the needed keys (translations are read synchronously; a missing key throws at build/render), **including `nav.<key>`**.
+5. `components/site-header.tsx` and `components/site-footer.tsx` — both keep their own explicit list; a route not listed there is reachable only by URL. Re-read the header note above before adding a seventh nav item.
 
 `app/sitemap.ts` and `lib/seo.ts` derive everything from `routeByKey`, so they update automatically once routing is correct.
 
@@ -160,14 +186,15 @@ The merge is what makes already-entered data correct without anyone re-typing it
 
 **Call `getVacationPeriods()`, never cache the result at module scope.** In development it re-reads the file on every call; in a production build it reads once and caches. This matters: `vacation.json` is read with `readFileSync`, not imported, so Turbopack has no idea it changed. It used to be a module-level `const`, which meant `npm run dev` kept serving whatever the file said when the server started — after a CMS edit the site looked like vacations or substitutes were missing, and only a restart fixed it.
 
-The display has **three parts**:
+The display has **four parts**:
 
 1. **`components/next-vacation-banner.tsx`** (`NextVacationBanner`, no props) — a compact sand-coloured bar naming only the *next or currently running* vacation, linking to `/urlaubszeiten`. Rendered on `/`, `/termine`, `/rezepte` and `/kontakt`. Returns `null` when nothing is upcoming.
 2. **`components/vacation-overview.tsx`** — the full display on `/urlaubszeiten`, in two parts:
    - a **featured block** for the next/current period (illustration, large date range, return date, and a column of substitute cards with `tel:` links);
    - an **overview section** ("Alle geplanten Urlaubszeiten") that is always present as long as at least one period exists, so the practice can always see what is stored. With **two or more** periods it holds the full table (all periods, including the running one — there the repetition is wanted: the table is the year plan, the block above is the acute notice). With **exactly one** it holds a sentence saying no further closures are planned — a one-row table would repeat the featured block verbatim, which is the duplication the practice complained about.
    Below ~60em the table becomes labelled cards (explicit ARIA `role` attributes, because the `display` overrides strip table semantics).
-3. **`components/emergency-service.tsx`** (`EmergencyService`, `variant?: 'full' | 'compact'`) — the 116 117 / 112 block. `full` on `/urlaubszeiten` and at the end of `/`, `compact` on `/kontakt`. It is a **general** out-of-hours notice and must stay spatially separate from the vacation notice: KV rules forbid naming the on-call service as the practice's holiday substitute.
+3. **`components/vacation-dialog.tsx`** (`VacationDialog`, no props) — the same next/current period as an overlay that must be clicked away, **on `/` only**. Same data source as the banner, so the two can't drift; returns `null` when nothing is upcoming. Mechanism and its constraints: see the section above.
+4. **`components/emergency-service.tsx`** (`EmergencyService`, `variant?: 'full' | 'compact'`) — the 116 117 / 112 block. `full` on `/urlaubszeiten` and at the end of `/`, `compact` on `/kontakt`. It is a **general** out-of-hours notice and must stay spatially separate from the vacation notice: KV rules forbid naming the on-call service as the practice's holiday substitute.
 
 All pure, node-testable logic lives in **`lib/vacation-logic.ts`** (type-only import of `VacationPeriod`, no real data, no React): `parseIsoDate`, `isOngoing`, `getUpcomingVacations`, `getImminentVacation`, `getNextOrCurrentVacation`, `getReturnDate`, `formatWeekday`, `formatDate`, `formatReturnDate`, `formatCompactRange`, `formatVacationRange`, `telHref`, `vacationListYear`, `getVacationYears`.
 

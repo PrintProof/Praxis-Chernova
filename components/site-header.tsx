@@ -16,15 +16,20 @@ import {getPath, type RouteKey} from '@/lib/routing';
  * Navigation 622 + Rufnummer + Button + Abstaende = 1232px, der Container
  * fasst 1008px.
  *
- * Seit dem Wegfall von /hausbesuche (September 2026) sind es fuenf Punkte, und
- * es bleibt bei zwei Reihen: die Navigation ist zwar schmaler, aber die
- * Zweireihigkeit ist die stabile Form — beim naechsten Punkt braeuchte es
- * sonst wieder einen Umbau. Wer sie einreihig will, muss neu messen.
+ * Nach dem Wegfall von /hausbesuche waren es fuenf Punkte, seit
+ * /extra-leistungen (September 2026) wieder sechs — und genau dafuer war die
+ * Zweireihigkeit die stabile Form: die Navigationsreihe hat die volle
+ * Containerbreite (1008px) fuer sich, sechs Punkte passen dort unveraendert.
+ * Wer sie einreihig will, muss neu messen.
+ *
+ * Reihenfolge nach dem Ablauf eines Anliegens: Termin -> Rezept -> was es
+ * sonst gibt -> wann zu ist -> wie man uns erreicht.
  */
 const navItems = [
   'home',
   'appointments',
   'prescriptions',
+  'extras',
   'closures',
   'contact'
 ] as const;

@@ -341,6 +341,10 @@
   --z-raised: 10;
   --z-sticky: 50;
   --z-header: 60;
+  /* Overlay ueber der gesamten Seite (Urlaubshinweis beim Seitenaufruf).
+     Ueber der Kopfzeile, unter dem Skip-Link — der erscheint ohnehin nur bei
+     Tastaturfokus und darf nie verdeckt sein. */
+  --z-overlay: 90;
   --z-skip-link: 100;
 }
 

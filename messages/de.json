@@ -15,6 +15,7 @@
     "privacy": "Datenschutz",
     "appointments": "Termine",
     "prescriptions": "Rezepte",
+    "extras": "Extra-Leistungen",
     "closures": "Urlaubszeiten"
   },
   "common": {
@@ -39,7 +40,7 @@
   "home": {
     "about": {
       "title": "Die Praxis",
-      "body": "Veronika Chernova ist Fachärztin für Innere und Allgemeinmedizin. In unserer Praxis bieten wir eine persönliche, vertrauensvolle und moderne hausärztliche Versorgung. Unser Ziel ist es, Sie kompetent und individuell in allen Gesundheitsfragen zu begleiten."
+      "body": "Veronika Chernova ist Fachärztin für Innere- und Allgemeinmedizin. In unserer Praxis bieten wir eine persönliche, vertrauensvolle und moderne hausärztliche Versorgung. Unser Ziel ist es, Sie kompetent und individuell in allen Gesundheitsfragen zu begleiten."
     },
     "hours": {
       "title": "Sprechzeiten",
@@ -86,6 +87,10 @@
       "link": "Vertretung und Details",
       "linkAria": "Vertretung und Details zum Praxisurlaub unter Urlaubszeiten ansehen",
       "regionLabel": "Hinweis zum Praxisurlaub"
+    },
+    "dialog": {
+      "confirm": "Verstanden",
+      "closeAria": "Hinweis zum Praxisurlaub schließen"
     },
     "list": {
       "caption": "Geplante Urlaubszeiten der Praxis",
@@ -150,7 +155,23 @@
     "forToday": "für den aktuellen Tag",
     "phoneNoApp": "Auch ohne Praxis-App.",
     "videoTitle": "Videosprechstunde",
+    "openVideoTitle": "Offene Videosprechstunde",
+    "openVideoWhenLabel": "Wann?",
+    "openVideoWhoLabel": "Für wen geeignet?",
+    "openVideoCta": "Zur offenen Videosprechstunde",
+    "openVideoHandout": "Offene Videosprechstunde — das Merkblatt",
     "rulesTitle": "Beim Besuch der Praxis"
+  },
+  "handout": {
+    "meta": "PDF öffnen"
+  },
+  "extras": {
+    "title": "Extra-Leistungen",
+    "lead": "Angebote unserer Praxis über die Regelversorgung hinaus.",
+    "vitaminCure": {
+      "title": "Vitamin-Kur",
+      "handout": "Vitamin-Kur für mehr Energie & Wohlbefinden"
+    }
   },
   "prescriptions": {
     "title": "Rezepte und Überweisungen",

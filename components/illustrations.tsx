@@ -204,6 +204,22 @@ export function ExternalLink(props: IconProps) {
   );
 }
 
+/**
+ * Blatt mit Pfeil nach unten — Merkblatt zum Herunterladen (PDF).
+ * Bewusst dasselbe Blatt wie bei `Prescription`, nur mit Pfeil statt Zeilen:
+ * beide zeigen ein Papier der Praxis, der Pfeil sagt "kommt zu Ihnen".
+ */
+export function Download(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M14.4 3.2 L7 3.2 A1.8 1.8 0 0 0 5.2 5 L5.2 19 A1.8 1.8 0 0 0 7 20.8 L17 20.8 A1.8 1.8 0 0 0 18.8 19 L18.8 7.6 Z" />
+      <path d="M14.4 3.4 L14.4 6.2 A1.4 1.4 0 0 0 15.8 7.6 L18.6 7.6" />
+      <path d="M12 10.4 L12 16.8" />
+      <path d="M9.2 14 L12 16.8 L14.8 14" />
+    </Icon>
+  );
+}
+
 /** Haken — erfuellt, enthalten. */
 export function Check(props: IconProps) {
   return (

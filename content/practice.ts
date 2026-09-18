@@ -302,6 +302,64 @@ export const practice = {
   maskNote: 'Bitte nur mit einer medizinischen Mund-Nasen-Maske.',
 
   /**
+   * Die Aushaenge der Praxis als PDF. Dateien liegen in `public/downloads/`,
+   * verlinkt werden sie ueber components/handout-link.tsx (setzt den Basispfad).
+   *
+   * Es sind dieselben A4-Blaetter, die in der Praxis haengen — die Praxis
+   * wollte sie im September 2026 auch auf der Website haben. Bewusst als
+   * Datei und nicht abgetippt: das Blatt ist gestaltet, und der Wortlaut auf
+   * der Seite soll knapp bleiben ("kurz und klar"). Wer mehr wissen will,
+   * oeffnet das Blatt.
+   */
+  handouts: {
+    vitaminCure: 'vitamin-kur.pdf',
+    openVideoConsultation: 'offene-videosprechstunde.pdf'
+  },
+
+  /**
+   * Zusatzangebote ausserhalb der Regelversorgung (/extra-leistungen).
+   * Wortlaut aus dem Aushang der Praxis.
+   *
+   * Der Preis steht bewusst NUR auf dem Aushang: er ist dort als
+   * "AKTIONSANGEBOT" ausgewiesen und kann sich aendern, ohne dass jemand an
+   * die Website denkt. Auf der Seite steht deshalb, worum es geht — der
+   * Aushang selbst nennt die Konditionen.
+   */
+  extras: {
+    vitaminCure: {
+      lead: 'Unsere Praxis bietet eine Vitamin-Kur als Kurzinfusion an:',
+      items: [
+        'Hochdosiertes Vitamin C als Kurzinfusion',
+        'Vitamin B6 + B12 + Folsäure als Spritze'
+      ],
+      advice: 'Ihr Praxisteam berät Sie gerne.'
+    }
+  },
+
+  /**
+   * Offene Videosprechstunde — Wortlaut aus dem Aushang der Praxis
+   * ("JETZT NEU: UNSERE OFFENE VIDEOSPRECHSTUNDE", September 2026).
+   *
+   * Sie ist etwas ANDERES als die Videosprechstunde nach Termin
+   * (`appointments.videoLine`): hier gibt es ausdruecklich keine Vereinbarung,
+   * man tritt im Zeitfenster einfach dem Warteraum bei. Deshalb steht sie auf
+   * /termine als eigener Abschnitt unter der Videosprechstunde und nicht in
+   * demselben Kasten.
+   *
+   * `url` ist die Adresse, die auf dem Aushang unter dem QR-Code steht — ein
+   * anderer Einstieg als `bookingUrl`, naemlich der Warteraum statt der
+   * Terminbuchung.
+   */
+  openVideoConsultation: {
+    lead: 'Flexibel. Schnell. Direkt. Ganz bequem von Zuhause aus oder unterwegs.',
+    noAppointment: 'Ohne Voranmeldung',
+    days: 'Montags, mittwochs und freitags',
+    time: '12:00 – 13:00 Uhr',
+    suitableFor: 'Akute Beschwerden, AU, Befundbesprechung',
+    url: 'https://app.arzt-direkt.de/praxis-chernova/form#info'
+  },
+
+  /**
    * Hausbesuche — wortgetreu aus dem Merkblatt der Praxis.
    * Nennt jetzt auch die Voraussetzung (starke Mobilitaetseinschraenkung), die
    * in der frueheren Fassung fehlte: dort stand nur die 2-km-Grenze.

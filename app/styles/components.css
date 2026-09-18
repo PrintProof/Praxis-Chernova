@@ -225,6 +225,72 @@
   translate: 2px 0;
 }
 
+/* ---------------------------------------------------------------------------
+   2b. Aushang der Praxis (.handout) — Link auf ein PDF in public/downloads/.
+   Steht auf /extra-leistungen und auf /termine, deshalb hier und nicht in
+   einer Seitendatei. Markup: components/handout-link.tsx.
+
+   Bewusst eine KARTE und kein Textlink: das Ziel verlaesst die Website (neuer
+   Tab, anderes Dateiformat), und das soll man dem Element ansehen, bevor man
+   klickt. Die Zusatzzeile sagt es ausserdem im Klartext.
+   --------------------------------------------------------------------------- */
+
+.handout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  /* Eigene Zeile, aber nur so breit wie noetig: eine ueber die ganze Spalte
+     gezogene Karte laese sich als Abschnitt lesen, nicht als ein Link. */
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--tap-min);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-inline-start: var(--bw-bar) solid var(--accent-strong);
+  border-radius: var(--radius-card);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.handout:hover {
+  background-color: var(--brand-soft);
+  border-color: var(--border-brand);
+  border-inline-start-color: var(--brand);
+}
+
+.handout__icon {
+  flex: none;
+  color: var(--brand);
+}
+
+.handout__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+/* Der Linktext selbst — unterstrichen, damit er auch ohne die Karte als Link
+   erkennbar bleibt (Farbe allein traegt keine Information). */
+.handout__label {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semibold);
+  color: var(--brand);
+  text-decoration-line: underline;
+  text-underline-offset: 0.22em;
+}
+
+.handout:hover .handout__label {
+  color: var(--brand-hover);
+}
+
+.handout__meta {
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-muted);
+}
+
 /* Vertikale Linkliste ohne Marker. Markup braucht role="list". */
 .link-list {
   list-style: none;
@@ -532,6 +598,20 @@
   margin-top: var(--space-5);
 }
 
+/* Der Maskensatz steht in DERSELBEN Groesse wie die Ueberschrift darueber —
+   ausdruecklicher Wunsch der Praxis (September 2026). Ueberschrift und Regel
+   sind hier ein einziger Gedanke: die Ueberschrift nennt den Anlass ("Bei
+   Erkaeltungssymptomen ..."), der Satz die Regel ("Bitte nur mit einer
+   medizinischen Mund-Nasen-Maske."). In Fliesstextgroesse las sich die Regel
+   wie eine Fussnote zum Anlass, obwohl sie die eigentliche Aussage ist.
+   Die ruhigere Farbe bleibt: sie haelt die Rangfolge, ohne den Satz kleiner
+   zu machen. Gilt bewusst nur im Maskenkasten — `.note__body` traegt sonst
+   (z.B. auf /rezepte) weiterhin Fliesstext. */
+.visit-rules__mask .note__body {
+  font-size: var(--step-1);
+  line-height: var(--leading-title);
+}
+
 /* Traegt optional ein `.callout__icon` vor dem Text — deshalb hier schon
    Flex und Abstand, statt das in jeder Seitendatei zu wiederholen (so war es
    in .news-plan__title dupliziert). Ohne Icon aendert sich nichts: der
@@ -662,7 +742,12 @@
 
 /* ---------------------------------------------------------------------------
    6. Hinweisband (Urlaub, einzeilig) — schmales Sandband unter der Kopfzeile.
-   Volle Breite, statisch im Seitenfluss. Niemals Modal oder Overlay.
+   Volle Breite, statisch im Seitenfluss.
+
+   Es bleibt das RUHIGE Format und steht auf vier Seiten. Zusaetzlich ploppt der
+   Hinweis auf der Startseite einmal als Overlay auf (Abschnitt 6b) — so von der
+   Praxis im September 2026 gewuenscht, weil das Band ueberlesen wurde. Das Band
+   ersetzt das Overlay NICHT: nach dem Wegklicken muss der Hinweis noch da sein.
    --------------------------------------------------------------------------- */
 
 .notice-bar {
@@ -720,6 +805,192 @@
 @media (min-width: 40em) {
   .notice-bar__link {
     margin-inline-start: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   6b. Urlaubs-Overlay — derselbe Hinweis, aber beim Aufruf der Startseite
+   sichtbar vor dem Inhalt. Muss weggeklickt werden.
+
+   OHNE JAVASCRIPT. Traeger ist eine Checkbox, die im HTML schon `checked` ist;
+   Hintergrund und Kasten sind ihre GESCHWISTER und haengen am Zustand. Die drei
+   Schliessflaechen (Hintergrund, Kreuz, "Verstanden") sind <label for=…> auf
+   genau diese Checkbox. Markup: components/vacation-dialog.tsx.
+
+   Bewusst Geschwisterselektor (`~`) und nicht `:has()`: `~` funktioniert in
+   jedem Browser, der die Seite ueberhaupt darstellt. Faellt CSS komplett aus,
+   steht der Hinweis als gewoehnlicher Textblock ganz oben auf der Seite — auch
+   das ist ein brauchbares Ergebnis.
+   --------------------------------------------------------------------------- */
+
+/* Unsichtbar, aber fokussierbar: mit der Tastatur das erste erreichbare
+   Element der Seite, Leertaste schliesst. Kein `display: none` im offenen
+   Zustand — das nimmt Elemente aus der Tabulatorreihenfolge. */
+.vacation-dialog__toggle {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: var(--z-overlay);
+}
+
+/* Geschlossen: Overlay weg — und die Checkbox gleich mit. Ein unsichtbares
+   Bedienelement ohne Funktion soll nicht dauerhaft die Tabulatorreihenfolge
+   anfuehren. Ihr Zustand bleibt trotz `display: none` erhalten, das Overlay
+   kommt also nicht zurueck. */
+.vacation-dialog__toggle:not(:checked),
+.vacation-dialog__toggle:not(:checked) ~ .vacation-dialog__backdrop,
+.vacation-dialog__toggle:not(:checked) ~ .vacation-dialog__panel {
+  display: none;
+}
+
+/* Solange das Overlay offen ist, scrollt die Seite dahinter nicht weg.
+   `:has()` ist hier reine Zugabe: kann der Browser es nicht, scrollt der
+   Hintergrund eben — das Overlay funktioniert trotzdem. */
+body:has(.vacation-dialog__toggle:checked) {
+  overflow: hidden;
+}
+
+.vacation-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  /* --wine-950 mit Deckkraft: warm abgedunkelt statt neutralgrau, damit das
+     Creme darunter nicht ins Graue kippt. */
+  background-color: rgba(42, 16, 23, 0.55);
+  cursor: pointer;
+  animation: vacation-dialog-fade var(--duration) var(--ease) both;
+}
+
+.vacation-dialog__panel {
+  position: fixed;
+  z-index: calc(var(--z-overlay) + 1);
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  width: min(32rem, calc(100vw - 2 * var(--gutter)));
+  max-height: calc(100vh - 2 * var(--space-6));
+  max-height: calc(100dvh - 2 * var(--space-6));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  /* Dieselbe Sandflaeche wie Band und Urlaubs-Callout: die Farbe sagt bereits,
+     worum es geht, bevor man ein Wort gelesen hat. */
+  background-color: var(--sand);
+  color: var(--sand-text);
+  border: 1px solid var(--sand-border);
+  border-block-start: var(--bw-bar) solid var(--sand-accent);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: vacation-dialog-rise var(--duration-slow) var(--ease) both;
+}
+
+@keyframes vacation-dialog-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vacation-dialog-rise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 0.75rem));
+  }
+}
+
+/* Das Kreuz oben rechts. Volles Touchziel, damit es auf dem Telefon sicher
+   getroffen wird. */
+.vacation-dialog__dismiss {
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-end: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: var(--radius-pill);
+  color: var(--sand-muted);
+  cursor: pointer;
+}
+
+.vacation-dialog__dismiss:hover {
+  color: var(--sand-text);
+  background-color: var(--sand-soft);
+}
+
+.vacation-dialog__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  /* Platz fuer das Kreuz daneben. */
+  padding-inline-end: var(--tap-min);
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--sand-text);
+}
+
+.vacation-dialog__icon {
+  color: var(--sand-accent);
+}
+
+/* Der Zeitraum ist die Aussage des Kastens — entsprechend gross und mit
+   tabellarischen Ziffern, damit die Datumsangaben ruhig stehen. */
+.vacation-dialog__range {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-title);
+  font-variant-numeric: tabular-nums;
+  color: var(--sand-text);
+}
+
+.vacation-dialog__return,
+.vacation-dialog__note {
+  margin: 0;
+  color: var(--sand-text);
+}
+
+.vacation-dialog__note {
+  font-size: var(--step--1);
+  color: var(--sand-muted);
+}
+
+.vacation-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-2);
+}
+
+/* Ein <label>, das wie ein Knopf aussieht — es KANN keinen eigenen Fokus
+   bekommen. Den traegt die Checkbox; ihr Fokusring wird hierher gespiegelt,
+   sonst waere Tastaturfokus im Overlay unsichtbar. */
+.vacation-dialog__confirm {
+  cursor: pointer;
+}
+
+.vacation-dialog__toggle:focus-visible ~ .vacation-dialog__panel .vacation-dialog__confirm {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Gedruckt wird die Seite, nicht der Hinweis darueber. */
+@media print {
+  .vacation-dialog__backdrop,
+  .vacation-dialog__panel {
+    display: none;
   }
 }
 

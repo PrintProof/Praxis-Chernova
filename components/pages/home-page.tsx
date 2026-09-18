@@ -7,6 +7,7 @@ import {OpeningHours} from '@/components/opening-hours';
 import {PageShell} from '@/components/page-shell';
 import {PracticeLogo} from '@/components/practice-logo';
 import {Section} from '@/components/section';
+import {VacationDialog} from '@/components/vacation-dialog';
 import {VisitRules} from '@/components/visit-rules';
 import {practice} from '@/content/practice';
 import {getTranslator} from '@/lib/i18n';
@@ -59,7 +60,11 @@ export function HomePage() {
   const t = getTranslator();
 
   return (
-    <PageShell routeKey="home" notice={<NextVacationBanner />}>
+    <PageShell
+      routeKey="home"
+      notice={<NextVacationBanner />}
+      overlay={<VacationDialog />}
+    >
       <section className="page-hero page-hero--split home-hero">
         <div className="container page-hero__inner">
           <div className="home-hero__copy">

@@ -1,4 +1,5 @@
-import {Calendar, Phone, Video} from '@/components/illustrations';
+import {Calendar, Check, Phone, Video} from '@/components/illustrations';
+import {HandoutLink} from '@/components/handout-link';
 import {NextVacationBanner} from '@/components/next-vacation-banner';
 import {PageShell} from '@/components/page-shell';
 import {Section} from '@/components/section';
@@ -16,7 +17,8 @@ import {getTranslator} from '@/lib/i18n';
  *
  * Reihenfolge folgt dem Ablauf einer Patientin:
  *   1. Wie bekomme ich einen Termin?   (zwei Wege mit Uhrzeit)
- *   2. Geht es auch ohne herzukommen?  (Videosprechstunde)
+ *   2. Geht es auch ohne herzukommen?  (Videosprechstunde nach Termin)
+ *  2b. Und ganz ohne Termin?           (offene Videosprechstunde, Mo/Mi/Fr)
  *   3. Was gilt, wenn ich komme?       (Terminpflicht, Maske bei Erkaeltung)
  * Schritt 3 wiederholt die zwei Kaesten der Startseite — auf ausdruecklichen
  * Wunsch der Praxis (August 2026), weil viele direkt hier landen. Warum das
@@ -99,6 +101,62 @@ export function AppointmentsPage() {
           <Video className="icon appointment-video__icon" />
           <p className="way__body">{practice.appointments.videoLine}</p>
         </div>
+      </Section>
+
+      {/* 2b. Offene Videosprechstunde — im September 2026 von der Praxis
+              eingefuehrt und auf ausdruecklichen Wunsch als EIGENER Abschnitt
+              unter der Videosprechstunde, nicht in denselben Kasten.
+              Der Unterschied ist genau der Punkt: die Videosprechstunde oben
+              wird wie jeder andere Termin vereinbart, diese hier ausdruecklich
+              NICHT — man tritt im Zeitfenster einfach dem Warteraum bei.
+              Deshalb traegt der Abschnitt dieselben drei Angaben wie der
+              Aushang der Praxis: ohne Voranmeldung, wann, fuer wen. Der Aushang
+              selbst haengt als PDF darunter (er erklaert auch die sechs
+              Schritte im Warteraum, die hier nicht abgetippt werden). */}
+      <Section className="open-video" title={t('appointments.openVideoTitle')}>
+        <p className="open-video__lead">{practice.openVideoConsultation.lead}</p>
+
+        <p className="open-video__badge">
+          <Check className="icon icon--sm open-video__badge-icon" />
+          <span>{practice.openVideoConsultation.noAppointment}</span>
+        </p>
+
+        <dl className="open-video__facts">
+          <div className="open-video__fact">
+            <dt>{t('appointments.openVideoWhenLabel')}</dt>
+            <dd>
+              <span className="open-video__days">{practice.openVideoConsultation.days}</span>
+              <span className="open-video__time">{practice.openVideoConsultation.time}</span>
+            </dd>
+          </div>
+          <div className="open-video__fact">
+            <dt>{t('appointments.openVideoWhoLabel')}</dt>
+            <dd>{practice.openVideoConsultation.suitableFor}</dd>
+          </div>
+        </dl>
+
+        {/* Der Einstieg vom Aushang: die Adresse unter dem QR-Code. Ein anderer
+            Weg als der Online-Termin in der Kopfzeile — hier landet man im
+            Warteraum, nicht in der Terminbuchung. */}
+        <p className="open-video__action">
+          <a
+            className="button button--primary"
+            href={practice.openVideoConsultation.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Video className="button__icon" />
+            <span className="button__text">
+              <span className="button__label">{t('appointments.openVideoCta')}</span>
+            </span>
+            <span className="visually-hidden"> ({t('accessibility.newTabHint')})</span>
+          </a>
+        </p>
+
+        <HandoutLink
+          file={practice.handouts.openVideoConsultation}
+          label={t('appointments.openVideoHandout')}
+        />
       </Section>
 
       {/* 3. Die zwei Besuchsregeln als Abschluss. Anders als auf der

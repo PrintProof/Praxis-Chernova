@@ -141,3 +141,94 @@
   margin: 0;
   max-width: var(--measure);
 }
+
+/* ---------------------------------------------------------------------------
+   Offene Videosprechstunde (September 2026).
+
+   Sie steht bewusst NICHT in der getoenten `.way--offer`-Karte darueber: die
+   Unterscheidung zur Videosprechstunde nach Termin ist die ganze Aussage des
+   Abschnitts, und zwei gleich aussehende Kaesten untereinander verwischen sie.
+   Hier traegt deshalb eine Datenliste die Angaben — dieselbe Ordnung wie auf
+   dem Aushang der Praxis (ohne Voranmeldung / wann / fuer wen).
+   --------------------------------------------------------------------------- */
+
+.open-video__lead {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+/* "Ohne Voranmeldung" ist die eigentliche Neuigkeit — als Marke gesetzt,
+   damit sie beim Ueberfliegen zuerst haengen bleibt. Die Aussage steht als
+   Text da, die Flaeche wiederholt sie nur. */
+.open-video__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-5) 0 0;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--brand-soft);
+  border: 1px solid var(--border-brand);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+}
+
+.open-video__badge-icon {
+  color: var(--brand);
+}
+
+.open-video__facts {
+  display: grid;
+  gap: var(--space-5);
+  margin: var(--block-gap) 0 0;
+  max-width: var(--measure);
+}
+
+@media (min-width: 44em) {
+  .open-video__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+.open-video__fact > dt {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-label);
+  color: var(--brand-muted);
+}
+
+.open-video__fact > dd {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  color: var(--text);
+}
+
+/* Die Uhrzeit traegt den Abschnitt, wie bei den zwei Buchungswegen daneben —
+   dieselbe Groesse, damit die Seite eine Leseordnung behaelt. */
+.open-video__time {
+  font-family: var(--font-ui);
+  font-size: var(--step-2);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-title);
+  font-variant-numeric: tabular-nums;
+}
+
+.open-video__days {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.open-video__action {
+  margin: var(--block-gap) 0 0;
+}
+
+.open-video .handout {
+  margin-top: var(--space-5);
+}

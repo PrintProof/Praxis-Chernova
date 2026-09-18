@@ -1,0 +1,50 @@
+/* =============================================================================
+   page-extras.css — die Ausnahmen der Seite /extra-leistungen
+   -----------------------------------------------------------------------------
+   Layer 5 von 5: tokens -> base -> layout -> components -> PAGES.
+
+   Bewusst duenn. Ein Angebot besteht hier aus wenig Text, einer Aufzaehlung
+   und dem Aushang als PDF — die Karte dafuer (.handout) ist geteilt und steht
+   in components.css, weil sie auch auf /termine benutzt wird.
+   ============================================================================= */
+
+.extras-offer__lead {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+/* Aufzaehlung mit Haken statt Punkten: es sind Bestandteile eines Angebots,
+   keine Aufzaehlung im Fliesstext. Die Haken sind dekorativ — welche Punkte
+   dazugehoeren, sagt der Text. */
+.extras-offer__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.extras-offer__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  max-width: var(--measure);
+}
+
+.extras-offer__check {
+  flex: none;
+  color: var(--brand);
+}
+
+.extras-offer__advice {
+  margin: var(--space-5) 0 0;
+  max-width: var(--measure);
+  color: var(--text-muted);
+}
+
+/* Der Aushang schliesst den Abschnitt ab und bekommt dafuer mehr Luft als die
+   Absaetze untereinander. */
+.extras-offer .handout {
+  margin-top: var(--block-gap);
+}
