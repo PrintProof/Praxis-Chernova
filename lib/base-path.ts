@@ -1,18 +1,20 @@
 /**
  * Der Basispfad der Website — die EINE Quelle dafuer.
  *
- * Lokal laeuft die Seite unter "/", auf GitHub Pages liegt sie im
- * Unterverzeichnis /Praxis-Chernova. `next.config.ts` importiert `basePath`
- * von hier, damit Konfiguration und Anwendungscode nicht auseinanderlaufen
- * koennen. Deshalb bewusst OHNE `@/`-Alias importierbar (relativer Pfad) und
- * ohne jede weitere Abhaengigkeit: die Datei wird auch beim Laden der
- * Next-Konfiguration ausgewertet, lange bevor es eine React-Umgebung gibt.
+ * Seit September 2026 laeuft die Seite unter der eigenen Domain
+ * praxis-chernova.de und liegt dort im Wurzelverzeichnis. Der Basispfad ist
+ * deshalb ueberall leer — lokal wie in Produktion.
+ *
+ * Bis dahin war sie nur ueber GitHub Pages im Unterverzeichnis
+ * /Praxis-Chernova erreichbar, und der Pfad wurde allein im Actions-Build
+ * gesetzt. Die Konstante bleibt, weil `next.config.ts` sie importiert und
+ * `assetPath()` sie voranstellt: Sollte die Seite je wieder in einem
+ * Unterverzeichnis liegen, ist das hier die einzige Stelle. Deshalb bewusst
+ * OHNE `@/`-Alias importierbar (relativer Pfad) und ohne jede weitere
+ * Abhaengigkeit: die Datei wird auch beim Laden der Next-Konfiguration
+ * ausgewertet, lange bevor es eine React-Umgebung gibt.
  */
-export const repoName = 'Praxis-Chernova';
-
-const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
-
-export const basePath = isGitHubPages ? `/${repoName}` : '';
+export const basePath = '';
 
 /**
  * Adresse einer Datei aus `public/`, mit Basispfad davor.

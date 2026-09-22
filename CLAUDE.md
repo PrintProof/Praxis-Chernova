@@ -54,7 +54,7 @@ Two practical traps: the viewBox is **80×64 (5:4), not square** — always deri
 
 The site is **German-only**. There is no multi-locale routing, no `[locale]` route tree, and no `next-intl` middleware/provider. `lib/i18n.ts` defines a single locale (`de`) and exposes `getTranslator()`, a thin wrapper over `next-intl`'s `createTranslator` that reads `messages/de.json` synchronously. Components call `t('namespace.key')` with no locale argument.
 
-`lib/routing.ts` is the single source of truth for URLs: `routeByKey` maps a `RouteKey` to its German path (`/termine`, `/urlaubszeiten`, `/kontakt`, …), and `getPath(routeKey)` returns it. The `closures` route was `/schliesszeiten` until September 2026 and is now **`/urlaubszeiten`** — path, label and title renamed together, because the old address had never been handed out. **Always build internal links with `getPath` and Next's `<Link>`** — never hardcode paths, or the production `basePath` gets lost.
+`lib/routing.ts` is the single source of truth for URLs: `routeByKey` maps a `RouteKey` to its German path (`/termine`, `/urlaubszeiten`, `/kontakt`, …), and `getPath(routeKey)` returns it. The `closures` route was `/schliesszeiten` until September 2026 and is now **`/urlaubszeiten`** — path, label and title renamed together, because the old address had never been handed out. **Always build internal links with `getPath` and Next's `<Link>`** — never hardcode paths, or a renamed route has to be hunted down in the markup.
 
 ## Information architecture — the one rule that matters
 
@@ -128,8 +128,8 @@ Yes, that is a deliberate exception to the one-canonical-home rule above, made b
 
 Two traps:
 
-- **Link them with `assetPath()` (`lib/base-path.ts`), never a bare `href="/downloads/…"`.** Next prefixes the GitHub Pages `basePath` for `<Link>` and for its own assets, but not for a plain anchor into `public/` — the link would 404 in production. `<Link>` is wrong here too: the targets are files, not routes, and Next would try to prefetch them.
-- `next.config.ts` **imports** `basePath` from that same file, so configuration and application code cannot drift. Don't re-inline the `GITHUB_ACTIONS` check anywhere else.
+- **Link them with `assetPath()` (`lib/base-path.ts`), never a bare `href="/downloads/…"`.** The base path is empty today (own domain, site at the root), so both spellings happen to produce the same URL — but Next prefixes a `basePath` for `<Link>` and for its own assets and *not* for a plain anchor into `public/`, so a bare href would silently break the day the site moves into a subdirectory again. `<Link>` is wrong here too: the targets are files, not routes, and Next would try to prefetch them.
+- `next.config.ts` **imports** `basePath` from that same file, so configuration and application code cannot drift.
 
 ### The vacation notice pops up on the home page — without JavaScript
 
@@ -208,10 +208,17 @@ When changing any of this, verify all data shapes by temporarily editing `conten
 
 `lib/seo.ts` `buildMetadata({routeKey, title, description})` produces a canonical URL plus OpenGraph (locale `de_DE`)/Twitter tags. There are **no** `hreflang`/`x-default` alternates — the site is German-only. Each route's `metadata` should call it. `StructuredData` (`components/structured-data.tsx`) injects JSON-LD. Site base URL comes from `NEXT_PUBLIC_SITE_URL`.
 
-`getSiteUrl` normalises the base to end in `/` and resolves paths **relatively**. This is load-bearing: on GitHub Pages the site lives in a subdirectory, and `new URL('/leistungen', 'https://…/Praxis-Chernova')` resolves against the *origin* and silently drops it — which previously produced canonical URLs, `og:url`, JSON-LD ids, `sitemap.xml` and `robots.txt` all pointing at addresses that don't exist. Don't "simplify" it back.
+`getSiteUrl` normalises the base to end in `/` and resolves paths **relatively**. That is a deliberate safeguard: would the site ever live in a subdirectory again (until September 2026 it did, as `https://…/Praxis-Chernova`), `new URL('/termine', base)` resolves against the *origin* and silently drops it — which back then produced canonical URLs, `og:url`, JSON-LD ids, `sitemap.xml` and `robots.txt` all pointing at addresses that don't exist. Don't "simplify" it back.
 
-To verify a production build: `GITHUB_ACTIONS=true NEXT_PUBLIC_SITE_URL=https://printproof.github.io/Praxis-Chernova npm run build`, then check `out/*/index.html` for `/Praxis-Chernova`-prefixed assets and canonicals — and rebuild without those env vars afterwards so `out/` matches local state.
+To verify a production build: `NEXT_PUBLIC_SITE_URL=https://praxis-chernova.de npm run build`, then check `out/*/index.html` for canonicals on that host and assets under `/_next/…` — and rebuild without the env var afterwards so `out/` matches local state.
 
-## Deployment (GitHub Pages)
+## Deployment (GitHub Pages + eigene Domain)
 
-`.github/workflows/` builds on push to `main` and deploys `./out`. `next.config.ts` sets `output: 'export'`, `trailingSlash: true`, `images.unoptimized`, and — **only when `GITHUB_ACTIONS === 'true'`** — applies `basePath`/`assetPrefix` of `/Praxis-Chernova`. So locally there is no base path, but production assets/links are served under that subpath; rely on Next's `<Link>` and `getPath` rather than manual URLs so the base path is handled for you.
+`.github/workflows/` builds on push to `main` and deploys `./out`. `next.config.ts` sets `output: 'export'`, `trailingSlash: true`, `images.unoptimized`.
+
+Since September 2026 the site runs on the practice's own domain, **`praxis-chernova.de`** (registered at IONOS, in the practice's name; nameservers and DNS stay at IONOS). It is served from the **root**, so there is no base path any more — `lib/base-path.ts` exports an empty string, and the workflow's `NEXT_PUBLIC_SITE_URL` is the bare domain. Hosting itself is still GitHub Pages (`PrintProof/Praxis-Chernova`), which is why the Datenschutzerklärung names GitHub as the host.
+
+Two things this depends on and that live **outside** the repo:
+
+- **DNS at IONOS** — four A records on the apex (`185.199.108.153`, `.109.`, `.110.`, `.111.153`), the matching AAAA records (`2606:50c0:8000::153` … `8003::153`), and `www` as a CNAME to `printproof.github.io`. Apex and `www` then redirect to each other automatically.
+- **The custom domain in the repo's Pages settings** (`gh api repos/PrintProof/Praxis-Chernova/pages` shows it as `cname`). With an Actions-based deploy GitHub creates **no** `CNAME` file and ignores one in the artifact — don't add `public/CNAME`, it does nothing. "Enforce HTTPS" only becomes available once the certificate is issued (up to 24 h).

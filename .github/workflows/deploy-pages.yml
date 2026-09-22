@@ -36,8 +36,7 @@ jobs:
       - name: Build static site
         run: npm run build
         env:
-          GITHUB_ACTIONS: 'true'
-          NEXT_PUBLIC_SITE_URL: https://printproof.github.io/Praxis-Chernova
+          NEXT_PUBLIC_SITE_URL: https://praxis-chernova.de
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
