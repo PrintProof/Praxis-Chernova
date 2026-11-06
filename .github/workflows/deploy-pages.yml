@@ -3,10 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Taeglicher Neubau: "heute" ist das Build-Datum (lib/vacations.ts). Ohne
+  # ihn blieben vergangene Urlaube stehen, bis zufaellig wieder jemand pusht.
+  # 02:30 UTC = 03:30/04:30 deutscher Zeit.
+  schedule:
+    - cron: '30 2 * * *'
   workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  # Datumslogik in Praxiszeit, nicht in der UTC-Zeit des Runners.
+  TZ: Europe/Berlin
 
 permissions:
   contents: read
