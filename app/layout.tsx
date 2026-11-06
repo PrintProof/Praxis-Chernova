@@ -1,5 +1,7 @@
 import type {ReactNode} from 'react';
 
+import {OnlineReception} from '@/components/online-reception';
+
 // Reihenfolge ist bedeutsam: Tokens -> Basis -> Layout -> Komponenten -> Seiten.
 // Jede Datei hat genau einen Zweck, damit Stile auffindbar bleiben.
 import '@/app/styles/tokens.css';
@@ -17,7 +19,10 @@ import '@/app/styles/page-legal.css';
 export default function RootLayout({children}: {children: ReactNode}) {
   return (
     <html lang="de">
-      <body>{children}</body>
+      <body>
+        {children}
+        <OnlineReception />
+      </body>
     </html>
   );
 }

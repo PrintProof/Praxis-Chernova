@@ -10,6 +10,8 @@ Static marketing/info website for a German medical practice ("Praxis Veronika Ch
 
 **No external requests, ever.** No webfonts (system font stack only), no CDN, no analytics, no remote images. This is a German medical practice — third-party requests are a GDPR problem. The only external URLs in the markup are click-through links (arzt-direkt booking, the arzt-direkt app page, the arzt-direkt waiting room for the open video consultation, Google Maps) plus non-fetching namespace URLs (`schema.org` in JSON-LD, `w3.org` in SVG). PDFs are served from `public/downloads/`, never hot-linked.
 
+**The one exception (November 2026, the practice's explicit wish): the arzt-direkt *Online-Rezeption* widget** (`components/online-reception.tsx`, rendered site-wide from `app/layout.tsx`). It loads the vendor's script, fonts and settings on every page view — the only third-party JS and the only external request on page load. The Datenschutzerklärung (`content/legal.ts`, "Externe Dienste" + "Keine Cookies") describes exactly this; change one, change the other. The widget only works if `praxis-chernova.de` is an allowed origin in the practice's arzt-direkt settings (otherwise its settings call answers `SEC_001 Origin not allowed`). Don't add further embeds on the strength of this exception.
+
 ## Commands
 
 ```bash

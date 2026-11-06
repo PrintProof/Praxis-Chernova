@@ -125,12 +125,13 @@ export const datenschutz: LegalSection[] = [
   {
     heading: 'Keine Cookies, kein Tracking',
     body: [
-      'Diese Website verwendet keine Cookies, kein Analyse- oder Tracking-Tool, keine externen Web-Fonts (CDN) und keine eingebetteten Karten oder Videos. Es findet kein Profiling statt. Eine Einwilligung nach § 25 TDDDG ist nicht erforderlich, da auf Ihrem Endgerät keine Informationen gespeichert oder ausgelesen werden, die nicht unbedingt erforderlich sind.'
+      'Diese Website verwendet keine Cookies, kein Analyse- oder Tracking-Tool und keine eingebetteten Karten oder Videos. Abgesehen vom Widget der Online-Rezeption (siehe unten) werden keine externen Inhalte oder Web-Fonts geladen. Es findet kein Profiling statt. Eine Einwilligung nach § 25 TDDDG ist nicht erforderlich, da auf Ihrem Endgerät keine Informationen gespeichert oder ausgelesen werden, die nicht unbedingt erforderlich sind.'
     ]
   },
   {
     heading: 'Externe Dienste und Weiterleitungen',
     body: [
+      'Online-Rezeption (arzt-direkt): Auf allen Seiten ist das Widget "Online-Rezeption" des Dienstes arzt-direkt eingebunden (Anbieter: zollsoft GmbH, Jena). Damit es angezeigt werden kann, lädt Ihr Browser beim Aufruf unserer Website Programmcode, Schriftarten und die Einstellungen der Praxis von Servern des Anbieters (app.arzt-direkt.de, onlinetermine.arzt-direkt.com). Dabei werden technisch notwendige Daten, insbesondere Ihre IP-Adresse, an den Anbieter übermittelt. Das Widget setzt keine Cookies. Erst wenn Sie das Widget aktiv nutzen, verarbeitet der Anbieter darüber hinaus Ihre Eingaben; es gilt die Datenschutzerklärung von arzt-direkt. Rechtsgrundlage ist unser berechtigtes Interesse, Patientinnen und Patienten eine einfache digitale Kontaktaufnahme zur Praxis zu ermöglichen (Art. 6 Abs. 1 lit. f DSGVO).',
       'Online-Terminbuchung (arzt-direkt): Auf dieser Website ist lediglich ein Link zur Online-Terminbuchung über den externen Dienst arzt-direkt (app.arzt-direkt.de) eingebunden. Beim bloßen Aufruf unserer Website werden hierfür keine Daten an den Anbieter übertragen. Erst wenn Sie den Link aktiv anklicken, verlassen Sie unsere Seite und gelangen zur Plattform arzt-direkt, die als eigener Verantwortlicher die Verarbeitung Ihrer Daten übernimmt. Es gilt dann die Datenschutzerklärung des Anbieters.',
       'Routenplanung (Google Maps): Die Schaltfläche "Route planen" ist ein einfacher Link zu Google Maps. Es ist keine Karte eingebettet; beim bloßen Aufruf unserer Website werden keine Daten an Google übertragen. Erst beim Anklicken werden Sie zu Google Maps weitergeleitet. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland; es gelten die Datenschutzbestimmungen von Google.',
       'Rechtsgrundlage für die Bereitstellung dieser Verlinkungen ist unser berechtigtes Interesse an einer komfortablen Terminvereinbarung und Anfahrt (Art. 6 Abs. 1 lit. f DSGVO).'

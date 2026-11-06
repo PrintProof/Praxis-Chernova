@@ -107,6 +107,17 @@ export const bookingUrl = 'https://app.arzt-direkt.de/praxis-chernova/booking';
  */
 export const appInfoUrl = 'https://arzt-direkt.de/arzt-direkt-app/';
 
+/**
+ * Online-Rezeption von arzt-direkt (Tomedo), eingebettet als Widget auf
+ * jeder Seite (components/online-reception.tsx). Einbettungscode kam am
+ * 06.11.2026 von der Praxis per WhatsApp. Die Instanz-ID gehoert zur Praxis
+ * (`praxis-chernova` bei arzt-direkt).
+ */
+export const onlineReception = {
+  scriptUrl: 'https://app.arzt-direkt.de/orz/arzt-direkt-orz-widget.js',
+  instanceId: '638860f2a368f1541293c09a'
+} as const;
+
 export const practice = {
   name: 'Praxis Veronika Chernova',
   physicianName: 'Veronika Chernova',
